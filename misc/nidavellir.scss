@@ -1,4 +1,3 @@
-<?php
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -8,19 +7,8 @@
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * nidavellir.view.php
+ * nidavellir.scss
  *
+ * Nidavellir stylesheet
  *
  */
-
-require_once( APP_BASE_PATH."view/common/game.view.php" );
-
-class view_nidavellir_nidavellir extends game_view
-{
-  function getGameName() {
-    return "nidavellir";
-  }
-
-  function build_page($viewArgs){
-  }
-}
