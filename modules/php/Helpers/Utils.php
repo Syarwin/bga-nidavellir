@@ -1,5 +1,5 @@
 <?php
-namespace NID;
+namespace NID\Helpers;
 
 abstract class Utils extends \APP_DbObject
 {

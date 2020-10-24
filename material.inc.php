@@ -13,4 +13,4 @@
  * Nidavellir game material description
  */
 
- require_once("modules/constants.inc.php");
+ require_once("modules/php/constants.inc.php");

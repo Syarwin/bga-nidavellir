@@ -14,6 +14,7 @@
 
 
 use NID\PlayerManager;
+use NID\Cards;
 use NID\Log;
 
 $swdNamespaceAutoload = function ($class) {
@@ -33,15 +34,18 @@ require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 
 class Nidavellir extends Table
 {
-//	use NID\States\PickWordTrait;
-//	use NID\States\AddHintTrait;
+	use NID\States\BidsTrait;
+	use NID\States\RecruitTrait;
 
 	public static $instance = null;
 	public function __construct() {
 		parent::__construct();
 		self::$instance = $this;
 
-		self::initGameStateLabels([]);
+		self::initGameStateLabels([
+      'currentTavern' => CURRENT_TAVERN, // TODO init and reset
+      'currentPlayerIndex' => CURRENT_PLAYER_INDEX, // TODO init
+    ]);
 //		 'optionTeam' => OPTION_TEAM_SIZE,
 //		 'optionHint' => OPTION_HINT_MODE,
 	}
@@ -59,9 +63,13 @@ class Nidavellir extends Table
    */
 	protected function setupNewGame( $players, $options = [] ){
 		PlayerManager::setupNewGame($players);
-		$this->activeNextPlayer();
+    Cards::setupNewGame($players);
 	}
 
+
+  public function stStartOfTurn(){
+    $this->gamestate->nextState('');
+  }
 
 	/*
 	 * getAllDatas:
@@ -69,6 +77,7 @@ class Nidavellir extends Table
 	protected function getAllDatas(){
 		return [
 			'players' => NID\PlayerManager::getUiData(),
+      'cards' => NID\Cards::getInLocation(['age',"%"]),
 		];
 	}
 

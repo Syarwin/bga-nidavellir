@@ -8,3 +8,10 @@
 -- -----
 
 -- dbmodel.sql
+
+CREATE TABLE IF NOT EXISTS `card` (
+  `card_key` varchar(32) NOT NULL,
+  `card_location` varchar(32) NOT NULL,
+  `card_state` int(10),
+  PRIMARY KEY (`card_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

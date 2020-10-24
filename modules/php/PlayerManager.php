@@ -6,13 +6,15 @@ use Nidavellir;
  * PlayerManager: all utility functions concerning players
  */
 
-class PlayerManager extends \APP_DbObject
+class PlayerManager extends DB_Manager
 {
-	public static function setupNewGame($players)	{
-		self::DbQuery('DELETE FROM player');
-		$gameInfos = Nidavellir::get()->getGameinfos();
-		$sql = 'INSERT INTO player (player_id, player_color, player_canal, player_name, player_avatar) VALUES ';
+	protected static $table = "player";
+	protected static $cast = "NID\Player";
 
+	public static function setupNewGame($players)	{
+		$gameInfos = Nidavellir::get()->getGameinfos();
+
+		$query = self::DB()->multipleInsert(['player_id', 'player_color', 'player_canal', 'player_name', 'player_avatar']);
 		$values = [];
 		$i = 0;
 		foreach ($players as $pId => $player) {
@@ -21,9 +23,9 @@ class PlayerManager extends \APP_DbObject
 			$name = $player['player_name'];
 			$avatar = addslashes($player['player_avatar']);
 			$name = addslashes($player['player_name']);
-			$values[] = "($pId, '$color','$canal','$name','$avatar')";
+			$values[] = [$pId, $color, $canal, $name, $avatar];
 		}
-		self::DbQuery($sql . implode($values, ','));
+		$query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors'] );
 		Nidavellir::get()->reloadPlayersBasicInfos();
 	}
@@ -38,31 +40,30 @@ class PlayerManager extends \APP_DbObject
 	}
 
 	/*
-	 * getPlayers : Returns array of SantoriniPlayer for all/specified player IDs
-	 * if $asArrayCollection is set to true it return the result as a map $id=>array
+	 * getPlayers : Returns array of players for all/specified player IDs
 	 */
-	public static function getPlayers($playerIds = null, $asArrayCollection = false) {
-		$columns = ["id", "no", "name", "color", "eliminated", "score", "zombie"];
-		$sqlcolumns = [];
-		foreach($columns as $col) $sqlcolumns[] = "player_$col $col";
-		$sql = "SELECT " . implode(", ", $sqlcolumns) . " FROM player" ;
-		if (is_array($playerIds)) {
-			$sql .= " WHERE player_id IN ('" . implode("','", $playerIds) . "')";
-		}
-
-		if($asArrayCollection) return self::getCollectionFromDB($sql);
-		else return self::getObjectListFromDB($sql);
+	public static function getPlayers($playerIds = null) {
+		return self::DB()->whereIn($playerIds)->get();
 	}
 
 	/*
 	 * getUiData : get all ui data of all players
 	 */
 	public static function getUiData()	{
-		return self::getPlayers(null, true);
+		$ui = [];
+		foreach(self::getPlayers() as $player){
+			$ui[$player->getId()] = $player->getUiData();
+		}
+		return $ui;
 	}
 
 
 //  public static function updateUi(){
 //    Nidavellir::get()->notifyAllPlayers("updatePlayersInfo", '', ['players' => self::getUiData() ]);
 //  }
+
+
+	public static function getUlineOwner(){
+		return null; // TODO
+	}
 }
