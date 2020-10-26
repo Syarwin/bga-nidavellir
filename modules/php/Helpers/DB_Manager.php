@@ -3,7 +3,9 @@ namespace NID\Helpers;
 
 class DB_Manager {
 	protected static $table = null;
-  protected static $cast = null;
+  protected static $primary = null;
+  protected static $associative = false;
+  protected static function cast($row){ return $row; }
 
   public static function DB($table = null){
     if(is_null($table)){
@@ -13,6 +15,6 @@ class DB_Manager {
       $table = static::$table;
     }
 
-    return new QueryBuilder($table, static::$cast);
+    return new QueryBuilder($table, function($row){ return static::cast($row); }, static::$primary, static::$associative);
   }
 }

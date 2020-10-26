@@ -5,21 +5,21 @@ namespace NID\Helpers;
  * This is a generic class to manage game pieces.
  *
  * On DB side this is based on a standard table with the following fields:
- * %prefix_%key (string), %prefix_%location (string), %prefix_%state (int)
+ * %prefix_%id (string), %prefix_%location (string), %prefix_%state (int)
  *
  *
  * CREATE TABLE IF NOT EXISTS `token` (
- * `token_key` varchar(32) NOT NULL,
+ * `token_id` varchar(32) NOT NULL,
  * `token_location` varchar(32) NOT NULL,
  * `token_state` int(10),
- * PRIMARY KEY (`token_key`)
+ * PRIMARY KEY (`token_id`)
  * ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  *
  * CREATE TABLE IF NOT EXISTS `card` (
- * `card_key` varchar(32) NOT NULL,
+ * `card_id` int(32) NOT NULL AUTO_INCREMENT,,
  * `card_location` varchar(32) NOT NULL,
  * `card_state` int(10),
- * PRIMARY KEY (`card_key`)
+ * PRIMARY KEY (`card_id`)
  * ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  *
  */
@@ -27,7 +27,11 @@ namespace NID\Helpers;
 class Pieces extends DB_Manager {
   protected static $table = null;
   protected static $cast = null;
+  protected static $associative = false;
+
   protected static $prefix = "piece_";
+  protected static $autoIncrement = true;
+  protected static $primary = "piece_id";
   protected static $autoremovePrefix = true;
   protected static $autoreshuffle = false; // If true, a new deck is automatically formed with a reshuffled discard as soon at is needed
   protected static $autoreshuffleListener = null; // Callback to a method called when an autoreshuffle occurs
@@ -49,33 +53,33 @@ class Pieces extends DB_Manager {
    * Return the basic select query fetching basic fields and custom fields
    */
   final static function getSelectQuery() {
-    $basic = ['key' => static::$prefix."key", 'location' => static::$prefix."location", 'state' => static::$prefix."state"];
+    $basic = ['id' => static::$prefix."id", 'location' => static::$prefix."location", 'state' => static::$prefix."state"];
     if(!self::$autoremovePrefix)
       $basic = array_values($basic);
 
-    return self::DB()->select(array_merge($basic, self::$customFields));
+    return self::DB()->select(array_merge($basic, static::$customFields));
   }
 
-  final static function getUpdateQuery($keys = [], $location = null, $state = null){
+  final static function getUpdateQuery($ids = [], $location = null, $state = null){
     $data = [];
     if(!is_null($location))
       $data[static::$prefix.'location'] = $location;
     if(!is_null($state))
       $data[static::$prefix.'state'] = $state;
 
-    if(!is_array($keys))
-      $keys = [$keys];
+    if(!is_array($ids))
+      $ids = [$ids];
 
-    return self::DB()->update($data)->whereIn(static::$prefix.'key', $keys);
+    return self::DB()->update($data)->whereIn(static::$prefix.'id', $ids);
   }
 
   /****
    * Return a select query with a where condition
    */
-  protected function addWhereClause(&$query, $key = null, $location = null, $state = null) {
-    if(!is_null($key)){
-      $whereOp = strpos($key, "%") !== false? "LIKE" : "=";
-      $query = $query->where(static::$prefix."key", $whereOp, $key);
+  protected function addWhereClause(&$query, $id = null, $location = null, $state = null) {
+    if(!is_null($id)){
+      $whereOp = strpos($id, "%") !== false? "LIKE" : "=";
+      $query = $query->where(static::$prefix."id", $whereOp, $id);
     }
 
     if(!is_null($location)){
@@ -94,9 +98,9 @@ class Pieces extends DB_Manager {
   /****
    * Append the basic select query with a where clause
    */
-  public static function getSelectWhere($key = null, $location = null, $state = null) {
+  public static function getSelectWhere($id = null, $location = null, $state = null) {
     $query = self::getSelectQuery();
-    self::addWhereClause($query, $key, $location, $state);
+    self::addWhereClause($query, $id, $location, $state);
     return $query;
   }
 
@@ -125,25 +129,25 @@ class Pieces extends DB_Manager {
   }
 
   /*
-   * Check that the key is alphanum and underscore
+   * Check that the id is alphanum and underscore
    */
-  final static function checkKey(&$key, $like = false) {
-    if (is_null($key))
-      throw new \BgaVisibleSystemException("Class Pieces: key cannot be null");
+  final static function checkId(&$id, $like = false) {
+    if (is_null($id))
+      throw new \BgaVisibleSystemException("Class Pieces: id cannot be null");
 
     $extra = $like? "%" : "";
-    if (preg_match("/^[A-Za-z_0-9${extra}]+$/", $key) == 0)
-      throw new \BgaVisibleSystemException("Class Pieces: key must be alphanum and underscore non empty string '$key'");
+    if (preg_match("/^[A-Za-z_0-9${extra}]+$/", $id) == 0)
+      throw new \BgaVisibleSystemException("Class Pieces: id must be alphanum and underscore non empty string '$id'");
   }
 
-  final function checkKeyArray($arr) {
+  final function checkIdArray($arr) {
     if (is_null($arr))
       throw new \BgaVisibleSystemException("Class Pieces: tokens cannot be null");
 
     if (!is_array($arr)){
       throw new \BgaVisibleSystemException("Class Pieces: tokens must be an array");
-      foreach ($arr as $key) {
-        self::checkKey($key);
+      foreach ($arr as $id) {
+        self::checkId($id);
       }
     }
   }
@@ -181,18 +185,18 @@ class Pieces extends DB_Manager {
   ************************************/
 
   /**
-   * Get specific piece by key
+   * Get specific piece by id
    */
-  public static function get($keys) {
-    if(!is_array($keys))
-      $keys = [$keys];
+  public static function get($ids) {
+    if(!is_array($ids))
+      $ids = [$ids];
 
-    self::checkKeyArray($keys);
-    if (empty($keys))
+    self::checkIdArray($ids);
+    if (empty($ids))
         return [];
 
-    $result = self::getSelectQuery()->whereIn(static::$prefix."key", $keys)->get();
-    if (count($result) != count($keys))
+    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get();
+    if (count($result) != count($ids))
       throw new \BgaVisibleSystemException("Class Pieces: getMany, some pieces have not been found !");
 
     return $result;
@@ -200,16 +204,16 @@ class Pieces extends DB_Manager {
 
 
   /**
-   * Get specific piece by key
+   * Get specific piece by id
    */
-  public static function getState($key) {
-    $res = self::get($key);
+  public static function getState($id) {
+    $res = self::get($id);
     return is_null($res)? null : $res[(static::$autoremovePrefix? '' : static::$prefix).'state'];
   }
 
 
-  public static function getLocation($key) {
-    $res = self::get($key);
+  public static function getLocation($id) {
+    $res = self::get($id);
     return is_null($res)? null : $res[(static::$autoremovePrefix? '' : static::$prefix).'location'];
   }
 
@@ -218,10 +222,10 @@ class Pieces extends DB_Manager {
   /**
    * Get max or min state of the specific location
    */
-  public static function getExtremePosition($getMax, $location, $key = null) {
+  public static function getExtremePosition($getMax, $location, $id = null) {
     $whereOp = self::checkLocation($location, true);
     $query = self::DB();
-    self::addWhereClause($query, $key, $location);
+    self::addWhereClause($query, $id, $location);
     return $query->func($getMax? "MAX" : "MIN", static::$prefix.'state') ?? 0;
   }
 
@@ -269,24 +273,24 @@ class Pieces extends DB_Manager {
   ************** SETTERS **************
   *************************************
   ************************************/
-  public static function setState($key, $state) {
+  public static function setState($id, $state) {
     self::checkState($state);
-    self::checkKey($key);
-    return self::getUpdateQuery($key, null, $state)->run();
+    self::checkId($id);
+    return self::getUpdateQuery($id, null, $state)->run();
   }
 
 
   /*
    * Move one (or many) pieces to given location
    */
-  public static function move($keys, $location, $state = 0) {
-    if(!is_array($keys))
-      $keys = [$keys];
+  public static function move($ids, $location, $state = 0) {
+    if(!is_array($ids))
+      $ids = [$ids];
 
     self::checkLocation($location);
     self::checkState($state);
-    self::checkKeyArray($keys);
-    return self::getUpdateQuery($keys, $location, $state)->run();
+    self::checkIdArray($ids);
+    return self::getUpdateQuery($ids, $location, $state)->run();
   }
 
 
@@ -322,8 +326,8 @@ class Pieces extends DB_Manager {
    */
   public static function pickForLocation($nbr, $fromLocation, $toLocation, $state = 0, $deckReform = true) {
     $pieces = self::getTopOf($fromLocation, $nbr);
-    $keys = array_map(function($piece){ return $piece[(static::$autoremovePrefix? '' : static::$prefix).'key']; }, $pieces);
-    self::getUpdateQuery($keys, $toLocation, $state);
+    $ids = array_map(function($piece){ return $piece[(static::$autoremovePrefix? '' : static::$prefix).'id']; }, $pieces);
+    self::getUpdateQuery($ids, $toLocation, $state);
 
     // No more pieces in deck & reshuffle is active => form another deck
     if (isset(static::$autoreshuffleCustom[$fromLocation]) && count($pieces) < $nbr && static::$autoreshuffle && $deckReform){
@@ -341,7 +345,7 @@ class Pieces extends DB_Manager {
    */
   public static function reformDeckFromDiscard($fromLocation) {
     self::checkLocation($fromLocation);
-    if (!array_key_exists($fromLocation, static::$autoreshuffleCustom))
+    if (!array_id_exists($fromLocation, static::$autoreshuffleCustom))
       throw new \BgaVisibleSystemException("Class Pieces:reformDeckFromDiscard: Unknown discard location for $fromLocation !");
 
     $discard = static::autoreshuffleCustom[$fromLocation];
@@ -364,30 +368,30 @@ class Pieces extends DB_Manager {
     $pieces = self::getInLocation($location);
     shuffle($pieces);
     foreach($pieces as $state => $piece){
-      $key = $piece[(static::$autoremovePrefix? '' : static::$prefix).'key'];
-      self::getUpdateQuery($key, null, $state)->run();
+      $id = $piece[(static::$autoremovePrefix? '' : static::$prefix).'id'];
+      self::getUpdateQuery($id, null, $state)->run();
     }
   }
 
 
   // Move a card to a specific location where card are ordered. If location_arg place is already taken, increment
   // all tokens after location_arg in order to insert new card at this precise location
-  public static function insertAt($key, $location, $state = 0) {
+  public static function insertAt($id, $location, $state = 0) {
     self::checkLocation($location);
     self::checkState($state);
     $p = static::$prefix;
     self::DB()->inc([$p.'state' => 1])->where($p.'location', $location)->where($p.'state', '>=', $state)->run();
-    self::move($key, $location, $state);
+    self::move($id, $location, $state);
   }
 
-  public static function insertOnTop($key, $location) {
+  public static function insertOnTop($id, $location) {
     $pos = self::getExtremePosition(true, $location);
-    self::insertAt($key, $location, $pos + 1);
+    self::insertAt($id, $location, $pos + 1);
   }
 
-  public static function insertAtBottom($key, $location) {
+  public static function insertAtBottom($id, $location) {
     $pos = self::getExtremePosition(false, $location);
-    self::insertAt($key, $location, $pos - 1);
+    self::insertAt($id, $location, $pos - 1);
   }
 
 
@@ -403,24 +407,22 @@ class Pieces extends DB_Manager {
    * Pieces is an array with at least the following fields:
    * [
    *   [
-   *     "key" => <unique key>    // This unique alphanum and underscore key, use {INDEX} to replace with index if 'nbr' > 1, i..e "meeple_{INDEX}_red"
-   *     "nbr" => <nbr>           // Number of tokens with this key, optional default is 1. If nbr >1 and key does not have {INDEX} it will throw an exception
+   *     "id" => <unique id>    // This unique alphanum and underscore id, use {INDEX} to replace with index if 'nbr' > 1, i..e "meeple_{INDEX}_red"
+   *     "nbr" => <nbr>           // Number of tokens with this id, optional default is 1. If nbr >1 and id does not have {INDEX} it will throw an exception
    *     "nbrStart" => <nbr>           // Optional, if the indexing does not start at 0
    *     "location" => <location>       // Optional argument specifies the location, alphanum and underscore
    *     "state" => <state>             // Optional argument specifies integer state, if not specified and $token_state_global is not specified auto-increment is used
    */
 
-  function create($pieces, $globalLocation = null, $globalState = null, $globalKey = null) {
+  function create($pieces, $globalLocation = null, $globalState = null, $globalId = null) {
     $pos = is_null($globalLocation)? 0 : (self::getExtremePosition(true, $globalLocation) + 1);
 
-// TODO custom fields
-
     $values = [];
-    $keys = [];
+    $ids = [];
     foreach ($pieces as $info){
       $n = $info['nbr'] ?? 1;
       $start = $info['nbrStart'] ?? 0;
-      $key = $info['key'] ?? $globalKey;
+      $id = $info['id'] ?? $globalId;
       $location = $info['location'] ?? $globalLocation;
       $state = $info['state'] ?? $globalState;
       if(is_null($state)){
@@ -428,8 +430,8 @@ class Pieces extends DB_Manager {
       }
 
       // SANITY
-      if (is_null($key))
-        throw new \BgaVisibleSystemException("Class Pieces: create: key cannot be null");
+      if (is_null($id) && !static::$autoIncrement)
+        throw new \BgaVisibleSystemException("Class Pieces: create: id cannot be null if not autoincrement");
 
       if (is_null($location))
         throw new \BgaVisibleSystemException("Class Pieces : create location cannot be null (set per token location or location_global");
@@ -437,23 +439,39 @@ class Pieces extends DB_Manager {
 
 
       for ($i = $start; $i < $n + $start; $i++) {
-        $nKey = preg_replace("/\{INDEX\}/", $key == $globalKey? count($keys) : $i, $key);
-        self::checkKey($nKey);
-        $values[] = [$nKey, $location, $state];
-        $keys [] = $nKey;
+        $data = [];
+        if(static::$autoIncrement){
+          $data = [$location, $state];
+        } else {
+          $nId = preg_replace("/\{INDEX\}/", $id == $globalId? count($ids) : $i, $id);
+          self::checkId($nId);
+          $data = [$nId, $location, $state];
+          $ids[] = $nId;
+        }
+
+        foreach(static::$customFields as $field){
+          $data[] = $info[$field] ?? null;
+        }
+
+        $values[] = $data;
       }
     }
 
     $p = static::$prefix;
-    self::DB()->multipleInsert([$p."key", $p."location", $p."state"])->values($values);
-    return $keys;
+    $fields = static::$autoIncrement? [$p."location", $p."state"] : [$p."id", $p."location", $p."state"];
+    foreach(static::$customFields as $field){
+      $fields[] = $field;
+    }
+
+    self::DB()->multipleInsert($fields)->values($values);
+    return $ids;
   }
 
   /*
    * Create a single token
    */
-  function singleCreate($key, $location, $state = null) {
+  function singleCreate($id, $location, $state = null) {
     self::checkState($state);
-    return self::create(['key' => $key, 'location' => $location, 'state' => $state]);
+    return self::create(['id' => $id, 'location' => $location, 'state' => $state]);
   }
 }

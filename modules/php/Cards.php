@@ -10,6 +10,17 @@ class Cards extends Helpers\Pieces
 {
 	protected static $table = "card";
 	protected static $prefix = "card_";
+  protected static $customFields = ['class', 'grade'];
+  protected static function cast($card){
+    return [
+      'id'       => (int) $card['id'],
+      'location' => $card['location'],
+      'state'    => (int) $card['id'],
+      'class'    => (int) $card['class'],
+      'grade'    => json_decode($card['grade']),
+    ];
+  }
+
 
 	private static $deck = [
     BLACKSMITH  => 8,
@@ -34,12 +45,12 @@ class Cards extends Helpers\Pieces
 		foreach($deck as $class => $copies){
 			$info = [
 				'class' => $class,
-				'grade' => $class == ROYAL_OFFER? [] : [null],
+				'grade' => json_encode($class == ROYAL_OFFER? [] : [null]),
 			];
 
 			if(is_array($copies)){
 				foreach($copies as $bp){
-					$info['grade'] = [$bp];
+					$info['grade'] = json_encode([$bp]);
 					array_push($cards, $info);
 				}
 			} else {
@@ -48,7 +59,7 @@ class Cards extends Helpers\Pieces
 			}
 		}
 
-		self::create($cards, ['age',$age], null, "dwarf{$age}_{INDEX}");
+		self::create($cards, ['age',$age]);
     self::shuffle(['age',$age]);
 	}
 
