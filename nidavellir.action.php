@@ -27,4 +27,22 @@ class action_nidavellir extends APP_GameAction
       self::trace( "Complete reinitialization of board game" );
     }
   }
+
+
+  public function playerBids()
+  {
+    self::setAjaxMode();
+    $raw = self::getArg("bids", AT_numberlist, true);
+    $bids = explode(';', $raw);
+    $this->game->actConfirmBids($bids);
+    self::ajaxResponse();
+  }
+
+  public function changeBids()
+  {
+    self::setAjaxMode();
+    $this->game->actChangeBids();
+    self::ajaxResponse();
+  }
+
 }

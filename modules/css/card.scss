@@ -1,0 +1,99 @@
+.card {
+  width:$wCard;
+  height:$hCard;
+  margin:0px $scale*15px;
+  position:relative;
+
+  &::before {
+    content:'';
+    position:absolute;
+    display:block;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    border-radius: 5%;
+    filter:drop-shadow(0px 0px 4px black);
+    background-image:url('img/dwarves.jpg');
+  }
+
+  @for $i from 1 through 5 {
+    &[data-class="#{$i}"][data-parity="0"]::before { background-position-x: 2*($i - 1) * 100% / 9; }
+    &[data-class="#{$i}"][data-parity="1"]::before { background-position-x: (2*($i - 1) + 1) * 100% / 9; }
+  }
+
+  $wRank:0.6 * $wCard;
+  $hRank:2/5 * $wRank;
+
+  .card-grade {
+    position: absolute;
+    z-index:2;
+    width:0.6 * $wCard;
+    height:$hCard * 0.8;
+    display: flex;
+    flex-flow: column;
+    padding-top:4%;
+
+    .card-rank {
+      order:1;
+      width:$wRank;
+      height:$hRank;
+      background-image:url('img/ranks.png');
+      background-size:100% 500%;
+      font-family: 'Norse';
+      color:white;
+      text-shadow: 0px 0px 2px black;
+      font-weight: bold;
+      padding-left: 20%;
+      box-sizing: border-box;
+      font-size: 19px;
+      position: relative;
+
+      /*
+      margin-left:-$hRank/4;
+
+      &::after {
+        content:'';
+        position: absolute;
+        left: -$hRank/4;
+        bottom: -$hRank/8;
+        z-index: -1;
+        border: $hRank/4 solid transparent;
+      }
+      */
+    }
+
+    .card-class-icon {
+      order:4;
+      width:0.3 * $wCard;
+      height:0.3 * $wCard;
+      background-image:url('img/classes.png');
+      background-size:cover;
+    }
+  }
+/*
+  &[data-class="1"] .card-rank::after { border-right-color:#261860; }
+  &[data-class="2"] .card-rank::after { border-right-color:#0e4931; }
+  &[data-class="3"] .card-rank::after { border-right-color:#28648b; }
+  &[data-class="4"] .card-rank::after { border-right-color:#905631; }
+  &[data-class="5"] .card-rank::after { border-right-color:#41160e; }
+*/
+
+  &[data-class="1"] .card-rank::before,
+  &[data-class="2"] .card-rank::before {
+    content:'';
+    display: inline-block;
+    width:0.7*$hRank;
+    height:0.7*$hRank;
+    margin: 0.15*$hRank 0;
+    background-image:url('img/rank-values.png');
+    background-size:cover;
+  }
+  &[data-class="2"] .card-rank::before { background-position-x:100%; }
+
+
+  @for $i from 1 through 5 {
+    &[data-class="#{$i}"] .card-rank { background-position-y: ($i - 1) * 100% / 4; }
+    &[data-class="#{$i}"] .card-class-icon { background-position-y: ($i - 1) * 100% / 4; }
+  }
+
+}

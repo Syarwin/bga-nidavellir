@@ -1,0 +1,28 @@
+.panel-container {
+  .coins-zone {
+    display: flex;
+  }
+
+  .command-zone {
+    display: flex;
+    flex-flow: row;
+
+    .command-zone-class {
+      display: flex;
+      flex-flow: column;
+
+      div {
+        width:30px;
+        height:15px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: -5px;
+        background-position: center center;
+      }
+
+      @for $i from 1 through 5 {
+        &[data-class="#{$i}"] div { background-image:url('img/grades/#{$i}.png'); }
+      }
+    }
+  }
+}

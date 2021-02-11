@@ -21,7 +21,7 @@ $machinestates = [
     "description" => "",
     "type" => "manager",
     "action" => "stGameSetup",
-    "transitions" => [ "" => ST_START_OF_TURN ]
+    "transitions" => [ "" => ST_START_OF_AGE ]
   ],
 
   // Start of an age or distinction
@@ -31,13 +31,12 @@ $machinestates = [
     "type" => "game",
     "action" => "stStartOfAge",
     "transitions" => [
-      "age" => ST_START_OF_TURN,
-//      "distinction" => ST_DISTINCTION
+      "turn" => ST_START_OF_TURN,
     ]
   ],
 
 
-  // Player start of turn : draw the cards
+  // Start of turn : draw the cards
   ST_START_OF_TURN => [
     "name" => "startOfTurn",
     "description" => "",
@@ -47,17 +46,30 @@ $machinestates = [
   ],
 
 
-  // Player start of turn : draw the cards
   ST_BIDS => [
     "name" => "playerBids",
     'description' => clienttranslate('Waiting for other players to bid'),
     'descriptionmyturn' => clienttranslate('${you} must bid for the three taverns'),
+    'descriptionmyturngeneric' => clienttranslate('${you} must bid for the three taverns'),
+    'descriptionmyturnplacecoin' => clienttranslate('${you} must select a tavern to place the coin'),
     'type' => 'multipleactiveplayer',
     'args' => 'argPlayerBids',
     'action' => 'stPlayersBids',
     'possibleactions' => ['bid'],
     'transitions' => [
-      'done' => ST_REVEAL_BIDS,
+      'done' => ST_NEXT_RESOLUTION,
+    ]
+  ],
+
+
+  ST_NEXT_RESOLUTION => [
+    "name" => "nextResolution",
+    "description" => "",
+    "type" => "game",
+    "action" => "stNextResolution",
+    "transitions" => [
+      'reveal' => ST_REVEAL_BIDS,
+      'finished' => ST_END_OF_TURN,
     ]
   ],
 
@@ -71,7 +83,6 @@ $machinestates = [
     "transitions" => [
       'revealed' => ST_RESOLVE_BIDS,
       'uline' => ST_ULINE_BID,
-      'finished' => ST_END_OF_TURN,
     ]
   ],
 
@@ -108,7 +119,7 @@ $machinestates = [
 		'action' => 'stNextPlayer',
 		'transitions' => [
       'recruit' => ST_RECRUIT_DWARF,
-      'done' => ST_REVEAL_BIDS,
+      'done' => ST_NEXT_RESOLUTION,
     ],
 	],
 
@@ -164,7 +175,19 @@ $machinestates = [
     "action" => "stEndOfTurn",
     "transitions" => [
       'nextTurn' => ST_START_OF_TURN,
-      'nextAge' => ST_START_OF_AGE,
+      'nextAge' => ST_END_OF_AGE,
+    ]
+  ],
+
+
+  // End of age
+  ST_END_OF_AGE => [
+    "name" => "endOfAge",
+    "description" => "",
+    "type" => "game",
+    "action" => "stEndOfAge",
+    "transitions" => [ ''
+//      'distrinction' => ST_START_OF_AGE,
     ]
   ],
 

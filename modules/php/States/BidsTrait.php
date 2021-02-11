@@ -2,9 +2,7 @@
 namespace NID\States;
 
 use Nidavellir;
-use NID\NotificationManager;
-use NID\PlayerManager;
-use NID\Log;
+use NID\Game\Players;
 
 trait BidsTrait
 {
@@ -22,19 +20,56 @@ trait BidsTrait
 
 	public function argPlayerBids()
   {
-    return []; // TODO : give the id of coin to each player ?
+    $data = [ '_private' => [] ];
+    foreach(Players::getAll() as $pId => $player){
+      $data['_private'][$pId] = $player->getCoinIds();
+    }
+    return $data;
 	}
 
 
-  public function confirmBids($playerId)
+  public function actConfirmBids($bids)
   {
     $this->checkAction("bid");
 
-    if(false){
+    // Check number of bids
+    if(count($bids) != 3){
       throw new \BgaUserException(_("You still have coins to bids!"));
     }
 
-    $this->gamestate->setPlayerNonMultiactive($playerId, 'done');
+    // Check if coins belongs to player
+    $player = Players::getCurrent();
+    $coins = $player->getCoinIds();
+    foreach($bids as $coinId){
+      if(!in_array($coinId, $coins))
+        throw new \BgaUserException(_("This coin is not yours!"));
+    }
+
+    // Move coin in corresponding position
+    foreach($bids as $tavern => $coinId){
+      $player->bid($tavern, $coinId);
+    }
+
+    $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
+  }
+
+
+  public function actChangeBids()
+  {
+    $this->gamestate->setPlayersMultiactive([self::getCurrentPlayerId()], '');
+  }
+
+
+
+  /////////////////////////////
+  /////// Bids are over  //////
+  /////////////////////////////
+  public function stNextResolution()
+  {
+    // Are we done with the three tavers ?
+    $currentTavern = $this->getGameStateValue('currentTavern');
+    $nextState = in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN])? "reveal" : "finished";
+    $this->gamestate->nextState($nextState);
   }
 
 
@@ -48,12 +83,7 @@ trait BidsTrait
    */
   public function stRevealBids()
   {
-    // Are we done with the three tavers ?
-    $currentTavern = $this->getGameStateValue('currentTavern');
-    if(!in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN])){
-      $this->gamestate->nextState("finished");
-      return;
-    }
+    die("Coucou");
 
     NotificationManager::revealBids();
     $pId = PlayerManager::getUlineOwner();

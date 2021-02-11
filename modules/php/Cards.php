@@ -1,6 +1,8 @@
 <?php
 namespace NID;
 use Nidavellir;
+use NID\Game\Players;
+use NID\Game\Globals;
 
 /*
  * Cards: all utility functions concerning cards
@@ -15,13 +17,20 @@ class Cards extends Helpers\Pieces
     return [
       'id'       => (int) $card['id'],
       'location' => $card['location'],
-      'state'    => (int) $card['id'],
+      'state'    => (int) $card['state'],
       'class'    => (int) $card['class'],
       'grade'    => json_decode($card['grade']),
     ];
   }
 
+  public static function getUiData()
+  {
+    return self::getInLocation(['tavern', '%'])->toArray();
+  }
 
+  /*********************
+  ***** DECK SETUP *****
+  *********************/
 	private static $deck = [
     BLACKSMITH  => 8,
     HUNTER 		  => 6,
@@ -40,6 +49,9 @@ class Cards extends Helpers\Pieces
 	];
 
 
+  /*
+   * Create one deck for age $age
+   */
 	private static function createDeck($deck, $age){
 		$cards = [];
 		foreach($deck as $class => $copies){
@@ -63,10 +75,36 @@ class Cards extends Helpers\Pieces
     self::shuffle(['age',$age]);
 	}
 
-	public static function setupNewGame($players)	{
+  /*
+   * Create both age1 and age2 decks
+   */
+	public static function setupNewGame($players)
+  {
 		$deck = count($players) == 5? self::$deck5Players : self::$deck;
 		self::createDeck($deck, 1);
 		$deck[ROYAL_OFFER]++; // One more royal offer at age 2
     self::createDeck($deck, 2);
 	}
+
+
+
+  /****************
+  ***** PLAY  *****
+  ****************/
+
+  /*
+   * Prepare turn : draw the corresponding amount of card from appropriate deck
+   */
+  public static function startNewTurn()
+  {
+    $age = Globals::getAge();
+    $nPlayers = Players::count();
+    $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
+
+    return [
+      'tavern_1' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0]),
+      'tavern_2' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1]),
+      'tavern_3' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2]),
+    ];
+  }
 }

@@ -6,12 +6,11 @@ class QueryBuilder extends \APP_DbObject {
 	$where, $orWhere, $whereCount=0, $isOrWhere = false, $limit, $orderBy;
 
 
-	public function __construct($table, $cast, $primary = 'id', $associative = false)
+	public function __construct($table, $cast = null, $primary = 'id')
 	{
     $this->table = $table;
 		$this->cast = $cast;
     $this->primary = $primary;
-    $this->associative = $associative;
     $this->columns = null;
     $this->sql = null;
     $this->limit = null;
@@ -54,7 +53,7 @@ class QueryBuilder extends \APP_DbObject {
 
 		$this->sql .= implode(',', $vals);
 		self::DbQuery($this->sql);
-		return self::DbAffectedRow();
+		return self::DbGetLastId();
 	}
 
 
@@ -79,7 +78,7 @@ class QueryBuilder extends \APP_DbObject {
 	{
 		$values = [];
 		foreach ($fields as $column => $field) {
-			$values[] = "`$column` = '$field'";
+			$values[] = "`$column` = ". (is_null($field)? "NULL" : "'$field'");
 		}
 
 		$this->sql = "UPDATE `{$this->table}` SET " . implode(',', $values);
@@ -108,7 +107,7 @@ class QueryBuilder extends \APP_DbObject {
   public function run($id = null)
   {
     if (isset($id)) {
-      $this->computeWhereClause($id);
+      $this->computeWhereClause([ [$id] ]);
     }
     $this->assembleQueryClauses();
     self::DbQuery($this->sql);
@@ -117,7 +116,7 @@ class QueryBuilder extends \APP_DbObject {
 
 
 
-  /****************ù****************
+  /*********************************
   ********* SELECT QUERIES *********
   *********************************/
 
@@ -127,9 +126,7 @@ class QueryBuilder extends \APP_DbObject {
    */
 	public function select($columns)
 	{
-		$cols = [];
-    if($this->associative)
-      $cols[] = "{$this->primary} AS `result_associative_index`";
+		$cols = ["{$this->primary} AS `result_associative_index`"];
 
 		if(!is_array($columns)){
 			$cols = [$columns];
@@ -150,13 +147,16 @@ class QueryBuilder extends \APP_DbObject {
    */
   public function get($returnValueIfOnlyOneRow = true)
 	{
-    $select = $this->columns ?? "*";
+    $select = $this->columns ?? "*, {$this->primary} AS `result_associative_index`";
 		$this->sql = "SELECT $select FROM `$this->table`";
     $this->assembleQueryClauses();
 
     $res = self::getObjectListFromDB($this->sql);
 		$oRes = [];
 		foreach($res as $row){
+      $id = $row['result_associative_index'];
+      unset($row['result_associative_index']);
+
       $val = $row;
       if(is_callable($this->cast)){
         $val = forward_static_call($this->cast, $row);
@@ -164,16 +164,13 @@ class QueryBuilder extends \APP_DbObject {
         $val = $this->cast == "object"? ((object) $row) : new $this->cast($row);
       }
 
-      if($this->associative)
-        $oRes[$row['result_associative_index']] = $val;
-      else
-			   array_push($oRes, $val);
+      $oRes[$id] = $val;
 		}
 
 		if($returnValueIfOnlyOneRow && count($oRes) <= 1)
 			return count($oRes) == 1? reset($oRes) : null;
 		else
-			return $oRes;
+			return new Collection($oRes);
 	}
 
 
@@ -221,11 +218,14 @@ class QueryBuilder extends \APP_DbObject {
     $this->sql .= $this->limit ?? '';
 	}
 
-
+  private function protect($arg)
+  {
+    return is_string($arg)? ("'". mysql_escape_string($arg) . "'") : $arg;
+  }
 
   protected function computeWhereClause($arg)
   {
-    $this->where = is_null($this->where)? " WHERE " : ($this->isOrWhere? " OR " : " AND ");
+    $this->where = is_null($this->where)? " WHERE " : ($this->where . ($this->isOrWhere? " OR " : " AND ") );
 
     if(!is_array($arg))
       $arg = [$arg];
@@ -234,15 +234,15 @@ class QueryBuilder extends \APP_DbObject {
     $n = count($param);
     // Only one param => use primary field
     if ($n == 1) {
-      $this->where .= " `{$this->primary}` = '" . mysql_escape_string($param[0]) ."'";
+      $this->where .= " `{$this->primary}` = " . $this->protect($param[0]);
     }
     // Three params : WHERE $1 OP2 $3
     else if ($n == 3) {
-      $this->where .= "`".trim($param[0]). "` ". $param[1]. " '" . mysql_escape_string($param[2]) ."'";
+      $this->where .= "`".trim($param[0]). "` ". $param[1]. " " .$this->protect($param[2]);
     }
     // Two params : $1 = $2
     else if ($n == 2) {
-      $this->where .= "`".trim($param[0])."` = '" . mysql_escape_string($param[1]) ."'";
+      $this->where .= "`".trim($param[0])."` = " . $this->protect($param[1]);
     }
 
     if(!empty($arg))
@@ -256,14 +256,14 @@ class QueryBuilder extends \APP_DbObject {
 		$this->isOrWhere = false;
 		$num_args = func_num_args();
 		$args = func_get_args();
-		$this->computeWhereClause($num_args == 1? $args[0] : [$args]);
+		$this->computeWhereClause( ( $num_args == 1 && is_array($args[0]) )? $args[0] : [$args]);
 		return $this;
 	}
 
 
 	public function whereIn()
 	{
-    $this->where = is_null($this->where)? " WHERE " : ($this->isOrWhere? " OR " : " AND ");
+    $this->where = is_null($this->where)? " WHERE " : ($this->where. ($this->isOrWhere? " OR " : " AND "));
 
 		$num_args = func_num_args();
 		$args = func_get_args();
@@ -275,6 +275,29 @@ class QueryBuilder extends \APP_DbObject {
 		$this->where .= "`$field` IN ('". implode("','", $values) ."')";
 		return $this;
 	}
+
+  public function whereNotIn()
+	{
+    $this->where = is_null($this->where)? " WHERE " : ($this->where. ($this->isOrWhere? " OR " : " AND "));
+
+		$num_args = func_num_args();
+		$args = func_get_args();
+		$field = ($num_args == 1)? $this->primary : $args[0];
+		$values = ($num_args == 1)? $args[0] : $args[1];
+		if(is_null($values))
+			return $this;
+
+		$this->where .= "`$field` NOT IN ('". implode("','", $values) ."')";
+		return $this;
+	}
+
+  public function whereNull($field)
+	{
+    $this->where = is_null($this->where)? " WHERE " : ($this->where. ($this->isOrWhere? " OR " : " AND "));
+		$this->where .= "`$field` IS NULL";
+		return $this;
+	}
+
 
 	public function orWhere()
 	{
@@ -327,4 +350,50 @@ class QueryBuilder extends \APP_DbObject {
 
 		return $this;
 	}
+}
+
+
+
+class Collection extends \ArrayObject {
+  public function getIds(){
+    return array_keys($this->getArrayCopy());
+  }
+
+  public function empty(){
+    return empty($this->getArrayCopy());
+  }
+
+  public function first(){
+    $arr = $this->toArray();
+    return isset($arr[0])? $arr[0] : null;
+  }
+
+  public function toArray(){
+    return array_values($this->getArrayCopy());
+  }
+
+  public function toAssoc(){
+    return $this->getArrayCopy();
+  }
+
+  public function map($func){
+    return array_map($func, $this->toArray());
+  }
+
+  public function assocMap($func){
+    return array_map($func, $this->toAssoc());
+  }
+
+  public function merge($arr){
+    return new Collection( array_merge($this->toAssoc(), $arr->toAssoc()) );
+  }
+
+  public function reduce($func, $init){
+    return array_reduce($this->toArray(), $func, $init);
+  }
+
+  public function filter($func){
+    return array_values(array_filter($this->toArray(), $func));
+  }
+
 }

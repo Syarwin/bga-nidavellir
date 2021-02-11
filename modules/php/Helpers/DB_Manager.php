@@ -1,10 +1,9 @@
 <?php
 namespace NID\Helpers;
 
-class DB_Manager {
+class DB_Manager extends \APP_DbObject {
 	protected static $table = null;
   protected static $primary = null;
-  protected static $associative = false;
   protected static function cast($row){ return $row; }
 
   public static function DB($table = null){
@@ -15,6 +14,6 @@ class DB_Manager {
       $table = static::$table;
     }
 
-    return new QueryBuilder($table, function($row){ return static::cast($row); }, static::$primary, static::$associative);
+    return new QueryBuilder($table, function($row){ return static::cast($row); }, static::$primary);
   }
 }

@@ -27,11 +27,10 @@ namespace NID\Helpers;
 class Pieces extends DB_Manager {
   protected static $table = null;
   protected static $cast = null;
-  protected static $associative = false;
 
   protected static $prefix = "piece_";
   protected static $autoIncrement = true;
-  protected static $primary = "piece_id";
+  protected static $primary;
   protected static $autoremovePrefix = true;
   protected static $autoreshuffle = false; // If true, a new deck is automatically formed with a reshuffled discard as soon at is needed
   protected static $autoreshuffleListener = null; // Callback to a method called when an autoreshuffle occurs
@@ -41,7 +40,14 @@ class Pieces extends DB_Manager {
   protected static $customFields = [];
   protected static $gIndex = [];
 
+  public static function DB($table = null){
+    static::$primary = static::$prefix."id";
+    return parent::DB(static::$table);;
+  }
 
+// TODO : putDeckOnTop
+// TODO : pickRandomFor
+// TODO : collection filter
 
   /************************************
   *************************************
@@ -54,7 +60,7 @@ class Pieces extends DB_Manager {
    */
   final static function getSelectQuery() {
     $basic = ['id' => static::$prefix."id", 'location' => static::$prefix."location", 'state' => static::$prefix."state"];
-    if(!self::$autoremovePrefix)
+    if(!static::$autoremovePrefix)
       $basic = array_values($basic);
 
     return self::DB()->select(array_merge($basic, static::$customFields));
@@ -67,10 +73,12 @@ class Pieces extends DB_Manager {
     if(!is_null($state))
       $data[static::$prefix.'state'] = $state;
 
-    if(!is_array($ids))
-      $ids = [$ids];
+    $query = self::DB()->update($data);
+    if(!is_null($ids)){
+      $query = $query->whereIn(static::$prefix.'id', is_array($ids)? $ids : [$ids]);
+    }
 
-    return self::DB()->update($data)->whereIn(static::$prefix.'id', $ids);
+    return $query;
   }
 
   /****
@@ -124,7 +132,7 @@ class Pieces extends DB_Manager {
       $location = implode("_", $location);
 
     $extra = $like? "%" : "";
-    if (preg_match("/^[A-Za-z${extra}][A-Za-z_0-9${extra}-]*$/", $location) == 0)
+    if (preg_match("/^[A-Za-z0-9${extra}-][A-Za-z_0-9${extra}-]*$/", $location) == 0)
       throw new \BgaVisibleSystemException("Class Pieces: location must be alphanum and underscore non empty string '$location'");
   }
 
@@ -185,6 +193,13 @@ class Pieces extends DB_Manager {
   ************************************/
 
   /**
+   * Get all the pieces
+   */
+  public static function getAll(){
+    return self::getSelectQuery()->get();
+  }
+
+  /**
    * Get specific piece by id
    */
   public static function get($ids) {
@@ -195,11 +210,11 @@ class Pieces extends DB_Manager {
     if (empty($ids))
         return [];
 
-    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get();
+    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get(false);
     if (count($result) != count($ids))
       throw new \BgaVisibleSystemException("Class Pieces: getMany, some pieces have not been found !");
 
-    return $result;
+    return count($result) == 1? $result->first() : $result;
   }
 
 
@@ -232,10 +247,10 @@ class Pieces extends DB_Manager {
   /**
    * Return "$nbr" piece on top of this location, top defined as item with higher state value
    */
-  public static function getTopOf($location, $n = 1) {
+  public static function getTopOf($location, $n = 1, $returnValueIfOnlyOneRow = true) {
     self::checkLocation($location);
-    self::checkPosInt($nbr);
-    return self::getSelectWhere(null, $location)->limit($n)->get();
+    self::checkPosInt($n);
+    return self::getSelectWhere(null, $location)->orderBy(static::$prefix.'state', 'DESC')->limit($n)->get($returnValueIfOnlyOneRow);
   }
 
 
@@ -244,7 +259,7 @@ class Pieces extends DB_Manager {
    * Return all pieces in specific location
    * note: if "order by" is used, result object is NOT indexed by ids
    */
-  public static function getInLocation($location, $state = null, $orderBy = null) {
+  public static function getInLocationQ($location, $state = null, $orderBy = null) {
     self::checkLocation($location, true);
     self::checkState($state, true);
 
@@ -253,7 +268,11 @@ class Pieces extends DB_Manager {
       $query = $query->orderBy($orderBy);
     }
 
-    return $query->get();
+    return $query;
+  }
+
+  public static function getInLocation($location, $state = null, $orderBy = null) {
+    return self::getInLocationQ($location, $state, $orderBy)->get(false);
   }
 
   /**
@@ -300,7 +319,7 @@ class Pieces extends DB_Manager {
    *  if "fromLocation" and "fromState" are null: move ALL cards to specific location
    */
   public static function moveAllInLocation($fromLocation, $toLocation, $fromState = null, $toState = 0) {
-    if (!is_null($fromLocation != null))
+    if (!is_null($fromLocation))
       self::checkLocation($fromLocation);
     self::checkLocation($toLocation);
 
@@ -313,8 +332,8 @@ class Pieces extends DB_Manager {
    * Move all pieces from a location to another location arg stays with the same value
    */
   public static function moveAllInLocationKeepState($fromLocation, $toLocation) {
-    self::checkLocation($from_location);
-    self::checkLocation($to_location);
+    self::checkLocation($fromLocation);
+    self::checkLocation($toLocation);
     return self::moveAllInLocation($fromLocation, $toLocation, null, null);
   }
 
@@ -325,30 +344,35 @@ class Pieces extends DB_Manager {
    * Return pieces infos or void array if no card in the specified location
    */
   public static function pickForLocation($nbr, $fromLocation, $toLocation, $state = 0, $deckReform = true) {
-    $pieces = self::getTopOf($fromLocation, $nbr);
-    $ids = array_map(function($piece){ return $piece[(static::$autoremovePrefix? '' : static::$prefix).'id']; }, $pieces);
-    self::getUpdateQuery($ids, $toLocation, $state);
+    self::checkLocation($fromLocation);
+    self::checkLocation($toLocation);
+    $pieces = self::getTopOf($fromLocation, $nbr, false);
+    $ids = $pieces->getIds();
+    self::getUpdateQuery($ids, $toLocation, $state)->run();
 
     // No more pieces in deck & reshuffle is active => form another deck
-    if (isset(static::$autoreshuffleCustom[$fromLocation]) && count($pieces) < $nbr && static::$autoreshuffle && $deckReform){
-      $missing = $nbr - count($tokens);
+    if (array_key_exists($fromLocation, static::$autoreshuffleCustom) && count($pieces) < $nbr && static::$autoreshuffle && $deckReform){
+      $missing = $nbr - count($pieces);
       self::reformDeckFromDiscard($fromLocation);
-      $pieces = array_merge($pieces, self::pickForLocation($missing, $fromLocation, $toLocation, $state, false)); // Note: block anothr deck reform
+      $pieces = $pieces->merge(self::pickForLocation($missing, $fromLocation, $toLocation, $state, false)); // Note: block another deck reform
     }
 
     return $pieces;
   }
 
+  public static function pickOneForLocation($fromLocation, $toLocation, $state = 0, $deckReform = true) {
+    return self::pickForLocation(1, $fromLocation, $toLocation, $state, $deckReform)->first();
+  }
 
   /*
    * Reform a location from another location when enmpty
    */
   public static function reformDeckFromDiscard($fromLocation) {
     self::checkLocation($fromLocation);
-    if (!array_id_exists($fromLocation, static::$autoreshuffleCustom))
+    if (!array_key_exists($fromLocation, static::$autoreshuffleCustom))
       throw new \BgaVisibleSystemException("Class Pieces:reformDeckFromDiscard: Unknown discard location for $fromLocation !");
 
-    $discard = static::autoreshuffleCustom[$fromLocation];
+    $discard = static::$autoreshuffleCustom[$fromLocation];
     self::checkLocation($discard);
     self::moveAllInLocation($discard, $fromLocation);
     self::shuffle($fromLocation);
@@ -365,10 +389,9 @@ class Pieces extends DB_Manager {
    */
   public static function shuffle($location) {
     self::checkLocation($location);
-    $pieces = self::getInLocation($location);
+    $pieces = self::getInLocation($location)->getIds();
     shuffle($pieces);
-    foreach($pieces as $state => $piece){
-      $id = $piece[(static::$autoremovePrefix? '' : static::$prefix).'id'];
+    foreach($pieces as $state => $id){
       self::getUpdateQuery($id, null, $state)->run();
     }
   }
@@ -463,8 +486,9 @@ class Pieces extends DB_Manager {
       $fields[] = $field;
     }
 
-    self::DB()->multipleInsert($fields)->values($values);
-    return $ids;
+    // With auto increment, we only return the last inserted elem id
+    $lastId = self::DB()->multipleInsert($fields)->values($values);
+    return static::$autoIncrement? $lastId : $ids;
   }
 
   /*

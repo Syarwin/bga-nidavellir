@@ -1,0 +1,88 @@
+#nidavellir-board {
+  display:flex;
+  flex-flow:column;
+  margin-left:-2px;
+
+  #exterior {
+    width:100vw;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: flex-end;
+    
+    &::before {
+      content:'';
+      display: block;
+      position: absolute;
+      background-image:url("img/sky.jpg");
+      z-index:-1;
+      width:100%;
+      height: 100%;
+      margin-top:-200px;
+      padding-top:200px;
+    }
+
+    @import "layout.treasure";
+    @import "layout.taverns";
+  }
+
+  #foundations {
+    background-image:url('img/tavern/foundations.jpg');
+    width:100vw;
+    height:$scale*20px;
+  }
+
+
+
+  .nidavellir-player-board {
+    width:100vw;
+    min-height:$scale*350px;
+    position:relative;
+    display: flex;
+    align-items: flex-start;
+//    background-color:#838c92;
+
+    &#player-board-1 {
+      background-color: #c1c1f2;
+    }
+
+    &#player-board-2 {
+      background-color: #ffafaf;
+    }
+
+    &::before {
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100vw;
+      height:100px;
+      background-image: url('img/mines/top.png');
+      background-size:contain;
+    }
+
+    &::after {
+      content:'';
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100vw;
+      height:100px;
+      background-image: url('img/mines/bottom.png');
+      background-size:contain;
+    }
+
+    .cards-class {
+      width:$wCard;
+      margin: $scale*40px $scale*15px 0px;
+      z-index: 2;
+
+      .card {
+        margin-bottom:-$scale*0.8*$hCard;
+        &:last-of-type {
+          margin-bottom: 60px;
+        }
+      }
+    }
+  }
+}

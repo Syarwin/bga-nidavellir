@@ -12,11 +12,6 @@
  *
  */
 
-
-use NID\PlayerManager;
-use NID\Cards;
-use NID\Log;
-
 $swdNamespaceAutoload = function ($class) {
    $classParts = explode('\\', $class);
    if ($classParts[0] == 'NID') {
@@ -31,9 +26,15 @@ spl_autoload_register($swdNamespaceAutoload, true, true);
 
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
 
+use NID\Cards;
+use NID\Coins;
+use NID\Game\Globals;
+use NID\Game\Players;
 
 class Nidavellir extends Table
 {
+  use NID\States\AgeTrait;
+  use NID\States\TurnTrait;
 	use NID\States\BidsTrait;
 	use NID\States\RecruitTrait;
 
@@ -41,13 +42,7 @@ class Nidavellir extends Table
 	public function __construct() {
 		parent::__construct();
 		self::$instance = $this;
-
-		self::initGameStateLabels([
-      'currentTavern' => CURRENT_TAVERN, // TODO init and reset
-      'currentPlayerIndex' => CURRENT_PLAYER_INDEX, // TODO init
-    ]);
-//		 'optionTeam' => OPTION_TEAM_SIZE,
-//		 'optionHint' => OPTION_HINT_MODE,
+    Globals::declare($this);
 	}
 	public static function get(){
 	 return self::$instance;
@@ -62,22 +57,23 @@ class Nidavellir extends Table
 	 * setupNewGame:
    */
 	protected function setupNewGame( $players, $options = [] ){
-		PlayerManager::setupNewGame($players);
+		Players::setupNewGame($players);
     Cards::setupNewGame($players);
+    Coins::setupNewGame($players);
+
+    Globals::setupNewGame();
+//    Statistics::setupNewGame();
 	}
-
-
-  public function stStartOfTurn(){
-    $this->gamestate->nextState('');
-  }
 
 	/*
 	 * getAllDatas:
 	 */
 	protected function getAllDatas(){
+    $pId = self::getCurrentPId();
 		return [
-			'players' => NID\PlayerManager::getUiData(),
-      'cards' => NID\Cards::getInLocation(['age',"%"]),
+			'players' => Players::getUiData($pId),
+      'taverns' => Cards::getUiData(),
+      'royalTreasure' => NID\Coins::getInLocation('treasure'),
 		];
 	}
 
@@ -120,4 +116,18 @@ class Nidavellir extends Table
 	 */
 	public function upgradeTableDb($from_version) {
 	}
+
+  ///////////////////////////////////////////////////////////
+  // Exposing proteced method, please use at your own risk //
+  ///////////////////////////////////////////////////////////
+
+  // Exposing protected method getCurrentPlayerId
+  public static function getCurrentPId(){
+    return self::getCurrentPlayerId();
+  }
+
+  // Exposing protected method translation
+  public static function translate($text){
+    return self::_($text);
+  }
 }

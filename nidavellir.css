@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -7,8 +8,433 @@
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * nidavellir.css
+ * nidavellir.scss
  *
  * Nidavellir stylesheet
  *
  */
+html {
+  background-image: url("img/background.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed; }
+
+@font-face {
+  font-family: 'Norse';
+  src: url("img/font/Norse.woff2") format("woff2"), url("img/font/Norse.woff") format("woff"), url("img/font/Norse.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; }
+@font-face {
+  font-family: 'Norse';
+  src: url("img/font/Norse-Bold.woff2") format("woff2"), url("img/font/Norse-Bold.woff") format("woff"), url("img/font/Norse-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap; }
+.card {
+  width: 98px;
+  height: 144.9px;
+  margin: 0px 10.5px;
+  position: relative;
+  /*
+    &[data-class="1"] .card-rank::after { border-right-color:#261860; }
+    &[data-class="2"] .card-rank::after { border-right-color:#0e4931; }
+    &[data-class="3"] .card-rank::after { border-right-color:#28648b; }
+    &[data-class="4"] .card-rank::after { border-right-color:#905631; }
+    &[data-class="5"] .card-rank::after { border-right-color:#41160e; }
+  */ }
+  .card::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 5%;
+    filter: drop-shadow(0px 0px 4px black);
+    background-image: url("img/dwarves.jpg"); }
+  .card[data-class="1"][data-parity="0"]::before {
+    background-position-x: 0%; }
+  .card[data-class="1"][data-parity="1"]::before {
+    background-position-x: 11.1111111111%; }
+  .card[data-class="2"][data-parity="0"]::before {
+    background-position-x: 22.2222222222%; }
+  .card[data-class="2"][data-parity="1"]::before {
+    background-position-x: 33.3333333333%; }
+  .card[data-class="3"][data-parity="0"]::before {
+    background-position-x: 44.4444444444%; }
+  .card[data-class="3"][data-parity="1"]::before {
+    background-position-x: 55.5555555556%; }
+  .card[data-class="4"][data-parity="0"]::before {
+    background-position-x: 66.6666666667%; }
+  .card[data-class="4"][data-parity="1"]::before {
+    background-position-x: 77.7777777778%; }
+  .card[data-class="5"][data-parity="0"]::before {
+    background-position-x: 88.8888888889%; }
+  .card[data-class="5"][data-parity="1"]::before {
+    background-position-x: 100%; }
+  .card .card-grade {
+    position: absolute;
+    z-index: 2;
+    width: 58.8px;
+    height: 115.92px;
+    display: flex;
+    flex-flow: column;
+    padding-top: 4%; }
+    .card .card-grade .card-rank {
+      order: 1;
+      width: 58.8px;
+      height: 23.52px;
+      background-image: url("img/ranks.png");
+      background-size: 100% 500%;
+      font-family: 'Norse';
+      color: white;
+      text-shadow: 0px 0px 2px black;
+      font-weight: bold;
+      padding-left: 20%;
+      box-sizing: border-box;
+      font-size: 19px;
+      position: relative;
+      /*
+      margin-left:-$hRank/4;
+
+      &::after {
+        content:'';
+        position: absolute;
+        left: -$hRank/4;
+        bottom: -$hRank/8;
+        z-index: -1;
+        border: $hRank/4 solid transparent;
+      }
+      */ }
+    .card .card-grade .card-class-icon {
+      order: 4;
+      width: 29.4px;
+      height: 29.4px;
+      background-image: url("img/classes.png");
+      background-size: cover; }
+  .card[data-class="1"] .card-rank::before, .card[data-class="2"] .card-rank::before {
+    content: '';
+    display: inline-block;
+    width: 16.464px;
+    height: 16.464px;
+    margin: 3.528px 0;
+    background-image: url("img/rank-values.png");
+    background-size: cover; }
+  .card[data-class="2"] .card-rank::before {
+    background-position-x: 100%; }
+  .card[data-class="1"] .card-rank {
+    background-position-y: 0%; }
+  .card[data-class="1"] .card-class-icon {
+    background-position-y: 0%; }
+  .card[data-class="2"] .card-rank {
+    background-position-y: 25%; }
+  .card[data-class="2"] .card-class-icon {
+    background-position-y: 25%; }
+  .card[data-class="3"] .card-rank {
+    background-position-y: 50%; }
+  .card[data-class="3"] .card-class-icon {
+    background-position-y: 50%; }
+  .card[data-class="4"] .card-rank {
+    background-position-y: 75%; }
+  .card[data-class="4"] .card-class-icon {
+    background-position-y: 75%; }
+  .card[data-class="5"] .card-rank {
+    background-position-y: 100%; }
+  .card[data-class="5"] .card-class-icon {
+    background-position-y: 100%; }
+
+#nidavellir-board {
+  display: flex;
+  flex-flow: column;
+  margin-left: -2px; }
+  #nidavellir-board #exterior {
+    width: 100vw;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: flex-end; }
+    #nidavellir-board #exterior::before {
+      content: '';
+      display: block;
+      position: absolute;
+      background-image: url("img/sky.jpg");
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      margin-top: -200px;
+      padding-top: 200px; }
+    #nidavellir-board #exterior #treasure-container {
+      width: 500px;
+      height: 650px;
+      position: relative;
+      margin-top: -100px;
+      margin-right: 100px; }
+      #nidavellir-board #exterior #treasure-container::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-image: url("img/citadel.png");
+        background-size: 100% 100%;
+        z-index: -1; }
+      #nidavellir-board #exterior #treasure-container #treasure {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-end;
+        height: 100%;
+        width: 74%;
+        margin-left: 10%; }
+        #nidavellir-board #exterior #treasure-container #treasure .treasure-row {
+          height: 80px;
+          width: 100%;
+          margin-top: 3%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center; }
+          #nidavellir-board #exterior #treasure-container #treasure .treasure-row .treasure-slot {
+            width: 65px;
+            height: 65px;
+            background-image: url("img/coins.png");
+            background-size: cover;
+            background-position-x: calc(100% / 3);
+            font-family: 'Norse';
+            font-size: 38px;
+            color: #64360e;
+            font-weight: bold;
+            filter: drop-shadow(1px 1px 2px black);
+            padding-right: 7%;
+            box-sizing: border-box;
+            text-align: right;
+            line-height: 64px; }
+    #nidavellir-board #exterior #taverns-container {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      #nidavellir-board #exterior #taverns-container #taverns {
+        display: grid;
+        grid-template-columns: 105px 14px auto 14px 42px;
+        grid-template-rows: 14px 161px 14px 161px 14px 161px; }
+        #nidavellir-board #exterior #taverns-container #taverns > * {
+          box-sizing: border-box; }
+        #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder {
+          grid-column: 1;
+          width: 105px;
+          display: flex;
+          flex-flow: column;
+          perspective: 300px; }
+          #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-mount {
+            width: 105px;
+            height: 16.275px;
+            background-image: url("img/barre.png");
+            background-size: contain; }
+          #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing {
+            margin-top: -7.1375px;
+            transform-origin: 50% 0%; }
+@keyframes swing {
+  0% {
+    transform: rotateX(0deg); }
+  30% {
+    transform: rotateX(2deg); }
+  50% {
+    transform: rotateX(0deg); }
+  83% {
+    transform: rotateX(-2deg); }
+  100% {
+    transform: rotateX(0deg); } }
+            #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-chain {
+              width: 105px;
+              height: 26.775px;
+              background-image: url("img/maillons.png");
+              background-size: contain; }
+            #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign {
+              width: 105px;
+              height: 74.55px;
+              margin-top: -2.1px;
+              background-image: url("img/enseigne_1.png");
+              background-size: cover;
+              z-index: 2;
+              display: flex;
+              justify-content: center;
+              align-items: center; }
+              #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign#tavern-sign-1 {
+                background-image: url("img/enseigne_2.png"); }
+              #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign#tavern-sign-2 {
+                height: 80.85px;
+                margin-top: -7px;
+                background-image: url("img/enseigne_3.png"); }
+              #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder {
+                width: 67.095px;
+                height: 67.095px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center; }
+                #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable {
+                  border: 3px dashed white;
+                  cursor: pointer; }
+                  #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable:hover {
+                    border-color: red; }
+        #nidavellir-board #exterior #taverns-container #taverns .hor-beam {
+          grid-column: 2 / 5;
+          background-image: url("img/tavern/horizontal_beam.jpg");
+          border-left: 1px solid black;
+          border-right: 1px solid black; }
+          #nidavellir-board #exterior #taverns-container #taverns .hor-beam#hor-beam-1 {
+            border-top: 1px solid black; }
+        #nidavellir-board #exterior #taverns-container #taverns .ver-beam {
+          background-image: url("img/tavern/vertical_beam.jpg");
+          background-size: 100% 100%; }
+          #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-1, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-3, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-5 {
+            border-left: 1px solid black; }
+          #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-2, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-4, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-6 {
+            border-right: 1px solid black; }
+        #nidavellir-board #exterior #taverns-container #taverns .tavern-cards-holder {
+          flex-grow: 1;
+          height: 100%;
+          background-image: url("img/tavern/props.png"), url("img/tavern/background.jpg");
+          background-size: 100%, 30%;
+          border: 1px solid black;
+          display: flex;
+          justify-content: space-around;
+          align-items: center; }
+          #nidavellir-board #exterior #taverns-container #taverns .tavern-cards-holder#tavern-3 {
+            border-bottom: none; }
+  #nidavellir-board #foundations {
+    background-image: url("img/tavern/foundations.jpg");
+    width: 100vw;
+    height: 14px; }
+  #nidavellir-board .nidavellir-player-board {
+    width: 100vw;
+    min-height: 245px;
+    position: relative;
+    display: flex;
+    align-items: flex-start; }
+    #nidavellir-board .nidavellir-player-board#player-board-1 {
+      background-color: #c1c1f2; }
+    #nidavellir-board .nidavellir-player-board#player-board-2 {
+      background-color: #ffafaf; }
+    #nidavellir-board .nidavellir-player-board::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100px;
+      background-image: url("img/mines/top.png");
+      background-size: contain; }
+    #nidavellir-board .nidavellir-player-board::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 100px;
+      background-image: url("img/mines/bottom.png");
+      background-size: contain; }
+    #nidavellir-board .nidavellir-player-board .cards-class {
+      width: 98px;
+      margin: 28px 10.5px 0px;
+      z-index: 2; }
+      #nidavellir-board .nidavellir-player-board .cards-class .card {
+        margin-bottom: -81.144px; }
+        #nidavellir-board .nidavellir-player-board .cards-class .card:last-of-type {
+          margin-bottom: 60px; }
+
+.coin {
+  overflow: visible;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  z-index: 100; }
+  .coin .coin-holder {
+    position: absolute;
+    width: 100%;
+    height: 100%; }
+    .coin .coin-holder::before, .coin .coin-holder::after {
+      content: "";
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid white;
+      border-radius: 34px;
+      z-index: 4;
+      box-sizing: border-box; }
+    .coin .coin-holder::after {
+      border: 1px dashed red; }
+    .coin .coin-holder .coin-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url("img/coins.png");
+      background-size: 400%;
+      background-repeat: no-repeat;
+      filter: drop-shadow(1px 1px 2px black); }
+      .coin .coin-holder .coin-inner .coin-value {
+        width: 60%;
+        text-align: right;
+        font-family: 'Norse';
+        font-size: 28px;
+        line-height: 49px;
+        color: #64360e;
+        font-weight: bold; }
+  .coin[data-type="0"] .coin-holder .coin-inner {
+    background-position-x: 0%; }
+  .coin[data-type="1"] .coin-holder .coin-inner {
+    background-position-x: calc(100% / 3); }
+  .coin[data-type="2"] .coin-holder .coin-inner {
+    background-position-x: calc(100% / 3 * 2); }
+  .coin[data-type="0"][data-value="0"] .coin-holder .coin-inner {
+    background-position-x: 100%; }
+  .coin.selectable .coin-holder {
+    cursor: pointer; }
+    .coin.selectable .coin-holder:hover {
+      transform: scale(1.2); }
+    .coin.selectable .coin-holder::before, .coin.selectable .coin-holder::after {
+      display: block; }
+    .coin.selectable .coin-holder::after {
+      animation-name: borderBlink;
+      animation-duration: 1s;
+      animation-iteration-count: infinite; }
+@keyframes borderBlink {
+  0% {
+    border-style: dashed; }
+  49% {
+    border-style: dashed; }
+  50% {
+    border-style: solid; }
+  100% {
+    border-style: solid; } }
+  .coin.selected .coin-holder::after {
+    animation: none;
+    border: 2px solid green; }
+
+.panel-container .coins-zone {
+  display: flex; }
+.panel-container .command-zone {
+  display: flex;
+  flex-flow: row; }
+  .panel-container .command-zone .command-zone-class {
+    display: flex;
+    flex-flow: column; }
+    .panel-container .command-zone .command-zone-class div {
+      width: 30px;
+      height: 15px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-right: -5px;
+      background-position: center center; }
+    .panel-container .command-zone .command-zone-class[data-class="1"] div {
+      background-image: url("img/grades/1.png"); }
+    .panel-container .command-zone .command-zone-class[data-class="2"] div {
+      background-image: url("img/grades/2.png"); }
+    .panel-container .command-zone .command-zone-class[data-class="3"] div {
+      background-image: url("img/grades/3.png"); }
+    .panel-container .command-zone .command-zone-class[data-class="4"] div {
+      background-image: url("img/grades/4.png"); }
+    .panel-container .command-zone .command-zone-class[data-class="5"] div {
+      background-image: url("img/grades/5.png"); }
+
+/*# sourceMappingURL=nidavellir.css.map */

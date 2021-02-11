@@ -1,6 +1,6 @@
 <?php
 namespace NID;
-use Nidavellir;
+use NID\Coins;
 
 /*
  * Player: all utility functions concerning a player
@@ -50,6 +50,7 @@ class Player
       'no'        => $this->no,
       'name'      => $this->getName(),
       'color'     => $this->color,
+      'coins'     => $this->getVisibleCoins($current),
     ];
   }
 
@@ -64,9 +65,28 @@ class Player
   }
 
 
+  public function getCoins()
+  {
+    return Coins::getOfPlayer($this->id);
+  }
+
+  public function getVisibleCoins($current = false)
+  {
+    $coins = $this->getCoins();
+    return $current? $coins : $coins->filter(function($coin){ return in_array($coin['location'], ['tavern-1', 'tavern-2', 'tavern-3']); });
+  }
+
+  public function getCoinIds()
+  {
+    return Coins::getOfPlayer($this->id)->getIds();
+  }
 
 /*************************
 ********** Utils *********
 *************************/
 
+  public function bid($tavern, $coinId)
+  {
+    Coins::bid($coinId, $this->id, $tavern);
+  }
 }

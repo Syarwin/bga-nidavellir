@@ -1,0 +1,124 @@
+#taverns-container {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  #taverns {
+    display: grid;
+    grid-template-columns: $wSign $scale*20px auto $scale*20px $scale*60px;
+    grid-template-rows: $scale*20px $scale*230px $scale*20px $scale*230px $scale*20px $scale*230px;
+    & > * {
+      box-sizing: border-box;
+    }
+
+    .tavern-sign-holder {
+      grid-column: 1;
+      width:$wSign;
+      display: flex;
+      flex-flow: column;
+      perspective: 300px;
+
+      .tavern-mount {
+        width:$wSign;
+        height:$hMount;
+        background-image: url('img/barre.png');
+        background-size:contain;
+      }
+
+      .tavern-swing {
+        margin-top:-$hMount/2 + 1px;
+        transform-origin: 50% 0%;
+        //animation:2s swing infinite linear;
+
+        @keyframes swing {
+          0%   { transform:rotateX(0deg); }
+          30%  { transform:rotateX(2deg); }
+          50%  { transform:rotateX(0deg);  }
+          83% { transform:rotateX(-2deg);  }
+          100% { transform:rotateX(0deg); }
+        }
+
+        .tavern-chain {
+          width:$wSign;
+          height:$hChain;
+          background-image: url('img/maillons.png');
+          background-size:contain;
+        }
+
+        .tavern-sign {
+          width:$wSign;
+          height:$hSign;
+          margin-top:-3px*$scale;
+          background-image: url('img/enseigne_1.png');
+          background-size:cover;
+          z-index:2;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+
+          &#tavern-sign-1 {
+            background-image: url('img/enseigne_2.png');
+          }
+          &#tavern-sign-2 {
+            height:$hSign3;
+            margin-top:-10px*$scale;
+            background-image: url('img/enseigne_3.png');
+          }
+
+          .tavern-coin-holder {
+            width:0.9*$hSign;
+            height:0.9*$hSign;
+            border-radius: 50%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+
+            &.selectable {
+              border:3px dashed white;
+              cursor:pointer;
+
+              &:hover {
+                border-color:red;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .hor-beam {
+      grid-column: 2 / 5;
+      background-image:url('img/tavern/horizontal_beam.jpg');
+      border-left:1px solid black;
+      border-right:1px solid black;
+
+      &#hor-beam-1 {
+        border-top:1px solid black;
+      }
+    }
+
+    .ver-beam {
+      background-image:url('img/tavern/vertical_beam.jpg');
+      background-size:100% 100%;
+
+      &#ver-beam-1, &#ver-beam-3, &#ver-beam-5 { border-left:1px solid black; }
+      &#ver-beam-2, &#ver-beam-4, &#ver-beam-6 { border-right:1px solid black; }
+    }
+
+    .tavern-cards-holder {
+      flex-grow: 1;
+      height:100%;
+//          min-width: 700px;
+      background-image: url('img/tavern/props.png'), url('img/tavern/background.jpg');
+      background-size:100%, 30%;
+      border:1px solid black;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      &#tavern-3 {
+        border-bottom:none;
+      }
+    }
+  }
+}
