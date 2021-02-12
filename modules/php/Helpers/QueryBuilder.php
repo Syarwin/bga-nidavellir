@@ -145,7 +145,7 @@ class QueryBuilder extends \APP_DbObject {
   /*
    * get : run a select query and fetch values
    */
-  public function get($returnValueIfOnlyOneRow = true)
+  public function get($returnValueIfOnlyOneRow = false)
 	{
     $select = $this->columns ?? "*, {$this->primary} AS `result_associative_index`";
 		$this->sql = "SELECT $select FROM `$this->table`";
@@ -172,6 +172,11 @@ class QueryBuilder extends \APP_DbObject {
 		else
 			return new Collection($oRes);
 	}
+
+  public function getSingle()
+  {
+    return $this->limit(1)->get(true);
+  }
 
 
   /*

@@ -56,7 +56,7 @@ class Players extends \NID\Helpers\DB_Manager
   public function get($pId = null)
   {
     $pId = $pId ?: self::getActiveId();
-    return self::DB()->where($pId)->get();
+    return self::DB()->where($pId)->getSingle();
   }
 
   public function getActive()
@@ -74,6 +74,12 @@ class Players extends \NID\Helpers\DB_Manager
     $table = Nidavellir::get()->getNextPlayerTable();
     return $table[$player->getId()];
   }
+
+  public function getUlineOwner()
+  {
+    return null; // TODO
+  }
+
 
   /*
    * Return the number of players

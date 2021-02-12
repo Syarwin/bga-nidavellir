@@ -21,7 +21,7 @@
       .tavern-mount {
         width:$wSign;
         height:$hMount;
-        background-image: url('img/barre.png');
+        background-image: url('img/tavern/barre.png');
         background-size:contain;
       }
 
@@ -41,7 +41,7 @@
         .tavern-chain {
           width:$wSign;
           height:$hChain;
-          background-image: url('img/maillons.png');
+          background-image: url('img/tavern/maillons.png');
           background-size:contain;
         }
 
@@ -49,7 +49,7 @@
           width:$wSign;
           height:$hSign;
           margin-top:-3px*$scale;
-          background-image: url('img/enseigne_1.png');
+          background-image: url('img/tavern/sign_0.png');
           background-size:cover;
           z-index:2;
           display:flex;
@@ -57,12 +57,12 @@
           align-items: center;
 
           &#tavern-sign-1 {
-            background-image: url('img/enseigne_2.png');
+            background-image: url('img/tavern/sign_1.png');
           }
           &#tavern-sign-2 {
             height:$hSign3;
             margin-top:-10px*$scale;
-            background-image: url('img/enseigne_3.png');
+            background-image: url('img/tavern/sign_2.png');
           }
 
           .tavern-coin-holder {

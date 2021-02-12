@@ -2,7 +2,11 @@
 namespace NID\States;
 
 use Nidavellir;
+use NID\Coins;
 use NID\Game\Players;
+use NID\Game\Globals;
+use NID\Game\Notifications;
+
 
 trait BidsTrait
 {
@@ -13,8 +17,6 @@ trait BidsTrait
   {
     $this->gamestate->setAllPlayersMultiactive();
     // TODO : handle Uline by setting player inactive
-
-    $this->setGameStateValue('currentTavern', GOBLIN_TAVERN);
   }
 
 
@@ -28,26 +30,30 @@ trait BidsTrait
 	}
 
 
-  public function actConfirmBids($bids)
+  public function actPlayerBid($coinId, $tavern)
+  {
+    $this->checkAction("bid");
+
+    // Check if coins belongs to player
+    $coin = Coins::get($coinId);
+    $player = Players::getCurrent();
+    if($coin['pId'] != $player->getId())
+      throw new \BgaUserException(_("This coin is not yours!"));
+
+    // Move coin in corresponding position and notify (useful for replay)
+    $player->bid($coinId, $tavern);
+    Notifications::bid($player, $coin, $tavern);
+
+  }
+
+  public function actConfirmBids()
   {
     $this->checkAction("bid");
 
     // Check number of bids
-    if(count($bids) != 3){
-      throw new \BgaUserException(_("You still have coins to bids!"));
-    }
-
-    // Check if coins belongs to player
     $player = Players::getCurrent();
-    $coins = $player->getCoinIds();
-    foreach($bids as $coinId){
-      if(!in_array($coinId, $coins))
-        throw new \BgaUserException(_("This coin is not yours!"));
-    }
-
-    // Move coin in corresponding position
-    foreach($bids as $tavern => $coinId){
-      $player->bid($tavern, $coinId);
+    if(count($player->getBids()) != 3){
+      throw new \BgaUserException(_("You still have coins to bids!"));
     }
 
     $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
@@ -67,7 +73,7 @@ trait BidsTrait
   public function stNextResolution()
   {
     // Are we done with the three tavers ?
-    $currentTavern = $this->getGameStateValue('currentTavern');
+    $currentTavern = Globals::getTavern();
     $nextState = in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN])? "reveal" : "finished";
     $this->gamestate->nextState($nextState);
   }
@@ -83,10 +89,11 @@ trait BidsTrait
    */
   public function stRevealBids()
   {
-    die("Coucou");
+    $currentTavern = Globals::getTavern();
+    $coins = Coins::reveal($currentTavern);
+    Notifications::revealBids($coins, $currentTavern);
 
-    NotificationManager::revealBids();
-    $pId = PlayerManager::getUlineOwner();
+    $pId = Players::getUlineOwner();
     if(is_null($pId)){
       $this->gamestate->nextState("revealed");
     } else {

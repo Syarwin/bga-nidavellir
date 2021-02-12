@@ -11,6 +11,7 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
       this._notifications = [];
       this._activeStates = [];
       this._connections = [];
+      this._activeStatus = null;
     },
 
 
@@ -108,12 +109,16 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
 
 
      onUpdateActionButtons(stateName, args){
-       debug('Update activity: ' + stateName, args);
+       let status = this.isCurrentPlayerActive();
+       if(status != this._activeStatus){
+         debug('Update activity: ' + stateName, status);
+         this._activeStatus = status;
 
-       // Call appropriate method
-       var methodName = "onUpdateActivity" + stateName.charAt(0).toUpperCase() + stateName.slice(1);
-       if (this[methodName] !== undefined)
-         this[methodName](args.args);
+         // Call appropriate method
+         var methodName = "onUpdateActivity" + stateName.charAt(0).toUpperCase() + stateName.slice(1);
+         if (this[methodName] !== undefined)
+           this[methodName](args, status);
+       }
      },
 
      /*

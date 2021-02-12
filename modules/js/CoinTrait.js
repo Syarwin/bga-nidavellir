@@ -36,12 +36,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         if(coin.pId != null){
           container = 'coins-zone-' + coin.pId;
 
-          if(coin.location.substr(0,3) == "bid"){
-            let tavern = parseInt(coin.location.substr(3,1));
+          if(coin.location == "bid"){
+            let tavern = coin.location_arg;
             container = "tavern-coin-holder-" + tavern;
-
             // Make it work with bids
-            coin.location = tavern;
             this._tavernBids[tavern] = coin;
           }
         }

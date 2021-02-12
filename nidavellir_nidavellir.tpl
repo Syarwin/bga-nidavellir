@@ -1,59 +1,61 @@
 {OVERALL_GAME_HEADER}
 
 <div id="nidavellir-board">
-  <div id="exterior">
-    <div id="treasure-container">
-      <div id="treasure"></div>
-    </div>
+  <div id="exterior-wrapper">
+    <div id="exterior">
+      <div id="treasure-container">
+        <div id="treasure"></div>
+      </div>
 
 
-    <div id="taverns-container">
-      <div id="taverns">
-        <div id="tavern-roof"></div>
-        <div id="hor-beam-1" class="hor-beam"></div>
+      <div id="taverns-container">
+        <div id="taverns">
+          <div id="tavern-roof"></div>
+          <div id="hor-beam-1" class="hor-beam"></div>
 
-        <div class="tavern-sign-holder">
-          <div class="tavern-mount"></div>
-          <div class="tavern-swing">
-            <div class="tavern-chain"></div>
-            <div class="tavern-sign" id="tavern-sign-0">
-              <div class="tavern-coin-holder" id="tavern-coin-holder-0"></div>
+          <div class="tavern-sign-holder">
+            <div class="tavern-mount"></div>
+            <div class="tavern-swing">
+              <div class="tavern-chain"></div>
+              <div class="tavern-sign" id="tavern-sign-0">
+                <div class="tavern-coin-holder" id="tavern-coin-holder-0"></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="ver-beam-1" class="ver-beam"></div>
-        <div class="tavern-cards-holder" id="tavern_0"></div>
-        <div id="ver-beam-2" class="ver-beam"></div>
+          <div id="ver-beam-1" class="ver-beam"></div>
+          <div class="tavern-cards-holder" id="tavern_0"></div>
+          <div id="ver-beam-2" class="ver-beam"></div>
 
-        <div id="hor-beam-2" class="hor-beam"></div>
+          <div id="hor-beam-2" class="hor-beam"></div>
 
-        <div class="tavern-sign-holder">
-          <div class="tavern-mount"></div>
-          <div class="tavern-swing">
-            <div class="tavern-chain"></div>
-            <div class="tavern-sign" id="tavern-sign-1">
-              <div class="tavern-coin-holder" id="tavern-coin-holder-1"></div>
+          <div class="tavern-sign-holder">
+            <div class="tavern-mount"></div>
+            <div class="tavern-swing">
+              <div class="tavern-chain"></div>
+              <div class="tavern-sign" id="tavern-sign-1">
+                <div class="tavern-coin-holder" id="tavern-coin-holder-1"></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="ver-beam-3" class="ver-beam"></div>
-        <div class="tavern-cards-holder" id="tavern_1"></div>
-        <div id="ver-beam-4" class="ver-beam"></div>
+          <div id="ver-beam-3" class="ver-beam"></div>
+          <div class="tavern-cards-holder" id="tavern_1"></div>
+          <div id="ver-beam-4" class="ver-beam"></div>
 
-        <div id="hor-beam-3" class="hor-beam"></div>
+          <div id="hor-beam-3" class="hor-beam"></div>
 
-        <div class="tavern-sign-holder">
-          <div class="tavern-mount"></div>
-          <div class="tavern-swing">
-            <div class="tavern-chain"></div>
-            <div class="tavern-sign" id="tavern-sign-2">
-              <div class="tavern-coin-holder" id="tavern-coin-holder-2"></div>
+          <div class="tavern-sign-holder">
+            <div class="tavern-mount"></div>
+            <div class="tavern-swing">
+              <div class="tavern-chain"></div>
+              <div class="tavern-sign" id="tavern-sign-2">
+                <div class="tavern-coin-holder" id="tavern-coin-holder-2"></div>
+              </div>
             </div>
           </div>
+          <div id="ver-beam-5" class="ver-beam"></div>
+          <div class="tavern-cards-holder" id="tavern_2"></div>
+          <div id="ver-beam-6" class="ver-beam"></div>
         </div>
-        <div id="ver-beam-5" class="ver-beam"></div>
-        <div class="tavern-cards-holder" id="tavern_2"></div>
-        <div id="ver-beam-6" class="ver-beam"></div>
       </div>
     </div>
   </div>

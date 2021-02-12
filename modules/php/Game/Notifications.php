@@ -31,6 +31,28 @@ class Notifications
       'turn' => Globals::getTurn(),
     ]);
   }
+
+
+  public static function bid($player, $coin, $tavern){
+    self::notify($player->getId(), 'playerBid', '', [
+      'coin' => $coin,
+      'tavern' => $tavern,
+    ]);
+  }
+
+
+  public static function revealBids($coins, $tavern){
+    $msgs = [
+      GOBLIN_TAVERN => clienttranslate('Revealing the bids for the Laughing Goblin Tavern'),
+      DRAGON_TAVERN => clienttranslate('Revealing the bids for the Dancing Dragon Tavern'),
+      HORSE_TAVERN => clienttranslate('Revealing the bids for Shining Horse Tavern')
+    ];
+
+    self::notifyAll('revealBids', $msgs[$tavern], [
+      'coins' => $coins,
+      'tavern' => $tavern,
+    ]);
+  }
 }
 
 ?>

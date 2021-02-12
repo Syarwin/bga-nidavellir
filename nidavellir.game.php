@@ -19,12 +19,16 @@ $swdNamespaceAutoload = function ($class) {
        $file = dirname(__FILE__) . "/modules/php/" . implode(DIRECTORY_SEPARATOR, $classParts) . ".php";
        if (file_exists($file)) {
            require_once($file);
+       } else {
+          die("Cannot find file : ". $file);
        }
    }
 };
 spl_autoload_register($swdNamespaceAutoload, true, true);
 
 require_once( APP_GAMEMODULE_PATH.'module/table/table.game.php' );
+
+
 
 use NID\Cards;
 use NID\Coins;

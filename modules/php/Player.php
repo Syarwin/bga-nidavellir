@@ -81,11 +81,17 @@ class Player
     return Coins::getOfPlayer($this->id)->getIds();
   }
 
+  public function getBids()
+  {
+    // TODO
+    return [1,1,1];
+  }
+
 /*************************
 ********** Utils *********
 *************************/
 
-  public function bid($tavern, $coinId)
+  public function bid($coinId, $tavern)
   {
     Coins::bid($coinId, $this->id, $tavern);
   }

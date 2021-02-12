@@ -1,34 +1,35 @@
 define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.bidsTrait", null, {
     constructor(){
-      /*
       this._notifications.push(
-        ['newHand', 100],
-        ['giveCard', 1000],
-        ['receiveCard', 1000]
+        ['playerBid', 500],
+        ['revealBids', 800]
       );
-      this._callbackOnCard = null;
-      this._selectableCards = [];
-      */
 
       this._selectedCoin = null;
-      this._tavernBids = [];
+      this._tavernBids = [null, null, null];
     },
+
 
     onEnteringStatePlayerBids(args){
       if(!args._private)
         return;
 
-      if(!this.isCurrentPlayerActive()){
-        this.waitOtherBids();
-        return;
+      this.clearPossible();
+      if(this.isCurrentPlayerActive()){
+        this._bidableCoins = args._private;
+        this.clearBidSelection();
+        [0,1,2].forEach(tavern => this.connect("tavern-coin-holder-" + tavern, "click", () => this.onClickTavernSign(tavern) ));
+        this.toggleConfirmBidsBtn();
       }
+      else {
+        this.clearBidSelection(false);
+        this.addSecondaryActionButton("btnChangeBids", _("Change the bids"), () => this.takeAction("changeBids", {}) );
+      }
+    },
 
-      this._bidableCoins = args._private;
-//      this._tavernBids = [null, null, null];
-      this.clearBidSelection();
-      [0,1,2].forEach(tavern => this.connect("tavern-coin-holder-" + tavern, "click", () => this.onClickTavernSign(tavern) ));
-      this.toggleConfirmBidsBtn();
+    onUpdateActivityPlayerBids(arg, status){
+      this.onEnteringStatePlayerBids(arg);
     },
 
 
@@ -66,36 +67,49 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(coin == null)
         return;
 
+      this.takeAction("playerBid", {
+        coinId: coin.id,
+        tavern
+      });
+    },
+
+    notif_playerBid(n){
+      debug("Notif : new bid", n);
+      let tavern = n.args.tavern,
+          coin = n.args.coin;
+
       // Already a coin here ? Remove it
       if(this._tavernBids[tavern] != null){
         this.slideCoinToPlayerZone(this._tavernBids[tavern]);
       }
 
-      this._tavernBids[tavern] = this._selectedCoin;
-      if(coin.location != "player")
-        this._tavernBids[coin.location] = null;
+      if(coin.location != "hand")
+        this._tavernBids[coin.location_arg] = null;
+      this._tavernBids[tavern] = coin;
       this.slideCoinToTavernSign(coin, tavern);
       this.toggleConfirmBidsBtn();
     },
 
     toggleConfirmBidsBtn(){
       // All bids are set ?
-      let allSet = this._tavernBids.reduce( (carry, bid) => carry && bid != null, true);
+      let allSet = this._tavernBids[0] && this._tavernBids[1] && this._tavernBids[2];
       if(allSet){
         this.addPrimaryActionButton("btnConfirmBids", _("Confirm"), () => this.onClickConfirmBids());
+      } else {
+        dojo.destroy("btnConfirmBids");
       }
     },
 
 
     onClickConfirmBids(){
-      this.takeAction("playerBids", { bids: this._tavernBids.map(coin => coin.id).join(";") });
+      this.takeAction("confirmBids", {});
     },
 
 
 
-    waitOtherBids(){
-      this.clearBidSelection(false);
-      this.addSecondaryActionButton("btnChangeBids", _("Change the bids"), () => this.takeAction("changeBids", {}) );
+    notif_revealBids(n){
+      debug("Notif: reveal bids", n);
+      
     },
   });
 });

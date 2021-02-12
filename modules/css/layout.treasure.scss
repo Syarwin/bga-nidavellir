@@ -4,6 +4,7 @@
   position:relative;
   margin-top:-100px;
   margin-right:100px;
+  flex-shrink: 0;
 
   &::before {
     content:'';

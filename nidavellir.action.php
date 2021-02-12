@@ -29,12 +29,19 @@ class action_nidavellir extends APP_GameAction
   }
 
 
-  public function playerBids()
+  public function playerBid()
   {
     self::setAjaxMode();
-    $raw = self::getArg("bids", AT_numberlist, true);
-    $bids = explode(';', $raw);
-    $this->game->actConfirmBids($bids);
+    $coinId = self::getArg("coinId", AT_posint, true);
+    $tavern = self::getArg("tavern", AT_numberlist, true);
+    $this->game->actPlayerBid($coinId, $tavern);
+    self::ajaxResponse();
+  }
+
+  public function confirmBids()
+  {
+    self::setAjaxMode();
+    $this->game->actConfirmBids();
     self::ajaxResponse();
   }
 

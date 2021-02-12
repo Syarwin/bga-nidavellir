@@ -13,12 +13,14 @@
  * Nidavellir stylesheet
  *
  */
+/*
 html {
-  background-image: url("img/background.jpg");
+  background-image:url('img/background.jpg');
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed; }
-
+  background-attachment:fixed;
+}
+*/
 @font-face {
   font-family: 'Norse';
   src: url("img/font/Norse.woff2") format("woff2"), url("img/font/Norse.woff") format("woff"), url("img/font/Norse.ttf") format("truetype");
@@ -148,90 +150,93 @@ html {
   display: flex;
   flex-flow: column;
   margin-left: -2px; }
-  #nidavellir-board #exterior {
-    width: 100vw;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: flex-end; }
-    #nidavellir-board #exterior::before {
+  #nidavellir-board #exterior-wrapper {
+    overflow-x: auto;
+    width: 100vw; }
+    #nidavellir-board #exterior-wrapper::before {
       content: '';
       display: block;
       position: absolute;
       background-image: url("img/sky.jpg");
       z-index: -1;
-      width: 100%;
+      width: 100vw;
       height: 100%;
       margin-top: -200px;
       padding-top: 200px; }
-    #nidavellir-board #exterior #treasure-container {
-      width: 500px;
-      height: 650px;
-      position: relative;
-      margin-top: -100px;
-      margin-right: 100px; }
-      #nidavellir-board #exterior #treasure-container::before {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background-image: url("img/citadel.png");
-        background-size: 100% 100%;
-        z-index: -1; }
-      #nidavellir-board #exterior #treasure-container #treasure {
-        display: flex;
-        flex-flow: column;
-        justify-content: flex-end;
-        height: 100%;
-        width: 74%;
-        margin-left: 10%; }
-        #nidavellir-board #exterior #treasure-container #treasure .treasure-row {
-          height: 80px;
-          width: 100%;
-          margin-top: 3%;
-          display: flex;
-          justify-content: space-around;
-          align-items: center; }
-          #nidavellir-board #exterior #treasure-container #treasure .treasure-row .treasure-slot {
-            width: 65px;
-            height: 65px;
-            background-image: url("img/coins.png");
-            background-size: cover;
-            background-position-x: calc(100% / 3);
-            font-family: 'Norse';
-            font-size: 38px;
-            color: #64360e;
-            font-weight: bold;
-            filter: drop-shadow(1px 1px 2px black);
-            padding-right: 7%;
-            box-sizing: border-box;
-            text-align: right;
-            line-height: 64px; }
-    #nidavellir-board #exterior #taverns-container {
+    #nidavellir-board #exterior-wrapper #exterior {
       display: flex;
-      align-items: center;
-      justify-content: center; }
-      #nidavellir-board #exterior #taverns-container #taverns {
-        display: grid;
-        grid-template-columns: 105px 14px auto 14px 42px;
-        grid-template-rows: 14px 161px 14px 161px 14px 161px; }
-        #nidavellir-board #exterior #taverns-container #taverns > * {
-          box-sizing: border-box; }
-        #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder {
-          grid-column: 1;
-          width: 105px;
+      position: relative;
+      justify-content: center;
+      align-items: flex-end; }
+      #nidavellir-board #exterior-wrapper #exterior #treasure-container {
+        width: 500px;
+        height: 650px;
+        position: relative;
+        margin-top: -100px;
+        margin-right: 100px;
+        flex-shrink: 0; }
+        #nidavellir-board #exterior-wrapper #exterior #treasure-container::before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          background-image: url("img/citadel.png");
+          background-size: 100% 100%;
+          z-index: -1; }
+        #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure {
           display: flex;
           flex-flow: column;
-          perspective: 300px; }
-          #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-mount {
+          justify-content: flex-end;
+          height: 100%;
+          width: 74%;
+          margin-left: 10%; }
+          #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-row {
+            height: 80px;
+            width: 100%;
+            margin-top: 3%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center; }
+            #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-row .treasure-slot {
+              width: 65px;
+              height: 65px;
+              background-image: url("img/coins.png");
+              background-size: cover;
+              background-position-x: calc(100% / 3);
+              font-family: 'Norse';
+              font-size: 38px;
+              color: #64360e;
+              font-weight: bold;
+              filter: drop-shadow(1px 1px 2px black);
+              padding-right: 7%;
+              box-sizing: border-box;
+              text-align: right;
+              line-height: 64px; }
+      #nidavellir-board #exterior-wrapper #exterior #taverns-container {
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns {
+          display: grid;
+          grid-template-columns: 105px 14px auto 14px 42px;
+          grid-template-rows: 14px 161px 14px 161px 14px 161px; }
+          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns > * {
+            box-sizing: border-box; }
+          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder {
+            grid-column: 1;
             width: 105px;
-            height: 16.275px;
-            background-image: url("img/barre.png");
-            background-size: contain; }
-          #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing {
-            margin-top: -7.1375px;
-            transform-origin: 50% 0%; }
+            display: flex;
+            flex-flow: column;
+            perspective: 300px; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-mount {
+              width: 105px;
+              height: 16.275px;
+              background-image: url("img/tavern/barre.png");
+              background-size: contain; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing {
+              margin-top: -7.1375px;
+              transform-origin: 50% 0%; }
 @keyframes swing {
   0% {
     transform: rotateX(0deg); }
@@ -243,64 +248,64 @@ html {
     transform: rotateX(-2deg); }
   100% {
     transform: rotateX(0deg); } }
-            #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-chain {
-              width: 105px;
-              height: 26.775px;
-              background-image: url("img/maillons.png");
-              background-size: contain; }
-            #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign {
-              width: 105px;
-              height: 74.55px;
-              margin-top: -2.1px;
-              background-image: url("img/enseigne_1.png");
-              background-size: cover;
-              z-index: 2;
-              display: flex;
-              justify-content: center;
-              align-items: center; }
-              #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign#tavern-sign-1 {
-                background-image: url("img/enseigne_2.png"); }
-              #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign#tavern-sign-2 {
-                height: 80.85px;
-                margin-top: -7px;
-                background-image: url("img/enseigne_3.png"); }
-              #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder {
-                width: 67.095px;
-                height: 67.095px;
-                border-radius: 50%;
+              #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-chain {
+                width: 105px;
+                height: 26.775px;
+                background-image: url("img/tavern/maillons.png");
+                background-size: contain; }
+              #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign {
+                width: 105px;
+                height: 74.55px;
+                margin-top: -2.1px;
+                background-image: url("img/tavern/sign_0.png");
+                background-size: cover;
+                z-index: 2;
                 display: flex;
                 justify-content: center;
                 align-items: center; }
-                #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable {
-                  border: 3px dashed white;
-                  cursor: pointer; }
-                  #nidavellir-board #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable:hover {
-                    border-color: red; }
-        #nidavellir-board #exterior #taverns-container #taverns .hor-beam {
-          grid-column: 2 / 5;
-          background-image: url("img/tavern/horizontal_beam.jpg");
-          border-left: 1px solid black;
-          border-right: 1px solid black; }
-          #nidavellir-board #exterior #taverns-container #taverns .hor-beam#hor-beam-1 {
-            border-top: 1px solid black; }
-        #nidavellir-board #exterior #taverns-container #taverns .ver-beam {
-          background-image: url("img/tavern/vertical_beam.jpg");
-          background-size: 100% 100%; }
-          #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-1, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-3, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-5 {
-            border-left: 1px solid black; }
-          #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-2, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-4, #nidavellir-board #exterior #taverns-container #taverns .ver-beam#ver-beam-6 {
+                #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign#tavern-sign-1 {
+                  background-image: url("img/tavern/sign_1.png"); }
+                #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign#tavern-sign-2 {
+                  height: 80.85px;
+                  margin-top: -7px;
+                  background-image: url("img/tavern/sign_2.png"); }
+                #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder {
+                  width: 67.095px;
+                  height: 67.095px;
+                  border-radius: 50%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center; }
+                  #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable {
+                    border: 3px dashed white;
+                    cursor: pointer; }
+                    #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable:hover {
+                      border-color: red; }
+          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .hor-beam {
+            grid-column: 2 / 5;
+            background-image: url("img/tavern/horizontal_beam.jpg");
+            border-left: 1px solid black;
             border-right: 1px solid black; }
-        #nidavellir-board #exterior #taverns-container #taverns .tavern-cards-holder {
-          flex-grow: 1;
-          height: 100%;
-          background-image: url("img/tavern/props.png"), url("img/tavern/background.jpg");
-          background-size: 100%, 30%;
-          border: 1px solid black;
-          display: flex;
-          justify-content: space-around;
-          align-items: center; }
-          #nidavellir-board #exterior #taverns-container #taverns .tavern-cards-holder#tavern-3 {
-            border-bottom: none; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .hor-beam#hor-beam-1 {
+              border-top: 1px solid black; }
+          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam {
+            background-image: url("img/tavern/vertical_beam.jpg");
+            background-size: 100% 100%; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam#ver-beam-1, #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam#ver-beam-3, #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam#ver-beam-5 {
+              border-left: 1px solid black; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam#ver-beam-2, #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam#ver-beam-4, #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .ver-beam#ver-beam-6 {
+              border-right: 1px solid black; }
+          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-holder {
+            flex-grow: 1;
+            height: 100%;
+            background-image: url("img/tavern/props.png"), url("img/tavern/background.jpg");
+            background-size: 100%, 30%;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-around;
+            align-items: center; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-holder#tavern-3 {
+              border-bottom: none; }
   #nidavellir-board #foundations {
     background-image: url("img/tavern/foundations.jpg");
     width: 100vw;

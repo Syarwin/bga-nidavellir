@@ -210,11 +210,11 @@ class Pieces extends DB_Manager {
     if (empty($ids))
         return [];
 
-    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get(false);
+    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get();
     if (count($result) != count($ids))
       throw new \BgaVisibleSystemException("Class Pieces: getMany, some pieces have not been found !");
 
-    return count($result) == 1? $result->first() : $result;
+    return $result->count() == 1? $result->first() : $result;
   }
 
 
@@ -272,7 +272,7 @@ class Pieces extends DB_Manager {
   }
 
   public static function getInLocation($location, $state = null, $orderBy = null) {
-    return self::getInLocationQ($location, $state, $orderBy)->get(false);
+    return self::getInLocationQ($location, $state, $orderBy)->get();
   }
 
   /**

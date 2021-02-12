@@ -58,6 +58,9 @@ define([
 
 
       clearPossible(){
+        dojo.query('.coin').removeClass('selected selectable');
+        dojo.query(".tavern-coin-holder").removeClass("selectable");
+
         this.inherited(arguments);
       },
    });

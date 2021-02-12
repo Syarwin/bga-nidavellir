@@ -10,13 +10,14 @@ class Coins extends Helpers\Pieces
 {
 	protected static $table = "coin";
 	protected static $prefix = "coin_";
-  protected static $customFields = ['value', 'type'];
+  protected static $customFields = ['pId', 'value', 'type'];
   protected static function cast($coin){
     $data = explode('_', $coin['location']);
     return [
       'id'       => (int) $coin['id'],
       'location' => $data[0],
-      'pId'      => count($data) > 1? $data[1] : null,
+      'location_arg' => count($data) > 1? $data[1] : null,
+      'pId'      => $coin['pId'],
       'value'    => (int) $coin['value'],
       'type'     => (int) $coin['type'], // PLAYER, TREASURE, DISTINCTION
     ];
@@ -63,22 +64,40 @@ class Coins extends Helpers\Pieces
         array_push($coins, [
   				'value' => $value,
   				'type' => COIN_PLAYER,
+          'pId' => $pId,
   			]);
   		}
 
-      self::create($coins, ['player', $pId]);
+      self::create($coins, ['hand']);
     }
 	}
 
 
   public static function getOfPlayer($pId)
   {
-    return self::getInLocation(['%', $pId]);
+    return self::getSelectQuery()->where('pId', $pId)->get();
   }
 
 
   public static function bid($coinId, $pId, $tavern)
   {
-    self::move($coinId, ['bid'.$tavern, $pId]);
+    // Already a coin here ? Move it back to hand
+    $coin = self::getInLocationQ(['bid', $tavern])->where('pId', $pId)->getSingle();
+    if(!is_null($coin)){
+      self::move($coin['id'], 'hand');
+    }
+
+    self::move($coinId, ['bid', $tavern]);
+  }
+
+
+
+  public static function reveal($tavern)
+  {
+    $coins = self::getInLocation(['bid', $tavern]);
+    foreach($coins as $coin){
+      self::move($coin['id'], ['tavern', $tavern ]);
+    }
+    return $coins;
   }
 }

@@ -71,7 +71,12 @@ class Globals extends \APP_DbObject
   {
     return (int) self::get('currentTurn');
   }
-  
+
+  public function getTavern()
+  {
+    return (int) self::get('currentTavern');
+  }
+
 
   /*
    * Setters
@@ -86,7 +91,7 @@ class Globals extends \APP_DbObject
   public function startNewTurn()
   {
     self::inc('currentTurn');
-    self::set('currentTavern', 0);
+    self::set('currentTavern', GOBLIN_TAVERN);
   }
 
 }
