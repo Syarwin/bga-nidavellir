@@ -23,11 +23,15 @@ class Players extends \NID\Helpers\DB_Manager
 
     $gameInfos = Nidavellir::get()->getGameinfos();
     $colors = $gameInfos['player_colors'];
-    $query = self::DB()->multipleInsert(['player_id', 'player_color', 'player_canal', 'player_name', 'player_avatar', 'player_score']);
+    $query = self::DB()->multipleInsert(['player_id', 'player_color', 'player_canal', 'player_name', 'player_avatar', 'player_score', 'player_gem']);
+
+    $gems = [1,2,3,4,5];
+    array_splice($gems, 0, 5 - count($players));
+    shuffle($gems);
     $values = [];
     foreach ($players as $pId => $player) {
       $color = array_shift($colors);
-      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 1];
+      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 1, array_shift($gems)];
     }
     $query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors']);

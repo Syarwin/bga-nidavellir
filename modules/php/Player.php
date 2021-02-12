@@ -14,6 +14,7 @@ class Player
   protected $color;
   protected $eliminated = false;
   protected $zombie = false;
+  protected $gem = 0;
 
   public function __construct($row) {
     if($row != null) {
@@ -23,6 +24,7 @@ class Player
       $this->color = $row['player_color'];
       $this->eliminated = $row['player_eliminated'] == 1;
       $this->zombie = $row['player_zombie'] == 1;
+      $this->gem = $row['player_gem'];
     }
   }
 
@@ -36,11 +38,7 @@ class Player
   public function isEliminated(){ return $this->eliminated; }
   public function isZombie(){ return $this->zombie; }
 
-/*
-  public function getCardsInHand($formatted = false){ return BangCardManager::getHand($this->id, $formatted); }
-  public function getCardsInPlay(){ return BangCardManager::getCardsInPlay($this->id); }
-  public function countCardsInHand() { return BangCardManager::countCards("hand", $this->id);}
-*/
+  public function getGem(){ return $this->gem; }
 
   public function getUiData($currentPlayerId = null) {
     $current = $this->id == $currentPlayerId;
@@ -51,6 +49,7 @@ class Player
       'name'      => $this->getName(),
       'color'     => $this->color,
       'coins'     => $this->getVisibleCoins($current),
+      'gem'       => $this->gem,
     ];
   }
 

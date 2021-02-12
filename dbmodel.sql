@@ -28,3 +28,6 @@ CREATE TABLE IF NOT EXISTS `coin` (
   `type` int(10),
   PRIMARY KEY (`coin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `player` ADD `player_gem` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0';
