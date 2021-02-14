@@ -82,8 +82,15 @@ class Player
 
   public function getBids()
   {
-    // TODO
-    return [1,1,1];
+    $coins = Coins::getOfPlayer($this->id, 'bid%');
+    return $coins;
+  }
+  
+  public function getBid($current_tavern)
+  {
+    //$coins = Coins::getOfPlayer($this->id, 'bid_' . $current_tavern);
+    $coin = Coins::getInLocationQ(['tavern', $current_tavern])->where('pId', $this->id)->getSingle();
+    return $coin['value'];
   }
 
 /*************************

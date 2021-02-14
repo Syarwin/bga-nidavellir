@@ -6,6 +6,7 @@ use NID\Coins;
 use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
+use NID\Log;
 
 
 trait BidsTrait
@@ -55,6 +56,9 @@ trait BidsTrait
     if(count($player->getBids()) != 3){
       throw new \BgaUserException(_("You still have coins to bids!"));
     }
+    
+    // set of current index to -1 for resolution.
+    Globals::setCurrentPlayerIndex(-1);
 
     $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
   }
@@ -120,28 +124,28 @@ trait BidsTrait
    */
   public function stResolveBids()
   {
-    $currentTavern = $this->getGameStateValue('currentTavern');
-
-    // Sort players by bids
-    $players = PlayerManager::getAll();
-    $bids = [];
-    foreach ($players as $player) {
-      $bids[$player->getBid($currentTavern)][] = $player;
-    }
-    ksort($bids, SORT_NUMERIC);
-
-    // Then by gems
-    $order = [];
-    foreach($bids as $bid => $bidders){
-      Log::addTie($bidders);
-      usort($bidders, function($p1, $p2){ return $p1->getGem() - $p2->getGem(); });
-      foreach($bidders as $player){
-        array_push($order, $player->getId());
-      }
-    }
-
-    Log::addPlayerOrder($order);
-    $this->setGameStateValue('currentPlayerIndex', -1);
+    //$currentTavern = Globals::getTavern();
+    //
+    //// Sort players by bids
+    //$players = Players::getAll();
+    //$bids = [];
+    //foreach ($players as $player) {
+    //  $bids[$player->getBid($currentTavern)][] = $player;
+    //}
+    //ksort($bids, SORT_NUMERIC);
+    //
+    //// Then by gems
+    //$order = [];
+    //foreach($bids as $bid => $bidders){
+    //  //Log::addTie($bidders);
+    //  usort($bidders, function($p1, $p2){ return $p1->getGem() - $p2->getGem(); });
+    //  foreach($bidders as $player){
+    //    array_push($order, $player->getId());
+    //  }
+    //}
+    //
+    ////Log::addPlayerOrder($order);
+    //$this->setGameStateValue('currentPlayerIndex', -1);
     $this->gamestate->nextState("resolved");
   }
 
@@ -151,8 +155,9 @@ trait BidsTrait
    */
   public function stNextPlayer()
   {
-    $order = Log::getPlayerOrder();
-    $index = $this->gamestate->incGameStateValue('currentPlayerIndex', 1);
+    //$order = Log::getPlayerOrder();
+    $order = self::getBidOrder();
+    $index = Globals::incCurrentPlayerIndex(1);
 
     if($index >= count($order)){
       // If all players already played this turn, go on to reveal next bids (if any left)
@@ -160,9 +165,40 @@ trait BidsTrait
     } else {
       // Otherwise, make player active and go to recruitDwarf state
       $this->gamestate->changeActivePlayer($order[$index]);
+      Notifications::recruitStart(Players::getActive()->getName(),$index + 1);
       $this->gamestate->nextState("recruit");
     }
   }
 
+  // Provides order of resolution of the bid
+  public function getBidOrder()
+  {
+    $currentTavern = Globals::getTavern();
+    // Sort players by bids
+    $players = Players::getAll();
+    $bids = [];
+    foreach ($players as $player) {
+      $bids[$player->getBid($currentTavern)][] = $player;
+    }
+    krsort($bids, SORT_NUMERIC);
+
+    // Then by gems
+    $order = [];
+    foreach($bids as $bid => $bidders){
+      //Log::addTie($bidders);
+      usort($bidders, function($p1, $p2){ return $p1->getGem() - $p2->getGem(); });
+      foreach($bidders as $player){
+        array_push($order, $player->getId());
+      }
+    }
+    
+    return $order;
+  }
+  
+  // Send ties info
+  public function getTies() {
+    // TODO: return array of Gems/player to switch
+  }
+  
 }
 ?>

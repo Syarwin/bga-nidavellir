@@ -73,9 +73,12 @@ class Coins extends Helpers\Pieces
 	}
 
 
-  public static function getOfPlayer($pId)
+  public static function getOfPlayer($pId, $location = null, $oneRow = false)
   {
-    return self::getSelectQuery()->where('pId', $pId)->get();
+		if ($location != null)
+			return self::getSelectQuery()->where([['pId', $pId], ['coin_location', 'LIKE', $location]])->get($oneRow);
+		else
+			return self::getSelectQuery()->where('pId', $pId)->get();
   }
 
 

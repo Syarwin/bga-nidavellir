@@ -126,7 +126,7 @@ $machinestates = [
 
   ST_RECRUIT_DWARF => [
     "name" => "recruitDwarf",
-    'description' => clienttranslate('${activeplayer} must recruit a dwarf'),
+    'description' => clienttranslate('${actplayer} must recruit a dwarf'),
     'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the tavern'),
     'type' => 'activeplayer',
     'args' => 'argRecruitDwarf',
@@ -141,7 +141,7 @@ $machinestates = [
 
   ST_RECRUIT_HERO => [
     "name" => "recruitHero",
-    'description' => clienttranslate('${activeplayer} must recruit a hero'),
+    'description' => clienttranslate('${actplayer} must recruit a hero'),
     'descriptionmyturn' => clienttranslate('${you} must recruit a hero'),
     'type' => 'activeplayer',
     'args' => 'argRecruitHero',
@@ -156,7 +156,7 @@ $machinestates = [
 
   ST_TRADE_COIN => [
     "name" => "tradeCoin",
-    'description' => clienttranslate('${activeplayer} must trade coins'),
+    'description' => clienttranslate('${actplayer} must trade coins'),
     'descriptionmyturn' => clienttranslate('${you} must trade coins'),
     'type' => 'activeplayer',
     'args' => 'argTradeCoin',

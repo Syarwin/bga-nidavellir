@@ -1,7 +1,7 @@
 <?php
 namespace NID\Game;
 use Nidavellir;
-use \CREW\Cards;
+//use \CREW\Cards;
 
 /*
  * Globals
@@ -27,12 +27,13 @@ class Globals extends \APP_DbObject
 
 
   /*
-   * Declare globas (in the constructor of game.php)
+   * Declare globals (in the constructor of game.php)
    */
   private static $globals = [
     'currentAge' => 0,
     'currentTurn' => 0,
     'currentTavern' => 0,
+    'currentPlayerIndex' => -1,
   ];
 
   public static function declare($game){
@@ -77,6 +78,10 @@ class Globals extends \APP_DbObject
     return (int) self::get('currentTavern');
   }
 
+  public function getCurrentPlayerIndex()
+  {
+    return (int) self::get('currentPlayerIndex');
+  }
 
   /*
    * Setters
@@ -92,6 +97,16 @@ class Globals extends \APP_DbObject
   {
     self::inc('currentTurn');
     self::set('currentTavern', GOBLIN_TAVERN);
+  }
+  
+  public function incCurrentPlayerIndex($step)
+  {
+    return self::inc('currentPlayerIndex', $step);
+  }
+  
+  public function setCurrentPlayerIndex($value)
+  {
+    self::set('currentPlayerIndex', $value);
   }
 
 }

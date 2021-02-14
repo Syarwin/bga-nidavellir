@@ -145,12 +145,14 @@ class QueryBuilder extends \APP_DbObject {
   /*
    * get : run a select query and fetch values
    */
-  public function get($returnValueIfOnlyOneRow = false)
+  public function get($returnValueIfOnlyOneRow = false, $debug = false)
 	{
     $select = $this->columns ?? "*, {$this->primary} AS `result_associative_index`";
 		$this->sql = "SELECT $select FROM `$this->table`";
     $this->assembleQueryClauses();
 
+		if ($debug)
+			throw new \feException($this->sql);
     $res = self::getObjectListFromDB($this->sql);
 		$oRes = [];
 		foreach($res as $row){

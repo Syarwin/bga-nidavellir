@@ -53,6 +53,13 @@ class Notifications
       'tavern' => $tavern,
     ]);
   }
+  
+    public static function recruitStart($player, $order){
+    self::notifyAll('recruitStart', '${player} is choosing in position ${order}', [
+      'player' => $player,
+      'order'  => $order,
+    ]);
+  }
 }
 
 ?>

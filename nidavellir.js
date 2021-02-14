@@ -28,6 +28,7 @@ define([
     g_gamethemeurl + "modules/js/PlayerTrait.js",
 
     g_gamethemeurl + "modules/js/States/BidsTrait.js",
+    g_gamethemeurl + "modules/js/States/RecruitTrait.js",
 ], function (dojo, declare) {
    return declare("bgagame.nidavellir", [
      customgame.game,
@@ -35,6 +36,7 @@ define([
      nidavellir.coinTrait,
      nidavellir.playerTrait,
      nidavellir.bidsTrait,
+     nidavellir.recruitTrait,
    ], {
       constructor(){},
 

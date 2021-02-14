@@ -103,6 +103,7 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
 
        // Call appropriate method
        var methodName = "onEnteringState" + stateName.charAt(0).toUpperCase() + stateName.slice(1);
+    
        if (this[methodName] !== undefined)
          this[methodName](args.args);
      },

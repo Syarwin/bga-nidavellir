@@ -3,7 +3,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     constructor(){
       this._notifications.push(
         ['playerBid', 500],
-        ['revealBids', 800]
+        ['revealBids', 800],
+        ['recruitStart', 500]
       );
 
       this._selectedCoin = null;
@@ -110,6 +111,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_revealBids(n){
       debug("Notif: reveal bids", n);
       
+    },
+    
+    notif_recruitStart(args) {
+      debug("notif: recruitStart", args);
     },
   });
 });

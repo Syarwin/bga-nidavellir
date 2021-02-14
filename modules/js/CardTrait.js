@@ -25,5 +25,18 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     addRank(rank, card){
       this.place('jstpl_rank', { rank : rank ?? '' }, 'card-grade-' + card.id);
     },
+    
+    makeCardSelectable(tavern, callback){
+      this._selectableTavern = tavern;
+
+      dojo.query(".card").removeClass("selectable");
+      dojo.query("#tavern_" + this._selectableTavern + " .card").addClass("selectable");
+
+      
+      
+      //coins.forEach(coinId => {
+      //  dojo.addClass("coin-" + coinId, "selectable");
+      //});
+    },
   });
 });
