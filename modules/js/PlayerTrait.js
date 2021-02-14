@@ -24,6 +24,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
           }
         }
 
+        // Gem
+        this.place("jstpl_gemContainer", player, "player_board_" + player.id);
+        this.place('jstpl_gem', { value : player.gem }, 'gem-container-' + player.id);
+
         if(this.player_id == player.id){
           Object.values(player.coins).forEach(coin => this.addCoin(coin))
         }

@@ -103,6 +103,15 @@ var jstpl_playerPanel = `
   </div>
 </div>`;
 
+var jstpl_gemContainer = `
+<div id="gem-container-\${id}" class="gem-container"></div>
+`;
+
+var jstpl_gem = `
+<div id="gem-\${value}" data-value="\${value}" class="gem"></div>
+`;
+
+
 
 var jstpl_coin = `
 <div class="coin" id="coin-\${id}" data-type="\${type}" data-value="\${value}">

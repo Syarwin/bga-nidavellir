@@ -442,4 +442,31 @@ html {
     .panel-container .command-zone .command-zone-class[data-class="5"] div {
       background-image: url("img/grades/5.png"); }
 
+.gem-container {
+  position: absolute;
+  top: 0;
+  right: 38px;
+  width: 28px;
+  height: 42px; }
+
+.gem {
+  position: absolute;
+  width: 28px;
+  height: 42px;
+  background-image: url("img/gemmes.png");
+  background-size: 600%;
+  background-repeat: no-repeat; }
+  .gem[data-value="1"] {
+    background-position-x: 0%; }
+  .gem[data-value="2"] {
+    background-position-x: 20%; }
+  .gem[data-value="3"] {
+    background-position-x: 40%; }
+  .gem[data-value="4"] {
+    background-position-x: 60%; }
+  .gem[data-value="5"] {
+    background-position-x: 80%; }
+  .gem[data-value="6"] {
+    background-position-x: 100%; }
+
 /*# sourceMappingURL=nidavellir.css.map */

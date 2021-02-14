@@ -26,3 +26,25 @@
     }
   }
 }
+
+
+.gem-container {
+  position:absolute;
+  top:0;
+  right:38px;
+  width:28px;
+  height:42px;
+}
+
+.gem {
+  position:absolute;
+  width:28px;
+  height:42px;
+  background-image:url("img/gemmes.png");
+  background-size:600%;
+  background-repeat: no-repeat;
+
+  @for $i from 1 through 6 {
+    &[data-value="#{$i}"] { background-position-x:($i - 1) * 100% / 5; }
+  }
+}
