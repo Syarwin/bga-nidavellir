@@ -85,7 +85,7 @@ class Player
     $coins = Coins::getOfPlayer($this->id, 'bid%');
     return $coins;
   }
-  
+
   public function getBid($current_tavern)
   {
     //$coins = Coins::getOfPlayer($this->id, 'bid_' . $current_tavern);
@@ -100,5 +100,10 @@ class Player
   public function bid($coinId, $tavern)
   {
     Coins::bid($coinId, $this->id, $tavern);
+  }
+
+  public function recruit($card)
+  {
+    Cards::recruit($card, $this->id);
   }
 }

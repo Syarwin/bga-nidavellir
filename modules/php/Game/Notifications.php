@@ -6,10 +6,12 @@ use NID\Game\Globals;
 class Notifications
 {
   protected static function notifyAll($name, $msg, $data){
+    self::updateArgs($data);
     Nidavellir::get()->notifyAllPlayers($name, $msg, $data);
   }
 
   protected static function notify($pId, $name, $msg, $data){
+    self::updateArgs($data);
     Nidavellir::get()->notifyPlayer($pId, $name, $msg, $data);
   }
 
@@ -53,12 +55,45 @@ class Notifications
       'tavern' => $tavern,
     ]);
   }
-  
-    public static function recruitStart($player, $order){
-    self::notifyAll('recruitStart', '${player} is choosing in position ${order}', [
+
+
+  public static function recruitStart($player, $order){
+    self::notifyAll('recruitStart', '${player_name} is choosing in position ${order}', [
       'player' => $player,
       'order'  => $order,
     ]);
+  }
+
+  public static function recruit($player, $card){
+    self::notifyAll('recruit', '${player_name} recruits ${card_name}', [
+      'player' => $player,
+      'card_name' => "test",
+      'card'  => $card,
+    ]);
+  }
+
+
+  /*
+   * Automatically adds some standard field about player and/or card
+   */
+  public static function updateArgs(&$args){
+    if(isset($args['player'])){
+      $args['player_name'] = $args['player']->getName();
+      $args['player_id'] = $args['player']->getId();
+      unset($args['player']);
+    }
+
+    /*
+    TODO : substitution on js
+    if(isset($args['card'])){
+      $c = $args['card'];
+
+      $args['value'] = $c['value'];
+      $args['value_symbol'] = $c['value'];// The substitution will be done in JS format_string_recursive function
+      $args['color'] = $c['color'];
+      $args['color_symbol'] = $c['color'];// The substitution will be done in JS format_string_recursive function
+    }
+    */
   }
 }
 

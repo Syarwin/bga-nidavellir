@@ -7,9 +7,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['giveCard', 1000],
         ['receiveCard', 1000]
       );
+      */
       this._callbackOnCard = null;
       this._selectableCards = [];
-      */
     },
 
     setupTaverns(){
@@ -20,23 +20,26 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       card.parity = card.id % 2;
       this.place('jstpl_card', card, container);
       card.grade.forEach(rank => this.addRank(rank, card) );
+      dojo.connect($("card-" + card.id), "click", () => this.onClickCard(card) );
     },
 
     addRank(rank, card){
       this.place('jstpl_rank', { rank : rank ?? '' }, 'card-grade-' + card.id);
     },
-    
-    makeCardSelectable(tavern, callback){
-      this._selectableTavern = tavern;
+
+
+    onClickCard(card){
+      if(this._selectableCards.includes(card.id)){
+        this._callbackOnCard(card);
+      }
+    },
+
+    makeCardSelectable(cards, callback){
+      this._selectableCards = cards;
+      this._callbackOnCard = callback;
 
       dojo.query(".card").removeClass("selectable");
-      dojo.query("#tavern_" + this._selectableTavern + " .card").addClass("selectable");
-
-      
-      
-      //coins.forEach(coinId => {
-      //  dojo.addClass("coin-" + coinId, "selectable");
-      //});
+      cards.forEach(cardId => dojo.addClass('card-' + cardId, "selectable") );
     },
   });
 });

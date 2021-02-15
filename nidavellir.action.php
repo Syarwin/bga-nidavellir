@@ -28,7 +28,9 @@ class action_nidavellir extends APP_GameAction
     }
   }
 
-
+  ///////////////////////////////
+  //////////// Bids  ////////////
+  ///////////////////////////////
   public function playerBid()
   {
     self::setAjaxMode();
@@ -49,6 +51,18 @@ class action_nidavellir extends APP_GameAction
   {
     self::setAjaxMode();
     $this->game->actChangeBids();
+    self::ajaxResponse();
+  }
+
+
+  ///////////////////////////////
+  /////////// Recruit  //////////
+  ///////////////////////////////
+  public function recruitDwarf()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg("cardId", AT_posint, true);
+    $this->game->actRecruitDwarf($cardId);
     self::ajaxResponse();
   }
 

@@ -107,4 +107,25 @@ class Cards extends Helpers\Pieces
       'tavern_3' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2]),
     ];
   }
+
+
+  /*
+   * Return available cards in tavern
+   */
+  public static function getInTavern($tavern)
+  {
+    return self::getInLocation(['tavern', $tavern]);
+  }
+
+
+
+  /*
+   * Put a card in corresponding player stack of color
+   */
+  public static function recruit($card, $pId)
+  {
+    // TODO handle heroes
+    self::move($card['id'], ["commander-zone", $pId, $card['class']]);
+  }
+
 }

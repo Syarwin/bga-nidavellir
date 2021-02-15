@@ -6,7 +6,6 @@ use NID\Coins;
 use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
-use NID\Log;
 
 
 trait BidsTrait
@@ -56,7 +55,7 @@ trait BidsTrait
     if(count($player->getBids()) != 3){
       throw new \BgaUserException(_("You still have coins to bids!"));
     }
-    
+
     // set of current index to -1 for resolution.
     Globals::setCurrentPlayerIndex(-1);
 
@@ -165,7 +164,7 @@ trait BidsTrait
     } else {
       // Otherwise, make player active and go to recruitDwarf state
       $this->gamestate->changeActivePlayer($order[$index]);
-      Notifications::recruitStart(Players::getActive()->getName(),$index + 1);
+      Notifications::recruitStart(Players::getActive(), $index + 1);
       $this->gamestate->nextState("recruit");
     }
   }
@@ -191,14 +190,14 @@ trait BidsTrait
         array_push($order, $player->getId());
       }
     }
-    
+
     return $order;
   }
-  
+
   // Send ties info
   public function getTies() {
     // TODO: return array of Gems/player to switch
   }
-  
+
 }
 ?>
