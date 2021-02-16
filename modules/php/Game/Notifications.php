@@ -58,16 +58,15 @@ class Notifications
 
 
   public static function recruitStart($player, $order){
-    self::notifyAll('recruitStart', '${player_name} is choosing in position ${order}', [
+    self::notifyAll('recruitStart', clienttranslate('${player_name} is choosing in position ${order}'), [
       'player' => $player,
       'order'  => $order,
     ]);
   }
 
   public static function recruit($player, $card){
-    self::notifyAll('recruit', '${player_name} recruits ${card_name}', [
+    self::notifyAll('recruit', clienttranslate('${player_name} recruits ${card_name}${card_class}'), [
       'player' => $player,
-      'card_name' => "test",
       'card'  => $card,
     ]);
   }
@@ -83,17 +82,20 @@ class Notifications
       unset($args['player']);
     }
 
-    /*
-    TODO : substitution on js
     if(isset($args['card'])){
       $c = $args['card'];
 
-      $args['value'] = $c['value'];
-      $args['value_symbol'] = $c['value'];// The substitution will be done in JS format_string_recursive function
-      $args['color'] = $c['color'];
-      $args['color_symbol'] = $c['color'];// The substitution will be done in JS format_string_recursive function
+      $names = [
+        BLACKSMITH => clienttranslate('a blacksmith'),
+        HUNTER => clienttranslate('a hunter'),
+        EXPLORER => clienttranslate('an explorer'),
+        MINER => clienttranslate('a miner'),
+        WARRIOR => clienttranslate('a warrior'),
+      ];
+
+      $args['card_name'] = $names[$c['class']];
+      $args['card_class'] = $c['class'];// The substitution will be done in JS format_string_recursive function
     }
-    */
   }
 }
 

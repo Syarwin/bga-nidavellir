@@ -110,9 +110,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_revealBids(n){
       debug("Notif: reveal bids", n);
-      
+      Object.values(n.args.coins).forEach(coin => this.addCoin(coin) );
     },
-    
+
     notif_recruitStart(args) {
       debug("notif: recruitStart", args);
     },

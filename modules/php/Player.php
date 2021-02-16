@@ -1,6 +1,7 @@
 <?php
 namespace NID;
 use NID\Coins;
+use NID\Game\Globals;
 
 /*
  * Player: all utility functions concerning a player
@@ -49,6 +50,7 @@ class Player
       'name'      => $this->getName(),
       'color'     => $this->color,
       'coins'     => $this->getVisibleCoins($current),
+      'cards'     => $this->getCards(),
       'gem'       => $this->gem,
     ];
   }
@@ -72,7 +74,7 @@ class Player
   public function getVisibleCoins($current = false)
   {
     $coins = $this->getCoins();
-    return $current? $coins : $coins->filter(function($coin){ return in_array($coin['location'], ['tavern-1', 'tavern-2', 'tavern-3']); });
+    return $current? $coins : $coins->filter(function($coin){ return $coin['location'] == "tavern"; });
   }
 
   public function getCoinIds()
@@ -86,11 +88,25 @@ class Player
     return $coins;
   }
 
-  public function getBid($current_tavern)
+  public function getBid($currentTavern, $returnCoin = false)
   {
     //$coins = Coins::getOfPlayer($this->id, 'bid_' . $current_tavern);
-    $coin = Coins::getInLocationQ(['tavern', $current_tavern])->where('pId', $this->id)->getSingle();
-    return $coin['value'];
+    $coin = Coins::getInLocationQ(['tavern', $currentTavern])->where('pId', $this->id)->getSingle();
+    return $returnCoin? $coin : $coin['value'];
+  }
+
+
+  public function shouldTrade()
+  {
+    $currentTavern = Globals::getTavern();
+    $coin = $this->getBid($currentTavern, true);
+    return $coin['value'] == 0 || $coin['type'] == COIN_DISTINCTION;
+  }
+
+
+  public function getCards()
+  {
+    return Cards::getOfPlayer($this->id);
   }
 
 /*************************

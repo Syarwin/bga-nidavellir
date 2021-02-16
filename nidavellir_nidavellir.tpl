@@ -62,44 +62,24 @@
 
   <div id="foundations"></div>
 
-  <div id="player-board-1" class="nidavellir-player-board">
-    <div class="cards-class">
-      <div class="card test2"></div>
-      <div class="card test2"></div>
-    </div>
-    <div class="cards-class">
-      <div class="card test4"></div>
-      <div class="card test4"></div>
-      <div class="card test4"></div>
-    </div>
-    <div class="cards-class">
-      <div class="card test1"></div>
-    </div>
-  </div>
-  <div id="player-board-2" class="nidavellir-player-board">
-    <div class="cards-class"></div>
-    <div class="cards-class">
-      <div class="card test4"></div>
-    </div>
-    <div class="cards-class"></div>
-    <div class="cards-class">
-      <div class="card test2"></div>
-      <div class="card test2"></div>
-    </div>
-  </div>
-  <div id="player-board-3" class="nidavellir-player-board"></div>
+  <div id="player-boards"></div>
 </div>
 
 <script type="text/javascript">
 var jstpl_playerPanel = `
 <div class="panel-container" id="panel-container-\${id}" data-no="\${no}">
   <div class="coins-zone" id="coins-zone-\${id}"></div>
+  <div class="bids-zone" id="bids-zone-\${id}">
+    <div class="bids-zone-tavern tavern-0" id="bids-zone-0-\${id}"></div>
+    <div class="bids-zone-tavern tavern-1" id="bids-zone-1-\${id}"></div>
+    <div class="bids-zone-tavern tavern-2" id="bids-zone-2-\${id}"></div>
+  </div>
   <div class="command-zone" id="command-zone-\${id}">
-    <div id="command-zone-\${id}-1" class="command-zone-class" data-class="1"></div>
-    <div id="command-zone-\${id}-2" class="command-zone-class" data-class="2"></div>
-    <div id="command-zone-\${id}-3" class="command-zone-class" data-class="3"></div>
-    <div id="command-zone-\${id}-4" class="command-zone-class" data-class="4"></div>
-    <div id="command-zone-\${id}-5" class="command-zone-class" data-class="5"></div>
+    <div id="command-zone-overview-\${id}-1" class="command-zone-class" data-class="1"></div>
+    <div id="command-zone-overview-\${id}-2" class="command-zone-class" data-class="2"></div>
+    <div id="command-zone-overview-\${id}-3" class="command-zone-class" data-class="3"></div>
+    <div id="command-zone-overview-\${id}-4" class="command-zone-class" data-class="4"></div>
+    <div id="command-zone-overview-\${id}-5" class="command-zone-class" data-class="5"></div>
   </div>
 </div>`;
 
@@ -135,6 +115,17 @@ var jstpl_card = `
 var jstpl_rank = `
   <div class="card-rank">\${rank}</div>
 `;
+
+var jstpl_playerBoard = `
+<div id="player-board-\${no}" class="nidavellir-player-board">
+  <div class="cards-class" id="command-zone_\${id}_1"></div>
+  <div class="cards-class" id="command-zone_\${id}_2"></div>
+  <div class="cards-class" id="command-zone_\${id}_3"></div>
+  <div class="cards-class" id="command-zone_\${id}_4"></div>
+  <div class="cards-class" id="command-zone_\${id}_5"></div>
+  <div class="cards-class" id="command-zone_\${id}_6"></div>
+</div>
+`
 
 </script>
 

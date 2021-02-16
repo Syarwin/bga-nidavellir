@@ -31,22 +31,39 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       })
     },
 
-    addCoin(coin, container = null){
-      if(container == null){
-        if(coin.pId != null){
-          container = 'coins-zone-' + coin.pId;
 
-          if(coin.location == "bid"){
-            let tavern = coin.location_arg;
-            container = "tavern-coin-holder-" + tavern;
-            // Make it work with bids
-            this._tavernBids[tavern] = coin;
-          }
+    getCoinContainer(coin){
+      let container = null;
+
+      if(coin.pId != null){
+        container = 'coins-zone-' + coin.pId;
+
+        if(coin.location == "bid"){
+          let tavern = coin.location_arg;
+          container = "tavern-coin-holder-" + tavern;
+          // Make it work with bids
+          this._tavernBids[tavern] = coin;
+        }
+        else if(coin.location == "tavern"){
+          container = "bids-zone-" + coin.location_arg + "-" + coin.pId;
         }
       }
 
-      this.place('jstpl_coin', coin, container);
-      dojo.connect($('coin-' + coin.id), "click", (evt) => this.onClickCoin(coin, evt) );
+      return container;
+    },
+
+    addCoin(coin, container = null){
+      if(container == null){
+        container = this.getCoinContainer(coin);
+      }
+
+      if($('coin-' + coin.id)){
+        this.slide('coin-' + coin.id, container,800)
+        .then( () => this.attachToNewParent('coin-' + coin.id, container) );
+      } else {
+        this.place('jstpl_coin', coin, container);
+        dojo.connect($('coin-' + coin.id), "click", (evt) => this.onClickCoin(coin, evt) );
+      }
     },
 
     makeCoinsSelectable(coins, callback){

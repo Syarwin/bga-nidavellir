@@ -56,9 +56,6 @@ trait BidsTrait
       throw new \BgaUserException(_("You still have coins to bids!"));
     }
 
-    // set of current index to -1 for resolution.
-    Globals::setCurrentPlayerIndex(-1);
-
     $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
   }
 
@@ -144,7 +141,10 @@ trait BidsTrait
     //}
     //
     ////Log::addPlayerOrder($order);
-    //$this->setGameStateValue('currentPlayerIndex', -1);
+
+    // set of current index to -1 for resolution.
+    Globals::setCurrentPlayerIndex(-1);
+
     $this->gamestate->nextState("resolved");
   }
 
@@ -160,6 +160,7 @@ trait BidsTrait
 
     if($index >= count($order)){
       // If all players already played this turn, go on to reveal next bids (if any left)
+      Globals::incTavern();
       $this->gamestate->nextState("done");
     } else {
       // Otherwise, make player active and go to recruitDwarf state
@@ -185,7 +186,7 @@ trait BidsTrait
     $order = [];
     foreach($bids as $bid => $bidders){
       //Log::addTie($bidders);
-      usort($bidders, function($p1, $p2){ return $p1->getGem() - $p2->getGem(); });
+      usort($bidders, function($p1, $p2){ return $p2->getGem() - $p1->getGem(); });
       foreach($bidders as $player){
         array_push($order, $player->getId());
       }

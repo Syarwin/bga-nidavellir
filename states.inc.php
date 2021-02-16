@@ -126,8 +126,8 @@ $machinestates = [
 
   ST_RECRUIT_DWARF => [
     "name" => "recruitDwarf",
-    'description' => clienttranslate('${actplayer} must recruit a dwarf'),
-    'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the tavern'),
+    'description' => clienttranslate('${actplayer} must recruit a dwarf at the ${tavern_name}'),
+    'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the ${tavern_name}'),
     'type' => 'activeplayer',
     'args' => 'argRecruitDwarf',
     'possibleactions' => ['recruit'],

@@ -3,6 +3,36 @@
     display: flex;
   }
 
+  .bids-zone {
+    display: flex;
+    margin: 5px 0;
+    justify-content: space-around;
+    align-items: center;
+
+    .bids-zone-tavern {
+      width: 78px;
+      height: 50px;
+      background-image: url("img/tavern/sign_0.png");
+      background-size: contain;
+      background-position: -8px center;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background-repeat: no-repeat;
+      
+      &.tavern-1 {
+        background-image: url('img/tavern/sign_1.png');
+      }
+      &.tavern-2 {
+        background-image: url('img/tavern/sign_2.png');
+      }
+
+      .coin {
+        transform: scale(0.8);
+      }
+    }
+  }
+
   .command-zone {
     display: flex;
     flex-flow: row;

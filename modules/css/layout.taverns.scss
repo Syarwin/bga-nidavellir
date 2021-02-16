@@ -119,6 +119,19 @@
       &#tavern-3 {
         border-bottom:none;
       }
+
+      &.selectable {
+        animation-name: borderBlink2;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes borderBlink2 {
+        0% {border: 2px dashed yellow;}
+        49% {border: 2px dashed yellow;}
+        50% {border: 2px dashed white;}
+        100% {border: 2px dashed white;}
+      }
     }
   }
 }

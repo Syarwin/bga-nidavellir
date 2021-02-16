@@ -13,6 +13,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     onEnteringStateRecruitDwarf(args) {
       // activate the cards
       this.makeCardSelectable(args.cards, this.onClickRecruitDwarf.bind(this));
+      dojo.addClass("tavern_" + args.tavern, "selectable");
     },
 
     onClickRecruitDwarf(card){
@@ -22,7 +23,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_recruit(n){
       debug("Notif: new recruit", n);
-      // TODO 
+      let card = n.args.card;
+      this.slide('card-' + card.id, card.location, 800)
+      .then(() => {
+        dojo.place('card-' + card.id, card.location)
+        dojo.style('card-' + card.id, { top:null, left:null, right: null });
+      });
     },
   });
 });

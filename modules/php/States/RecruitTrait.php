@@ -12,8 +12,18 @@ trait RecruitTrait
 {
   public function argRecruitDwarf()
   {
+    $taverns = [
+      GOBLIN_TAVERN => clienttranslate('Laughing Goblin Tavern'),
+      DRAGON_TAVERN => clienttranslate('Dancing Dragon Tavern'),
+      HORSE_TAVERN => clienttranslate('Shining Horse Tavern')
+    ];
+
+    $tavern = Globals::getTavern();
     return [
-      'cards' => Cards::getInTavern(Globals::getTavern() )->getIds()
+      'i18n' => ['tavern_name'],
+      'cards' => Cards::getInTavern($tavern)->getIds(),
+      'tavern' => $tavern,
+      'tavern_name' => $taverns[$tavern],
     ];
   }
 
@@ -31,10 +41,14 @@ trait RecruitTrait
     $card = Cards::get($cardId);
     $player = Players::getCurrent();
     $player->recruit($card);
+
+    $card = Cards::get($cardId); // Update location
     Notifications::recruit($player, $card);
 
 
     // TODO
-    $this->gamestate->nextState('next');
+    $nextState = $player->shouldTrade()? 'trade' : 'next';
+    $this->gamestate->nextState($nextState);
   }
+
 }

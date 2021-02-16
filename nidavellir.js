@@ -62,8 +62,32 @@ define([
       clearPossible(){
         dojo.query('.coin').removeClass('selected selectable');
         dojo.query(".tavern-coin-holder").removeClass("selectable");
+        dojo.query(".tavern-cards-holder").removeClass("selectable");
+
 
         this.inherited(arguments);
       },
+
+
+
+      /* This enable to inject translatable styled things to logs or action bar */
+      /* @Override */
+      format_string_recursive (log, args) {
+        try {
+          if (log && args && !args.processed) {
+            args.processed = true;
+
+            // Representation of the class of a card
+            if (args.card_class !== undefined) {
+              args.card_class = dojo.string.substitute("<span class='card-class class-${class}'></span>", {'class' :args.card_class });
+            }
+          }
+        } catch (e) {
+          console.error(log,args,"Exception thrown", e.stack);
+        }
+
+        return this.inherited(arguments);
+      },
+
    });
 });

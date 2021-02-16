@@ -98,12 +98,18 @@ class Globals extends \APP_DbObject
     self::inc('currentTurn');
     self::set('currentTavern', GOBLIN_TAVERN);
   }
-  
+
+  public function incTavern()
+  {
+    return self::inc('currentTavern', 1);
+  }
+
+
   public function incCurrentPlayerIndex($step)
   {
     return self::inc('currentPlayerIndex', $step);
   }
-  
+
   public function setCurrentPlayerIndex($value)
   {
     self::set('currentPlayerIndex', $value);

@@ -125,7 +125,13 @@ class Cards extends Helpers\Pieces
   public static function recruit($card, $pId)
   {
     // TODO handle heroes
-    self::move($card['id'], ["commander-zone", $pId, $card['class']]);
+    self::move($card['id'], ["command-zone", $pId, $card['class']]);
+  }
+
+
+  public static function getOfPlayer($pId)
+  {
+    return self::getInLocation(['command-zone', $pId, '%']);
   }
 
 }

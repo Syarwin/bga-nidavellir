@@ -41,6 +41,7 @@ class Nidavellir extends Table
   use NID\States\TurnTrait;
 	use NID\States\BidsTrait;
 	use NID\States\RecruitTrait;
+  use NID\States\TradeCoinTrait;
 
 	public static $instance = null;
 	public function __construct() {
