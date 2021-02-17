@@ -2,13 +2,21 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.bidsTrait", null, {
     constructor(){
       this._notifications.push(
+        ['newTurn', 700],
         ['playerBid', 500],
         ['revealBids', 800],
-        ['recruitStart', 500]
+        ['recruitStart', 500],
+        ['tradeGems', 1000]
       );
 
       this._selectedCoin = null;
       this._tavernBids = [null, null, null];
+    },
+
+
+    notif_newTurn(n){
+      debug("Starting a new turn", n);
+      n.args.cards.forEach(card => this.addCard(card) );
     },
 
 
@@ -113,8 +121,19 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       Object.values(n.args.coins).forEach(coin => this.addCoin(coin) );
     },
 
-    notif_recruitStart(args) {
-      debug("notif: recruitStart", args);
+    notif_recruitStart(n) {
+      debug("Notif: recruitStart", n);
+    },
+
+
+    notif_tradeGems(n){
+      debug("Notif: trading gems", n);
+      alert("test");
+      n.args.trades.forEach(trade => {
+        // [p1_id, p1_gem, p2_id, p2_gem]
+        this.slide('gem-' + trade[1], 'gem-container-' + trade[2]);
+        this.slide('gem-' + trade[3], 'gem-container-' + trade[0]);
+      })
     },
   });
 });

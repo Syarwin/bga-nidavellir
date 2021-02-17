@@ -24,11 +24,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_recruit(n){
       debug("Notif: new recruit", n);
       let card = n.args.card;
-      this.slide('card-' + card.id, card.location, 800)
-      .then(() => {
-        dojo.place('card-' + card.id, card.location)
-        dojo.style('card-' + card.id, { top:null, left:null, right: null });
-      });
+      this.slide('card-' + card.id, card.location, {
+        clearPos: true
+      })
     },
   });
 });

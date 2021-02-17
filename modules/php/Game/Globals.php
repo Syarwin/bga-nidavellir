@@ -105,7 +105,7 @@ class Globals extends \APP_DbObject
   }
 
 
-  public function incCurrentPlayerIndex($step)
+  public function incCurrentPlayerIndex($step = 1)
   {
     return self::inc('currentPlayerIndex', $step);
   }
@@ -113,6 +113,11 @@ class Globals extends \APP_DbObject
   public function setCurrentPlayerIndex($value)
   {
     self::set('currentPlayerIndex', $value);
+  }
+
+  public function resetCurrentPlayerIndex()
+  {
+    self::setCurrentPlayerIndex(-1);
   }
 
 }

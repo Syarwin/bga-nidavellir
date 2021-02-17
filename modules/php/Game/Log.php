@@ -6,7 +6,7 @@ use Nidavellir;
  * Log: a class that allows to log some actions
  *   and then fetch these actions latter
  */
-class Log extends \Nidavellir\Helpers\DB_Manager
+class Log extends \NID\Helpers\DB_Manager
 {
   protected static $table = 'log';
   protected static $primary = 'log_id';
@@ -15,7 +15,7 @@ class Log extends \Nidavellir\Helpers\DB_Manager
   {
     return [
       'id' => (int) $row['log_id'],
-      'pId' => (int) $row['player_id'],
+      'pId' => $row['player_id'],
       'turn' => (int) $row['turn'],
       'action' => $row['action'],
       'arg' => json_decode($row['action_arg'], true),
@@ -26,7 +26,7 @@ class Log extends \Nidavellir\Helpers\DB_Manager
    * Utils : where filter with player and current turn
    */
   private function getFilteredQuery($pId){
-    return self::DB()->where('player_id', $pId)->where('turn', Globals::getCurrentTurn() )->orderBy("log_id", "DESC");
+    return self::DB()->where('player_id', $pId)->where('turn', Globals::getTurn() )->orderBy("log_id", "DESC");
   }
 
 ////////////////////////////////
@@ -44,15 +44,20 @@ class Log extends \Nidavellir\Helpers\DB_Manager
    */
   public static function insert($player, $action, $args = [])
   {
-    $pId = is_integer($player)? $player : $player->getId();
-    $turn = Globals::getCurrentTurn();
+    $pId = (is_integer($player) || is_null($player))? $player : $player->getId();
+    $turn = Globals::getTurn();
     $actionArgs = json_encode($args);
     self::DB()->insert([
       'turn' => $turn,
-      'player_id' => $pId,
+      'player_id' => $pId ?? -1,
       'action' => $action,
       'action_arg' => $actionArgs,
     ]);
+  }
+
+  public static function storeOrder($order, $ties)
+  {
+    self::insert(null, "turnOrder", [ 'order' => $order, 'ties' => $ties]);
   }
 
 
@@ -70,4 +75,16 @@ class Log extends \Nidavellir\Helpers\DB_Manager
   {
     return self::getFilteredQuery($pId)->where('action', $action)->limit($limit)->get($limit == 1);
   }
+
+
+  public static function getTurnOrder()
+  {
+    return self::getLastAction('turnOrder', -1)['arg']['order'];
+  }
+
+  public static function getTies()
+  {
+    return self::getLastAction('turnOrder', -1)['arg']['ties'];
+  }
+
 }

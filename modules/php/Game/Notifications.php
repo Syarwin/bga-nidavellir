@@ -72,6 +72,27 @@ class Notifications
   }
 
 
+  public static function tradeGems($bid, $bidders, $trades){
+    $msgs = [
+      '', '',
+      clienttranslate('${player_name} and ${player_name2} both bade with their ${bid} coin, and trade their gems as a tie'),
+      clienttranslate('${player_name}, ${player_name2} and ${player_name3} all bade with their ${bid} coin, and trade their gems as a tie (${player_name2} keeps its gem)'),
+      clienttranslate('${player_name}, ${player_name2}, ${player_name3} and ${player_name4} all bade with their ${bid} coin, and trade their gems as a tie'),
+      clienttranslate('${player_name}, ${player_name2}, ${player_name3}, ${player_name4} and ${player_name5} all bade with their ${bid} coin, and trade their gems as a tie (${player_name3} keeps its gem)'),
+    ];
+
+    $data = [
+      'bid' => $bid,
+      'trades' => $trades,
+      'player_name' => $bidders[0],
+    ];
+    for($i = 1; $i < count($bidders); $i++){
+      $data['player_name'.($i + 1)] = $bidders[$i];
+    }
+
+    self::notifyAll('tradeGems', $msgs[count($bidders)], $data);
+  }
+
   /*
    * Automatically adds some standard field about player and/or card
    */

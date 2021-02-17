@@ -98,9 +98,18 @@ class Coins extends Helpers\Pieces
   public static function reveal($tavern)
   {
     $coins = self::getInLocation(['bid', $tavern]);
-    foreach($coins as $coin){
+    foreach($coins as &$coin){
       self::move($coin['id'], ['tavern', $tavern ]);
+      $coin['location'] = 'tavern';
     }
     return $coins;
+  }
+
+
+  public static function clearBids($pId)
+  {
+    foreach(self::getOfPlayer($pId) as $coin){
+      self::move($coin['id'], 'hand');
+    }
   }
 }

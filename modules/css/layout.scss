@@ -47,7 +47,6 @@
       display: flex;
       align-items: flex-start;
   //    background-color:#838c92;
-      z-index:100;
       @for $i from 0 through 5 {
         &#player-board-#{$i} {
           order: #{$i};

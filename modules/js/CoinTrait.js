@@ -58,7 +58,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
 
       if($('coin-' + coin.id)){
-        this.slide('coin-' + coin.id, container,800)
+        this.slide('coin-' + coin.id, container, {})
         .then( () => this.attachToNewParent('coin-' + coin.id, container) );
       } else {
         this.place('jstpl_coin', coin, container);
@@ -90,11 +90,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       let target = "coins-zone-" + this.player_id;
 
       coin.location = "player";
-      this.attachToNewParent(oldCoin, "ebd-body");
-      this.slide(oldCoin, target, 600).then( () => {
-        this.attachToNewParent(oldCoin, target);
-        dojo.style(oldCoin, { top:null, left:null, right: null });
-        dojo.connect($('coin-' + coin.id), "click", (evt) => this.onClickCoin(coin, evt) );
+      this.slide(oldCoin, target, {
+        duration:600,
       });
     },
 
@@ -104,13 +101,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         tavernTarget = "tavern-coin-holder-" + tavern;
 
       coin.location = tavern;
-      this.attachToNewParent(coinDiv, "ebd-body");
-      this.slidePos(coinDiv, tavernTarget , 10, 10, 600).then( () => {
-        this.attachToNewParent(coinDiv, tavernTarget );
-        dojo.style(coinDiv, { top:null, left:null, right: null });
-        dojo.connect($('coin-' + coin.id), "click", (evt) => this.onClickCoin(coin, evt) );
+      this.slide(coinDiv, tavernTarget, {
+        pos:{x: 10, y:10},
+        duration:600,
+      }).then(() => {
         this.clearBidSelection();
-      });
+      })
     },
   });
 });

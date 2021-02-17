@@ -109,6 +109,16 @@ class Player
     return Cards::getOfPlayer($this->id);
   }
 
+  public function getHeroes()
+  {
+    return $this->getCards()->filter(function($card){ return $card['class'] == HERO; });
+  }
+
+  public function countHeroes()
+  {
+    return count($this->getHeroes());
+  }
+
 /*************************
 ********** Utils *********
 *************************/
@@ -117,6 +127,12 @@ class Player
   {
     Coins::bid($coinId, $this->id, $tavern);
   }
+
+  public function clearBids()
+  {
+    Coins::clearBids($this->id);
+  }
+  
 
   public function recruit($card)
   {

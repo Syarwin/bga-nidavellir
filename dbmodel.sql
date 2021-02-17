@@ -32,3 +32,12 @@ CREATE TABLE IF NOT EXISTS `coin` (
 
 ALTER TABLE `player` ADD `player_gem` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0';
 
+
+CREATE TABLE IF NOT EXISTS `log` (
+  `log_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `turn` int(11) NOT NULL,
+  `player_id` int(11),
+  `action` varchar(16) NOT NULL,
+  `action_arg` json,
+  PRIMARY KEY (`log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

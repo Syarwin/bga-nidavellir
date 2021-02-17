@@ -6,6 +6,7 @@ use NID\Coins;
 use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
+use NID\Game\Log;
 
 
 trait BidsTrait
@@ -120,59 +121,7 @@ trait BidsTrait
    */
   public function stResolveBids()
   {
-    //$currentTavern = Globals::getTavern();
-    //
-    //// Sort players by bids
-    //$players = Players::getAll();
-    //$bids = [];
-    //foreach ($players as $player) {
-    //  $bids[$player->getBid($currentTavern)][] = $player;
-    //}
-    //ksort($bids, SORT_NUMERIC);
-    //
-    //// Then by gems
-    //$order = [];
-    //foreach($bids as $bid => $bidders){
-    //  //Log::addTie($bidders);
-    //  usort($bidders, function($p1, $p2){ return $p1->getGem() - $p2->getGem(); });
-    //  foreach($bidders as $player){
-    //    array_push($order, $player->getId());
-    //  }
-    //}
-    //
-    ////Log::addPlayerOrder($order);
-
-    // set of current index to -1 for resolution.
-    Globals::setCurrentPlayerIndex(-1);
-
-    $this->gamestate->nextState("resolved");
-  }
-
-
-  /*
-   * stNextPlayer: make the next player in current turn order active
-   */
-  public function stNextPlayer()
-  {
-    //$order = Log::getPlayerOrder();
-    $order = self::getBidOrder();
-    $index = Globals::incCurrentPlayerIndex(1);
-
-    if($index >= count($order)){
-      // If all players already played this turn, go on to reveal next bids (if any left)
-      Globals::incTavern();
-      $this->gamestate->nextState("done");
-    } else {
-      // Otherwise, make player active and go to recruitDwarf state
-      $this->gamestate->changeActivePlayer($order[$index]);
-      Notifications::recruitStart(Players::getActive(), $index + 1);
-      $this->gamestate->nextState("recruit");
-    }
-  }
-
-  // Provides order of resolution of the bid
-  public function getBidOrder()
-  {
+    // Compute and store order and ties
     $currentTavern = Globals::getTavern();
     // Sort players by bids
     $players = Players::getAll();
@@ -184,21 +133,66 @@ trait BidsTrait
 
     // Then by gems
     $order = [];
-    foreach($bids as $bid => $bidders){
+    $ties = [];
+    foreach($bids as $bid => &$bidders){
       //Log::addTie($bidders);
       usort($bidders, function($p1, $p2){ return $p2->getGem() - $p1->getGem(); });
       foreach($bidders as $player){
         array_push($order, $player->getId());
       }
+
+      // TIES
+      if(count($bidders) == 1)
+        continue; // No tie
+
+      $trades = [];
+      for($i = 0; $i < count($bidders) / 2; $i++){
+        $p1 = $bidders[$i];
+        $p2 = $bidders[count($bidders) - 1 - $i];
+        $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem() ];
+      }
+      $ties[$bid] = [
+        'bidders' => array_map(function($player){ return $player->getName();}, $bidders),
+        'trades' => $trades
+      ];
     }
 
-    return $order;
+    Log::storeOrder($order, $ties);
+
+
+    // reset of current index for resolution.
+    Globals::resetCurrentPlayerIndex();
+
+    $this->gamestate->nextState("resolved");
   }
 
-  // Send ties info
-  public function getTies() {
-    // TODO: return array of Gems/player to switch
-  }
 
+  /*
+   * stNextPlayer: make the next player in current turn order active
+   */
+  public function stNextPlayer()
+  {
+    //$order = Log::getPlayerOrder();
+    $order = Log::getTurnOrder();
+    $index = Globals::incCurrentPlayerIndex();
+
+    if($index >= count($order)){
+      // If all players already played this turn, trade gems
+      $ties = Log::getTies();
+      foreach($ties as $bid => $info){
+        Players::tradeGems($info['trades']);
+        Notifications::tradeGems($bid, $info['bidders'], $info['trades']);
+      }
+
+      // And go on to reveal next bids (if any left)
+      Globals::incTavern();
+      $this->gamestate->nextState("done");
+    } else {
+      // Otherwise, make player active and go to recruitDwarf state
+      $this->gamestate->changeActivePlayer($order[$index]);
+      Notifications::recruitStart(Players::getActive(), $index + 1);
+      $this->gamestate->nextState("recruit");
+    }
+  }
 }
 ?>

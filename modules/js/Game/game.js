@@ -103,7 +103,7 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
 
        // Call appropriate method
        var methodName = "onEnteringState" + stateName.charAt(0).toUpperCase() + stateName.slice(1);
-    
+
        if (this[methodName] !== undefined)
          this[methodName](args.args);
      },
@@ -306,32 +306,6 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
     /*
      * Sliding animation wrappers with Promises
      */
-    slide(sourceId, targetId, duration, delay = 0) {
-      return new Promise((resolve, reject) => {
-        var animation = this.slideToObject(sourceId, targetId, duration, delay);
-        dojo.connect(animation, 'onEnd', resolve);
-        animation.play();
-      });
-    },
-
-
-    slidePos(sourceId, targetId, x, y, duration, delay = 0) {
-      return new Promise((resolve, reject) => {
-        var animation = this.slideToObjectPos(sourceId, targetId, x, y, duration, delay);
-        dojo.connect(animation, 'onEnd', resolve);
-        animation.play();
-      });
-    },
-
-    slideAndDestroy(sourceId, targetId, duration, delay = 0) {
-    	return new Promise((resolve, reject) => {
-        this.slideToObjectAndDestroy(sourceId, targetId, duration, delay);
-    		setTimeout(() => {
-    			resolve();
-    		}, duration + delay)
-    	});
-    },
-
     slideTemporary(template, data, container, sourceId, targetId, duration, delay = 0) {
     	return new Promise((resolve, reject) => {
     		var animation = this.slideTemporaryObject(this.format_block(template, data), container, sourceId, targetId, duration, delay);
@@ -342,6 +316,83 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
     },
 
 
+
+    slide(mobile, targetId, options){
+      let config = Object.assign({
+        duration: 800,
+        delay:0,
+        destroy:false,
+        attach:true,
+        pos:null,
+        className:'moving',
+        clearPos: true,
+      }, options);
+
+      const newParent = config.attach? targetId : $(mobile).parentNode;
+      this.changeParent(mobile, 'game_play_area');
+      dojo.style(mobile, "zIndex", 1000);
+      dojo.addClass(mobile, config.className);
+      return new Promise((resolve, reject) => {
+        const animation = config.pos == null? this.slideToObject(mobile, targetId, config.duration, config.delay)
+          : this.slideToObjectPos(mobile, targetId, config.pos.x, config.pos.y, config.duration, config.delay);
+
+        dojo.connect(animation, 'onEnd', () => {
+          dojo.style(mobile, "zIndex", null);
+          dojo.removeClass(mobile, config.className);
+          this.changeParent(mobile, newParent);
+          if(config.destroy)
+            dojo.destroy(mobile);
+          if(config.clearPos)
+            dojo.style(mobile, { top:null, left:null });
+          resolve();
+        });
+        animation.play();
+      });
+    },
+
+    changeParent(mobile, new_parent, relation) {
+			if (mobile === null) {
+				console.error("attachToNewParent: mobile obj is null");
+				return;
+			}
+			if (new_parent === null) {
+				console.error("attachToNewParent: new_parent is null");
+				return;
+			}
+			if (typeof mobile == "string") {
+				mobile = $(mobile);
+			}
+			if (typeof new_parent == "string") {
+				new_parent = $(new_parent);
+			}
+			if (typeof relation == "undefined") {
+				relation = "last";
+			}
+			var src = dojo.position(mobile);
+			dojo.style(mobile, "position", "absolute");
+			dojo.place(mobile, new_parent, relation);
+			var tgt = dojo.position(mobile);
+			var box = dojo.marginBox(mobile);
+			var cbox = dojo.contentBox(mobile);
+			var left = box.l + src.x - tgt.x;
+			var top = box.t + src.y - tgt.y;
+			this.positionObjectDirectly(mobile, left, top);
+			box.l += box.w - cbox.w;
+			box.t += box.h - cbox.h;
+			return box;
+		},
+
+
+    positionObjectDirectly(mobileObj, x, y) {
+			// do not remove this "dead" code some-how it makes difference
+			dojo.style(mobileObj, "left"); // bug? re-compute style
+			// console.log("place " + x + "," + y);
+			dojo.style(mobileObj, {
+				left: x + "px",
+				top: y + "px"
+			});
+			dojo.style(mobileObj, "left"); // bug? re-compute style
+		},
 
     /*
      * Return a span with a colored 'You'

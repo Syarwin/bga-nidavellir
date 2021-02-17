@@ -334,8 +334,7 @@ html {
       min-height: 245px;
       position: relative;
       display: flex;
-      align-items: flex-start;
-      z-index: 100; }
+      align-items: flex-start; }
       #nidavellir-board #player-boards .nidavellir-player-board#player-board-0 {
         order: 0; }
       #nidavellir-board #player-boards .nidavellir-player-board#player-board-1 {

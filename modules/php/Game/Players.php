@@ -84,7 +84,6 @@ class Players extends \NID\Helpers\DB_Manager
     return null; // TODO
   }
 
-
   /*
    * Return the number of players
    */
@@ -100,5 +99,18 @@ class Players extends \NID\Helpers\DB_Manager
   public function getUiData($pId)
   {
     return self::getAll()->assocMap(function($player) use ($pId){ return $player->getUiData($pId); });
+  }
+
+
+  /*
+   * Trade gems: given a list of trade (player1, player2), proceeds to the exchange of gems
+   */
+  public function tradeGems($trades)
+  {
+    foreach($trades as $trade){
+      // $trade = [p1_id, p1_gem, p2_id, p2_gem]
+      self::DB()->update(['player_gem' => $trade[3]], $trade[0]);
+      self::DB()->update(['player_gem' => $trade[1]], $trade[2]);
+    }
   }
 }
