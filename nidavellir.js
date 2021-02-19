@@ -81,6 +81,17 @@ define([
             if (args.card_class !== undefined) {
               args.card_class = dojo.string.substitute("<span class='card-class class-${class}'></span>", {'class' :args.card_class });
             }
+
+            // Coin icons
+            var coinKeys = Object.keys(args).filter(key => key.substr(0,4) == 'coin' && key.substr(-4) != "type");
+            coinKeys.forEach(key => {
+              args[key] = this.format_block('jstpl_coin', {
+                id:-1,
+                value : args[key],
+                type : args[key + '_type']
+              });
+              args[key + '_type'] = '';
+            })
           }
         } catch (e) {
           console.error(log,args,"Exception thrown", e.stack);

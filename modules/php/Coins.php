@@ -28,7 +28,7 @@ class Coins extends Helpers\Pieces
    */
 	private static $coins = [
     5 => 2, 6 => 2, 7 => 3, 8 => 2, 9 => 3, 10 => 2, 11 => 3,
-    12 => 2, 13 => 2, 14 => 2, 15 => 1, 16 => 2, 17 => 1, 18 => 1,
+    12 => 2, 13 => 2, 14 => 2, 15 => 1, 16 => 1, 17 => 1, 18 => 1,
     19 => 1, 20 => 1, 21 => 1, 22 => 1, 23 => 1, 24 => 1, 25 => 1
 	];
 
@@ -111,5 +111,29 @@ class Coins extends Helpers\Pieces
     foreach(self::getOfPlayer($pId) as $coin){
       self::move($coin['id'], 'hand');
     }
+  }
+
+
+  public static function trade($coin, $target)
+  {
+    // Get the new coin
+    $newCoin = self::getSelectQuery()->where('coin_location', 'treasure')->where('value', '>=', $target)->orderBy('value', 'INC')->limit(1)->getSingle();
+    if(is_null($newCoin)){
+      $newCoin = self::getSelectQuery()->where('coin_location', 'treasure')->orderBy('value', 'DESC')->limit(1)->getSingle();
+    }
+
+    // Put this coin in player's hand
+    self::DB()->update([
+      'pId' => $coin['pId'],
+      'coin_location' => 'hand',
+    ], $newCoin['id']);
+
+    // Do whatever is needed to the old coin
+    self::DB()->update([
+      'pId' => 0,
+      'coin_location' => $coin['type'] == COIN_PLAYER? "discard" : "treasure",
+    ], $coin['id']);
+
+    return $newCoin;
   }
 }

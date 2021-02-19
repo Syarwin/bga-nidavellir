@@ -128,7 +128,6 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_tradeGems(n){
       debug("Notif: trading gems", n);
-      alert("test");
       n.args.trades.forEach(trade => {
         // [p1_id, p1_gem, p2_id, p2_gem]
         this.slide('gem-' + trade[1], 'gem-container-' + trade[2]);

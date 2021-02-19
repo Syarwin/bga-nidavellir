@@ -317,7 +317,7 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
 
 
 
-    slide(mobile, targetId, options){
+    slide(mobile, targetId, options = {}){
       let config = Object.assign({
         duration: 800,
         delay:0,
@@ -343,7 +343,7 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
           if(config.destroy)
             dojo.destroy(mobile);
           if(config.clearPos)
-            dojo.style(mobile, { top:null, left:null });
+            dojo.style(mobile, { top:null, left:null, position:null });
           resolve();
         });
         animation.play();

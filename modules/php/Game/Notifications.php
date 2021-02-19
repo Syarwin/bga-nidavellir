@@ -93,6 +93,24 @@ class Notifications
     self::notifyAll('tradeGems', $msgs[count($bidders)], $data);
   }
 
+
+  public static function tradeCoin($player, $coinMin, $coinMax, $newCoin){
+//    self::notifyAll('tradeCoin', clienttranslate('${player_name} uses ${coin_min}${coin_min_type} and ${coin_max}${coin_max_type} to trade ${coin_max}${coin_max_type} into ${coin_new}${coin_new_type}'), [
+    self::notifyAll('tradeCoin', clienttranslate('${player_name} uses ${coin_min}${coin_min_type} to trade ${coin_max}${coin_max_type} into ${coin_new}${coin_new_type}'), [
+      'player' => $player,
+      'coin_min' => $coinMin['value'],
+      'coin_min_type' => $coinMin['type'],
+      'coin_max' => $coinMax['value'],
+      'coin_max_type' => $coinMax['type'],
+      'coin_new' => $newCoin['value'],
+      'coin_new_type' => $newCoin['type'],
+
+      'max' => $coinMax,
+      'new' => $newCoin,
+    ]);
+  }
+
+
   /*
    * Automatically adds some standard field about player and/or card
    */

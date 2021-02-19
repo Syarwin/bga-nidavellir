@@ -156,13 +156,12 @@ $machinestates = [
 
   ST_TRADE_COIN => [
     "name" => "tradeCoin",
-    'description' => clienttranslate('${actplayer} must trade coins'),
-    'descriptionmyturn' => clienttranslate('${you} must trade coins'),
-    'type' => 'activeplayer',
-    'args' => 'argTradeCoin',
-    'possibleactions' => ['trade'],
+    'description' => '',
+    'type' => 'game',
+    "action" => "stTradeCoin",
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
+// TODO      'uline' => ST_NEXT_PLAYER,
     ]
   ],
 

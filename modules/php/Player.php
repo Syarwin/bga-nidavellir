@@ -74,7 +74,17 @@ class Player
   public function getVisibleCoins($current = false)
   {
     $coins = $this->getCoins();
-    return $current? $coins : $coins->filter(function($coin){ return $coin['location'] == "tavern"; });
+    if(!$current){
+      // If not current, "hide" bids
+      foreach($coins as &$coin){
+        if($coin['location'] == "bid"){
+          $coin['location'] = 'hand';
+          $coin['location_arg'] = null;
+        }
+      }
+    }
+    return $coins;
+//    return $current? $coins : $coins->filter(function($coin){ return $coin['location'] == "tavern"; });
   }
 
   public function getCoinIds()
@@ -93,6 +103,13 @@ class Player
     //$coins = Coins::getOfPlayer($this->id, 'bid_' . $current_tavern);
     $coin = Coins::getInLocationQ(['tavern', $currentTavern])->where('pId', $this->id)->getSingle();
     return $returnCoin? $coin : $coin['value'];
+  }
+
+
+  public function getUnbidCoins()
+  {
+    $coins = $this->getCoins();
+    return $coins->filter(function($coin){ return $coin['location'] == 'hand'; });
   }
 
 
@@ -132,7 +149,7 @@ class Player
   {
     Coins::clearBids($this->id);
   }
-  
+
 
   public function recruit($card)
   {

@@ -58,3 +58,43 @@ define('HERO', 7);
 define('COIN_PLAYER', 0);
 define('COIN_TREASURE', 1);
 define('COIN_DISTINCTION', 2);
+
+
+/*
+ * Game option
+ */
+define('OPTION_SETUP', 102);
+define('BASIC', 0);
+define('NORMAL', 1);
+
+
+/*
+ * HEROES
+ */
+define('KRAAL', 200);
+define('TARAH', 201);
+
+define('ARAL', 202);
+define('DAGDA', 203);
+
+define('AEGUR', 204);
+define('BONFUR', 205);
+
+define('ZORAL', 206);
+define('LOKDUR', 207);
+
+define('HOURYA', 208);
+define('IDUNN', 209);
+
+define('DWERG1', 210);
+define('DWERG2', 211);
+define('DWERG3', 212);
+define('DWERG4', 213);
+define('DWERG5', 214);
+
+define('SKAA', 215);
+define('ASTRID', 216);
+define('GRID', 217);
+define('ULINE', 218);
+define('YLUD', 219);
+define('THRUD', 220);

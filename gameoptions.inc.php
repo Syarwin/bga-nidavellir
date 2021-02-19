@@ -14,4 +14,22 @@
  * Nidavellir game options description
  */
 
-$game_options = [];
+$game_options = [
+  OPTION_SETUP => [
+    'name' => totranslate('Heroes'),
+    'values' => [
+      BASIC => [
+        'name' => totranslate('First game'),
+        'tmdisplay' => totranslate('First game'),
+        'description' => totranslate('Thrud, Ylud and Uline removed'),
+      ],
+      NORMAL => [
+        'name' => totranslate('All heroes'),
+        'tmdisplay' => totranslate('All heroes'),
+        'description' => totranslate('All heroes'),
+        'nobeginner' => true,
+      ],
+    ],
+    "default" => NORMAL,
+  ],
+];

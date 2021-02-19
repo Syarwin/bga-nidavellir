@@ -1,13 +1,10 @@
 define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.coinTrait", null, {
     constructor(){
-      /*
       this._notifications.push(
-        ['newHand', 100],
-        ['giveCard', 1000],
-        ['receiveCard', 1000]
+        ['tradeCoin', 1000]
       );
-      */
+
       this._callbackOnCoin = null;
       this._selectableCoins = [];
     },
@@ -26,16 +23,19 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       rows.forEach((row, i) => {
         var oRow = dojo.place('<div class="treasure-row">', 'treasure');
         row.forEach(slot => {
-          dojo.place('<div class="treasure-slot" id="treasure-slot-' + slot +'">' + slot + '</div>', oRow);
+          dojo.place('<div class="treasure-slot" id="treasure-slot-' + slot +'"></div>', oRow);
         })
       })
+
+      Object.values(this.gamedatas.royalTreasure).forEach(coin => this.addCoin(coin));
     },
 
 
     getCoinContainer(coin){
       let container = null;
 
-      if(coin.pId != null){
+      if(coin.pId != 0){
+        // Belongs to some player
         container = 'coins-zone-' + coin.pId;
 
         if(coin.location == "bid"){
@@ -47,6 +47,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         else if(coin.location == "tavern"){
           container = "bids-zone-" + coin.location_arg + "-" + coin.pId;
         }
+      } else if(coin.location == "treasure"){
+        // Belongs to royal treasure
+        container = 'treasure-slot-' + coin.value;
       }
 
       return container;
@@ -107,6 +110,26 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }).then(() => {
         this.clearBidSelection();
       })
+    },
+
+
+    notif_tradeCoin(n){
+      debug("Notif: trading coins", n);
+
+      // Slide new coin
+      this.slide('coin-' + n.args.new.id, 'coins-zone-' + n.args.player_id, {
+        duration:1000,
+      });
+
+      // Slide old coin depending on his type
+      if(n.args.max.type == 1){ // TREASURE
+        this.slide('coin-' + n.args.max.id, 'treasure-slot-' + n.args.max.value);
+      } else {
+        // Slide to tower and destroy
+        this.slide('coin-' + n.args.max.id, 'treasure', {
+          destroy: true,
+        });
+      }
     },
   });
 });

@@ -1,13 +1,34 @@
 #logs {
   .card-class {
     display:inline-block;
-    width:20px;
-    height:20px;
+    width:30px;
+    height:30px;
     background-image: url('img/classes.png');
     background-size: 100% 500%;
+    vertical-align: middle;
+    margin: -4px 3px 4px;
 
     @for $i from 1 through 5 {
       &.class-#{$i} { background-position-y: ($i - 1) * 100% / 4; }
+    }
+  }
+
+  .coin {
+    display: inline-block;
+    width:30px;
+    height:30px;
+    vertical-align:middle;
+    margin:-4px 3px 6px;
+
+
+    .coin-holder .coin-inner {
+      width:30px;
+      height:30px;
+
+      .coin-value {
+        font-size:20px;
+        line-height: 30px;
+      }
     }
   }
 }
