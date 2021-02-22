@@ -1,0 +1,23 @@
+#hall-container {
+  width:500px;
+  height:650px;
+  position:relative;
+  margin-left:100px;
+  flex-shrink: 0;
+
+  &::before {
+    content:'';
+    display: block;
+    width:100%;
+    height:100%;
+    position: absolute;
+    background-color:blue;
+    z-index: -1;
+  }
+
+  #hall {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+}

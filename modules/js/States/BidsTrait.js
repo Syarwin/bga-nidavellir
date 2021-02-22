@@ -4,9 +4,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._notifications.push(
         ['newTurn', 700],
         ['playerBid', 500],
-        ['revealBids', 800],
+        ['revealBids', 1000],
         ['recruitStart', 500],
-        ['tradeGems', 1000]
+        ['tradeGems', 1500]
       );
 
       this._selectedCoin = null;

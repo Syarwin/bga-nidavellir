@@ -57,6 +57,11 @@
           <div id="ver-beam-6" class="ver-beam"></div>
         </div>
       </div>
+
+
+      <div id="hall-container">
+        <div id="hall"></div>
+      </div>
     </div>
   </div>
 
@@ -105,7 +110,7 @@ var jstpl_coin = `
 
 
 var jstpl_card = `
-<div class="card" id="card-\${id}" data-class="\${class}" data-parity="\${parity}">
+<div class="card" id="card-\${id}" data-id="\${id}" data-class="\${class}" data-parity="\${parity}">
   <div class="card-grade" id="card-grade-\${id}">
     <div class="card-class-icon"></div>
   </div>

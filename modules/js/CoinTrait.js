@@ -2,7 +2,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.coinTrait", null, {
     constructor(){
       this._notifications.push(
-        ['tradeCoin', 1000]
+        ['tradeCoin', 1500]
       );
 
       this._callbackOnCoin = null;
@@ -61,7 +61,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
 
       if($('coin-' + coin.id)){
-        this.slide('coin-' + coin.id, container, {})
+        this.slide('coin-' + coin.id, container, { duration: 1000 })
         .then( () => this.attachToNewParent('coin-' + coin.id, container) );
       } else {
         this.place('jstpl_coin', coin, container);
@@ -118,7 +118,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       // Slide new coin
       this.slide('coin-' + n.args.new.id, 'coins-zone-' + n.args.player_id, {
-        duration:1000,
+        duration:1500,
       });
 
       // Slide old coin depending on his type

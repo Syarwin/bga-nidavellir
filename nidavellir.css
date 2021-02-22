@@ -38,13 +38,9 @@ html {
   height: 144.9px;
   margin: 0px 10.5px;
   position: relative;
-  /*
-    &[data-class="1"] .card-rank::after { border-right-color:#261860; }
-    &[data-class="2"] .card-rank::after { border-right-color:#0e4931; }
-    &[data-class="3"] .card-rank::after { border-right-color:#28648b; }
-    &[data-class="4"] .card-rank::after { border-right-color:#905631; }
-    &[data-class="5"] .card-rank::after { border-right-color:#41160e; }
-  */ }
+  /***************
+  ***** HERO *****
+  ***************/ }
   .card.selectable {
     cursor: pointer; }
     .card.selectable:hover {
@@ -58,27 +54,28 @@ html {
     background-size: cover;
     border-radius: 5%;
     filter: drop-shadow(0px 0px 4px black);
-    background-image: url("img/dwarves.jpg"); }
+    background-image: url("img/dwarves.jpg");
+    z-index: 2; }
   .card[data-class="1"][data-parity="0"]::before {
     background-position-x: 0%; }
   .card[data-class="1"][data-parity="1"]::before {
-    background-position-x: 11.1111111111%; }
+    background-position-x: 9.0909090909%; }
   .card[data-class="2"][data-parity="0"]::before {
-    background-position-x: 22.2222222222%; }
+    background-position-x: 18.1818181818%; }
   .card[data-class="2"][data-parity="1"]::before {
-    background-position-x: 33.3333333333%; }
+    background-position-x: 27.2727272727%; }
   .card[data-class="3"][data-parity="0"]::before {
-    background-position-x: 44.4444444444%; }
+    background-position-x: 36.3636363636%; }
   .card[data-class="3"][data-parity="1"]::before {
-    background-position-x: 55.5555555556%; }
+    background-position-x: 45.4545454545%; }
   .card[data-class="4"][data-parity="0"]::before {
-    background-position-x: 66.6666666667%; }
+    background-position-x: 54.5454545455%; }
   .card[data-class="4"][data-parity="1"]::before {
-    background-position-x: 77.7777777778%; }
+    background-position-x: 63.6363636364%; }
   .card[data-class="5"][data-parity="0"]::before {
-    background-position-x: 88.8888888889%; }
+    background-position-x: 72.7272727273%; }
   .card[data-class="5"][data-parity="1"]::before {
-    background-position-x: 100%; }
+    background-position-x: 81.8181818182%; }
   .card .card-grade {
     position: absolute;
     z-index: 2;
@@ -89,8 +86,8 @@ html {
     padding-top: 4%; }
     .card .card-grade .card-rank {
       order: 1;
-      width: 58.8px;
-      height: 23.52px;
+      width: 45px;
+      height: 19px;
       background-image: url("img/ranks.png");
       background-size: 100% 500%;
       font-family: 'Norse';
@@ -99,32 +96,22 @@ html {
       font-weight: bold;
       padding-left: 20%;
       box-sizing: border-box;
-      font-size: 19px;
-      position: relative;
-      /*
-      margin-left:-$hRank/4;
-
-      &::after {
-        content:'';
-        position: absolute;
-        left: -$hRank/4;
-        bottom: -$hRank/8;
-        z-index: -1;
-        border: $hRank/4 solid transparent;
-      }
-      */ }
+      font-size: 16px;
+      line-height: 18px;
+      position: relative; }
     .card .card-grade .card-class-icon {
       order: 4;
-      width: 29.4px;
-      height: 29.4px;
+      width: 24.5px;
+      height: 24.5px;
       background-image: url("img/classes.png");
-      background-size: cover; }
+      background-size: cover;
+      margin-left: 4px; }
   .card[data-class="1"] .card-rank::before, .card[data-class="2"] .card-rank::before {
     content: '';
     display: inline-block;
-    width: 16.464px;
-    height: 16.464px;
-    margin: 3.528px 0;
+    width: 13.3px;
+    height: 13.3px;
+    margin: 2.85px 0;
     background-image: url("img/rank-values.png");
     background-size: cover; }
   .card[data-class="2"] .card-rank::before {
@@ -149,6 +136,78 @@ html {
     background-position-y: 100%; }
   .card[data-class="5"] .card-class-icon {
     background-position-y: 100%; }
+  .card[data-class="6"]::before {
+    background-position-x: 90.9090909091%; }
+  .card[data-class="6"] .card-grade {
+    display: none; }
+  .card[data-class="7"]::before {
+    background-image: url("img/heroes.jpg");
+    background-size: 500%; }
+  .card[data-class="7"][data-id="200"]::before {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .card[data-class="7"][data-id="201"]::before {
+    background-position-x: 25%;
+    background-position-y: 0%; }
+  .card[data-class="7"][data-id="202"]::before {
+    background-position-x: 50%;
+    background-position-y: 0%; }
+  .card[data-class="7"][data-id="203"]::before {
+    background-position-x: 75%;
+    background-position-y: 0%; }
+  .card[data-class="7"][data-id="204"]::before {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  .card[data-class="7"][data-id="205"]::before {
+    background-position-x: 0%;
+    background-position-y: 25%; }
+  .card[data-class="7"][data-id="206"]::before {
+    background-position-x: 25%;
+    background-position-y: 25%; }
+  .card[data-class="7"][data-id="207"]::before {
+    background-position-x: 50%;
+    background-position-y: 25%; }
+  .card[data-class="7"][data-id="208"]::before {
+    background-position-x: 75%;
+    background-position-y: 25%; }
+  .card[data-class="7"][data-id="209"]::before {
+    background-position-x: 100%;
+    background-position-y: 25%; }
+  .card[data-class="7"][data-id="210"]::before {
+    background-position-x: 0%;
+    background-position-y: 50%; }
+  .card[data-class="7"][data-id="211"]::before {
+    background-position-x: 25%;
+    background-position-y: 50%; }
+  .card[data-class="7"][data-id="212"]::before {
+    background-position-x: 50%;
+    background-position-y: 50%; }
+  .card[data-class="7"][data-id="213"]::before {
+    background-position-x: 75%;
+    background-position-y: 50%; }
+  .card[data-class="7"][data-id="214"]::before {
+    background-position-x: 100%;
+    background-position-y: 50%; }
+  .card[data-class="7"][data-id="215"]::before {
+    background-position-x: 0%;
+    background-position-y: 75%; }
+  .card[data-class="7"][data-id="216"]::before {
+    background-position-x: 25%;
+    background-position-y: 75%; }
+  .card[data-class="7"][data-id="217"]::before {
+    background-position-x: 50%;
+    background-position-y: 75%; }
+  .card[data-class="7"][data-id="218"]::before {
+    background-position-x: 75%;
+    background-position-y: 75%; }
+  .card[data-class="7"][data-id="219"]::before {
+    background-position-x: 100%;
+    background-position-y: 75%; }
+  .card[data-class="7"][data-id="220"]::before {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .card[data-class="7"] .card-grade {
+    display: none; }
 
 #nidavellir-board {
   display: flex;
@@ -207,6 +266,15 @@ html {
               display: flex;
               justify-content: center;
               align-items: center; }
+              #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-row .treasure-slot .coin {
+                width: 50px;
+                height: 50px; }
+                #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-row .treasure-slot .coin .coin-holder .coin-inner {
+                  width: 50px;
+                  height: 50px; }
+                  #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-row .treasure-slot .coin .coin-holder .coin-inner .coin-value {
+                    font-size: 29px;
+                    line-height: 50px; }
               #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-row .treasure-slot .coin:last-of-type {
                 flex-shrink: 0; }
       #nidavellir-board #exterior-wrapper #exterior #taverns-container {
@@ -315,6 +383,24 @@ html {
     border: 2px dashed white; }
   100% {
     border: 2px dashed white; } }
+      #nidavellir-board #exterior-wrapper #exterior #hall-container {
+        width: 500px;
+        height: 650px;
+        position: relative;
+        margin-left: 100px;
+        flex-shrink: 0; }
+        #nidavellir-board #exterior-wrapper #exterior #hall-container::before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          background-color: blue;
+          z-index: -1; }
+        #nidavellir-board #exterior-wrapper #exterior #hall-container #hall {
+          display: flex;
+          flex-flow: row;
+          flex-wrap: wrap; }
   #nidavellir-board #foundations {
     background-image: url("img/tavern/foundations.jpg");
     width: 100vw;
@@ -367,14 +453,14 @@ html {
         margin: 28px 10.5px 0px;
         z-index: 2; }
         #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card {
-          margin-bottom: -81.144px; }
+          margin-bottom: -121.716px; }
           #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card:last-of-type {
             margin-bottom: 60px; }
 
 .coin {
   overflow: visible;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   position: relative;
   z-index: 100; }
   .coin .coin-holder {
@@ -395,8 +481,8 @@ html {
       border: 1px dashed red; }
     .coin .coin-holder .coin-inner {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background-image: url("img/coins.png");
       background-size: 400%;
       background-repeat: no-repeat;
@@ -405,8 +491,8 @@ html {
         width: 60%;
         text-align: right;
         font-family: 'Norse';
-        font-size: 28px;
-        line-height: 49px;
+        font-size: 24px;
+        line-height: 40px;
         color: #64360e;
         font-weight: bold; }
   .coin[data-type="0"] .coin-holder .coin-inner {
@@ -442,6 +528,8 @@ html {
 
 .panel-container .coins-zone {
   display: flex; }
+  .panel-container .coins-zone .coin {
+    margin: 0 3px; }
 .panel-container .bids-zone {
   display: flex;
   margin: 5px 0;
@@ -456,13 +544,12 @@ html {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    padding-right: 5px; }
     .panel-container .bids-zone .bids-zone-tavern.tavern-1 {
       background-image: url("img/tavern/sign_1.png"); }
     .panel-container .bids-zone .bids-zone-tavern.tavern-2 {
       background-image: url("img/tavern/sign_2.png"); }
-    .panel-container .bids-zone .bids-zone-tavern .coin {
-      transform: scale(0.8); }
 .panel-container .command-zone {
   display: flex;
   flex-flow: row; }
@@ -514,7 +601,19 @@ html {
   .gem[data-value="6"] {
     background-position-x: 100%; }
 
-#logs .card-class {
+#logs .card-class-name {
+  font-weight: bold; }
+  #logs .card-class-name.class-1 {
+    color: #554696; }
+  #logs .card-class-name.class-2 {
+    color: #158353; }
+  #logs .card-class-name.class-3 {
+    color: #3e9bd6; }
+  #logs .card-class-name.class-4 {
+    color: #ef7926; }
+  #logs .card-class-name.class-5 {
+    color: #923425; }
+#logs .card-class-symbol {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -522,15 +621,15 @@ html {
   background-size: 100% 500%;
   vertical-align: middle;
   margin: -4px 3px 4px; }
-  #logs .card-class.class-1 {
+  #logs .card-class-symbol.class-1 {
     background-position-y: 0%; }
-  #logs .card-class.class-2 {
+  #logs .card-class-symbol.class-2 {
     background-position-y: 25%; }
-  #logs .card-class.class-3 {
+  #logs .card-class-symbol.class-3 {
     background-position-y: 50%; }
-  #logs .card-class.class-4 {
+  #logs .card-class-symbol.class-4 {
     background-position-y: 75%; }
-  #logs .card-class.class-5 {
+  #logs .card-class-symbol.class-5 {
     background-position-y: 100%; }
 #logs .coin {
   display: inline-block;

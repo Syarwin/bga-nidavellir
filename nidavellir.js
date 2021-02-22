@@ -53,6 +53,7 @@ define([
 
         this.setupPlayers();
         this.setupTaverns();
+        this.setupHall();
         this.setupRoyalTreasure();
 
         this.inherited(arguments);
@@ -63,6 +64,7 @@ define([
         dojo.query('.coin').removeClass('selected selectable');
         dojo.query(".tavern-coin-holder").removeClass("selectable");
         dojo.query(".tavern-cards-holder").removeClass("selectable");
+        dojo.query(".card").removeClass("selectable");
 
 
         this.inherited(arguments);
@@ -79,7 +81,11 @@ define([
 
             // Representation of the class of a card
             if (args.card_class !== undefined) {
-              args.card_class = dojo.string.substitute("<span class='card-class class-${class}'></span>", {'class' :args.card_class });
+              args.card_class = dojo.string.substitute("<span class='card-class-name class-${class}'>${name}</span>", {
+                'name' : _(args.card_class),
+                'class' : args.card_class_symbol,
+              });
+              args.card_class_symbol = dojo.string.substitute("<span class='card-class-symbol class-${class}'></span>", {'class' : args.card_class_symbol });
             }
 
             // Coin icons

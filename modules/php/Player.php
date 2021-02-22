@@ -50,7 +50,7 @@ class Player
       'name'      => $this->getName(),
       'color'     => $this->color,
       'coins'     => $this->getVisibleCoins($current),
-      'cards'     => $this->getCards(),
+      'cards'     => $this->getCards()->ui(),
       'gem'       => $this->gem,
     ];
   }
@@ -128,12 +128,35 @@ class Player
 
   public function getHeroes()
   {
-    return $this->getCards()->filter(function($card){ return $card['class'] == HERO; });
+    return $this->getCards()->filter(function($card){ return $card instanceof \NID\Cards\HeroCard; });
   }
 
   public function countHeroes()
   {
     return count($this->getHeroes());
+  }
+
+
+  public function getRanks()
+  {
+    $ranks = [100, 0, 0, 0, 0, 0];
+    foreach($this->getCards() as $card){
+      $card->updateRanks($ranks);
+    }
+
+    return $ranks;
+  }
+
+
+  public function countLines()
+  {
+    $ranks = $this->getRanks();
+    return min($ranks);
+  }
+
+  public function canRecruitHero()
+  {
+    return $this->countLines() > $this->countHeroes();
   }
 
 /*************************

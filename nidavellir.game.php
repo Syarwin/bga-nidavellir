@@ -62,8 +62,8 @@ class Nidavellir extends Table
 	 * setupNewGame:
    */
 	protected function setupNewGame( $players, $options = [] ){
+    Cards::setupNewGame($players, $options);
 		Players::setupNewGame($players);
-    Cards::setupNewGame($players);
     Coins::setupNewGame($players);
 
     Globals::setupNewGame();
@@ -77,7 +77,7 @@ class Nidavellir extends Table
     $pId = self::getCurrentPId();
 		return [
 			'players' => Players::getUiData($pId),
-      'taverns' => Cards::getUiData(),
+      'cards' => Cards::getUiData(),
       'royalTreasure' => NID\Coins::getInLocation('treasure'),
 		];
 	}

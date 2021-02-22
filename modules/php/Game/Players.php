@@ -1,6 +1,7 @@
 <?php
 namespace NID\Game;
 use Nidavellir;
+use NID\Cards;
 
 /*
  * Players manager : allows to easily access players ...
@@ -36,6 +37,16 @@ class Players extends \NID\Helpers\DB_Manager
     $query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors']);
     Nidavellir::get()->reloadPlayersBasicInfos();
+
+
+    if(true){
+      $pId = array_keys($players)[0];
+      Cards::addClass($pId, BLACKSMITH);
+      Cards::addClass($pId, HUNTER);
+      Cards::addClass($pId, EXPLORER);
+      Cards::addClass($pId, MINER);
+      Cards::addClass($pId, WARRIOR);
+    }
   }
 
 

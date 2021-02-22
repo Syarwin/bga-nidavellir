@@ -403,4 +403,8 @@ class Collection extends \ArrayObject {
     return array_values(array_filter($this->toArray(), $func));
   }
 
+
+  public function ui(){
+    return $this->map(function($elem){ return $elem->getUiData(); });
+  }
 }

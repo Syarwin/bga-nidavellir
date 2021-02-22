@@ -1,6 +1,9 @@
 .panel-container {
   .coins-zone {
     display: flex;
+    .coin {
+      margin:0 3px;
+    }
   }
 
   .bids-zone {
@@ -19,7 +22,8 @@
       justify-content: flex-end;
       align-items: center;
       background-repeat: no-repeat;
-      
+      padding-right:5px;
+
       &.tavern-1 {
         background-image: url('img/tavern/sign_1.png');
       }
@@ -28,7 +32,7 @@
       }
 
       .coin {
-        transform: scale(0.8);
+//        transform: scale(0.8);
       }
     }
   }

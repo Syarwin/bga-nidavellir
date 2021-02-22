@@ -132,7 +132,6 @@ $machinestates = [
     'args' => 'argRecruitDwarf',
     'possibleactions' => ['recruit'],
     'transitions' => [
-      'next' => ST_NEXT_PLAYER,
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
     ]

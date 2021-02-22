@@ -58,12 +58,11 @@ class action_nidavellir extends APP_GameAction
   ///////////////////////////////
   /////////// Recruit  //////////
   ///////////////////////////////
-  public function recruitDwarf()
+  public function recruit()
   {
     self::setAjaxMode();
     $cardId = self::getArg("cardId", AT_posint, true);
-    $this->game->actRecruitDwarf($cardId);
+    $this->game->actRecruit($cardId);
     self::ajaxResponse();
   }
-
 }

@@ -26,6 +26,7 @@
 
       @import "layout.treasure";
       @import "layout.taverns";
+      @import "layout.hall";
     }
   }
 
@@ -89,7 +90,7 @@
         z-index: 2;
 
         .card {
-          margin-bottom:-$scale*0.8*$hCard;
+          margin-bottom:-$scale*1.2*$hCard; // TODO
           &:last-of-type {
             margin-bottom: 60px;
           }

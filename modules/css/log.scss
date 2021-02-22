@@ -1,5 +1,16 @@
 #logs {
-  .card-class {
+  .card-class-name {
+    font-weight: bold;
+    
+    &.class-1 { color: #554696; }
+    &.class-2 { color: #158353; }
+    &.class-3 { color: #3e9bd6; }
+    &.class-4 { color: #ef7926; }
+    &.class-5 { color: #923425; }
+  }
+
+
+  .card-class-symbol {
     display:inline-block;
     width:30px;
     height:30px;

@@ -22,15 +22,16 @@
     border-radius: 5%;
     filter:drop-shadow(0px 0px 4px black);
     background-image:url('img/dwarves.jpg');
+    z-index:2;
   }
 
   @for $i from 1 through 5 {
-    &[data-class="#{$i}"][data-parity="0"]::before { background-position-x: 2*($i - 1) * 100% / 9; }
-    &[data-class="#{$i}"][data-parity="1"]::before { background-position-x: (2*($i - 1) + 1) * 100% / 9; }
+    &[data-class="#{$i}"][data-parity="0"]::before { background-position-x: 2*($i - 1) * 100% / 11; }
+    &[data-class="#{$i}"][data-parity="1"]::before { background-position-x: (2*($i - 1) + 1) * 100% / 11; }
   }
 
-  $wRank:0.6 * $wCard;
-  $hRank:2/5 * $wRank;
+  $wRank:45px;// 0.6 * $wCard;
+  $hRank:19px; //2/5 * $wRank;
 
   .card-grade {
     position: absolute;
@@ -53,38 +54,20 @@
       font-weight: bold;
       padding-left: 20%;
       box-sizing: border-box;
-      font-size: 19px;
+      font-size: 16px;
+      line-height: 18px;
       position: relative;
-
-      /*
-      margin-left:-$hRank/4;
-
-      &::after {
-        content:'';
-        position: absolute;
-        left: -$hRank/4;
-        bottom: -$hRank/8;
-        z-index: -1;
-        border: $hRank/4 solid transparent;
-      }
-      */
     }
 
     .card-class-icon {
       order:4;
-      width:0.3 * $wCard;
-      height:0.3 * $wCard;
+      width:0.25 * $wCard;
+      height:0.25 * $wCard;
       background-image:url('img/classes.png');
       background-size:cover;
+      margin-left:4px;
     }
   }
-/*
-  &[data-class="1"] .card-rank::after { border-right-color:#261860; }
-  &[data-class="2"] .card-rank::after { border-right-color:#0e4931; }
-  &[data-class="3"] .card-rank::after { border-right-color:#28648b; }
-  &[data-class="4"] .card-rank::after { border-right-color:#905631; }
-  &[data-class="5"] .card-rank::after { border-right-color:#41160e; }
-*/
 
   &[data-class="1"] .card-rank::before,
   &[data-class="2"] .card-rank::before {
@@ -104,4 +87,35 @@
     &[data-class="#{$i}"] .card-class-icon { background-position-y: ($i - 1) * 100% / 4; }
   }
 
+
+  // ROYAL_OFFER
+  &[data-class="6"]{
+    &::before { background-position-x: 10 * 100% / 11; }
+    // TODO : AGE II / &[data-class="6"]::before { background-position-x: 11 * 100% / 11; }
+    .card-grade {
+      display:none;
+    }
+  }
+
+
+  /***************
+  ***** HERO *****
+  ***************/
+  &[data-class="7"] {
+    &::before {
+      background-image:url('img/heroes.jpg');
+      background-size:500%;
+    }
+
+    @for $i from 0 through $heroesNb - 1 {
+      &[data-id="#{$heroesStart + $i}"]::before {
+        background-position-x:($i % 5) * 25%;
+        background-position-y:($i  - ($i % 5) )/ 5 * 100% / 4;
+      }
+    }
+
+    .card-grade {
+      display:none;
+    }
+  }
 }

@@ -12,12 +12,17 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     onEnteringStateRecruitDwarf(args) {
       // activate the cards
-      this.makeCardSelectable(args.cards, this.onClickRecruitDwarf.bind(this));
+      this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
       dojo.addClass("tavern_" + args.tavern, "selectable");
     },
 
-    onClickRecruitDwarf(card){
-      this.takeAction("recruitDwarf", { cardId : card.id });
+    onEnteringStateRecruitHero(args) {
+      // activate the cards
+      this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
+    },
+
+    onClickCardRecruit(card){
+      this.takeAction("recruit", { cardId : card.id });
     },
 
 
@@ -28,5 +33,6 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         clearPos: true
       })
     },
+
   });
 });

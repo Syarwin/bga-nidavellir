@@ -65,7 +65,7 @@ class Notifications
   }
 
   public static function recruit($player, $card){
-    self::notifyAll('recruit', clienttranslate('${player_name} recruits ${card_name}${card_class}'), [
+    self::notifyAll('recruit', clienttranslate('${player_name} recruits ${card_class}${card_class_symbol}'), [
       'player' => $player,
       'card'  => $card,
     ]);
@@ -132,8 +132,9 @@ class Notifications
         WARRIOR => clienttranslate('a warrior'),
       ];
 
-      $args['card_name'] = $names[$c['class']];
-      $args['card_class'] = $c['class'];// The substitution will be done in JS format_string_recursive function
+      $args['card_class'] = $names[$c->getClass()];
+      $args['card_class_symbol'] = $c->getClass();// The substitution will be done in JS format_string_recursive function
+      $args['card'] = $c->getUiData();
     }
   }
 }

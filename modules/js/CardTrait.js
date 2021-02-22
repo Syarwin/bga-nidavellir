@@ -13,8 +13,14 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
     setupTaverns(){
-      this.gamedatas.taverns.forEach(card => this.addCard(card, card.location));
+      this.gamedatas.cards.taverns.forEach(card => this.addCard(card, card.location));
     },
+
+    setupHall(){
+      debug(this.gamedatas.cards.hall);
+      this.gamedatas.cards.hall.forEach(card => this.addCard(card, card.location));
+    },
+
 
     addCard(card, container){
       card.parity = card.id % 2;

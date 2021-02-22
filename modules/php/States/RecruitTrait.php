@@ -10,6 +10,10 @@ use NID\Game\Notifications;
 
 trait RecruitTrait
 {
+  /**********************
+  ******** DWARF ********
+  **********************/
+
   public function argRecruitDwarf()
   {
     $taverns = [
@@ -28,14 +32,14 @@ trait RecruitTrait
   }
 
 
-  public function actRecruitDwarf($cardId)
+  public function actRecruit($cardId)
   {
     $this->checkAction("recruit");
 
     // Check if cards is in tavern
-    $cards = $this->argRecruitDwarf()['cards'];
+    $cards = $this->gamestate->state()['args']['cards'];
     if(!in_array($cardId, $cards))
-      throw new \BgaUserException(_("You cannot recruit this dwarf"));
+      throw new \BgaUserException(_("You cannot recruit this dwarf/hero"));
 
     // Move card in corresponding position and notify (useful for replay)
     $card = Cards::get($cardId);
@@ -46,9 +50,23 @@ trait RecruitTrait
     Notifications::recruit($player, $card);
 
 
-    // TODO
-    $nextState = $player->shouldTrade()? 'trade' : 'next';
+    $nextState = $player->canRecruitHero()? 'hero' : 'trade';
     $this->gamestate->nextState($nextState);
   }
 
+
+
+
+  /**********************
+  ******** HERO ********
+  **********************/
+
+  public function argRecruitHero()
+  {
+    $player = Players::getActive();
+    $heroes = Cards::getRecruitableHeroes($player);
+    return [
+      'cards' => array_map(function($hero){ return $hero->getId(); }, $heroes),
+    ];
+  }
 }

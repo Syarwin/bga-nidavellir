@@ -42,6 +42,7 @@ define('CURRENT_PLAYER_INDEX', 11);
 /*
  * Type of cards
  */
+define('NEUTRAL', 0);
 define('BLACKSMITH', 1);
 define('HUNTER', 2);
 define('EXPLORER', 3);
