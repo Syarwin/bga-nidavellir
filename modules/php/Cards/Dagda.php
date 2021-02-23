@@ -15,5 +15,16 @@ class Dagda extends HeroCard
     ];
   }
 
-  // TODO : destruct and check recruit
+  public function canBeRecruited($player){
+    $stacks = $player->getDiscardableStacks();
+    return count($stacks) >= 2 + (in_array(HUNTER, $stacks)? 1 : 0);
+  }
+
+  public function stateAfterRecruit(){
+    return 'discard';
+  }
+
+  public function getDiscardRequirement(){
+    return 2;
+  }
 }

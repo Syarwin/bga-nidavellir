@@ -65,4 +65,13 @@ class action_nidavellir extends APP_GameAction
     $this->game->actRecruit($cardId);
     self::ajaxResponse();
   }
+
+
+  public function transformCoin()
+  {
+    self::setAjaxMode();
+    $coinId = self::getArg("coinId", AT_posint, true);
+    $this->game->actTransformCoin($coinId);
+    self::ajaxResponse();
+  }
 }

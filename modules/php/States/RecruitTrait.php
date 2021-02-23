@@ -50,7 +50,11 @@ trait RecruitTrait
     Notifications::recruit($player, $card);
 
 
-    $nextState = $player->canRecruitHero()? 'hero' : 'trade';
+    $nextState = $card->stateAfterRecruit() ?? ($player->canRecruitHero()? 'hero' : 'trade');
+    if($card->getClass() == ROYAL_OFFER){
+      Globals::setTransformValue($card->getValue());
+      $nextState = "transform";
+    }
     $this->gamestate->nextState($nextState);
   }
 
@@ -67,6 +71,19 @@ trait RecruitTrait
     $heroes = Cards::getRecruitableHeroes($player);
     return [
       'cards' => array_map(function($hero){ return $hero->getId(); }, $heroes),
+      'test' => $player->getDiscardableStacks(),
+    ];
+  }
+
+
+  public function argDiscardCard()
+  {
+    $player = Players::getActive();
+    $recruit = $player->getLastAction("recruit");
+    $card = Cards::get($recruit['card']['id']);
+    return [
+      'n' => $card->getDiscardRequirement(),
+      'cards' => array_map(function($card){ return $card->getId(); }, $player->getDiscardableCards()),
     ];
   }
 }

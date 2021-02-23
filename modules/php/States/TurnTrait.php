@@ -23,7 +23,9 @@ trait TurnTrait
     foreach(Players::getAll() as $player){
       $player->clearBids();
     }
-//    Notifications::clearTurn();
+
+    Cards::clearTaverns(); // Useful in 2p mode only
+    Notifications::clearTurn();
 
     // TODO
     $this->gamestate->nextState('nextTurn');

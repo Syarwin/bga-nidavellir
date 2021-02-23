@@ -14,8 +14,10 @@ class Cards extends Helpers\Pieces
 	protected static $prefix = "card_";
   protected static $customFields = ['class', 'grade'];
   protected static function cast($card){
-    if(in_array($card['class'], [BLACKSMITH, HUNTER, WARRIOR, MINER, EXPLORER, ROYAL_OFFER]) )
+    if(in_array($card['class'], [BLACKSMITH, HUNTER, WARRIOR, MINER, EXPLORER]) )
       return new \NID\Cards\DwarfCard($card);
+    else if($card['class'] == ROYAL_OFFER)
+      return new \NID\Cards\RoyalOfferingCard($card);
     else if($card['class'] == HERO)
       return self::getHero($card['id'], $card);
   }
@@ -37,7 +39,7 @@ class Cards extends Helpers\Pieces
     WARRIOR     => [3,4,5,6,6,7,8,9],
     MINER			  => [0,0,1,1,2,2],
     EXPLORER    => [5,6,7,8,9,10,11],
-    ROYAL_OFFER => 1,
+    ROYAL_OFFER => [3],
 	];
 	private static $deck5Players = [
 		BLACKSMITH  => 10,
@@ -45,7 +47,7 @@ class Cards extends Helpers\Pieces
 		WARRIOR     => [3,4,5,6,6,7,8,9,10],
 		MINER			  => [0,0,0,1,1,1,2,2],
 		EXPLORER    => [5,6,7,8,9,10,11,12],
-		ROYAL_OFFER => 2,
+		ROYAL_OFFER => [3,3],
 	];
 
 
@@ -57,7 +59,7 @@ class Cards extends Helpers\Pieces
 		foreach($deck as $class => $copies){
 			$info = [
 				'class' => $class,
-				'grade' => json_encode($class == ROYAL_OFFER? [] : [null]),
+				'grade' => json_encode([null]),
 			];
 
 			if(is_array($copies)){
@@ -82,7 +84,8 @@ class Cards extends Helpers\Pieces
   {
 		$deck = count($players) == 5? self::$deck5Players : self::$deck;
 		self::createDeck($deck, 1);
-		$deck[ROYAL_OFFER]++; // One more royal offer at age 2
+
+		$deck[ROYAL_OFFER] = count($players) == 5? [5,5,5] : [5,5]; // One more royal offer at age 2
     self::createDeck($deck, 2);
 
     self::createHeroes($options);
@@ -151,11 +154,11 @@ class Cards extends Helpers\Pieces
     $nPlayers = Players::count();
     $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
 
-    return [
-      'tavern_1' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
-      'tavern_2' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1])->ui(),
-      'tavern_3' => self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2])->ui(),
-    ];
+    return array_merge(
+      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
+      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1])->ui(),
+      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2])->ui()
+    );
   }
 
 
@@ -174,13 +177,16 @@ class Cards extends Helpers\Pieces
    */
   public static function recruit($card, $pId)
   {
-    self::move($card->getId(), ["command-zone", $pId, $card->getRecruitementZone()] );
+    if($card->getClass() == ROYAL_OFFER)
+      self::move($card->getId(), "discard");
+    else
+      self::insertOnTop($card->getId(), ["command-zone", $pId, $card->getRecruitementZone()] );
   }
 
 
   public static function getOfPlayer($pId)
   {
-    return self::getInLocation(['command-zone', $pId, '%']);
+    return self::getInLocation(['command-zone', $pId, '%'], null, ['card_state', 'ASC']);
   }
 
 
@@ -188,5 +194,23 @@ class Cards extends Helpers\Pieces
   {
     $heroes = self::getInLocation('hall');
     return $heroes->filter(function($hero) use ($player){ return $hero->canBeRecruited($player); });
+  }
+
+
+  public static function clearTaverns()
+  {
+    self::moveAllInLocation(['tavern', '0'], 'discard');
+    self::moveAllInLocation(['tavern', '1'], 'discard');
+    self::moveAllInLocation(['tavern', '2'], 'discard');
+  }
+
+
+  public static function getTopOfStacks($pId, $stacks)
+  {
+    $cards = [];
+    foreach($stacks as $stack){
+      $cards[] = self::getTopOf(['command-zone', $pId, $stack]);
+    }
+    return $cards;
   }
 }

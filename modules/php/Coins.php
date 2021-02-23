@@ -17,6 +17,7 @@ class Coins extends Helpers\Pieces
       'id'       => (int) $coin['id'],
       'location' => $data[0],
       'location_arg' => count($data) > 1? $data[1] : null,
+      'location_raw' => $coin['location'],
       'pId'      => $coin['pId'],
       'value'    => (int) $coin['value'],
       'type'     => (int) $coin['type'], // PLAYER, TREASURE, DISTINCTION
@@ -114,7 +115,7 @@ class Coins extends Helpers\Pieces
   }
 
 
-  public static function trade($coin, $target)
+  public static function trade($coin, $target, $keepLocation = false)
   {
     // Get the new coin
     $newCoin = self::getSelectQuery()->where('coin_location', 'treasure')->where('value', '>=', $target)->orderBy('value', 'INC')->limit(1)->getSingle();
@@ -125,7 +126,7 @@ class Coins extends Helpers\Pieces
     // Put this coin in player's hand
     self::DB()->update([
       'pId' => $coin['pId'],
-      'coin_location' => 'hand',
+      'coin_location' => $keepLocation? $coin['location_raw'] : 'hand',
     ], $newCoin['id']);
 
     // Do whatever is needed to the old coin
@@ -134,6 +135,6 @@ class Coins extends Helpers\Pieces
       'coin_location' => $coin['type'] == COIN_PLAYER? "discard" : "treasure",
     ], $coin['id']);
 
-    return $newCoin;
+    return self::get($newCoin['id']);
   }
 }

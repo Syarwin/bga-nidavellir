@@ -12,14 +12,22 @@ abstract class AbstractCard
   protected $state = 0;
   protected $class = 0;
   protected $grade = [];
+  protected $pId = null;
+  protected $zone = null;
 
   public function __construct($row) {
     if($row != null) {
+      $data = explode('_', $row['location']);
       $this->id = (int) $row['id'];
       $this->location = $row['location'];
       $this->state = $row['state'];
       $this->class = $row['class'];
       $this->grade = json_decode($row['grade']);
+
+      if($data[0] == "command-zone"){
+        $this->pId = $data[1];
+        $this->zone = $data[2];
+      }
     }
   }
 
@@ -34,6 +42,7 @@ abstract class AbstractCard
       array_reduce($this->grade, function($carry, $rank){ return $carry + $rank; }, 0)
       : 0;
   }
+  public function getZone(){ return $this->zone; }
 
   public function getUiData() {
     return [
@@ -51,5 +60,9 @@ abstract class AbstractCard
 
   public function updateRanks(&$ranks){
     $ranks[$this->class] += $this->getRanks();
+  }
+
+  public function stateAfterRecruit(){
+    return null;
   }
 }

@@ -349,6 +349,7 @@ class Pieces extends DB_Manager {
     $pieces = self::getTopOf($fromLocation, $nbr, false);
     $ids = $pieces->getIds();
     self::getUpdateQuery($ids, $toLocation, $state)->run();
+    $pieces = self::get($ids);
 
     // No more pieces in deck & reshuffle is active => form another deck
     if (array_key_exists($fromLocation, static::$autoreshuffleCustom) && count($pieces) < $nbr && static::$autoreshuffle && $deckReform){

@@ -79,6 +79,8 @@ class Nidavellir extends Table
 			'players' => Players::getUiData($pId),
       'cards' => Cards::getUiData(),
       'royalTreasure' => NID\Coins::getInLocation('treasure'),
+      'age' => Globals::getAge(),
+      'turn' => Globals::getTurn(),
 		];
 	}
 

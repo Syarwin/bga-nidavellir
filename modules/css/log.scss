@@ -1,12 +1,13 @@
 #logs {
   .card-class-name {
     font-weight: bold;
-    
+
     &.class-1 { color: #554696; }
     &.class-2 { color: #158353; }
     &.class-3 { color: #3e9bd6; }
     &.class-4 { color: #ef7926; }
     &.class-5 { color: #923425; }
+    &.class-6_3, &.class-6_5 { color: #e6a637; }
   }
 
 
@@ -15,12 +16,12 @@
     width:30px;
     height:30px;
     background-image: url('img/classes.png');
-    background-size: 100% 500%;
+    background-size: 100% 600%;
     vertical-align: middle;
     margin: -4px 3px 4px;
 
-    @for $i from 1 through 5 {
-      &.class-#{$i} { background-position-y: ($i - 1) * 100% / 4; }
+    @for $i from 1 through 6 {
+      &.class-#{$i} { background-position-y: ($i - 1) * 100% / 5; }
     }
   }
 

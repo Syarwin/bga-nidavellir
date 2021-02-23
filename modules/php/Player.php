@@ -2,6 +2,7 @@
 namespace NID;
 use NID\Coins;
 use NID\Game\Globals;
+use NID\Game\Log;
 
 /*
  * Player: all utility functions concerning a player
@@ -38,6 +39,7 @@ class Player
   public function getColor(){ return $this->color; }
   public function isEliminated(){ return $this->eliminated; }
   public function isZombie(){ return $this->zombie; }
+  public function getLastAction($action){ return Log::getLastActionArg($action, $this->id); }
 
   public function getGem(){ return $this->gem; }
 
@@ -147,16 +149,40 @@ class Player
     return $ranks;
   }
 
-
   public function countLines()
   {
     $ranks = $this->getRanks();
+
     return min($ranks);
   }
 
   public function canRecruitHero()
   {
     return $this->countLines() > $this->countHeroes();
+  }
+
+
+  // Useful for Dagda and Bonfur
+  public function getDiscardableStacks()
+  {
+    $stacksTops = [HERO, 0, 0, 0, 0, 0];
+    foreach($this->getCards() as $card){
+      $stacksTops[$card->getZone()] = $card->getClass();
+    }
+
+    $stacks = [];
+    foreach($stacksTops as $stack => $type){
+      if($type != HERO)
+        $stacks[] = $stack;
+    }
+
+    return $stacks;
+  }
+
+  public function getDiscardableCards()
+  {
+    $stacks = $this->getDiscardableStacks();
+    return Cards::getTopOfStacks($this->id, $stacks);
   }
 
 /*************************
@@ -176,6 +202,7 @@ class Player
 
   public function recruit($card)
   {
+    Log::insert($this, 'recruit', ['card' => $card->getUiData()]);
     Cards::recruit($card, $this->id);
   }
 }

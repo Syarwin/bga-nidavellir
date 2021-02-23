@@ -22,6 +22,9 @@ define('ST_RECRUIT_HERO', 22);
 
 define('ST_TRADE_COIN', 23);
 
+define('ST_TRANSFORM_COIN', 24);
+define('ST_DISCARD_CARD', 25);
+
 define('ST_END_OF_AGE', 30);
 
 define('ST_GAME_END', 99);

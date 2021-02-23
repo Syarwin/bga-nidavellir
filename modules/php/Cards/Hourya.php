@@ -13,5 +13,7 @@ class Hourya extends HeroCard
     ];
   }
 
-  // TODO : check recruit
+  public function canBeRecruited($player){
+    return $player->getRanks()[EXPLORER] >= 5;
+  }
 }

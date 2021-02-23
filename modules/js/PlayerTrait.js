@@ -17,6 +17,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       var nPlayers = players.length;
       var currentPlayerNo = players.reduce((carry, player) => (player.id == this.player_id) ? player.no : carry, 0);
 
+      dojo.attr('overall-content', 'data-nplayers', nPlayers);
       players.forEach(player => {
         player.no = (player.no + nPlayers - currentPlayerNo) % nPlayers;
 

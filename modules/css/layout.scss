@@ -90,12 +90,32 @@
         z-index: 2;
 
         .card {
-          margin-bottom:-$scale*1.2*$hCard; // TODO
+          @for $i from 0 through 3 {
+            &[data-ranks="#{$i}"] {
+              margin-bottom:-$hCard + $i*0.16*$hCard;
+            }
+          }
+
           &:last-of-type {
             margin-bottom: 60px;
+          }
+
+          &.selectable {
+            animation: pulse 1.5s infinite;
+            @keyframes pulse {
+              0% {
+                box-shadow: 0 0 0 2px #ffc400;
+              }
+              50% {
+                box-shadow: 0 0 0 10px transparent;
+              }
+            }
           }
         }
       }
     }
   }
 }
+
+#overall-content[data-nplayers="2"] .tavern-cards-holder { min-width:3*($wCard + $scale*30px); }
+#overall-content[data-nplayers="3"] .tavern-cards-holder { min-width:3*($wCard + $scale*30px); }

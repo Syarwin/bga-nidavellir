@@ -24,5 +24,42 @@ trait TradeCoinTrait
 
     $this->gamestate->nextState('next');
   }
+
+
+
+  public function argTransformCoin()
+  {
+    $player = Players::getActive();
+
+    $coins = $player->getCoins();
+    $upgradableCoins = [];
+    foreach($coins as $coin){
+      if($coin['value'] != 0 && ($coin['value'] != 3 || $coin['type'] != COIN_DISTINCTION))
+        $upgradableCoins[] = $coin['id'];
+    }
+
+    return [
+      'value' => Globals::getTransformValue(),
+      'coins' => $upgradableCoins,
+    ];
+  }
+
+  public function actTransformCoin($coinId)
+  {
+    $this->checkAction("transform");
+
+    // Check if coins belongs to player
+    $coin = Coins::get($coinId);
+    $player = Players::getCurrent();
+    if($coin['pId'] != $player->getId())
+      throw new \BgaUserException(_("This coin is not yours!"));
+
+    $newCoin = Coins::trade($coin, $coin['value'] + Globals::getTransformValue(), true);
+    Notifications::transformCoin($player, $coin, $newCoin);
+
+
+    $nextState = $player->canRecruitHero()? 'hero' : 'trade';
+    $this->gamestate->nextState($nextState);
+  }
 }
 ?>

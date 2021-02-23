@@ -134,8 +134,24 @@ $machinestates = [
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
+      'transform' => ST_TRANSFORM_COIN,
     ]
   ],
+
+  ST_TRANSFORM_COIN => [
+    "name" => "transformCoin",
+    'description' => clienttranslate('${actplayer} must choose a coin to transform (+${value})'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a coin to transform (+${value})'),
+    'type' => 'activeplayer',
+    'args' => 'argTransformCoin',
+    'possibleactions' => ['transform'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'trade' => ST_TRADE_COIN,
+      //'distinction' => ST_NEXT_DISTINCTION,
+    ]
+  ],
+
 
 
   ST_RECRUIT_HERO => [
@@ -149,9 +165,25 @@ $machinestates = [
       'next' => ST_NEXT_PLAYER,
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
+      'discard' => ST_DISCARD_CARD,
     ]
   ],
 
+
+  ST_DISCARD_CARD => [
+    "name" => "discardCard",
+    'description' => clienttranslate('${actplayer} must discard ${n} cards'),
+    'descriptionmyturn' => clienttranslate('${you} must discard ${n} cards'),
+    'descriptionsingle' => clienttranslate('${actplayer} must discard a card'),
+    'descriptionmyturnsingle' => clienttranslate('${you} must discard a card'),
+    'type' => 'activeplayer',
+    'args' => 'argDiscardCard',
+    'possibleactions' => ['discard'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'trade' => ST_TRADE_COIN,
+    ]
+  ],
 
   ST_TRADE_COIN => [
     "name" => "tradeCoin",

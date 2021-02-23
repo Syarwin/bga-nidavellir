@@ -110,6 +110,24 @@ class Notifications
     ]);
   }
 
+  public static function transformCoin($player, $coinMax, $newCoin){
+    self::notifyAll('tradeCoin', clienttranslate('${player_name} transforms ${coin_max}${coin_max_type} into ${coin_new}${coin_new_type}'), [
+      'player' => $player,
+      'coin_max' => $coinMax['value'],
+      'coin_max_type' => $coinMax['type'],
+      'coin_new' => $newCoin['value'],
+      'coin_new_type' => $newCoin['type'],
+
+      'max' => $coinMax,
+      'new' => $newCoin,
+    ]);
+  }
+
+
+  public static function clearTurn(){
+    self::notifyAll('clearTurn', '', []);
+  }
+
 
   /*
    * Automatically adds some standard field about player and/or card
@@ -130,10 +148,12 @@ class Notifications
         EXPLORER => clienttranslate('an explorer'),
         MINER => clienttranslate('a miner'),
         WARRIOR => clienttranslate('a warrior'),
+        ROYAL_OFFER => clienttranslate('a royal offering'),
+        HERO => clienttranslate('a hero'),
       ];
 
       $args['card_class'] = $names[$c->getClass()];
-      $args['card_class_symbol'] = $c->getClass();// The substitution will be done in JS format_string_recursive function
+      $args['card_class_symbol'] = $c->getRecruitementZone();// The substitution will be done in JS format_string_recursive function
       $args['card'] = $c->getUiData();
     }
   }

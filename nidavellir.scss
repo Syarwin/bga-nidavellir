@@ -50,3 +50,12 @@ html {
 @import "modules/css/coin";
 @import "modules/css/playerPanel";
 @import "modules/css/log";
+@import "modules/css/settings";
+
+
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}

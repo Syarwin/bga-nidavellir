@@ -76,15 +76,21 @@ class Log extends \NID\Helpers\DB_Manager
     return self::getFilteredQuery($pId)->where('action', $action)->limit($limit)->get($limit == 1);
   }
 
+  public static function getLastActionArg($action, $pId, $limit = 1)
+  {
+    return self::getLastAction($action, $pId, $limit)['arg'];
+  }
+
+
 
   public static function getTurnOrder()
   {
-    return self::getLastAction('turnOrder', -1)['arg']['order'];
+    return self::getLastActionArg('turnOrder', -1)['order'];
   }
 
   public static function getTies()
   {
-    return self::getLastAction('turnOrder', -1)['arg']['ties'];
+    return self::getLastActionArg('turnOrder', -1)['ties'];
   }
 
 }

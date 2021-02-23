@@ -115,6 +115,8 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
+      overflow:hidden;
+      position:relative;
 
       &#tavern-3 {
         border-bottom:none;
@@ -131,6 +133,12 @@
         49% {border: 2px dashed yellow;}
         50% {border: 2px dashed white;}
         100% {border: 2px dashed white;}
+      }
+
+
+      .card {
+        transition:left 1s;
+        left:0px;
       }
     }
   }

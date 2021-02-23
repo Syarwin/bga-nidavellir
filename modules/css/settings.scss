@@ -1,0 +1,95 @@
+#player_config {
+  margin:10px 0px;
+
+  #player_config_row {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  #player_info_row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom:10px;
+
+    #age-counter-holder {
+      font-weight: bold;
+      #age-counter {
+        display:inline-block;
+        width:30px;
+        height:30px;
+        background-image:url('img/ages.png');
+        background-size:cover;
+        vertical-align: middle;
+
+        &[data-value="2"] { background-position-x:100%; }
+      }
+    }
+
+    #turn-counter-holder {
+      font-weight: bold;
+    }
+  }
+
+
+  #show-scoresheet, #show-settings {
+    height:40px;
+    width:50px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      color:grey;
+    }
+
+    cursor:pointer;
+    &:hover {
+      color:grey;
+    }
+
+    svg {
+      width:auto;
+      height:40px;
+    }
+  }
+
+  #show-settings{
+    .fa-primary {
+      transform-origin: 216px 255px;
+      transition: transform 1s;
+    }
+
+    &:hover .fa-primary {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+/*
+ * Controls in the top bar
+ */
+#layout-controls-container {
+  position:relative;
+  text-align: center;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin-top: 10px;
+
+  &.layoutControlsHidden {
+    display:none;
+  }
+}
+
+
+#overall-content[data-nplayers="2"], #overall-content[data-nplayers="3"] {
+  #turn-counter::after {
+    content:'/4';
+  }
+}
+
+#overall-content[data-nplayers="4"], #overall-content[data-nplayers="5"] {
+  #turn-counter::after {
+    content:'/3';
+  }
+}

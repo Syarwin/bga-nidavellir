@@ -6,7 +6,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['playerBid', 500],
         ['revealBids', 1000],
         ['recruitStart', 500],
-        ['tradeGems', 1500]
+        ['tradeGems', 1500],
+        ['clearTurn', 1000],
       );
 
       this._selectedCoin = null;
@@ -16,7 +17,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_newTurn(n){
       debug("Starting a new turn", n);
-      n.args.cards.forEach(card => this.addCard(card) );
+      n.args.cards.forEach(card => this.addCard(card, card.location, true) );
     },
 
 
@@ -133,6 +134,19 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this.slide('gem-' + trade[1], 'gem-container-' + trade[2]);
         this.slide('gem-' + trade[3], 'gem-container-' + trade[0]);
       })
+    },
+
+
+    notif_clearTurn(n){
+      debug("Clearing turn", n);
+      dojo.query('.tavern-cards-holder .card').forEach(this.slideToRightAndDestroy);
+      this.forEachPlayer(player => {
+        dojo.query('#overall_player_board_' + player.id + ' .coin').forEach(coin => {
+          this.slide(coin, "coins-zone-" + player.id, {
+            duration:600,
+          });
+        });
+      });
     },
   });
 });

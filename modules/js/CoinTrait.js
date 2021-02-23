@@ -62,7 +62,6 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       if($('coin-' + coin.id)){
         this.slide('coin-' + coin.id, container, { duration: 1000 })
-        .then( () => this.attachToNewParent('coin-' + coin.id, container) );
       } else {
         this.place('jstpl_coin', coin, container);
         dojo.connect($('coin-' + coin.id), "click", (evt) => this.onClickCoin(coin, evt) );
@@ -117,19 +116,36 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       debug("Notif: trading coins", n);
 
       // Slide new coin
-      this.slide('coin-' + n.args.new.id, 'coins-zone-' + n.args.player_id, {
+      let location = n.args.new.location == 'hand'? 'coins-zone-' + n.args.player_id
+        : (n.args.player_id == this.player_id?
+            this.getCoinContainer(n.args.new)
+            : ('bids-zone-'+ n.args.new.location_arg + '-' + n.args.player_id)
+        );
+
+
+      this.slide('coin-' + n.args.new.id, location, {
         duration:1500,
       });
 
       // Slide old coin depending on his type
       if(n.args.max.type == 1){ // TREASURE
-        this.slide('coin-' + n.args.max.id, 'treasure-slot-' + n.args.max.value);
+        this.slide('coin-' + n.args.max.id, 'treasure-slot-' + n.args.max.value, { duration:1500 });
       } else {
         // Slide to tower and destroy
         this.slide('coin-' + n.args.max.id, 'treasure', {
           destroy: true,
+          duration:1500,
         });
       }
+    },
+
+
+    onEnteringStateTransformCoin(args){
+      this.makeCoinsSelectable(args.coins, this.onClickCoinTransform.bind(this));
+    },
+
+    onClickCoinTransform(coin){
+      this.takeAction('transformCoin', { coinId : coin.id });
     },
   });
 });

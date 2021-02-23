@@ -22,11 +22,15 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
 
-    addCard(card, container){
+    addCard(card, container, animation = false){
       card.parity = card.id % 2;
+      card.ranks = card.grade.length;
       this.place('jstpl_card', card, container);
       card.grade.forEach(rank => this.addRank(rank, card) );
       dojo.connect($("card-" + card.id), "click", () => this.onClickCard(card) );
+
+      if(animation)
+        this.slideFromLeft('card-' + card.id);
     },
 
     addRank(rank, card){
@@ -47,5 +51,29 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       dojo.query(".card").removeClass("selectable");
       cards.forEach(cardId => dojo.addClass('card-' + cardId, "selectable") );
     },
+
+
+
+    slideFromLeft(elem){
+      elem = typeof elem == 'string'? $(elem) : elem;
+      let x = (elem.offsetWidth + elem.offsetLeft + 30);
+      dojo.addClass(elem, 'notransition')
+      dojo.style(elem, "opacity", "0");
+      dojo.style(elem, "left", -x + "px");
+      elem.offsetHeight;
+      dojo.removeClass(elem, 'notransition');
+
+      dojo.style(elem, "opacity", "1");
+      dojo.style(elem, "left", "0px")
+    },
+
+    slideToRightAndDestroy(elem){
+      elem = typeof elem == 'string'? $(elem) : elem;
+      let stack = elem.parentNode;
+      let x = (stack.offsetWidth - elem.offsetLeft + 100);
+      dojo.style(elem, "left", x + "px");
+      setTimeout(() => dojo.destroy(elem), 1000);
+    },
+
   });
 });

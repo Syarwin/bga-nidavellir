@@ -34,6 +34,7 @@ class Globals extends \APP_DbObject
     'currentTurn' => 0,
     'currentTavern' => 0,
     'currentPlayerIndex' => -1,
+    'transformValue' => 0,
   ];
 
   public static function declare($game){
@@ -83,6 +84,11 @@ class Globals extends \APP_DbObject
     return (int) self::get('currentPlayerIndex');
   }
 
+  public function getTransformValue()
+  {
+    return (int) self::get('transformValue');
+  }
+
   /*
    * Setters
    */
@@ -118,6 +124,11 @@ class Globals extends \APP_DbObject
   public function resetCurrentPlayerIndex()
   {
     self::setCurrentPlayerIndex(-1);
+  }
+
+  public function setTransformValue($val)
+  {
+    self::set('transformValue', $val);
   }
 
 }

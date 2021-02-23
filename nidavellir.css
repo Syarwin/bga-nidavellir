@@ -38,13 +38,15 @@ html {
   height: 144.9px;
   margin: 0px 10.5px;
   position: relative;
+  border-radius: 5%;
   /***************
   ***** HERO *****
   ***************/ }
   .card.selectable {
     cursor: pointer; }
     .card.selectable:hover {
-      transform: scale(1.1); }
+      transform: scale(1.1);
+      z-index: 100; }
   .card::before {
     content: '';
     position: absolute;
@@ -123,19 +125,19 @@ html {
   .card[data-class="2"] .card-rank {
     background-position-y: 25%; }
   .card[data-class="2"] .card-class-icon {
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   .card[data-class="3"] .card-rank {
     background-position-y: 50%; }
   .card[data-class="3"] .card-class-icon {
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   .card[data-class="4"] .card-rank {
     background-position-y: 75%; }
   .card[data-class="4"] .card-class-icon {
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   .card[data-class="5"] .card-rank {
     background-position-y: 100%; }
   .card[data-class="5"] .card-class-icon {
-    background-position-y: 100%; }
+    background-position-y: 80%; }
   .card[data-class="6"]::before {
     background-position-x: 90.9090909091%; }
   .card[data-class="6"] .card-grade {
@@ -367,7 +369,9 @@ html {
             border: 1px solid black;
             display: flex;
             justify-content: space-around;
-            align-items: center; }
+            align-items: center;
+            overflow: hidden;
+            position: relative; }
             #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-holder#tavern-3 {
               border-bottom: none; }
             #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-holder.selectable {
@@ -383,6 +387,9 @@ html {
     border: 2px dashed white; }
   100% {
     border: 2px dashed white; } }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-holder .card {
+              transition: left 1s;
+              left: 0px; }
       #nidavellir-board #exterior-wrapper #exterior #hall-container {
         width: 500px;
         height: 650px;
@@ -452,10 +459,28 @@ html {
         width: 98px;
         margin: 28px 10.5px 0px;
         z-index: 2; }
-        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card {
+        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card[data-ranks="0"] {
+          margin-bottom: -144.9px; }
+        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card[data-ranks="1"] {
           margin-bottom: -121.716px; }
-          #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card:last-of-type {
-            margin-bottom: 60px; }
+        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card[data-ranks="2"] {
+          margin-bottom: -98.532px; }
+        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card[data-ranks="3"] {
+          margin-bottom: -75.348px; }
+        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card:last-of-type {
+          margin-bottom: 60px; }
+        #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card.selectable {
+          animation: pulse 1.5s infinite; }
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 2px #ffc400; }
+  50% {
+    box-shadow: 0 0 0 10px transparent; } }
+#overall-content[data-nplayers="2"] .tavern-cards-holder {
+  min-width: 357px; }
+
+#overall-content[data-nplayers="3"] .tavern-cards-holder {
+  min-width: 357px; }
 
 .coin {
   overflow: visible;
@@ -527,7 +552,9 @@ html {
     border: 2px solid green; }
 
 .panel-container .coins-zone {
-  display: flex; }
+  display: flex;
+  justify-content: center;
+  margin: 5px 0px 10px; }
   .panel-container .coins-zone .coin {
     margin: 0 3px; }
 .panel-container .bids-zone {
@@ -535,7 +562,7 @@ html {
   margin: 5px 0;
   justify-content: space-around;
   align-items: center; }
-  .panel-container .bids-zone .bids-zone-tavern {
+  .panel-container .bids-zone .bids-zone-tavern-holder {
     width: 78px;
     height: 50px;
     background-image: url("img/tavern/sign_0.png");
@@ -546,10 +573,13 @@ html {
     align-items: center;
     background-repeat: no-repeat;
     padding-right: 5px; }
-    .panel-container .bids-zone .bids-zone-tavern.tavern-1 {
+    .panel-container .bids-zone .bids-zone-tavern-holder.tavern-1 {
       background-image: url("img/tavern/sign_1.png"); }
-    .panel-container .bids-zone .bids-zone-tavern.tavern-2 {
+    .panel-container .bids-zone .bids-zone-tavern-holder.tavern-2 {
       background-image: url("img/tavern/sign_2.png"); }
+    .panel-container .bids-zone .bids-zone-tavern-holder .bids-zone-tavern {
+      width: 40px;
+      height: 40px; }
 .panel-container .command-zone {
   display: flex;
   flex-flow: row; }
@@ -613,23 +643,27 @@ html {
     color: #ef7926; }
   #logs .card-class-name.class-5 {
     color: #923425; }
+  #logs .card-class-name.class-6_3, #logs .card-class-name.class-6_5 {
+    color: #e6a637; }
 #logs .card-class-symbol {
   display: inline-block;
   width: 30px;
   height: 30px;
   background-image: url("img/classes.png");
-  background-size: 100% 500%;
+  background-size: 100% 600%;
   vertical-align: middle;
   margin: -4px 3px 4px; }
   #logs .card-class-symbol.class-1 {
     background-position-y: 0%; }
   #logs .card-class-symbol.class-2 {
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   #logs .card-class-symbol.class-3 {
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   #logs .card-class-symbol.class-4 {
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   #logs .card-class-symbol.class-5 {
+    background-position-y: 80%; }
+  #logs .card-class-symbol.class-6 {
     background-position-y: 100%; }
 #logs .coin {
   display: inline-block;
@@ -643,5 +677,72 @@ html {
     #logs .coin .coin-holder .coin-inner .coin-value {
       font-size: 20px;
       line-height: 30px; }
+
+#player_config {
+  margin: 10px 0px; }
+  #player_config #player_config_row {
+    display: flex;
+    justify-content: space-around; }
+  #player_config #player_info_row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px; }
+    #player_config #player_info_row #age-counter-holder {
+      font-weight: bold; }
+      #player_config #player_info_row #age-counter-holder #age-counter {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background-image: url("img/ages.png");
+        background-size: cover;
+        vertical-align: middle; }
+        #player_config #player_info_row #age-counter-holder #age-counter[data-value="2"] {
+          background-position-x: 100%; }
+    #player_config #player_info_row #turn-counter-holder {
+      font-weight: bold; }
+  #player_config #show-scoresheet, #player_config #show-settings {
+    height: 40px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; }
+    #player_config #show-scoresheet:hover, #player_config #show-settings:hover {
+      color: grey; }
+    #player_config #show-scoresheet:hover, #player_config #show-settings:hover {
+      color: grey; }
+    #player_config #show-scoresheet svg, #player_config #show-settings svg {
+      width: auto;
+      height: 40px; }
+  #player_config #show-settings .fa-primary {
+    transform-origin: 216px 255px;
+    transition: transform 1s; }
+  #player_config #show-settings:hover .fa-primary {
+    transform: rotate(180deg); }
+
+/*
+ * Controls in the top bar
+ */
+#layout-controls-container {
+  position: relative;
+  text-align: center;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin-top: 10px; }
+  #layout-controls-container.layoutControlsHidden {
+    display: none; }
+
+#overall-content[data-nplayers="2"] #turn-counter::after, #overall-content[data-nplayers="3"] #turn-counter::after {
+  content: '/4'; }
+
+#overall-content[data-nplayers="4"] #turn-counter::after, #overall-content[data-nplayers="5"] #turn-counter::after {
+  content: '/3'; }
+
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important; }
 
 /*# sourceMappingURL=nidavellir.css.map */

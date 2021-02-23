@@ -55,6 +55,8 @@ define([
         this.setupTaverns();
         this.setupHall();
         this.setupRoyalTreasure();
+        this.setupInfoPanel();
+        this.udpateInfoCounters();
 
         this.inherited(arguments);
       },
@@ -65,11 +67,106 @@ define([
         dojo.query(".tavern-coin-holder").removeClass("selectable");
         dojo.query(".tavern-cards-holder").removeClass("selectable");
         dojo.query(".card").removeClass("selectable");
+        this._tavernBids = [null, null, null];
 
 
         this.inherited(arguments);
       },
 
+
+
+      setupInfoPanel(){
+        this.place('jstpl_configPlayerBoard', {
+          'age' : _('Age'),
+          'turn' : _('Turn'),
+        }, 'player_boards', 'first');
+        dojo.connect($('show-settings'), 'onclick', () => this.toggleControls() );
+        dojo.connect($('show-scoresheet'), 'onclick', () => this.showScoreSheet() );
+        this.turnCounter = new ebg.counter();
+        this.turnCounter.create('turn-counter');
+
+        this.addTooltip( 'show-settings', '', _("Display some settings about the game."));
+        this.addTooltip( 'show-scoresheet', '', _("Display the scoring pad."));
+
+        this.setupSettings();
+      },
+
+      udpateInfoCounters(){
+        dojo.attr('age-counter', 'data-value', this.gamedatas.age);
+        this.turnCounter.toValue(this.gamedatas.turn);
+      },
+
+
+      updatePlayerOrdering(){
+        this.inherited(arguments);
+        dojo.place('player_board_config', 'player_boards', 'first');
+      },
+
+
+      //////////////////////////////
+      //////////////////////////////
+      /////////   SETTINGS   ///////
+      //////////////////////////////
+      //////////////////////////////
+
+      showScoreSheet(){
+        debug("Showing scoresheet:");
+        new customgame.modal("showScoreSheet", {
+          autoShow:true,
+          class:"alhambra_popin",
+          closeIcon:'fa-times',
+          openAnimation:true,
+          openAnimationTarget:"show-scoresheet",
+        });
+        dojo.style("popin_showScoreSheet", "transform", "scale(" + this.gameinterface_zoomFactor + ")");
+
+      },
+
+      toggleControls(){
+        dojo.toggleClass('layout-controls-container', 'layoutControlsHidden')
+
+        // Hacking BGA framework
+        if(dojo.hasClass("ebd-body", "mobile_version")){
+          dojo.query(".player-board").forEach(elt => {
+            if(elt.style.height != "auto"){
+              dojo.style(elt, "min-height", elt.style.height);
+              elt.style.height = "auto";
+            }
+          });
+        }
+      },
+
+
+      getConfig(value, v){
+        return localStorage.getItem(value) == null? v : localStorage.getItem(value);
+      },
+
+      setupSettings(){
+        /*
+        dojo.place($('preference_control_102').parentNode.parentNode, 'layout-controls-container');
+
+        /*
+         * Simple slider to show the zoom of scoresheet
+        this._speedSlider = document.getElementById('layout-control-animation-speed');
+        noUiSlider.create(this._speedSlider, {
+          start: [100 - this._animationSpeed],
+          step:10,
+          padding:10,
+          range: {
+            'min': [0],
+            'max': [100]
+          },
+        });
+        this._speedSlider.noUiSlider.on('slide', (arg) => this.setAnimationSpeed(parseInt(arg[0])) );
+        */
+      },
+
+/*
+      setAnimationSpeed(speed){
+        this._animationSpeed = 100 - speed;
+        localStorage.setItem("alhambraAnimationSpeed", 100 - speed);
+      },
+*/
 
 
       /* This enable to inject translatable styled things to logs or action bar */
@@ -85,7 +182,19 @@ define([
                 'name' : _(args.card_class),
                 'class' : args.card_class_symbol,
               });
-              args.card_class_symbol = dojo.string.substitute("<span class='card-class-symbol class-${class}'></span>", {'class' : args.card_class_symbol });
+
+
+              if(args.card_class_symbol[0] == 6){
+                // ROYAL_OFFER
+                args.card_class_symbol = this.format_block('jstpl_coin', {
+                  id:-1,
+                  value : '+' + args.card_class_symbol[2],
+                  type : 1
+                });
+              }
+              else {
+                args.card_class_symbol = dojo.string.substitute("<span class='card-class-symbol class-${class}'></span>", {'class' : args.card_class_symbol });
+              }
             }
 
             // Coin icons

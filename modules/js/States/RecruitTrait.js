@@ -29,10 +29,29 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_recruit(n){
       debug("Notif: new recruit", n);
       let card = n.args.card;
-      this.slide('card-' + card.id, card.location, {
-        clearPos: true
-      })
+
+      if(card.class == 6){
+        // ROYAL OFFER
+        this.slide('card-' + card.id, "overall_player_board_" + n.args.player_id, {
+          destroy:true,
+        });
+      } else {
+        this.slide('card-' + card.id, card.location)
+      }
     },
 
+
+    onEnteringStateDiscardCard(args){
+      if(args.n == 1){
+        this.changePageTitle("single");
+      }
+      if(this.isCurrentPlayerActive()){
+        this.makeCardSelectable(args.cards, this.onClickCardDiscard.bind(this));
+      }
+    },
+
+    onClickCardDiscard(card){
+      debug(card);
+    },
   });
 });
