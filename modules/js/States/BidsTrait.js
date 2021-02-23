@@ -29,7 +29,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(this.isCurrentPlayerActive()){
         this._bidableCoins = args._private;
         this.clearBidSelection();
-        [0,1,2].forEach(tavern => this.connect("bids-drop-zone-" + tavern + "-" + this.player_id, "click", () => this.onClickTavernSign(tavern) ));
+        [0,1,2].forEach(tavern => this.connect("bids-drop-zone-" + tavern, "click", () => this.onClickTavernSign(tavern) ));
         this.toggleConfirmBidsBtn();
       }
       else {
@@ -70,7 +70,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._selectedCoin = coin;
       //this.makeCoinsSelectable([coin.id], this.onClickCoinBid.bind(this));
       dojo.addClass("coin-" + coin.id, 'selected');
-      dojo.query("#overall_player_board_" + this.player_id + " .bids-drop-zone").addClass("selectable");
+      dojo.query(".bids-drop-zone").addClass("selectable");
       this.addSecondaryActionButton("btnCancelBid", _("Cancel"), () => this.clearBidSelection());
       this.changePageTitle('placecoin');
     },

@@ -209,7 +209,9 @@ class Cards extends Helpers\Pieces
   {
     $cards = [];
     foreach($stacks as $stack){
-      $cards[] = self::getTopOf(['command-zone', $pId, $stack]);
+      $card = self::getTopOf(['command-zone', $pId, $stack]);
+      if($card != null)
+        $cards[] = $card;
     }
     return $cards;
   }

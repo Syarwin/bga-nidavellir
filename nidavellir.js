@@ -194,6 +194,17 @@ define([
               }
             }
 
+            if (args.card2_class !== undefined) {
+              args.card2_class = dojo.string.substitute("<span class='card-class-name class-${class}'>${name}</span>", {
+                'name' : _(args.card2_class),
+                'class' : args.card2_class_symbol,
+              });
+
+              args.card2_class_symbol = dojo.string.substitute("<span class='card-class-symbol class-${class}'></span>", {'class' : args.card2_class_symbol });
+            }
+
+
+
             // Coin icons
             var coinKeys = Object.keys(args).filter(key => key.substr(0,4) == 'coin' && key.substr(-4) != "type");
             coinKeys.forEach(key => {

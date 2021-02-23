@@ -40,7 +40,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
         if(coin.location == "bid"){
           let tavern = coin.location_arg;
-          container = "bids-zone-" + tavern + "-" + this.player_id;
+          container = "tavern-coin-holder-" + tavern;
           // Make it work with bids
           this._tavernBids[tavern] = coin;
         }
@@ -100,7 +100,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     slideCoinToTavernSign(coin, tavern){
       let coinDiv = "coin-" + coin.id,
-        tavernTarget = "bids-zone-" + tavern + "-" + this.player_id; //"tavern-coin-holder-" + tavern;
+        tavernTarget = "tavern-coin-holder-" + tavern;
 
       coin.location = tavern;
       this.slide(coinDiv, tavernTarget, {

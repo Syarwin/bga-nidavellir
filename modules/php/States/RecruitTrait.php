@@ -103,5 +103,6 @@ trait RecruitTrait
     Cards::discard($cardIds);
     Notifications::discardCards($player, $cards);
     $nextState = $player->canRecruitHero()? 'hero' : 'trade';
+    $this->gamestate->nextState($nextState);
   }
 }

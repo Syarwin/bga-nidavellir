@@ -342,18 +342,28 @@ html {
                   height: 80.85px;
                   margin-top: -7px;
                   background-image: url("img/tavern/sign_2.png"); }
+                #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .bids-drop-zone {
+                  width: 59.64px;
+                  height: 59.64px;
+                  display: none; }
+                  #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .bids-drop-zone.selectable {
+                    display: block;
+                    border: 2.5px dashed white;
+                    border-radius: 50%;
+                    background-color: rgba(255, 255, 255, 0.2);
+                    cursor: pointer; }
+                    #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .bids-drop-zone.selectable:hover {
+                      border: 2.5px solid red;
+                      background-color: rgba(255, 255, 255, 0.4); }
                 #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder {
-                  width: 67.095px;
-                  height: 67.095px;
+                  position: absolute;
+                  left: -4px;
+                  width: 40px;
+                  height: 40px;
                   border-radius: 50%;
                   display: flex;
                   justify-content: center;
                   align-items: center; }
-                  #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable {
-                    border: 3px dashed white;
-                    cursor: pointer; }
-                    #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-sign-holder .tavern-swing .tavern-sign .tavern-coin-holder.selectable:hover {
-                      border-color: red; }
           #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .hor-beam {
             grid-column: 2 / 5;
             background-image: url("img/tavern/horizontal_beam.jpg");
@@ -637,21 +647,6 @@ html {
       background-image: url("img/tavern/sign_1.png"); }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-2 {
       background-image: url("img/tavern/sign_2.png"); }
-    .panel-container .bids-zone .bids-zone-tavern-holder .bids-drop-zone {
-      display: none; }
-      .panel-container .bids-zone .bids-zone-tavern-holder .bids-drop-zone.selectable {
-        display: block;
-        position: absolute;
-        width: 35px;
-        height: 35px;
-        left: 7px;
-        border: 2.5px dashed white;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.2);
-        cursor: pointer; }
-        .panel-container .bids-zone .bids-zone-tavern-holder .bids-drop-zone.selectable:hover {
-          border: 2.5px solid white;
-          background-color: rgba(255, 255, 255, 0.4); }
     .panel-container .bids-zone .bids-zone-tavern-holder .bids-zone-tavern {
       width: 40px;
       height: 40px; }

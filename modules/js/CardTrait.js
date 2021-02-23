@@ -1,13 +1,9 @@
 define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.cardTrait", null, {
     constructor(){
-      /*
       this._notifications.push(
-        ['newHand', 100],
-        ['giveCard', 1000],
-        ['receiveCard', 1000]
+        ['discardCards', 1000]
       );
-      */
       this._callbackOnCard = null;
       this._selectableCards = [];
     },
@@ -75,5 +71,20 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       setTimeout(() => dojo.destroy(elem), 1000);
     },
 
+
+    notif_discardCards(n){
+      debug("Notif: discarding cards", n);
+      this.slide('card-' + n.args.card.id, 'page-title', {
+        duration:1000,
+        destroy:true,
+      });
+
+      if(n.args.card2){
+        this.slide('card-' + n.args.card2.id, 'page-title', {
+          duration:1000,
+          destroy:true,
+        });
+      }
+    },
   });
 });

@@ -65,22 +65,33 @@
             background-image: url('img/tavern/sign_2.png');
           }
 
+          .bids-drop-zone {
+            width:0.8*$hSign;
+            height:0.8*$hSign;
+            display:none;
+            &.selectable {
+              display:block;
+              border: 2.5px dashed white;
+              border-radius: 50%;
+              background-color:rgba(255,255,255,0.2);
+              cursor: pointer;
+
+              &:hover {
+                border: 2.5px solid red;
+                background-color:rgba(255,255,255,0.4);
+              }
+            }
+          }
+
           .tavern-coin-holder {
-            width:0.9*$hSign;
-            height:0.9*$hSign;
+            position: absolute;
+            left: -4px;
+            width:40px;
+            height:40px;
             border-radius: 50%;
             display:flex;
             justify-content: center;
             align-items: center;
-
-            &.selectable {
-              border:3px dashed white;
-              cursor:pointer;
-
-              &:hover {
-                border-color:red;
-              }
-            }
           }
         }
       }

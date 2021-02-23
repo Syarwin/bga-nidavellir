@@ -124,16 +124,17 @@ class Notifications
   }
 
   public static function discardCards($player, $cards){
-    if(is_array($cards)){
-      self::notifyAll('discard', clienttranslate('${player_name} discards ${card_class}${card_class_symbol} and ${card2_class}${card2_class_symbol}'), [
-        'player' => $player,
-        'card'  => $cards[0],
-        'cards'  => $cards[1],
-      ]);
-    } else {
-      self::notifyAll('discard', clienttranslate('${player_name} discards ${card_class}${card_class_symbol}'), [
+    if($cards instanceof \NID\Cards\AbstractCard){
+      self::notifyAll('discardCards', clienttranslate('${player_name} discards ${card_class}${card_class_symbol}'), [
         'player' => $player,
         'card'  => $cards,
+      ]);
+    } else {
+      $t = $cards->toArray();
+      self::notifyAll('discardCards', clienttranslate('${player_name} discards ${card_class}${card_class_symbol} and ${card2_class}${card2_class_symbol}'), [
+        'player' => $player,
+        'card'  => $t[0],
+        'card2'  => $t[1],
       ]);
     }
   }

@@ -35,26 +35,6 @@
         background-image: url('img/tavern/sign_2.png');
       }
 
-      .bids-drop-zone {
-        display:none;
-        &.selectable {
-          display:block;
-          position: absolute;
-          width: 35px;
-          height: 35px;
-          left: 7px;
-          border: 2.5px dashed white;
-          border-radius: 50%;
-          background-color:rgba(255,255,255,0.2);
-          cursor: pointer;
-
-          &:hover {
-            border: 2.5px solid white;
-            background-color:rgba(255,255,255,0.4);
-          }
-        }
-      }
-
       .bids-zone-tavern {
         width:40px;
         height:40px;

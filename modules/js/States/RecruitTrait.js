@@ -2,8 +2,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.recruitTrait", null, {
     constructor(){
       this._notifications.push(
-        ['recruit', 1000],
-        ['discardCards', 1000],
+        ['recruit', 1000]
       );
       this._activeStates.push("recruitDwarf");
 
@@ -74,21 +73,6 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.takeAction('discardCards', {
         cardIds: this._selectedCardsForDiscard.join(';'),
       });
-    },
-
-    notif_discardCards(n){
-      debug("Notif: discarding cards", n);
-      this.slide('card-' + n.args.card.id, 'page-title', {
-        duration:1000,
-        destroy:true,
-      });
-
-      if(n.args.card2){
-        this.slide('card-' + n.args.card2.id, 'page-title', {
-          duration:1000,
-          destroy:true,
-        });
-      }
     },
   });
 });

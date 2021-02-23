@@ -17,7 +17,10 @@
             <div class="tavern-mount"></div>
             <div class="tavern-swing">
               <div class="tavern-chain"></div>
-              <div class="tavern-sign" id="tavern-sign-0"></div>
+              <div class="tavern-sign" id="tavern-sign-0">
+                <div class="bids-drop-zone" id="bids-drop-zone-0"></div>
+                <div class="tavern-coin-holder" id="tavern-coin-holder-0"></div>
+              </div>
             </div>
           </div>
           <div id="ver-beam-1" class="ver-beam"></div>
@@ -30,7 +33,10 @@
             <div class="tavern-mount"></div>
             <div class="tavern-swing">
               <div class="tavern-chain"></div>
-              <div class="tavern-sign" id="tavern-sign-1"></div>
+              <div class="tavern-sign" id="tavern-sign-1">
+                <div class="bids-drop-zone" id="bids-drop-zone-1"></div>
+                <div class="tavern-coin-holder" id="tavern-coin-holder-1"></div>
+              </div>
             </div>
           </div>
           <div id="ver-beam-3" class="ver-beam"></div>
@@ -43,7 +49,10 @@
             <div class="tavern-mount"></div>
             <div class="tavern-swing">
               <div class="tavern-chain"></div>
-              <div class="tavern-sign" id="tavern-sign-2"></div>
+              <div class="tavern-sign" id="tavern-sign-2">
+                <div class="bids-drop-zone" id="bids-drop-zone-2"></div>
+                <div class="tavern-coin-holder" id="tavern-coin-holder-2"></div>
+              </div>
             </div>
           </div>
           <div id="ver-beam-5" class="ver-beam"></div>
@@ -71,15 +80,12 @@ var jstpl_playerPanel = `
   <div class="bids-zone" id="bids-zone-\${id}">
     <div class="bids-zone-tavern-holder tavern-0">
       <div class="bids-zone-tavern" id="bids-zone-0-\${id}"></div>
-      <div class="bids-drop-zone" id="bids-drop-zone-0-\${id}"></div>
     </div>
     <div class="bids-zone-tavern-holder tavern-1">
       <div class="bids-zone-tavern" id="bids-zone-1-\${id}"></div>
-      <div class="bids-drop-zone" id="bids-drop-zone-1-\${id}"></div>
     </div>
     <div class="bids-zone-tavern-holder tavern-2">
       <div class="bids-zone-tavern" id="bids-zone-2-\${id}"></div>
-      <div class="bids-drop-zone" id="bids-drop-zone-2-\${id}"></div>
     </div>
   </div>
   <div class="command-zone" id="command-zone-\${id}">
