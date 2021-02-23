@@ -74,4 +74,14 @@ class action_nidavellir extends APP_GameAction
     $this->game->actTransformCoin($coinId);
     self::ajaxResponse();
   }
+
+
+  public function discardCards()
+  {
+    self::setAjaxMode();
+    $raw = self::getArg("cardIds", AT_numberlist, true);
+    $cardIds = explode(';', $raw);
+    $this->game->actDiscardCards($cardIds);
+    self::ajaxResponse();
+  }
 }

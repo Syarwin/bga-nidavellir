@@ -86,4 +86,22 @@ trait RecruitTrait
       'cards' => array_map(function($card){ return $card->getId(); }, $player->getDiscardableCards()),
     ];
   }
+
+
+  public function actDiscardCards($cardIds)
+  {
+    $this->checkAction("discard");
+
+    $discardableCards = $this->argDiscardCard()['cards'];
+    foreach($cardIds as $cId){
+      if(!in_array($cId, $discardableCards))
+        throw new \BgaUserException(_("You cannot discard this card"));
+    }
+
+    $player = Players::getActive();
+    $cards = Cards::get($cardIds);
+    Cards::discard($cardIds);
+    Notifications::discardCards($player, $cards);
+    $nextState = $player->canRecruitHero()? 'hero' : 'trade';
+  }
 }

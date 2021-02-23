@@ -213,4 +213,9 @@ class Cards extends Helpers\Pieces
     }
     return $cards;
   }
+
+  public static function discard($cardIds)
+  {
+    self::move($cardIds, "discard");
+  }
 }

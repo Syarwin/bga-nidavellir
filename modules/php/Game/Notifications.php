@@ -123,6 +123,22 @@ class Notifications
     ]);
   }
 
+  public static function discardCards($player, $cards){
+    if(is_array($cards)){
+      self::notifyAll('discard', clienttranslate('${player_name} discards ${card_class}${card_class_symbol} and ${card2_class}${card2_class_symbol}'), [
+        'player' => $player,
+        'card'  => $cards[0],
+        'cards'  => $cards[1],
+      ]);
+    } else {
+      self::notifyAll('discard', clienttranslate('${player_name} discards ${card_class}${card_class_symbol}'), [
+        'player' => $player,
+        'card'  => $cards,
+      ]);
+    }
+  }
+
+
 
   public static function clearTurn(){
     self::notifyAll('clearTurn', '', []);
@@ -139,22 +155,28 @@ class Notifications
       unset($args['player']);
     }
 
+    $names = [
+      BLACKSMITH => clienttranslate('a blacksmith'),
+      HUNTER => clienttranslate('a hunter'),
+      EXPLORER => clienttranslate('an explorer'),
+      MINER => clienttranslate('a miner'),
+      WARRIOR => clienttranslate('a warrior'),
+      ROYAL_OFFER => clienttranslate('a royal offering'),
+      HERO => clienttranslate('a hero'),
+    ];
+
     if(isset($args['card'])){
       $c = $args['card'];
-
-      $names = [
-        BLACKSMITH => clienttranslate('a blacksmith'),
-        HUNTER => clienttranslate('a hunter'),
-        EXPLORER => clienttranslate('an explorer'),
-        MINER => clienttranslate('a miner'),
-        WARRIOR => clienttranslate('a warrior'),
-        ROYAL_OFFER => clienttranslate('a royal offering'),
-        HERO => clienttranslate('a hero'),
-      ];
-
       $args['card_class'] = $names[$c->getClass()];
       $args['card_class_symbol'] = $c->getRecruitementZone();// The substitution will be done in JS format_string_recursive function
       $args['card'] = $c->getUiData();
+    }
+
+    if(isset($args['card2'])){
+      $c = $args['card2'];
+      $args['card2_class'] = $names[$c->getClass()];
+      $args['card2_class_symbol'] = $c->getRecruitementZone();// The substitution will be done in JS format_string_recursive function
+      $args['card2'] = $c->getUiData();
     }
   }
 }

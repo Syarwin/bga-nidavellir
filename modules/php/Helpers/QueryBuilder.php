@@ -279,7 +279,7 @@ class QueryBuilder extends \APP_DbObject {
 		if(is_null($values))
 			return $this;
 
-		$this->where .= "`$field` IN ('". implode("','", $values) ."')";
+		$this->where .= "`$field` IN ('". implode("','", $values ) ."')";
 		return $this;
 	}
 

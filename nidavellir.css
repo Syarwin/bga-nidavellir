@@ -47,6 +47,13 @@ html {
     .card.selectable:hover {
       transform: scale(1.1);
       z-index: 100; }
+  .card.selected {
+    border: 3px solid red;
+    margin-top: -3px;
+    margin-left: 7.5px;
+    animation: none !important;
+    transform: scale(1.08);
+    z-index: 100; }
   .card::before {
     content: '';
     position: absolute;
@@ -470,11 +477,11 @@ html {
         #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card:last-of-type {
           margin-bottom: 60px; }
         #nidavellir-board #player-boards .nidavellir-player-board .cards-class .card.selectable {
-          animation: pulse 1.5s infinite; }
+          animation: pulse 2s infinite; }
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 2px #ffc400; }
-  50% {
+  80% {
     box-shadow: 0 0 0 10px transparent; } }
 #overall-content[data-nplayers="2"] .tavern-cards-holder {
   min-width: 357px; }
