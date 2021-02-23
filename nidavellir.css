@@ -495,6 +495,58 @@ html {
   height: 40px;
   position: relative;
   z-index: 100; }
+  .coin[data-value="0"] {
+    order: 0; }
+  .coin[data-value="1"] {
+    order: 1; }
+  .coin[data-value="2"] {
+    order: 2; }
+  .coin[data-value="3"] {
+    order: 3; }
+  .coin[data-value="4"] {
+    order: 4; }
+  .coin[data-value="5"] {
+    order: 5; }
+  .coin[data-value="6"] {
+    order: 6; }
+  .coin[data-value="7"] {
+    order: 7; }
+  .coin[data-value="8"] {
+    order: 8; }
+  .coin[data-value="9"] {
+    order: 9; }
+  .coin[data-value="10"] {
+    order: 10; }
+  .coin[data-value="11"] {
+    order: 11; }
+  .coin[data-value="12"] {
+    order: 12; }
+  .coin[data-value="13"] {
+    order: 13; }
+  .coin[data-value="14"] {
+    order: 14; }
+  .coin[data-value="15"] {
+    order: 15; }
+  .coin[data-value="16"] {
+    order: 16; }
+  .coin[data-value="17"] {
+    order: 17; }
+  .coin[data-value="18"] {
+    order: 18; }
+  .coin[data-value="19"] {
+    order: 19; }
+  .coin[data-value="20"] {
+    order: 20; }
+  .coin[data-value="21"] {
+    order: 21; }
+  .coin[data-value="22"] {
+    order: 22; }
+  .coin[data-value="23"] {
+    order: 23; }
+  .coin[data-value="24"] {
+    order: 24; }
+  .coin[data-value="25"] {
+    order: 25; }
   .coin .coin-holder {
     position: absolute;
     width: 100%;
@@ -579,11 +631,27 @@ html {
     justify-content: flex-end;
     align-items: center;
     background-repeat: no-repeat;
-    padding-right: 5px; }
+    padding-right: 5px;
+    position: relative; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-1 {
       background-image: url("img/tavern/sign_1.png"); }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-2 {
       background-image: url("img/tavern/sign_2.png"); }
+    .panel-container .bids-zone .bids-zone-tavern-holder .bids-drop-zone {
+      display: none; }
+      .panel-container .bids-zone .bids-zone-tavern-holder .bids-drop-zone.selectable {
+        display: block;
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        left: 7px;
+        border: 2.5px dashed white;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        cursor: pointer; }
+        .panel-container .bids-zone .bids-zone-tavern-holder .bids-drop-zone.selectable:hover {
+          border: 2.5px solid white;
+          background-color: rgba(255, 255, 255, 0.4); }
     .panel-container .bids-zone .bids-zone-tavern-holder .bids-zone-tavern {
       width: 40px;
       height: 40px; }

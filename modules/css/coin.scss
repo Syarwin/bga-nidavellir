@@ -5,6 +5,11 @@
   position:relative;
   z-index: 100;
 
+  @for $i from 0 through 25 {
+    &[data-value="#{$i}"] { order:#{$i} }
+  }
+
+
   .coin-holder {
     position:absolute;
     width:100%;

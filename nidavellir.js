@@ -67,12 +67,9 @@ define([
         dojo.query(".tavern-coin-holder").removeClass("selectable");
         dojo.query(".tavern-cards-holder").removeClass("selectable");
         dojo.query(".card").removeClass("selectable");
-        this._tavernBids = [null, null, null];
-
 
         this.inherited(arguments);
       },
-
 
 
       setupInfoPanel(){

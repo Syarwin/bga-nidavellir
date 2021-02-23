@@ -29,7 +29,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(this.isCurrentPlayerActive()){
         this._bidableCoins = args._private;
         this.clearBidSelection();
-        [0,1,2].forEach(tavern => this.connect("tavern-coin-holder-" + tavern, "click", () => this.onClickTavernSign(tavern) ));
+        [0,1,2].forEach(tavern => this.connect("bids-drop-zone-" + tavern + "-" + this.player_id, "click", () => this.onClickTavernSign(tavern) ));
         this.toggleConfirmBidsBtn();
       }
       else {
@@ -38,6 +38,11 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
     },
 
+    onLeavingStatePlayerBids(){
+      this._tavernBids = [null, null, null];
+    },
+
+
     onUpdateActivityPlayerBids(arg, status){
       this.onEnteringStatePlayerBids(arg);
     },
@@ -45,7 +50,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     clearBidSelection(makeSelectable = true){
       dojo.query('.coin').removeClass('selected');
-      dojo.query(".tavern-coin-holder").removeClass("selectable");
+      dojo.query(".bids-drop-zone").removeClass("selectable");
       dojo.destroy("btnCancelBid");
       this._selectedCoin = null;
       if(makeSelectable){
@@ -63,9 +68,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
 
       this._selectedCoin = coin;
-      this.makeCoinsSelectable([coin.id], this.onClickCoinBid.bind(this));
+      //this.makeCoinsSelectable([coin.id], this.onClickCoinBid.bind(this));
       dojo.addClass("coin-" + coin.id, 'selected');
-      dojo.query(".tavern-coin-holder").addClass("selectable");
+      dojo.query("#overall_player_board_" + this.player_id + " .bids-drop-zone").addClass("selectable");
       this.addSecondaryActionButton("btnCancelBid", _("Cancel"), () => this.clearBidSelection());
       this.changePageTitle('placecoin');
     },
