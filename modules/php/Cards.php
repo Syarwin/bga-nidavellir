@@ -114,6 +114,19 @@ class Cards extends Helpers\Pieces
     LOKDUR => 'Lokdur',
     HOURYA => 'Hourya',
     IDUNN => 'Idunn',
+
+    DWERG1 => 'Dwerg1',
+    DWERG2 => 'Dwerg2',
+    DWERG3 => 'Dwerg3',
+    DWERG4 => 'Dwerg4',
+    DWERG5 => 'Dwerg5',
+
+    SKAA => 'Skaa',
+    ASTRID => 'Astrid',
+    GRID => 'Grid',
+    ULINE => 'Uline',
+    YLUD => 'Ylud',
+    THRUD => 'Thrud',
   ];
 
   public static function getHero($id, $row = null)

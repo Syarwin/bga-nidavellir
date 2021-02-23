@@ -27,8 +27,9 @@ trait TurnTrait
     Cards::clearTaverns(); // Useful in 2p mode only
     Notifications::clearTurn();
 
-    // TODO
-    $this->gamestate->nextState('nextTurn');
+
+    $cardsLeft = Cards::countInLocation(['age', Globals::getAge()]);
+    $this->gamestate->nextState($cardsLeft == 0? 'nextAge' : 'nextTurn');
   }
 }
 ?>

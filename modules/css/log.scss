@@ -20,9 +20,10 @@
     vertical-align: middle;
     margin: -4px 3px 4px;
 
-    @for $i from 1 through 6 {
+    @for $i from 1 through 5 {
       &.class-#{$i} { background-position-y: ($i - 1) * 100% / 5; }
     }
+    &.class-0 { background-position-y: 100%; }
   }
 
   .coin {

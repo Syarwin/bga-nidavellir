@@ -166,6 +166,7 @@ $machinestates = [
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
       'discard' => ST_DISCARD_CARD,
+      'transform' => ST_TRANSFORM_COIN,
     ]
   ],
 

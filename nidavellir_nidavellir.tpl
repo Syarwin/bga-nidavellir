@@ -132,6 +132,7 @@ var jstpl_rank = `
 
 var jstpl_playerBoard = `
 <div id="player-board-\${no}" class="nidavellir-player-board">
+  <div class="cards-class" id="command-zone_\${id}_0"></div>
   <div class="cards-class" id="command-zone_\${id}_1"></div>
   <div class="cards-class" id="command-zone_\${id}_2"></div>
   <div class="cards-class" id="command-zone_\${id}_3"></div>
