@@ -160,10 +160,11 @@ var jstpl_configPlayerBoard = `
     </div>
 
     <div id="player_config_row">
-      <div id="show-scoresheet">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+      <div id="show-overview">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <g class="fa-group">
-            <path class="fa-secondary" fill="currentColor" d="M544 464v32a16 16 0 0 1-16 16H112a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16h416a16 16 0 0 1 16 16z" opacity="0.4"></path><path class="fa-primary" fill="currentColor" d="M640 176a48 48 0 0 1-48 48 49 49 0 0 1-7.7-.8L512 416H128L55.7 223.2a49 49 0 0 1-7.7.8 48.36 48.36 0 1 1 43.7-28.2l72.3 43.4a32 32 0 0 0 44.2-11.6L289.7 85a48 48 0 1 1 60.6 0l81.5 142.6a32 32 0 0 0 44.2 11.6l72.4-43.4A47 47 0 0 1 544 176a48 48 0 0 1 96 0z"></path>
+            <path class="fa-secondary" fill="currentColor" d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm324.13 141.91a11.92 11.92 0 0 1-3.53 6.89L281 379.4l9.4 54.6a12 12 0 0 1-17.4 12.6l-49-25.8-48.9 25.8a12 12 0 0 1-17.4-12.6l9.4-54.6-39.6-38.6a12 12 0 0 1 6.6-20.5l54.7-8 24.5-49.6a12 12 0 0 1 21.5 0l24.5 49.6 54.7 8a12 12 0 0 1 10.13 13.61zM304 128h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16zm-192 0h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16z" opacity="0.4"></path>
+            <path class="fa-primary" fill="currentColor" d="M314 320.3l-54.7-8-24.5-49.6a12 12 0 0 0-21.5 0l-24.5 49.6-54.7 8a12 12 0 0 0-6.6 20.5l39.6 38.6-9.4 54.6a12 12 0 0 0 17.4 12.6l48.9-25.8 49 25.8a12 12 0 0 0 17.4-12.6l-9.4-54.6 39.6-38.6a12 12 0 0 0-6.6-20.5zM400 64h-48v48a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V64H160v48a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V64H48a48 48 0 0 0-48 48v80h448v-80a48 48 0 0 0-48-48z"></path>
           </g>
         </svg>
       </div>
@@ -182,6 +183,41 @@ var jstpl_configPlayerBoard = `
     </div>
   </div>
 </div>
+`;
+
+
+
+var jstpl_overview = `
+<table id='players-overview'>
+  <thead>
+    <tr id="overview-headers">
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="player-overview-body">
+    <tr id="overview-row-1">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+    <tr id="overview-row-2">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+    <tr id="overview-row-3">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+    <tr id="overview-row-4">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+    <tr id="overview-row-5">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+    <tr id="overview-row-0">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+    <tr id="overview-row-6">
+      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+    </tr>
+  </tbody>
+</table>
 `;
 
 </script>

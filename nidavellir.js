@@ -78,12 +78,12 @@ define([
           'turn' : _('Turn'),
         }, 'player_boards', 'first');
         dojo.connect($('show-settings'), 'onclick', () => this.toggleControls() );
-        dojo.connect($('show-scoresheet'), 'onclick', () => this.showScoreSheet() );
+        dojo.connect($('show-overview'), 'onclick', () => this.showOverview() );
         this.turnCounter = new ebg.counter();
         this.turnCounter.create('turn-counter');
 
         this.addTooltip( 'show-settings', '', _("Display some settings about the game."));
-        this.addTooltip( 'show-scoresheet', '', _("Display the scoring pad."));
+        this.addTooltip( 'show-overview', '', _("Display the scoring details."));
 
         this.setupSettings();
       },
@@ -106,18 +106,39 @@ define([
       //////////////////////////////
       //////////////////////////////
 
-      showScoreSheet(){
-        debug("Showing scoresheet:");
-        new customgame.modal("showScoreSheet", {
-          autoShow:true,
-          class:"alhambra_popin",
+      /*
+       * Display a table with a nice overview of current situation for everyone
+       */
+      showOverview(){
+        debug("Showing overview:");
+        var dial = new customgame.modal("showOverview", {
+          class:"nidavellir_popin",
           closeIcon:'fa-times',
           openAnimation:true,
-          openAnimationTarget:"show-scoresheet",
+          openAnimationTarget:"show-overview",
+          contents:jstpl_overview,
         });
-        dojo.style("popin_showScoreSheet", "transform", "scale(" + this.gameinterface_zoomFactor + ")");
 
+        for(var pId in this.gamedatas.players){
+          let player = this.gamedatas.players[pId];
+
+          dojo.place('<th>' + player.name + '</th>', 'overview-headers');
+          for(var i = 0; i < 7; i++){
+            dojo.place('<td>' + i + '</td>', "overview-row-" + i);
+          }
+        }
+
+
+        let box = $("ebd-body").getBoundingClientRect();
+        let modalWidth = 1000;
+        let newModalWidth = box['width']*0.8;
+        let modalScale = newModalWidth / modalWidth;
+        if(modalScale > 1) modalScale = 1;
+        dojo.style("popin_showOverview", "transform", `scale(${modalScale})`);
+
+        dial.show();
       },
+
 
       toggleControls(){
         dojo.toggleClass('layout-controls-container', 'layoutControlsHidden')

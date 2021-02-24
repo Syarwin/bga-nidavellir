@@ -723,17 +723,17 @@ html {
   background-size: 100% 600%;
   vertical-align: middle;
   margin: -4px 3px 4px; }
-  #logs .card-class-symbol.class-1 {
-    background-position-y: 0%; }
-  #logs .card-class-symbol.class-2 {
-    background-position-y: 20%; }
-  #logs .card-class-symbol.class-3 {
-    background-position-y: 40%; }
-  #logs .card-class-symbol.class-4 {
-    background-position-y: 60%; }
-  #logs .card-class-symbol.class-5 {
-    background-position-y: 80%; }
   #logs .card-class-symbol.class-0 {
+    background-position-y: 0%; }
+  #logs .card-class-symbol.class-1 {
+    background-position-y: 20%; }
+  #logs .card-class-symbol.class-2 {
+    background-position-y: 40%; }
+  #logs .card-class-symbol.class-3 {
+    background-position-y: 60%; }
+  #logs .card-class-symbol.class-4 {
+    background-position-y: 80%; }
+  #logs .card-class-symbol.class-5 {
     background-position-y: 100%; }
 #logs .coin {
   display: inline-block;
@@ -771,18 +771,18 @@ html {
           background-position-x: 100%; }
     #player_config #player_info_row #turn-counter-holder {
       font-weight: bold; }
-  #player_config #show-scoresheet, #player_config #show-settings {
+  #player_config #show-overview, #player_config #show-settings {
     height: 40px;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer; }
-    #player_config #show-scoresheet:hover, #player_config #show-settings:hover {
+    #player_config #show-overview:hover, #player_config #show-settings:hover {
       color: grey; }
-    #player_config #show-scoresheet:hover, #player_config #show-settings:hover {
+    #player_config #show-overview:hover, #player_config #show-settings:hover {
       color: grey; }
-    #player_config #show-scoresheet svg, #player_config #show-settings svg {
+    #player_config #show-overview svg, #player_config #show-settings svg {
       width: auto;
       height: 40px; }
   #player_config #show-settings .fa-primary {
@@ -808,6 +808,136 @@ html {
 
 #overall-content[data-nplayers="4"] #turn-counter::after, #overall-content[data-nplayers="5"] #turn-counter::after {
   content: '/3'; }
+
+.nidavellir_popin {
+  width: 80%;
+  position: relative; }
+  .nidavellir_popin .nidavellir_popin_closeicon {
+    background-color: #60322e;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 100%;
+    color: white !important; }
+    .nidavellir_popin .nidavellir_popin_closeicon:hover {
+      text-decoration: none;
+      color: #CCC !important;
+      transform: scale(1.1); }
+    .nidavellir_popin .nidavellir_popin_closeicon i {
+      margin-top: -2px; }
+
+#popin_showOverview {
+  z-index: 2000;
+  padding: 0;
+  width: 600px;
+  background-color: #cdcdcd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px black; }
+  #popin_showOverview #popin_showOverview_contents {
+    padding: 20px; }
+    #popin_showOverview #popin_showOverview_contents table {
+      width: 100%; }
+      #popin_showOverview #popin_showOverview_contents table th {
+        min-width: 50px;
+        height: 50px;
+        vertical-align: middle;
+        text-align: center;
+        border: 4px solid #cdcdcd;
+        background: #8c8c8c;
+        background: linear-gradient(90deg, #aaaaaa 0%, gainsboro 20%, gainsboro 80%, #aaaaaa 100%);
+        font-family: "Norse";
+        font-weight: bold;
+        font-size: 25px; }
+        #popin_showOverview #popin_showOverview_contents table th:first-of-type {
+          background: none;
+          border-right: none; }
+      #popin_showOverview #popin_showOverview_contents table tbody tr {
+        height: 50px;
+        border-bottom: 8px solid #cdcdcd; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-0 {
+          background-color: #8c9499; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-1 {
+          background-color: #8d85ac; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-2 {
+          background-color: #719b8a; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-3 {
+          background-color: #9fb7c7; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-4 {
+          background-color: #c7a97f; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-5 {
+          background-color: #a87570; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-6 {
+          background-color: #dddddd; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr td {
+          vertical-align: middle;
+          text-align: center;
+          padding: 5px 8px;
+          word-wrap: anywhere;
+          font-family: "Norse";
+          font-weight: bold;
+          font-size: 20px;
+          border-right: 4px solid #cdcdcd; }
+          #popin_showOverview #popin_showOverview_contents table tbody tr td:last-of-type, #popin_showOverview #popin_showOverview_contents table tbody tr td:first-of-type {
+            border-right: none; }
+          #popin_showOverview #popin_showOverview_contents table tbody tr td i {
+            color: #555;
+            font-size: 14px;
+            margin-left: 7px; }
+          #popin_showOverview #popin_showOverview_contents table tbody tr td.row-header {
+            padding: 0;
+            position: relative;
+            width: 100px; }
+            #popin_showOverview #popin_showOverview_contents table tbody tr td.row-header .row-rank {
+              height: 60px;
+              width: 100%;
+              background-image: url("img/ranks_scoring.png");
+              background-size: 100% 700%;
+              position: absolute;
+              top: -7px;
+              left: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center; }
+              #popin_showOverview #popin_showOverview_contents table tbody tr td.row-header .row-rank .rank-symbol {
+                width: 40px;
+                height: 40px;
+                background-image: url("img/classes.png");
+                background-size: 100% 600%;
+                filter: brightness(1000); }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-0 td.row-header .row-rank {
+          background-position-y: 0%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-0 td.row-header .rank-symbol {
+          background-position-y: 0%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-1 td.row-header .row-rank {
+          background-position-y: 16.6666666667%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-1 td.row-header .rank-symbol {
+          background-position-y: 20%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-2 td.row-header .row-rank {
+          background-position-y: 33.3333333333%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-2 td.row-header .rank-symbol {
+          background-position-y: 40%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-3 td.row-header .row-rank {
+          background-position-y: 50%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-3 td.row-header .rank-symbol {
+          background-position-y: 60%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-4 td.row-header .row-rank {
+          background-position-y: 66.6666666667%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-4 td.row-header .rank-symbol {
+          background-position-y: 80%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-5 td.row-header .row-rank {
+          background-position-y: 83.3333333333%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-5 td.row-header .rank-symbol {
+          background-position-y: 100%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-6 td.row-header .row-rank {
+          background-position-y: 100%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-6 td.row-header .rank-symbol {
+          background-position-y: 120%; }
 
 .notransition {
   -webkit-transition: none !important;
