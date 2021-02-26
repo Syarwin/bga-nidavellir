@@ -13,9 +13,13 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
     setupHall(){
-      debug(this.gamedatas.cards.hall);
       this.gamedatas.cards.hall.forEach(card => this.addCard(card, card.location));
     },
+
+    setupDistinctions(){
+      this.gamedatas.cards.evaluation.forEach(card => this.addCard(card, card.location));
+    },
+
 
 
     addCard(card, container, animation = false){

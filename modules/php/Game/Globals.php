@@ -35,6 +35,8 @@ class Globals extends \APP_DbObject
     'currentTavern' => 0,
     'currentPlayerIndex' => -1,
     'transformValue' => 0,
+    'currentDistinction' => 0,
+    'sourceState' => 0,
   ];
 
   public static function declare($game){
@@ -89,6 +91,12 @@ class Globals extends \APP_DbObject
     return (int) self::get('transformValue');
   }
 
+  public function getSourceState()
+  {
+    return (int) self::get('sourceState');
+  }
+
+
   /*
    * Setters
    */
@@ -131,4 +139,18 @@ class Globals extends \APP_DbObject
     self::set('transformValue', $val);
   }
 
+  public function setCurrentDistinction($val)
+  {
+    self::set('currentDistinction', $val);
+  }
+
+  public function nextDistinction()
+  {
+    return self::inc('currentDistinction', 1);
+  }
+
+  public function setSourceState($state)
+  {
+    self::set('sourceState', $state);
+  }
 }

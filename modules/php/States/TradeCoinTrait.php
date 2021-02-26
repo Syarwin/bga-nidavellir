@@ -58,8 +58,10 @@ trait TradeCoinTrait
     Notifications::transformCoin($player, $coin, $newCoin);
 
 
-    $nextState = $player->canRecruitHero()? 'hero' : 'trade';
-    $this->gamestate->nextState($nextState);
+    if($player->canRecruitHero())
+      $this->gamestate->nextState('hero');
+    else
+      $this->nextStateFromSource('transformDone');
   }
 }
 ?>

@@ -20,6 +20,8 @@ class Cards extends Helpers\Pieces
       return new \NID\Cards\RoyalOfferingCard($card);
     else if($card['class'] == HERO)
       return self::getHero($card['id'], $card);
+    else if($card['class'] == DISTINCTION)
+      return self::getDistinction($card['id'], $card);
   }
 
   public static function getUiData()
@@ -27,8 +29,32 @@ class Cards extends Helpers\Pieces
     return [
       'taverns' => self::getInLocation(['tavern', '%'])->ui(),
       'hall' => self::getInLocation('hall')->ui(),
+      'evaluation' => self::getInLocation('evaluation')->ui(),
     ];
   }
+
+  public static function refresh(&$card)
+  {
+    $card = self::get($card->getId());
+  }
+
+
+  /*
+   * Create both age1 and age2 decks, heroes and distinctions
+   */
+	public static function setupNewGame($players, $options)
+  {
+		$deck = count($players) == 5? self::$deck5Players : self::$deck;
+		self::createDeck($deck, 1);
+
+		$deck[ROYAL_OFFER] = count($players) == 5? [5,5,5] : [5,5]; // One more royal offer at age 2
+    self::createDeck($deck, 2);
+
+    self::createHeroes($options);
+
+    self::createDistinctions();
+	}
+
 
   /*********************
   ***** DECK SETUP *****
@@ -77,19 +103,6 @@ class Cards extends Helpers\Pieces
     self::shuffle(['age',$age]);
 	}
 
-  /*
-   * Create both age1 and age2 decks
-   */
-	public static function setupNewGame($players, $options)
-  {
-		$deck = count($players) == 5? self::$deck5Players : self::$deck;
-		self::createDeck($deck, 1);
-
-		$deck[ROYAL_OFFER] = count($players) == 5? [5,5,5] : [5,5]; // One more royal offer at age 2
-    self::createDeck($deck, 2);
-
-    self::createHeroes($options);
-	}
 
 
   // TEST ONLY
@@ -152,6 +165,45 @@ class Cards extends Helpers\Pieces
     }
 
     self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);
+  }
+
+
+  /*********************
+  **** DISTINCTIONS ****
+  *********************/
+  public static $distinctions = [
+    DISTINCTION_WARRIOR => 'DistinctionWarrior',
+    DISTINCTION_HUNTER  => 'DistinctionHunter',
+    DISTINCTION_MINER   => 'DistinctionMiner',
+    DISTINCTION_BLACKSMITH => 'DistinctionBlacksmith',
+    DISTINCTION_EXPLORER => 'DistinctionExplorer',
+  ];
+
+  public static function createDistinctions()
+  {
+    $values = [
+      [DISTINCTION_WARRIOR, 'evaluation', DISTINCTION, null ],
+      [DISTINCTION_HUNTER, 'evaluation', DISTINCTION, null ],
+      [DISTINCTION_MINER, 'evaluation', DISTINCTION, null ],
+      [DISTINCTION_BLACKSMITH, 'evaluation', DISTINCTION, null ],
+      [DISTINCTION_EXPLORER, 'evaluation', DISTINCTION, null ],
+    ];
+    self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);
+  }
+
+
+  public static function getDistinction($id, $row = null)
+  {
+    $className = '\NID\Cards\\' . self::$distinctions[$id];
+    return new $className($row);
+  }
+
+  public static function getDistinctionCard($i)
+  {
+    if($i > 5 || $i == 0)
+      return null;
+    $ids = [null, DISTINCTION_WARRIOR, DISTINCTION_HUNTER, DISTINCTION_MINER, DISTINCTION_BLACKSMITH, DISTINCTION_EXPLORER];
+    return self::get($ids[$i]);
   }
 
   /****************

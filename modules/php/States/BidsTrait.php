@@ -44,8 +44,23 @@ trait BidsTrait
     // Move coin in corresponding position and notify (useful for replay)
     $player->bid($coinId, $tavern);
     Notifications::bid($player, $coin, $tavern);
-
   }
+
+
+
+  public function actAutobid()
+  {
+    $player = Players::getCurrent();
+    $coins = $player->getCoinIds();
+    for($i = 0; $i < 3; $i++){
+      $player->bid($coins[$i], $i);
+      $coin = Coins::get($coins[$i]);
+      Notifications::bid($player, $coin, $i);
+    }
+
+    $this->actConfirmBids();
+  }
+
 
   public function actConfirmBids()
   {

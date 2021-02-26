@@ -5,7 +5,7 @@ namespace NID\Cards;
  * AbstractCard: all utility functions concerning a card : dwarf/improvements or hero
  */
 
-abstract class AbstractCard
+class AbstractCard
 {
   protected $id = -1;
   protected $location = '';
@@ -64,5 +64,23 @@ abstract class AbstractCard
 
   public function stateAfterRecruit(){
     return null;
+  }
+
+  public function getNotifString(){
+    $recruitNames = [
+      BLACKSMITH => clienttranslate('a blacksmith'),
+      HUNTER => clienttranslate('a hunter'),
+      EXPLORER => clienttranslate('an explorer'),
+      MINER => clienttranslate('a miner'),
+      WARRIOR => clienttranslate('a warrior'),
+      ROYAL_OFFER => clienttranslate('a royal offering'),
+      HERO => clienttranslate('a hero'),
+    ];
+
+    return $recruitNames[$this->getClass()];
+  }
+
+  public function getNotifSymbol(){
+    return $this->getRecruitementZone();
   }
 }

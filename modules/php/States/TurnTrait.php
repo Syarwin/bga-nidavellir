@@ -15,7 +15,8 @@ trait TurnTrait
     $cards = Cards::startNewTurn();
     Notifications::startNewTurn($cards);
 
-    $this->gamestate->nextState('');
+    $this->saveCurrentStateAsSource();
+    $this->gamestate->nextState('start');
   }
 
   public function stEndOfTurn()

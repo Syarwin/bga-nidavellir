@@ -46,19 +46,30 @@ trait RecruitTrait
     $player = Players::getCurrent();
     $player->recruit($card);
 
-    $card = Cards::get($cardId); // Update location
+    Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
 
-
-    $nextState = $card->stateAfterRecruit() ?? ($player->canRecruitHero()? 'hero' : 'trade');
     if($card->getClass() == ROYAL_OFFER){
       Globals::setTransformValue($card->getValue());
-      $nextState = "transform";
+      $this->gamestate->nextState("transform");
+    } else {
+      $this->nextStateAfterRecruit($card, $player);
     }
-    $this->gamestate->nextState($nextState);
   }
 
 
+
+  public function nextStateAfterRecruit($card, $player){
+    $nextState = $card->stateAfterRecruit();
+    if($nextState != null)
+      $this->gamestate->nextState($nextState);
+    else {
+      if($player->canRecruitHero())
+        $this->gamestate->nextState('hero');
+      else
+        $this->nextStateFromSource('recruitDone');
+    }
+  }
 
 
   /**********************

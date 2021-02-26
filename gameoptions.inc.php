@@ -14,6 +14,8 @@
  * Nidavellir game options description
  */
 
+require_once('modules/php/constants.inc.php');
+
 $game_options = [
   OPTION_SETUP => [
     'name' => totranslate('Heroes'),

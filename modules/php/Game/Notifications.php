@@ -146,6 +146,22 @@ class Notifications
   }
 
 
+  public static function distinctionTie($distinction, $maxRank){
+    self::notifyAll('discardCards', clienttranslate('${n} players are tied to the majority of ${card_class}${card_class_symbol} hence no one get the distinction card'), [
+      'n' => count($maxRank),
+      'card' => $distinction,
+    ]);
+  }
+
+
+  public static function distinction($player, $card){
+    self::notifyAll('recruit', clienttranslate('${player_name} has the strict majority of ${card_class}${card_class_symbol} and wins the corresponding distinction'), [
+      'player' => $player,
+      'card'  => $card,
+    ]);
+  }
+
+
   /*
    * Automatically adds some standard field about player and/or card
    */
@@ -156,26 +172,19 @@ class Notifications
       unset($args['player']);
     }
 
-    $names = [
-      BLACKSMITH => clienttranslate('a blacksmith'),
-      HUNTER => clienttranslate('a hunter'),
-      EXPLORER => clienttranslate('an explorer'),
-      MINER => clienttranslate('a miner'),
-      WARRIOR => clienttranslate('a warrior'),
-      ROYAL_OFFER => clienttranslate('a royal offering'),
-      HERO => clienttranslate('a hero'),
-    ];
 
     if(isset($args['card'])){
+      $args['i18n'][] = 'card_class';
       $c = $args['card'];
-      $args['card_class'] = $names[$c->getClass()];
-      $args['card_class_symbol'] = $c->getRecruitementZone();// The substitution will be done in JS format_string_recursive function
+      $args['card_class'] = $c->getNotifString();
+      $args['card_class_symbol'] = $c->getNotifSymbol();// The substitution will be done in JS format_string_recursive function
       $args['card'] = $c->getUiData();
     }
 
     if(isset($args['card2'])){
+      $args['i18n'][] = 'card2_class';
       $c = $args['card2'];
-      $args['card2_class'] = $names[$c->getClass()];
+      $args['card2_class'] = $recruitNames[$c->getClass()];
       $args['card2_class_symbol'] = $c->getRecruitementZone();// The substitution will be done in JS format_string_recursive function
       $args['card2'] = $c->getUiData();
     }

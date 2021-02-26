@@ -125,7 +125,7 @@ class Nidavellir extends Table
 	}
 
   ///////////////////////////////////////////////////////////
-  // Exposing proteced method, please use at your own risk //
+  // Exposing protected method, please use at your own risk //
   ///////////////////////////////////////////////////////////
 
   // Exposing protected method getCurrentPlayerId
@@ -136,5 +136,17 @@ class Nidavellir extends Table
   // Exposing protected method translation
   public static function translate($text){
     return self::_($text);
+  }
+
+
+
+  public function saveCurrentStateAsSource(){
+    Globals::setSourceState($this->gamestate->state_id() );
+  }
+
+  public function nextStateFromSource($transition){
+    $sourceState = $this->gamestate->states[Globals::getSourceState()];
+    $newState = $sourceState['transitions'][$transition];
+    $this->gamestate->jumpToState($newState);
   }
 }

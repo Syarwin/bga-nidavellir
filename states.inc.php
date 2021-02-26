@@ -42,7 +42,11 @@ $machinestates = [
     "description" => "",
     "type" => "game",
     "action" => "stStartOfTurn",
-    "transitions" => ['' => ST_BIDS]
+    "transitions" => [
+      'start' => ST_BIDS,
+      'recruitDone' => ST_TRADE_COIN, // Fake transition, used as source
+      'transformDone' => ST_TRADE_COIN, // Fake transition, used as source
+    ]
   ],
 
 
@@ -217,8 +221,25 @@ $machinestates = [
     "description" => "",
     "type" => "game",
     "action" => "stEndOfAge",
-    "transitions" => [ ''
-//      'distrinction' => ST_START_OF_AGE,
+    "transitions" => [
+      'distinctions' => ST_NEXT_DISTINCTION,
+      'scores' => ST_PRE_END_OF_GAME,
+    ]
+  ],
+
+
+  // Distinctions
+  ST_NEXT_DISTINCTION => [
+    "name" => "nextDistinction",
+    "description" => "",
+    "type" => "game",
+    "action" => "stNextDistinction",
+    "transitions" => [
+      'next' => ST_NEXT_DISTINCTION,
+      'done' => ST_START_OF_AGE,
+      'transform' => ST_TRANSFORM_COIN,
+      'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
+      'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
     ]
   ],
 

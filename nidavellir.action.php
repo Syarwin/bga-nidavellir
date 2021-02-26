@@ -31,6 +31,13 @@ class action_nidavellir extends APP_GameAction
   ///////////////////////////////
   //////////// Bids  ////////////
   ///////////////////////////////
+  public function autobid()
+  {
+    self::setAjaxMode();
+    $this->game->actAutobid();
+    self::ajaxResponse();
+  }
+
   public function playerBid()
   {
     self::setAjaxMode();

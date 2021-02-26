@@ -95,7 +95,7 @@
 
   @for $i from 1 through 5 {
     &[data-class="#{$i}"] .card-rank { background-position-y: ($i - 1) * 100% / 4; }
-    &[data-class="#{$i}"] .card-class-icon { background-position-y: ($i - 1) * 100% / 5; }
+    &[data-class="#{$i}"] .card-class-icon { background-position-y: $i * 100% / 5; }
   }
 
 
@@ -129,4 +129,27 @@
       display:none;
     }
   }
+
+
+
+  /**********************
+  ***** DISTINCTION *****
+  **********************/
+  &[data-class="8"] {
+    &::before {
+      background-image:url('img/distinctions.jpg');
+      background-size:500%;
+    }
+
+    @for $i from 0 through 4 {
+      &[data-id="#{$distinctionStart + $i}"]::before {
+        background-position-x:$i * 25%;
+      }
+    }
+
+    .card-grade {
+      display:none;
+    }
+  }
+
 }

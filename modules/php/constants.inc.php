@@ -27,6 +27,9 @@ define('ST_DISCARD_CARD', 25);
 
 define('ST_END_OF_AGE', 30);
 
+define('ST_NEXT_DISTINCTION', 31);
+
+define('ST_PRE_END_OF_GAME', 90);
 define('ST_GAME_END', 99);
 
 
@@ -54,6 +57,7 @@ define('WARRIOR', 5);
 define('ROYAL_OFFER', 6);
 
 define('HERO', 7);
+define('DISTINCTION', 8);
 
 
 /*
@@ -102,3 +106,13 @@ define('GRID', 217);
 define('ULINE', 218);
 define('YLUD', 219);
 define('THRUD', 220);
+
+
+/*
+ * DISTINCTIONS
+ */
+define('DISTINCTION_WARRIOR', 300);
+define('DISTINCTION_HUNTER', 301);
+define('DISTINCTION_MINER', 302);
+define('DISTINCTION_BLACKSMITH', 303);
+define('DISTINCTION_EXPLORER', 304);

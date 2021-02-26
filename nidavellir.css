@@ -41,7 +41,10 @@ html {
   border-radius: 5%;
   /***************
   ***** HERO *****
-  ***************/ }
+  ***************/
+  /**********************
+  ***** DISTINCTION *****
+  **********************/ }
   .card.selectable {
     cursor: pointer; }
     .card.selectable:hover {
@@ -128,23 +131,23 @@ html {
   .card[data-class="1"] .card-rank {
     background-position-y: 0%; }
   .card[data-class="1"] .card-class-icon {
-    background-position-y: 0%; }
+    background-position-y: 20%; }
   .card[data-class="2"] .card-rank {
     background-position-y: 25%; }
   .card[data-class="2"] .card-class-icon {
-    background-position-y: 20%; }
+    background-position-y: 40%; }
   .card[data-class="3"] .card-rank {
     background-position-y: 50%; }
   .card[data-class="3"] .card-class-icon {
-    background-position-y: 40%; }
+    background-position-y: 60%; }
   .card[data-class="4"] .card-rank {
     background-position-y: 75%; }
   .card[data-class="4"] .card-class-icon {
-    background-position-y: 60%; }
+    background-position-y: 80%; }
   .card[data-class="5"] .card-rank {
     background-position-y: 100%; }
   .card[data-class="5"] .card-class-icon {
-    background-position-y: 80%; }
+    background-position-y: 100%; }
   .card[data-class="6"]::before {
     background-position-x: 90.9090909091%; }
   .card[data-class="6"] .card-grade {
@@ -216,6 +219,21 @@ html {
     background-position-x: 0%;
     background-position-y: 100%; }
   .card[data-class="7"] .card-grade {
+    display: none; }
+  .card[data-class="8"]::before {
+    background-image: url("img/distinctions.jpg");
+    background-size: 500%; }
+  .card[data-class="8"][data-id="300"]::before {
+    background-position-x: 0%; }
+  .card[data-class="8"][data-id="301"]::before {
+    background-position-x: 25%; }
+  .card[data-class="8"][data-id="302"]::before {
+    background-position-x: 50%; }
+  .card[data-class="8"][data-id="303"]::before {
+    background-position-x: 75%; }
+  .card[data-class="8"][data-id="304"]::before {
+    background-position-x: 100%; }
+  .card[data-class="8"] .card-grade {
     display: none; }
 
 #nidavellir-board {
@@ -422,6 +440,24 @@ html {
           background-color: blue;
           z-index: -1; }
         #nidavellir-board #exterior-wrapper #exterior #hall-container #hall {
+          display: flex;
+          flex-flow: row;
+          flex-wrap: wrap; }
+      #nidavellir-board #exterior-wrapper #exterior #evaluation-container {
+        width: 150px;
+        height: 650px;
+        position: relative;
+        margin: 0px 100px;
+        flex-shrink: 0; }
+        #nidavellir-board #exterior-wrapper #exterior #evaluation-container::before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          background-color: red;
+          z-index: -1; }
+        #nidavellir-board #exterior-wrapper #exterior #evaluation-container #evaluation {
           display: flex;
           flex-flow: row;
           flex-wrap: wrap; }

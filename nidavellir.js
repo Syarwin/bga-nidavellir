@@ -54,6 +54,8 @@ define([
         this.setupPlayers();
         this.setupTaverns();
         this.setupHall();
+        this.setupDistinctions();
+        
         this.setupRoyalTreasure();
         this.setupInfoPanel();
         this.udpateInfoCounters();
@@ -69,6 +71,10 @@ define([
         dojo.query(".card").removeClass("selectable");
 
         this.inherited(arguments);
+      },
+
+      onUpdateActionButtons(){
+        this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
       },
 
 

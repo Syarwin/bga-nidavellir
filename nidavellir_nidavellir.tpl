@@ -65,6 +65,10 @@
       <div id="hall-container">
         <div id="hall"></div>
       </div>
+
+      <div id="evaluation-container">
+        <div id="evaluation"></div>
+      </div>
     </div>
   </div>
 

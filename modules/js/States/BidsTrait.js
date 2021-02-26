@@ -18,6 +18,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_newTurn(n){
       debug("Starting a new turn", n);
       n.args.cards.forEach(card => this.addCard(card, card.location, true) );
+      this.gamedatas.turn = n.args.turn;
+      this.udpateInfoCounters();
     },
 
 
@@ -152,6 +154,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
           });
         });
       });
+      this._tavernBids = [null, null, null];
     },
   });
 });
