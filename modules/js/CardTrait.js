@@ -8,16 +8,50 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._selectableCards = [];
     },
 
-    setupTaverns(){
+    setupCards(){
       this.gamedatas.cards.taverns.forEach(card => this.addCard(card, card.location));
+
+      this.setupHall();
+      this.setupDistinctions();
     },
+
+
 
     setupHall(){
+      this._heroesDialog = new customgame.modal("showHeroes", {
+        class:"nidavellir_popin",
+        closeIcon:'fa-times',
+        openAnimation:true,
+        openAnimationTarget:"tab-heroes",
+        contents:jstpl_heroesModal,
+        closeAction:'hide',
+      });
+
       this.gamedatas.cards.hall.forEach(card => this.addCard(card, card.location));
+      dojo.connect($('tab-heroes'), 'click', () => this.openHeroesModal() );
     },
 
+    openHeroesModal(){
+      this._heroesDialog.show();
+    },
+
+
     setupDistinctions(){
+      this._distinctionsDialog = new customgame.modal("showDistinctions", {
+        class:"nidavellir_popin",
+        closeIcon:'fa-times',
+        openAnimation:true,
+        openAnimationTarget:"tab-distinctions",
+        contents:jstpl_distinctionsModal,
+        closeAction:'hide',
+      });
+
       this.gamedatas.cards.evaluation.forEach(card => this.addCard(card, card.location));
+      dojo.connect($('tab-distinctions'), 'click', () => this.openDistinctionModal() );
+    },
+
+    openDistinctionModal(){
+      this._distinctionsDialog.show();
     },
 
 

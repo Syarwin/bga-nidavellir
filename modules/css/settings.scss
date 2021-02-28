@@ -14,20 +14,28 @@
 
     #age-counter-holder {
       font-weight: bold;
-      #age-counter {
-        display:inline-block;
-        width:30px;
-        height:30px;
-        background-image:url('img/ages.png');
-        background-size:cover;
-        vertical-align: middle;
+      font-family: "Norse";
 
+      #age-counter {
+        display: inline-block;
+        width: 25px;
+        height: 35px;
+        background-image: url("img/ages.jpg");
+        background-size: cover;
+        vertical-align: middle;
+        transform: rotate(8deg);
+        margin-left: 8px;
+        margin-top: -4px;
+        border-radius: 4px;
+        box-shadow: 1px 1px 4px 0px black;
+        
         &[data-value="2"] { background-position-x:100%; }
       }
     }
 
     #turn-counter-holder {
       font-weight: bold;
+      font-family: "Norse";
     }
   }
 

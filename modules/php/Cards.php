@@ -186,6 +186,7 @@ class Cards extends Helpers\Pieces
       [DISTINCTION_HUNTER, 'evaluation', DISTINCTION, null ],
       [DISTINCTION_MINER, 'evaluation', DISTINCTION, null ],
       [DISTINCTION_BLACKSMITH, 'evaluation', DISTINCTION, null ],
+      [DISTINCTION_BLACKSMITH_SPECIAL, 'evaluation', BLACKSMITH, json_encode([null, null])],
       [DISTINCTION_EXPLORER, 'evaluation', DISTINCTION, null ],
     ];
     self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);

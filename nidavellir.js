@@ -52,10 +52,8 @@ define([
       	debug('SETUP', gamedatas);
 
         this.setupPlayers();
-        this.setupTaverns();
-        this.setupHall();
-        this.setupDistinctions();
-        
+        this.setupCards();
+
         this.setupRoyalTreasure();
         this.setupInfoPanel();
         this.udpateInfoCounters();
@@ -75,6 +73,7 @@ define([
 
       onUpdateActionButtons(){
         this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
+        this.inherited(arguments);
       },
 
 

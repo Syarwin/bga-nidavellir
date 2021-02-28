@@ -38,11 +38,11 @@ abstract class DistinctionCard extends AbstractCard
 
   public function getNotifString(){
     $basicNames = [
-      BLACKSMITH => clienttranslate('blacksmith'),
-      HUNTER => clienttranslate('hunter'),
-      EXPLORER => clienttranslate('explorer'),
-      MINER => clienttranslate('miner'),
-      WARRIOR => clienttranslate('warrior'),
+      BLACKSMITH => clienttranslate('blacksmiths'),
+      HUNTER => clienttranslate('hunters'),
+      EXPLORER => clienttranslate('explorers'),
+      MINER => clienttranslate('miners'),
+      WARRIOR => clienttranslate('warriors'),
     ];
 
     return $basicNames[$this->getDistinctionClass()];

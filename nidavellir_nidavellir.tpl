@@ -3,76 +3,65 @@
 <div id="nidavellir-board">
   <div id="exterior-wrapper">
     <div id="exterior">
+      <div id="tabs-container">
+        <div class="nid-tab" id="tab-camp"></div>
+        <div class="nid-tab" id="tab-heroes"></div>
+        <div class="nid-tab" id="tab-distinctions"></div>
+      </div>
+
       <div id="treasure-container">
         <div id="treasure"></div>
+        <div class="treasure-decoration" id="treasure-decoration-1"></div>
+        <div class="treasure-decoration" id="treasure-decoration-2"></div>
+        <div class="treasure-decoration" id="treasure-decoration-3"></div>
       </div>
 
 
       <div id="taverns-container">
+        <div id="taverns-pre-bids-zone"></div>
+
         <div id="taverns">
-          <div id="tavern-roof"></div>
-          <div id="hor-beam-1" class="hor-beam"></div>
 
           <div class="tavern-sign-holder">
             <div class="tavern-mount"></div>
-            <div class="tavern-swing">
-              <div class="tavern-chain"></div>
-              <div class="tavern-sign" id="tavern-sign-0">
-                <div class="bids-drop-zone" id="bids-drop-zone-0"></div>
-                <div class="tavern-coin-holder" id="tavern-coin-holder-0"></div>
-              </div>
+            <div class="tavern-sign" id="tavern-sign-0">
+              <div class="bids-drop-zone" id="bids-drop-zone-0"></div>
+              <div class="tavern-coin-holder" id="tavern-coin-holder-0"></div>
             </div>
           </div>
-          <div id="ver-beam-1" class="ver-beam"></div>
-          <div class="tavern-cards-holder" id="tavern_0"></div>
-          <div id="ver-beam-2" class="ver-beam"></div>
+          <div class="tavern-cards-wrapper">
+            <div class="tavern-cards-holder" id="tavern_0"></div>
+          </div>
 
-          <div id="hor-beam-2" class="hor-beam"></div>
 
           <div class="tavern-sign-holder">
             <div class="tavern-mount"></div>
-            <div class="tavern-swing">
-              <div class="tavern-chain"></div>
-              <div class="tavern-sign" id="tavern-sign-1">
-                <div class="bids-drop-zone" id="bids-drop-zone-1"></div>
-                <div class="tavern-coin-holder" id="tavern-coin-holder-1"></div>
-              </div>
+            <div class="tavern-sign" id="tavern-sign-1">
+              <div class="bids-drop-zone" id="bids-drop-zone-1"></div>
+              <div class="tavern-coin-holder" id="tavern-coin-holder-1"></div>
             </div>
           </div>
-          <div id="ver-beam-3" class="ver-beam"></div>
-          <div class="tavern-cards-holder" id="tavern_1"></div>
-          <div id="ver-beam-4" class="ver-beam"></div>
+          <div class="tavern-cards-wrapper">
+            <div class="tavern-cards-holder" id="tavern_1"></div>
+          </div>
 
-          <div id="hor-beam-3" class="hor-beam"></div>
 
           <div class="tavern-sign-holder">
             <div class="tavern-mount"></div>
-            <div class="tavern-swing">
-              <div class="tavern-chain"></div>
-              <div class="tavern-sign" id="tavern-sign-2">
-                <div class="bids-drop-zone" id="bids-drop-zone-2"></div>
-                <div class="tavern-coin-holder" id="tavern-coin-holder-2"></div>
-              </div>
+            <div class="tavern-sign" id="tavern-sign-2">
+              <div class="bids-drop-zone" id="bids-drop-zone-2"></div>
+              <div class="tavern-coin-holder" id="tavern-coin-holder-2"></div>
             </div>
           </div>
-          <div id="ver-beam-5" class="ver-beam"></div>
-          <div class="tavern-cards-holder" id="tavern_2"></div>
-          <div id="ver-beam-6" class="ver-beam"></div>
+          <div class="tavern-cards-wrapper">
+            <div class="tavern-cards-holder" id="tavern_2"></div>
+          </div>
+
+
         </div>
-      </div>
-
-
-      <div id="hall-container">
-        <div id="hall"></div>
-      </div>
-
-      <div id="evaluation-container">
-        <div id="evaluation"></div>
       </div>
     </div>
   </div>
-
-  <div id="foundations"></div>
 
   <div id="player-boards"></div>
 </div>
@@ -135,7 +124,7 @@ var jstpl_rank = `
 `;
 
 var jstpl_playerBoard = `
-<div id="player-board-\${no}" class="nidavellir-player-board">
+<div id="player-board-\${no}" data-color="\${color}" class="nidavellir-player-board">
   <div class="cards-class" id="command-zone_\${id}_0"></div>
   <div class="cards-class" id="command-zone_\${id}_1"></div>
   <div class="cards-class" id="command-zone_\${id}_2"></div>
@@ -224,6 +213,18 @@ var jstpl_overview = `
 </table>
 `;
 
+
+var jstpl_heroesModal = `
+<div id="hall-container">
+  <div id="hall"></div>
+</div>
+`;
+
+var jstpl_distinctionsModal = `
+<div id="evaluation-container">
+  <div id="evaluation"></div>
+</div>
+`;
 </script>
 
 {OVERALL_GAME_FOOTER}

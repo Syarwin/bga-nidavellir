@@ -13,10 +13,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     setupRoyalTreasure(){
       let rows = [
         [22, 23, 24, 25],
-        [19, 20, 21],
-        [15, 16, 17, 18],
-        [12, 13, 14],
-        [8, 9, 10, 11],
+        [18, 19, 20, 21],
+        [14, 15, 16, 17],
+        [11, 12, 13],
+        [8, 9, 10],
         [5, 6, 7]
       ];
 
@@ -89,7 +89,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     slideCoinToPlayerZone(coin){
       let oldCoin = "coin-" + coin.id;
-      let target = "coins-zone-" + this.player_id;
+      let target = "taverns-pre-bids-zone"; //"coins-zone-" + this.player_id;
 
       coin.location = "player";
       this.slide(oldCoin, target, {

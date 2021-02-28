@@ -33,15 +33,18 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this.clearBidSelection();
         [0,1,2].forEach(tavern => this.connect("bids-drop-zone-" + tavern, "click", () => this.onClickTavernSign(tavern) ));
         this.toggleConfirmBidsBtn();
+        this.togglePreBidZone(true);
       }
       else {
         this.clearBidSelection(false);
         this.addSecondaryActionButton("btnChangeBids", _("Change the bids"), () => this.takeAction("changeBids", {}) );
+        this.togglePreBidZone(false);
       }
     },
 
     onLeavingStatePlayerBids(){
       this._tavernBids = [null, null, null];
+      this.togglePreBidZone(false);
     },
 
 
@@ -49,6 +52,17 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.onEnteringStatePlayerBids(arg);
     },
 
+
+    togglePreBidZone(status){
+      let source = status? ('coins-zone-' + this.player_id) : "taverns-pre-bids-zone";
+      let target = status? "taverns-pre-bids-zone" : ('coins-zone-' + this.player_id);
+      dojo.query('#' + source + ' .coin').forEach(coinDiv => {
+        this.slide(coinDiv, target, {
+          duration:500,
+        })
+      });
+      dojo.toggleClass("taverns-pre-bids-zone", "active", status)
+    },
 
     clearBidSelection(makeSelectable = true){
       dojo.query('.coin').removeClass('selected');

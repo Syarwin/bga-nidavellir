@@ -138,3 +138,66 @@
     }
   }
 }
+
+
+
+#popin_showHeroes {
+  z-index: 2000;
+  padding: 0;
+  width: 750px;
+  background-image: url("img/background_heroes.png");
+  background-size: 100% 100%;
+  filter:drop-shadow(3px 3px 10px black);
+
+  #popin_showHeroes_contents {
+    padding:15px;
+
+    #hall-container {
+      width: 715px;
+      height: 650px;
+      position: relative;
+
+      #hall {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+
+        .card {
+          margin:10px 10.5px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+#popin_showDistinctions {
+  z-index: 2000;
+  padding: 0;
+  width: 420px;
+  background-image: url("img/background_distinctions.png");
+  background-size: 100% 100%;
+  filter:drop-shadow(3px 3px 10px black);
+
+  #popin_showDistinctions_contents {
+    padding:15px;
+
+    #evaluation-container {
+      width:400px;
+      height:auto;
+      position:relative;
+
+      #evaluation {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+
+        .card {
+          margin:15px;
+        }
+      }
+    }
+  }
+}
