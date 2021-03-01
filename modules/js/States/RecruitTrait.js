@@ -2,7 +2,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.recruitTrait", null, {
     constructor(){
       this._notifications.push(
-        ['recruit', 1000]
+        ['recruit', 1000],
+        ['recruitHero', 2500],
+        ['distinction', 2500],
       );
       this._activeStates.push("recruitDwarf");
 
@@ -11,14 +13,23 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
     onEnteringStateRecruitDwarf(args) {
+      if(!this.isCurrentPlayerActive())
+        return;
       // activate the cards
       this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
       dojo.addClass("tavern_" + args.tavern, "selectable");
     },
 
     onEnteringStateRecruitHero(args) {
+      if(!this.isCurrentPlayerActive())
+        return;
+
       // activate the cards
+      dojo.query("#hall .card").addClass("unselectable");
       this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
+      this.addPrimaryActionButton("btnShowHeroes", _("Show heroes"), () => this.openHeroesModal() );
+      dojo.addClass('tab-heroes', "focus");
+      this.openHeroesModal();
     },
 
     onClickCardRecruit(card){
@@ -30,15 +41,57 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       debug("Notif: new recruit", n);
       let card = n.args.card;
 
-      if(card.class == 6){
+      if(card.class < 6) {
+        // DWARF
+        this.slide('card-' + card.id, card.location)
+      }
+      else if(card.class == 6){
         // ROYAL OFFER
         this.slide('card-' + card.id, "overall_player_board_" + n.args.player_id, {
           destroy:true,
         });
-      } else {
-        this.slide('card-' + card.id, card.location)
       }
     },
+
+
+
+    notif_recruitHero(n){
+      debug("Notif: new hero recruit", n);
+      let card = n.args.card;
+
+      dojo.addClass("card-overlay", "active");
+      if(this._heroesDialog.isDisplayed()){
+        this.slide("card-" + card.id, "card-overlay");
+        this._heroesDialog.hide();
+      } else {
+        this.slide("card-" + card.id, "card-overlay", { from : "tab-heroes" });
+      }
+
+      setTimeout(() => {
+        dojo.removeClass("card-overlay", "active");
+        this.slide('card-' + card.id, card.location);
+      }, 1500);
+    },
+
+
+    notif_distinction(n){
+      debug("Notif: distinction", n);
+      let card = n.args.card;
+
+      dojo.addClass("card-overlay", "active");
+      if(this._distinctionsDialog.isDisplayed()){
+        this.slide("card-" + card.id, "card-overlay");
+        this._distinctionsDialog.hide();
+      } else {
+        this.slide("card-" + card.id, "card-overlay", { from : "tab-distinctions" });
+      }
+
+      setTimeout(() => {
+        dojo.removeClass("card-overlay", "active");
+        this.slide('card-' + card.id, card.location);
+      }, 1500);
+    },
+
 
 
     onEnteringStateDiscardCard(args){

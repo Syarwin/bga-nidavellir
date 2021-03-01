@@ -89,7 +89,7 @@ trait BidsTrait
   public function stNextResolution()
   {
     // Are we done with the three tavers ?
-    $currentTavern = Globals::getTavern();
+    $currentTavern = Globals::incTavern();
     $nextState = in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN])? "reveal" : "finished";
     $this->gamestate->nextState($nextState);
   }
@@ -200,7 +200,6 @@ trait BidsTrait
       }
 
       // And go on to reveal next bids (if any left)
-      Globals::incTavern();
       $this->gamestate->nextState("done");
     } else {
       // Otherwise, make player active and go to recruitDwarf state

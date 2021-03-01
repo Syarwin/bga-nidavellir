@@ -48,6 +48,9 @@ html {
     .card.selectable:hover {
       transform: scale(1.1);
       z-index: 100; }
+  .card.unselectable, .card.unselectable:hover {
+    transform: none;
+    cursor: not-allowed; }
   .card.selected {
     border: 3px solid red;
     margin-top: -3px;
@@ -441,8 +444,23 @@ html {
         transition: margin 0.3s;
         background-image: url("img/tabs.png");
         background-size: 100% 300%; }
-        #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab:hover {
+        #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab:hover, #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.opened {
           margin-left: 0px; }
+        #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.focus {
+          animation: clickme 2s infinite; }
+@keyframes clickme {
+  0% {
+    transform: translateX(0px); }
+  20% {
+    transform: translateX(10px); }
+  40% {
+    transform: translateX(0px); }
+  60% {
+    transform: translateX(10px); }
+  80% {
+    transform: translateX(0px); } }
+        #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.focus:hover, #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.opened {
+          animation: none; }
         #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-heroes {
           background-position-y: 50%; }
         #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-distinctions {
@@ -512,6 +530,23 @@ html {
 
 #overall-content[data-nplayers="3"] .tavern-cards-holder {
   min-width: 357px; }
+
+#card-overlay {
+  opacity: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  pointer-events: none;
+  transition: opacity 600ms;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  #card-overlay.active {
+    opacity: 1; }
 
 .coin {
   overflow: visible;
@@ -644,7 +679,9 @@ html {
   display: flex;
   margin: 5px 0;
   justify-content: space-around;
-  align-items: center; }
+  align-items: center;
+  height: 50px;
+  transition: height 800ms; }
   .panel-container .bids-zone .bids-zone-tavern-holder {
     width: 78px;
     height: 50px;
@@ -656,7 +693,9 @@ html {
     align-items: center;
     background-repeat: no-repeat;
     padding-right: 5px;
-    position: relative; }
+    position: relative;
+    opacity: 1;
+    transition: opacity 600ms; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-1 {
       background-position-y: 50%; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-2 {
@@ -687,6 +726,17 @@ html {
       background-image: url("img/grades/4.png"); }
     .panel-container .command-zone .command-zone-class[data-class="5"] div {
       background-image: url("img/grades/5.png"); }
+
+#ebd-body[data-tavern="-1"] .panel-container .bids-zone {
+  height: 0px; }
+  #ebd-body[data-tavern="-1"] .panel-container .bids-zone .bids-zone-tavern-holder {
+    opacity: 0; }
+
+#ebd-body[data-tavern="0"] .panel-container .bids-zone .tavern-1, #ebd-body[data-tavern="0"] .panel-container .bids-zone .tavern-2 {
+  opacity: 0; }
+
+#ebd-body[data-tavern="1"] .panel-container .bids-zone .tavern-2 {
+  opacity: 0; }
 
 .gem-container {
   position: absolute;

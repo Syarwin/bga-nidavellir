@@ -66,7 +66,8 @@ define([
         dojo.query('.coin').removeClass('selected selectable');
         dojo.query(".tavern-coin-holder").removeClass("selectable");
         dojo.query(".tavern-cards-holder").removeClass("selectable");
-        dojo.query(".card").removeClass("selectable");
+        dojo.query(".card").removeClass("selectable unselectable");
+        dojo.query(".nid-tab").removeClass("focus");
 
         this.inherited(arguments);
       },
@@ -96,6 +97,7 @@ define([
       udpateInfoCounters(){
         dojo.attr('age-counter', 'data-value', this.gamedatas.age);
         this.turnCounter.toValue(this.gamedatas.turn);
+        dojo.attr('ebd-body', 'data-tavern', this.gamedatas.tavern);
       },
 
 

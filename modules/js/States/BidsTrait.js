@@ -4,7 +4,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._notifications.push(
         ['newTurn', 700],
         ['playerBid', 500],
-        ['revealBids', 1000],
+        ['revealBids', 2000],
         ['recruitStart', 500],
         ['tradeGems', 1500],
         ['clearTurn', 1000],
@@ -19,6 +19,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       debug("Starting a new turn", n);
       n.args.cards.forEach(card => this.addCard(card, card.location, true) );
       this.gamedatas.turn = n.args.turn;
+      this.gamedatas.tavern = n.args.tavern;
       this.udpateInfoCounters();
     },
 
@@ -140,7 +141,11 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_revealBids(n){
       debug("Notif: reveal bids", n);
-      Object.values(n.args.coins).forEach(coin => this.addCoin(coin) );
+      this.gamedatas.tavern = n.args.tavern;
+      this.udpateInfoCounters();
+      setTimeout(() => {
+        Object.values(n.args.coins).forEach(coin => this.addCoin(coin) );
+      }, 1000);
     },
 
     notif_recruitStart(n) {

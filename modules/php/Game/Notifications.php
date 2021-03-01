@@ -31,6 +31,7 @@ class Notifications
     self::notifyAll('newTurn', $msg, [
       'cards' => $cards,
       'turn' => Globals::getTurn(),
+      'tavern' => -1,
     ]);
   }
 
@@ -65,7 +66,8 @@ class Notifications
   }
 
   public static function recruit($player, $card){
-    self::notifyAll('recruit', clienttranslate('${player_name} recruits ${card_class}${card_class_symbol}'), [
+    $type = $card->getClass() == HERO? 'recruitHero' : 'recruit';
+    self::notifyAll($type, clienttranslate('${player_name} recruits ${card_class}${card_class_symbol}'), [
       'player' => $player,
       'card'  => $card,
     ]);
@@ -155,7 +157,7 @@ class Notifications
 
 
   public static function distinction($player, $card){
-    self::notifyAll('recruit', clienttranslate('${player_name} has the strict majority of ${card_class}${card_class_symbol} and wins the corresponding distinction'), [
+    self::notifyAll('distinction', clienttranslate('${player_name} has the strict majority of ${card_class}${card_class_symbol} and wins the corresponding distinction'), [
       'player' => $player,
       'card'  => $card,
     ]);

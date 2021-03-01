@@ -32,7 +32,7 @@ class Globals extends \APP_DbObject
   private static $globals = [
     'currentAge' => 0,
     'currentTurn' => 0,
-    'currentTavern' => 0,
+    'currentTavern' => -1,
     'currentPlayerIndex' => -1,
     'transformValue' => 0,
     'currentDistinction' => 0,
@@ -110,7 +110,7 @@ class Globals extends \APP_DbObject
   public function startNewTurn()
   {
     self::inc('currentTurn');
-    self::set('currentTavern', GOBLIN_TAVERN);
+    self::set('currentTavern', -1);
   }
 
   public function incTavern()

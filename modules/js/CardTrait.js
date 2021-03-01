@@ -13,6 +13,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       this.setupHall();
       this.setupDistinctions();
+      dojo.place("<div id='card-overlay'></div>", "ebd-body");
     },
 
 
@@ -25,6 +26,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         openAnimationTarget:"tab-heroes",
         contents:jstpl_heroesModal,
         closeAction:'hide',
+        statusElt:"tab-heroes",
       });
 
       this.gamedatas.cards.hall.forEach(card => this.addCard(card, card.location));
@@ -44,6 +46,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         openAnimationTarget:"tab-distinctions",
         contents:jstpl_distinctionsModal,
         closeAction:'hide',
+        statusElt:"tab-distinctions",
       });
 
       this.gamedatas.cards.evaluation.forEach(card => this.addCard(card, card.location));
@@ -83,7 +86,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._callbackOnCard = callback;
 
       dojo.query(".card").removeClass("selectable");
-      cards.forEach(cardId => dojo.addClass('card-' + cardId, "selectable") );
+      cards.forEach(cardId => {
+        dojo.removeClass('card-' + cardId, "unselectable");
+        dojo.addClass('card-' + cardId, "selectable");
+      });
     },
 
 

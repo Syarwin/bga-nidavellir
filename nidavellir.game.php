@@ -81,6 +81,7 @@ class Nidavellir extends Table
       'royalTreasure' => NID\Coins::getInLocation('treasure'),
       'age' => Globals::getAge(),
       'turn' => Globals::getTurn(),
+      'tavern' => Globals::getTavern(),
 		];
 	}
 

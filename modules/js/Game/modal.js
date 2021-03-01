@@ -54,11 +54,17 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
 
     onShow:null,
     onHide:null,
+
+    statusElt:null, // If specified, will add/remove "opened" class on this element
   };
 
 
 
   return declare("customgame.modal", null, {
+    _open: false,
+    isDisplayed(){ return this._open;},
+
+
     constructor(id, config){
       if(typeof id == "undefined"){
         console.error("You need an ID to create a modal");
@@ -226,7 +232,11 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
 
 
     show() {
+      if(this.statusElt !== null)
+        dojo.addClass(this.statusElt, "opened"),
+
       this.fadeInAnimation().then(() => {
+        this._open = true;
         if (this.onShow !== null) {
           this.onShow();
         }
@@ -287,9 +297,14 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
     hide() {
       this.fadeOutAnimation().then(() => {
         dojo.style("popin_" + this.id + "_container", "display", "none");
+        this._open = false;
 
         if (this.onHide !== null) {
           this.onHide();
+        }
+
+        if(this.statusElt !== null){
+          dojo.removeClass(this.statusElt, "opened");
         }
       });
     },

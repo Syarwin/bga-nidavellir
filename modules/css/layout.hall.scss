@@ -16,9 +16,34 @@
     background-image:url('img/tabs.png');
     background-size:100% 300%;
 
-    &:hover {
+    &:hover, &.opened {
       margin-left:0px;
     }
+
+    &.focus {
+      animation: clickme 2s infinite;
+      @keyframes clickme {
+        0% {
+          transform:translateX(0px);
+        }
+        20% {
+          transform:translateX(10px);
+        }
+        40% {
+          transform:translateX(0px);
+        }
+        60% {
+          transform:translateX(10px);
+        }
+        80% {
+          transform:translateX(0px);
+        }
+      }
+    }
+    &.focus:hover, &.opened {
+      animation:none;
+    }
+
 
     &#tab-heroes { background-position-y:50%; }
     &#tab-distinctions { background-position-y:100%; }

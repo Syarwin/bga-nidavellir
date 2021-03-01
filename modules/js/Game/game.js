@@ -332,12 +332,15 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
         attach:true,
         pos:null,
         className:'moving',
+        from:null,
         clearPos: true,
       }, options);
 
       const newParent = config.attach? targetId : $(mobile).parentNode;
       this.changeParent(mobile, 'game_play_area');
-      dojo.style(mobile, "zIndex", 1000);
+      if(config.from != null)
+        this.placeOnObject(mobile, config.from);
+      dojo.style(mobile, "zIndex", 5000);
       dojo.addClass(mobile, config.className);
       return new Promise((resolve, reject) => {
         const animation = config.pos == null? this.slideToObject(mobile, targetId, config.duration, config.delay)

@@ -76,7 +76,7 @@
           height:0.8*$hSign;
           display:none;
           margin-left:-8px;
-          
+
           &.selectable {
             display:block;
             border: 2.5px dashed white;
@@ -125,7 +125,8 @@
         overflow: hidden;
         position: relative;
         padding: 7px;
-
+        height: 100%;
+        box-sizing: border-box;
 
         &.selectable {
           animation-name: borderBlink2;

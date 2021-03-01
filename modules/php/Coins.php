@@ -137,4 +137,35 @@ class Coins extends Helpers\Pieces
 
     return self::get($newCoin['id']);
   }
+
+
+
+
+  public static function hunterDistinction($player)
+  {
+    /*
+    TODO
+
+    // Get the old coin
+    $coins = $player->getCoins()->filter(function($coin){ return $coin['value'] == 0; });
+    $oldCoin = $coins[0];
+
+
+    $newCoin = self::get()
+
+    // Put this coin in player's hand
+    self::DB()->update([
+      'pId' => $coin['pId'],
+      'coin_location' => $keepLocation? $coin['location_raw'] : 'hand',
+    ], $newCoin['id']);
+
+    // Do whatever is needed to the old coin
+    self::DB()->update([
+      'pId' => 0,
+      'coin_location' => $coin['type'] == COIN_PLAYER? "discard" : "treasure",
+    ], $coin['id']);
+
+    return self::get($newCoin['id']);
+    */
+  }
 }
