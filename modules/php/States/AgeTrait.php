@@ -57,6 +57,8 @@ trait AgeTrait
 
       Cards::refresh($distinction); // Update location
       Notifications::distinction($player, $distinction);
+
+      $distinction->applyEffect($player);
       $this->nextStateAfterRecruit($distinction, $player);
     }
   }

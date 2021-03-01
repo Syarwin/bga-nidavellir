@@ -8,8 +8,11 @@ use NID\Game\Log;
  * Player: all utility functions concerning a player
  */
 
-class Player
+class Player extends \NID\Helpers\DB_Manager
 {
+  protected static $table = 'player';
+  protected static $primary = 'player_id';
+
   protected $id;
   protected $no; // natural order
   protected $name; // player name
@@ -204,5 +207,10 @@ class Player
   {
     Log::insert($this, 'recruit', ['card' => $card->getUiData()]);
     Cards::recruit($card, $this->id);
+  }
+
+  public function setGemValue($val)
+  {
+    self::DB()->update(['player_gem' => $val], $this->id);
   }
 }

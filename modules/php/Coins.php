@@ -71,6 +71,8 @@ class Coins extends Helpers\Pieces
 
       self::create($coins, ['hand']);
     }
+
+    // TODO : create distinction
 	}
 
 

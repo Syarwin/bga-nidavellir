@@ -7,6 +7,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['revealBids', 2000],
         ['recruitStart', 500],
         ['tradeGems', 1500],
+        ['distinctionGem', 1500],
         ['clearTurn', 1000],
       );
 
@@ -160,6 +161,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this.slide('gem-' + trade[1], 'gem-container-' + trade[2]);
         this.slide('gem-' + trade[3], 'gem-container-' + trade[0]);
       })
+    },
+
+    notif_distinctionGem(n){
+      debug("Notif: distinction gem", n);
+      this.slide('gem-' + n.args.gem, 'page-title', { destroy: true });
+      this.place('jstpl_gem', { value : 6 }, 'gem-container-' + n.args.player_id);
     },
 
 

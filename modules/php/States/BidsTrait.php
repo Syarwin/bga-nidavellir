@@ -164,7 +164,8 @@ trait BidsTrait
       for($i = 0; $i < count($bidders) / 2; $i++){
         $p1 = $bidders[$i];
         $p2 = $bidders[count($bidders) - 1 - $i];
-        $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem() ];
+        if($p1->getGem() != 6 && $p2->getGem() != 6)
+          $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem() ];
       }
       $ties[$bid] = [
         'bidders' => array_map(function($player){ return $player->getName();}, $bidders),

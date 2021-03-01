@@ -412,7 +412,9 @@ html {
             align-items: center;
             overflow: hidden;
             position: relative;
-            padding: 7px; }
+            padding: 7px;
+            height: 100%;
+            box-sizing: border-box; }
             #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-wrapper .tavern-cards-holder.selectable {
               animation-name: borderBlink2;
               animation-duration: 1s;

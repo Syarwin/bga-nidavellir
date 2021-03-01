@@ -5,6 +5,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['recruit', 1000],
         ['recruitHero', 2500],
         ['distinction', 2500],
+        ['distinctionTie', 2500]
       );
       this._activeStates.push("recruitDwarf");
 
@@ -89,6 +90,26 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       setTimeout(() => {
         dojo.removeClass("card-overlay", "active");
         this.slide('card-' + card.id, card.location);
+      }, 1500);
+    },
+
+    notif_distinctionTie(n){
+      debug("Notif: distinction", n);
+      let card = n.args.card;
+
+      dojo.addClass("card-overlay", "active");
+      if(this._distinctionsDialog.isDisplayed()){
+        this.slide("card-" + card.id, "card-overlay");
+        this._distinctionsDialog.hide();
+      } else {
+        this.slide("card-" + card.id, "card-overlay", { from : "tab-distinctions" });
+      }
+
+      setTimeout(() => {
+        dojo.removeClass("card-overlay", "active");
+        this.slide('card-' + card.id, 'page-title', {
+          destroy:true,
+        });
       }, 1500);
     },
 

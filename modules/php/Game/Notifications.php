@@ -149,7 +149,7 @@ class Notifications
 
 
   public static function distinctionTie($distinction, $maxRank){
-    self::notifyAll('discardCards', clienttranslate('${n} players are tied to the majority of ${card_class}${card_class_symbol} hence no one get the distinction card'), [
+    self::notifyAll('distinctionTie', clienttranslate('${n} players are tied to the majority of ${card_class}${card_class_symbol} hence no one get the distinction card'), [
       'n' => count($maxRank),
       'card' => $distinction,
     ]);
@@ -160,6 +160,14 @@ class Notifications
     self::notifyAll('distinction', clienttranslate('${player_name} has the strict majority of ${card_class}${card_class_symbol} and wins the corresponding distinction'), [
       'player' => $player,
       'card'  => $card,
+    ]);
+  }
+
+
+  public static function distinctionGem($player){
+    self::notifyAll('distinctionGem', clienttranslate('${player_name} get the special value gem 6'), [
+      'player' => $player,
+      'gem' => $player->getGem(),
     ]);
   }
 
