@@ -9,8 +9,8 @@ class Kraal extends HeroCard
     $this->name = 'Kraal';
     $this->heroClass = WARRIOR;
     $this->grade = [
-      [7],
-      [0],
+      7,
+      0,
     ];
   }
 }

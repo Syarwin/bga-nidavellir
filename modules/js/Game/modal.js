@@ -323,6 +323,10 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
 
         dojo.disconnect(this.resizeListener);
         this.id = null;
+
+        if(this.statusElt !== null){
+          dojo.removeClass(this.statusElt, "opened");
+        }
       });
     },
   });

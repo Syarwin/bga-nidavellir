@@ -9,7 +9,7 @@ class Tarah extends HeroCard
     $this->name = 'Tarah';
     $this->heroClass = WARRIOR;
     $this->grade = [
-      [14],
+      14,
     ];
   }
 }

@@ -10,7 +10,7 @@ class Grid extends HeroCard
     $this->name = 'Grid';
     $this->heroClass = NEUTRAL;
     $this->grade = [
-      [7]
+      7
     ];
   }
 

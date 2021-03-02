@@ -22,5 +22,7 @@ class view_nidavellir_nidavellir extends game_view
   }
 
   function build_page($viewArgs){
+    $this->tpl['TURN'] = self::_("Turn");
+    $this->tpl['SCORE'] = self::_("Score");
   }
 }

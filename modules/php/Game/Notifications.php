@@ -172,6 +172,14 @@ class Notifications
   }
 
 
+  public static function updateScores($scores, $ranks){
+    self::notifyAll('updateScores', '', [
+      'scores' => $scores,
+      'ranks' => $ranks,
+    ]);
+  }
+
+
   /*
    * Automatically adds some standard field about player and/or card
    */

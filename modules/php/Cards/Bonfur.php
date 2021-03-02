@@ -9,9 +9,9 @@ class Bonfur extends HeroCard
     $this->name = 'Bonfur';
     $this->heroClass = BLACKSMITH;
     $this->grade = [
-      [null],
-      [null],
-      [null],
+      null,
+      null,
+      null,
     ];
   }
 

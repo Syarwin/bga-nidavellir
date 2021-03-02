@@ -1,15 +1,11 @@
 define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.playerTrait", null, {
     constructor(){
-      /*
       this._notifications.push(
-        ['newHand', 100],
-        ['giveCard', 1000],
-        ['receiveCard', 1000]
+        ['updateScores', 100],
       );
-      this._callbackOnCard = null;
-      this._selectableCards = [];
-      */
+      this._scoresCounters = {};
+      this._ranksCounters = {};
     },
 
     setupPlayers(){
@@ -18,7 +14,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       var currentPlayerNo = players.reduce((carry, player) => (player.id == this.player_id) ? player.no : carry, 0);
 
       dojo.attr('overall-content', 'data-nplayers', nPlayers);
-      players.forEach(player => {
+      this.forEachPlayer(player => {
         player.no = (player.no + nPlayers - currentPlayerNo) % nPlayers;
 
         this.place('jstpl_playerPanel', player, "overall_player_board_" + player.id);
@@ -34,7 +30,43 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this.place('jstpl_playerBoard', player, "player-boards");
         Object.values(player.cards).forEach(card => this.addCard(card, card.location) );
       });
+
+      this.setupPlayersScores();
+      this.updatePlayersScores();
     },
 
+    setupPlayersScores(){
+      this.forEachPlayer(player => {
+        this._scoresCounters[player.id] = {};
+        this._ranksCounters[player.id] = {};
+
+        for(var i = 0; i < 6; i++){
+          this._scoresCounters[player.id][i] = new ebg.counter();
+          this._scoresCounters[player.id][i].create('command-zone-score_' + player.id + '_' + i);
+
+          this._ranksCounters[player.id][i] = new ebg.counter();
+          this._ranksCounters[player.id][i].create('command-zone-ranks_' + player.id + '_' + i);
+        }
+      });
+    },
+
+    updatePlayersScores(){
+      this.forEachPlayer(player => {
+        for(var i = 0; i < 6; i++){
+          this._scoresCounters[player.id][i].toValue(player.scores[i]);
+          this._ranksCounters[player.id][i].toValue(player.ranks[i]);
+        }
+      });
+    },
+
+    notif_updateScores(n){
+      debug("Notif: updating scores", n);
+      this.forEachPlayer(player => {
+        this.gamedatas.players[player.id].scores = n.args.scores[player.id];
+        this.gamedatas.players[player.id].ranks = n.args.ranks[player.id];
+        this.scoreCtrl[player.id].toValue(n.args.scores[player.id].total);
+      });
+      this.updatePlayersScores();
+    },
   });
 });

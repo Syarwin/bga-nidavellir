@@ -2,25 +2,23 @@
   display:flex;
   align-items: center;
   justify-content: center;
+  margin:auto;
 
   #taverns-pre-bids-zone {
-    height: 300px;
+    height: 310px;
     width: 0px;
     overflow: hidden;
-    background: #ebd5bd;
-    transition: width 1s, border 1s;
-    border-radius: 10px;
-    border:none;
-    box-shadow: 1px 1px 7px -2px black;
+    transition: width 1s;
     margin: 20px;
     display: flex;
     flex-flow: column;
     justify-content: space-evenly;
     align-items: center;
+    background-image:url('img/pre_bids.png');
+    background-size:100% 100%;
 
     &.active {
-      width:70px;
-      border: 1px solid #6c3504;
+      width:80px;
     }
   }
 
@@ -29,10 +27,40 @@
     grid-template-columns: $wSign auto;
     grid-template-rows: 180px 180px 180px;
     grid-row-gap: 7px;
+    position:relative;
 
     & > * {
       box-sizing: border-box;
     }
+
+    #age-counter {
+      position: absolute;
+      width: 48px;
+      height: 70px;
+      background-image: url("img/ages.jpg");
+      background-size: cover;
+      vertical-align: middle;
+      transform: rotate(8deg);
+      border-radius: 4px;
+      box-shadow: 1px 1px 4px 0px black;
+      right: 14px;
+      z-index: -1;
+      top: -48px;
+
+      &[data-value="2"] { background-position-x:100%; }
+    }
+
+
+    #turn-counter-holder {
+      position: absolute;
+      right: 77px;
+      top: -39px;
+      font-weight: bold;
+      font-family: "Norse";
+      font-size: 29px;
+      text-shadow: 0px 0px 16px #215ac6;
+    }
+
 
     .tavern-sign-holder {
       grid-column: 1;

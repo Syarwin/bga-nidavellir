@@ -9,8 +9,8 @@ class Aegur extends HeroCard
     $this->name = 'Aëgur';
     $this->heroClass = BLACKSMITH;
     $this->grade = [
-      [null],
-      [null],
+      null,
+      null,
     ];
   }
 }

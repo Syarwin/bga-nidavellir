@@ -58,6 +58,9 @@ define([
         this.setupInfoPanel();
         this.udpateInfoCounters();
 
+        if(!gamedatas.expansion)
+          dojo.destroy('tab-camp');
+
         this.inherited(arguments);
       },
 
@@ -84,7 +87,7 @@ define([
           'turn' : _('Turn'),
         }, 'player_boards', 'first');
         dojo.connect($('show-settings'), 'onclick', () => this.toggleControls() );
-        dojo.connect($('show-overview'), 'onclick', () => this.showOverview() );
+        dojo.connect($('tab-score'), 'onclick', () => this.showOverview() );
         this.turnCounter = new ebg.counter();
         this.turnCounter.create('turn-counter');
 
@@ -122,17 +125,19 @@ define([
           class:"nidavellir_popin",
           closeIcon:'fa-times',
           openAnimation:true,
-          openAnimationTarget:"show-overview",
+          openAnimationTarget:"tab-score",
           contents:jstpl_overview,
+          statusElt:'tab-score',
         });
 
         for(var pId in this.gamedatas.players){
           let player = this.gamedatas.players[pId];
 
           dojo.place('<th>' + player.name + '</th>', 'overview-headers');
-          for(var i = 0; i < 7; i++){
+          for(var i = 0; i < 8; i++){
             dojo.place('<td>' + i + '</td>', "overview-row-" + i);
           }
+          dojo.place('<td>' + i + '</td>', "overview-total");
         }
 
 

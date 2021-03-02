@@ -40,4 +40,8 @@ abstract class HeroCard extends AbstractCard
   public function canBeRecruited($player){
     return true;
   }
+
+  public function updateBraveryValues(&$values){
+    $values[$this->heroClass] += $this->getBV();
+  }
 }

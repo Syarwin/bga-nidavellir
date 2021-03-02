@@ -32,7 +32,7 @@ class Players extends \NID\Helpers\DB_Manager
     $values = [];
     foreach ($players as $pId => $player) {
       $color = array_shift($colors);
-      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 1, array_shift($gems)];
+      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 5, array_shift($gems)];
     }
     $query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors']);
@@ -95,6 +95,16 @@ class Players extends \NID\Helpers\DB_Manager
     return null; // TODO
   }
 
+
+  public function getMaxWarriorRank()
+  {
+    $maxWarrior = 0;
+    foreach(Players::getAll() as $player){
+      $maxWarrior = max($maxWarrior, $player->getRanks()[WARRIOR]);
+    }
+    return $maxWarrior;
+  }
+
   /*
    * Return the number of players
    */
@@ -123,5 +133,23 @@ class Players extends \NID\Helpers\DB_Manager
       self::DB()->update(['player_gem' => $trade[3]], $trade[0]);
       self::DB()->update(['player_gem' => $trade[1]], $trade[2]);
     }
+  }
+
+
+
+  /*
+   * Update scores UI
+   */
+  public function updateScores()
+  {
+    $scores = [];
+    $ranks = [];
+    foreach(self::getAll() as $pId => $player){
+      $scores[$pId] = $player->getScores();
+      $ranks[$pId] = $player->getRanks();
+      self::DB()->update(['player_score' => $scores[$pId]['total']], $pId);
+    }
+
+    Notifications::updateScores($scores, $ranks);
   }
 }

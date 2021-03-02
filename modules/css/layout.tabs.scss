@@ -5,6 +5,7 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
+  margin-right:auto;
 
 
   .nid-tab {
@@ -14,7 +15,7 @@
     cursor:pointer;
     transition: margin 0.3s;
     background-image:url('img/tabs.png');
-    background-size:100% 300%;
+    background-size:100% 400%;
 
     &:hover, &.opened {
       margin-left:0px;
@@ -45,7 +46,17 @@
     }
 
 
-    &#tab-heroes { background-position-y:50%; }
-    &#tab-distinctions { background-position-y:100%; }
+    &#tab-heroes { background-position-y:calc(100% / 3); }
+    &#tab-distinctions { background-position-y:calc(2 * 100% / 3); }
+    &#tab-score {
+      background-position-y: 100%;
+      text-transform: capitalize;
+      font-size: 30px;
+      font-family: "Norse";
+      font-weight: bold;
+      line-height: 113px;
+      text-indent: 53px;
+      text-shadow: 0px 0px 19px white;
+    }
   }
 }

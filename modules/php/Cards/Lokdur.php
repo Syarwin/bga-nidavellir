@@ -9,7 +9,7 @@ class Lokdur extends HeroCard
     $this->name = 'Lokdur';
     $this->heroClass = MINER;
     $this->grade = [
-      [3]
+      3
     ];
   }
 }

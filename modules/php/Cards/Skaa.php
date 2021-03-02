@@ -9,7 +9,7 @@ class Skaa extends HeroCard
     $this->name = 'Skaa';
     $this->heroClass = NEUTRAL;
     $this->grade = [
-      [17]
+      17
     ];
   }
 }

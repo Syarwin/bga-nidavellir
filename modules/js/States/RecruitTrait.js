@@ -61,6 +61,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       let card = n.args.card;
 
       dojo.addClass("card-overlay", "active");
+      dojo.removeClass("card-" + card.id, "selectable selected");
       if(this._heroesDialog.isDisplayed()){
         this.slide("card-" + card.id, "card-overlay");
         this._heroesDialog.hide();

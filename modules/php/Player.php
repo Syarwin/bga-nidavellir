@@ -3,6 +3,7 @@ namespace NID;
 use NID\Coins;
 use NID\Game\Globals;
 use NID\Game\Log;
+use NID\Game\Players;
 
 /*
  * Player: all utility functions concerning a player
@@ -18,6 +19,7 @@ class Player extends \NID\Helpers\DB_Manager
   protected $name; // player name
   protected $color;
   protected $eliminated = false;
+  protected $score = 0;
   protected $zombie = false;
   protected $gem = 0;
 
@@ -28,6 +30,7 @@ class Player extends \NID\Helpers\DB_Manager
       $this->name = $row['player_name'];
       $this->color = $row['player_color'];
       $this->eliminated = $row['player_eliminated'] == 1;
+      $this->score = $row['player_score'];
       $this->zombie = $row['player_zombie'] == 1;
       $this->gem = $row['player_gem'];
     }
@@ -57,6 +60,9 @@ class Player extends \NID\Helpers\DB_Manager
       'coins'     => $this->getVisibleCoins($current),
       'cards'     => $this->getCards()->ui(),
       'gem'       => $this->gem,
+      'score'     => $this->score,
+      'scores'    => $this->getScores(),
+      'ranks'     => $this->getRanks(),
     ];
   }
 
@@ -74,6 +80,17 @@ class Player extends \NID\Helpers\DB_Manager
   public function getCoins()
   {
     return Coins::getOfPlayer($this->id);
+  }
+
+  public function getMaxCoin()
+  {
+     return $this->getCoins()->reduce(function($carry, $coin){ return max($carry, $coin['value']); }, 0);
+  }
+
+
+  public function getTotalCoinsValue()
+  {
+     return $this->getCoins()->reduce(function($carry, $coin){ return $carry + $coin['value']; }, 0);
   }
 
   public function getVisibleCoins($current = false)
@@ -144,7 +161,7 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function getRanks()
   {
-    $ranks = [100, 0, 0, 0, 0, 0];
+    $ranks = [0, 0, 0, 0, 0, 0];
     foreach($this->getCards() as $card){
       $card->updateRanks($ranks);
     }
@@ -152,10 +169,23 @@ class Player extends \NID\Helpers\DB_Manager
     return $ranks;
   }
 
+
+  public function getBraveryValues()
+  {
+    $values = [0, 0, 0, 0, 0, 0];
+    foreach($this->getCards() as $card){
+      $card->updateBraveryValues($values);
+    }
+
+    return $values;
+  }
+
+
   public function countLines()
   {
     $ranks = $this->getRanks();
-
+    $ranks[NEUTRAL] = 100; // Neutral does not count in lines
+    
     return min($ranks);
   }
 
@@ -186,6 +216,35 @@ class Player extends \NID\Helpers\DB_Manager
   {
     $stacks = $this->getDiscardableStacks();
     return Cards::getTopOfStacks($this->id, $stacks);
+  }
+
+
+  public function getScores()
+  {
+    $ranks = $this->getRanks();
+    $values = $this->getBraveryValues();
+    $blacksmithScores = [0, 3, 7, 12, 18, 25, 33, 42, 52, 63, 75, 88, 102, 117, 133, 150];
+    $hunterScores = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225];
+    $maxWarrior = Players::getMaxWarriorRank();
+
+    $scores = [
+      NEUTRAL => $values[NEUTRAL],
+      BLACKSMITH => $blacksmithScores[$ranks[BLACKSMITH]],
+      HUNTER => $hunterScores[$ranks[HUNTER]],
+      EXPLORER => $values[EXPLORER],
+      MINER => $values[MINER] * $ranks[MINER],
+      WARRIOR => $values[WARRIOR] + ($maxWarrior == $ranks[WARRIOR]? $this->getMaxCoin() : 0),
+      EXTRA_SCORE => $this->getTotalCoinsValue() + ($this->getGem() == 6? 3 : 0)
+    ];
+
+    foreach($this->getCards() as $card){
+      $card->updateScores($scores);
+    }
+
+    $scores['total'] = $scores[NEUTRAL] + $scores[BLACKSMITH] + $scores[HUNTER]
+      + $scores[EXPLORER] + $scores[MINER] + $scores[WARRIOR] + $scores[EXTRA_SCORE];
+
+    return $scores;
   }
 
 /*************************

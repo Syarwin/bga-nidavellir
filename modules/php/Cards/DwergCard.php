@@ -1,19 +1,18 @@
 <?php
 namespace NID\Cards;
 
-class Thrud extends HeroCard
+/*
+ * DwergCard: same behavior for all dwerg brothers
+ */
+
+abstract class DwergCard extends HeroCard
 {
   public function __construct($row) {
     parent::__construct($row);
-    $this->id = THRUD;
-    $this->name = 'Thrud';
+    $this->name = 'Dwerg';
     $this->heroClass = NEUTRAL;
     $this->grade = [
-      13
+      null,
     ];
-  }
-
-  public function stateAfterRecruit(){
-    return 'placeThrud';
   }
 }

@@ -9,7 +9,7 @@ class Idunn extends HeroCard
     $this->name = 'Idunn';
     $this->heroClass = EXPLORER;
     $this->grade = [
-      [7]
+      7
     ];
   }
 

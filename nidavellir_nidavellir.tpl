@@ -7,6 +7,7 @@
         <div class="nid-tab" id="tab-camp"></div>
         <div class="nid-tab" id="tab-heroes"></div>
         <div class="nid-tab" id="tab-distinctions"></div>
+        <div class="nid-tab" id="tab-score">{SCORE}</div>
       </div>
 
       <div id="treasure-container">
@@ -21,6 +22,11 @@
         <div id="taverns-pre-bids-zone"></div>
 
         <div id="taverns">
+          <div id="turn-counter-holder">
+            {TURN}
+            <span id="turn-counter"></span>
+          </div>
+          <div id="age-counter"></div>
 
           <div class="tavern-sign-holder">
             <div class="tavern-mount"></div>
@@ -125,13 +131,87 @@ var jstpl_rank = `
 
 var jstpl_playerBoard = `
 <div id="player-board-\${no}" data-color="\${color}" class="nidavellir-player-board">
-  <div class="cards-class" id="command-zone_\${id}_0"></div>
-  <div class="cards-class" id="command-zone_\${id}_1"></div>
-  <div class="cards-class" id="command-zone_\${id}_2"></div>
-  <div class="cards-class" id="command-zone_\${id}_3"></div>
-  <div class="cards-class" id="command-zone_\${id}_4"></div>
-  <div class="cards-class" id="command-zone_\${id}_5"></div>
-  <div class="cards-class" id="command-zone_\${id}_6"></div>
+  <div class="player-board-name" style="color:#\${color}">\${name}</div>
+
+  <div class="command-zone-container">
+    <div class="cards-class-header card-class_1">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_1"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_1"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+    <div class="cards-class-header card-class_2">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_2"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_2"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="cards-class-header card-class_3">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_3"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_3"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="cards-class-header card-class_4">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_4"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_4"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="cards-class-header card-class_5">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_5"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_5"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="cards-class-header card-class_0">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_0"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_0"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="cards-class card-class_1" id="command-zone_\${id}_1"></div>
+    <div class="cards-class card-class_2" id="command-zone_\${id}_2"></div>
+    <div class="cards-class card-class_3" id="command-zone_\${id}_3"></div>
+    <div class="cards-class card-class_4" id="command-zone_\${id}_4"></div>
+    <div class="cards-class card-class_5" id="command-zone_\${id}_5"></div>
+    <div class="cards-class card-class_0" id="command-zone_\${id}_0"></div>
+  </div>
 </div>
 `
 
@@ -140,28 +220,8 @@ var jstpl_playerBoard = `
 var jstpl_configPlayerBoard = `
 <div class='player-board' id="player_board_config">
   <div id="player_config" class="player_board_content">
-    <div id="player_info_row">
-      <div id="age-counter-holder">
-        \${age}
-        <span id="age-counter"></span>
-      </div>
-
-      <div id="turn-counter-holder">
-        \${turn}
-        <span id="turn-counter"></span>
-      </div>
-    </div>
 
     <div id="player_config_row">
-      <div id="show-overview">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-          <g class="fa-group">
-            <path class="fa-secondary" fill="currentColor" d="M0 192v272a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V192zm324.13 141.91a11.92 11.92 0 0 1-3.53 6.89L281 379.4l9.4 54.6a12 12 0 0 1-17.4 12.6l-49-25.8-48.9 25.8a12 12 0 0 1-17.4-12.6l9.4-54.6-39.6-38.6a12 12 0 0 1 6.6-20.5l54.7-8 24.5-49.6a12 12 0 0 1 21.5 0l24.5 49.6 54.7 8a12 12 0 0 1 10.13 13.61zM304 128h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16zm-192 0h32a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-32a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16z" opacity="0.4"></path>
-            <path class="fa-primary" fill="currentColor" d="M314 320.3l-54.7-8-24.5-49.6a12 12 0 0 0-21.5 0l-24.5 49.6-54.7 8a12 12 0 0 0-6.6 20.5l39.6 38.6-9.4 54.6a12 12 0 0 0 17.4 12.6l48.9-25.8 49 25.8a12 12 0 0 0 17.4-12.6l-9.4-54.6 39.6-38.6a12 12 0 0 0-6.6-20.5zM400 64h-48v48a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V64H160v48a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16V64H48a48 48 0 0 0-48 48v80h448v-80a48 48 0 0 0-48-48z"></path>
-          </g>
-        </svg>
-      </div>
-
       <div id="show-settings">
         <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
           <g>
@@ -189,25 +249,31 @@ var jstpl_overview = `
   </thead>
   <tbody id="player-overview-body">
     <tr id="overview-row-1">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-2">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-3">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-4">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-5">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-0">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-6">
-      <td class="row-header"><div class="row-rank"><div class="rank-symbol"></div></div></td>
+      <td class="row-header"><div class="row-rank"></div></td>
+    </tr>
+    <tr id="overview-row-7">
+      <td class="row-header"><div class="row-rank"></div></td>
+    </tr>
+    <tr id="overview-total">
+      <td class="row-header"></td>
     </tr>
   </tbody>
 </table>

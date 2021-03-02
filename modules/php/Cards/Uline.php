@@ -9,7 +9,7 @@ class Uline extends HeroCard
     $this->name = 'Uline';
     $this->heroClass = NEUTRAL;
     $this->grade = [
-      [9]
+      9
     ];
   }
 

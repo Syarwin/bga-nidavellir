@@ -76,6 +76,7 @@ class Nidavellir extends Table
 	protected function getAllDatas(){
     $pId = self::getCurrentPId();
 		return [
+      'expansion' => Globals::isExpansion(),
 			'players' => Players::getUiData($pId),
       'cards' => Cards::getUiData(),
       'royalTreasure' => NID\Coins::getInLocation('treasure'),

@@ -66,6 +66,12 @@ class Globals extends \APP_DbObject
   /*
    * Getters
    */
+  public function isExpansion()
+  {
+   return false;
+  }
+
+
   public function getAge()
   {
     return (int) self::get('currentAge');

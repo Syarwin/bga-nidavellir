@@ -8,7 +8,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['recruitStart', 500],
         ['tradeGems', 1500],
         ['distinctionGem', 1500],
-        ['clearTurn', 1000],
+        ['clearTurn', 1500],
       );
 
       this._selectedCoin = null;

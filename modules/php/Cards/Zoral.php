@@ -9,9 +9,9 @@ class Zoral extends HeroCard
     $this->name = 'Zoral';
     $this->heroClass = MINER;
     $this->grade = [
-      [1],
-      [0],
-      [0],
+      1,
+      0,
+      0,
     ];
   }
 }

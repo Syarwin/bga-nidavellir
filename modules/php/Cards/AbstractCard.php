@@ -37,7 +37,8 @@ class AbstractCard
   public function getId(){ return $this->id; }
   public function getClass(){ return $this->class; }
   public function getRanks(){ return is_array($this->grade)? count($this->grade) : 0; }
-  public function getBP(){
+  public function getBV(){
+    //var_dump($this->grade);
     return is_array($this->grade)?
       array_reduce($this->grade, function($carry, $rank){ return $carry + $rank; }, 0)
       : 0;
@@ -61,6 +62,14 @@ class AbstractCard
   public function updateRanks(&$ranks){
     $ranks[$this->class] += $this->getRanks();
   }
+
+  public function updateBraveryValues(&$values){
+    $values[$this->class] += $this->getBV();
+  }
+
+  public function updateScores(&$scores){
+  }
+
 
   public function stateAfterRecruit(){
     return null;

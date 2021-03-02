@@ -60,6 +60,9 @@ define('HERO', 7);
 define('DISTINCTION', 8);
 
 
+define('EXTRA_SCORE', 7);
+
+
 /*
  * Type of coins
  */

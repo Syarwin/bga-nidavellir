@@ -56,7 +56,7 @@ trait TradeCoinTrait
 
     $newCoin = Coins::trade($coin, $coin['value'] + Globals::getTransformValue(), true);
     Notifications::transformCoin($player, $coin, $newCoin);
-
+    Players::updateScores();
 
     if($player->canRecruitHero())
       $this->gamestate->nextState('hero');

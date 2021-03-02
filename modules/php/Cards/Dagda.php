@@ -9,9 +9,9 @@ class Dagda extends HeroCard
     $this->name = 'Dagda';
     $this->heroClass = HUNTER;
     $this->grade = [
-      [null],
-      [null],
-      [null],
+      null,
+      null,
+      null,
     ];
   }
 

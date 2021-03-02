@@ -9,7 +9,7 @@ class Hourya extends HeroCard
     $this->name = 'Hourya';
     $this->heroClass = EXPLORER;
     $this->grade = [
-      [20]
+      20
     ];
   }
 

@@ -8,13 +8,18 @@
     #exterior {
       display: flex;
       position: relative;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
 
       @import "layout.treasure";
       @import "layout.taverns";
-      @import "layout.hall";
+      @import "layout.tabs";
+
+      @media (max-width: 1650px) {
+        #treasure-container { order:3; }
+        #taverns-container { order:2; }
+      }
     }
   }
 
@@ -40,6 +45,7 @@
         }
       }
 
+
       &::before {
         content:'';
         display:block;
@@ -55,30 +61,122 @@
       &[data-color="0000ff"]::before {  filter:drop-shadow(2px 2px 4px black)  hue-rotate(171deg); }
       &[data-color="ff0000"]::before {  filter:drop-shadow(2px 2px 4px black)  hue-rotate(-18deg); }
 
-      .cards-class {
-        width:$wCard;
-        margin: $scale*40px $scale*15px 0px;
-        z-index: 2;
+      .player-board-name {
+        position: absolute;
+        top: 20px;
+        left: -2px;
+        background: #ffffffb0;
+        padding: 5px 20px;
+        text-indent: 10px;
+        box-shadow: 2px 2px 9px -1px #00000080;
+        font-family: "Norse";
+        font-weight: bold;
+        font-size: 22px;
+      }
 
-        .card {
-          @for $i from 0 through 3 {
-            &[data-ranks="#{$i}"] {
-              margin-bottom:-$hCard + $i*0.16*$hCard;
+      .command-zone-container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        margin-top: 40px;
+        grid-gap: 5px;
+        width:100%;
+
+        .cards-class-header {
+          width:90%;
+          display:flex;
+          justify-content: space-between;
+          font-family: "Norse";
+          font-weight:bold;
+          margin:auto;
+          font-size:19px;
+          &.card-class_0 .card-class-ranks { visibility: hidden; }
+
+          .card-class-ranks {
+            display:flex;
+
+            .rank {
+              width: 30px;
+              height: 29px;
+              background-image: url("img/ranks_scoring.png");
+              background-size: 100% 800%;
+              margin-bottom: -6px;
+            }
+
+            span {
+              margin-left:2px;
+              &::before {
+                content: '×';
+                margin-right: 2px;
+              }
             }
           }
 
-          &:last-of-type {
-            margin-bottom: 60px;
+          @for $i from 0 through 5 {
+            &.card-class_#{$i} .rank { background-position-y: $i * 100% / 7; }
           }
 
-          &.selectable {
-            animation: pulse 2s infinite;
-            @keyframes pulse {
-              0% {
-                box-shadow: 0 0 0 2px #ffc400;
+
+          i {
+            color: #555;
+            font-size: 14px;
+          }
+        }
+
+        .cards-class {
+          border: 1px solid #0000001c;
+          border-radius: 5px;
+          z-index: 2;
+          padding-top:10px;
+          position:relative;
+          min-height:160px;
+
+          &.card-class_0 { border-color:#848484; }
+          &.card-class_1 { border-color:#806ec6; }
+          &.card-class_2 { border-color:#09b36d; }
+          &.card-class_3 { border-color:#4998cc; }
+          &.card-class_4 { border-color:#d98e25; }
+          &.card-class_5 { border-color:#e62f1d; }
+
+          &::before {
+            content:'';
+            display:block;
+            position:absolute;
+            z-index:-1;
+            width:60px;
+            height:60px;
+            top:calc(50% - 30px);
+            left:calc(50% - 30px);
+            background-image:url('img/classes.png');
+            background-size:cover;
+            opacity:0.5;
+            filter:grayscale(0.2);
+          }
+
+          @for $i from 0 through 5 {
+            &.card-class_#{$i}::before { background-position-y: $i * 100% / 5; }
+          }
+
+
+          .card {
+            @for $i from 0 through 3 {
+              &[data-ranks="#{$i}"] {
+                margin-bottom:-$hCard + $i*0.16*$hCard;
               }
-              80% {
-                box-shadow: 0 0 0 10px transparent;
+            }
+
+            &:last-of-type {
+              margin-bottom: 10px;
+            }
+
+            &.selectable {
+              animation: pulse 2s infinite;
+              @keyframes pulse {
+                0% {
+                  box-shadow: 0 0 0 2px #ffc400;
+                }
+                80% {
+                  box-shadow: 0 0 0 10px transparent;
+                }
               }
             }
           }

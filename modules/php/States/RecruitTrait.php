@@ -48,6 +48,7 @@ trait RecruitTrait
 
     Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
+    Players::updateScores();
 
     if($card->getClass() == ROYAL_OFFER){
       Globals::setTransformValue($card->getValue());
@@ -113,6 +114,7 @@ trait RecruitTrait
     $cards = Cards::get($cardIds);
     Cards::discard($cardIds);
     Notifications::discardCards($player, $cards);
+    Players::updateScores();
     $nextState = $player->canRecruitHero()? 'hero' : 'trade';
     $this->gamestate->nextState($nextState);
   }

@@ -9,8 +9,8 @@ class Aral extends HeroCard
     $this->name = 'Aral';
     $this->heroClass = HUNTER;
     $this->grade = [
-      [null],
-      [null],
+      null,
+      null,
     ];
   }
 }
