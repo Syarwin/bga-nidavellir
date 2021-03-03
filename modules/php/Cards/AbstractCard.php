@@ -63,12 +63,11 @@ class AbstractCard
     $ranks[$this->class] += $this->getRanks();
   }
 
-  public function updateBraveryValues(&$values){
+  public function updateBraveryValues(&$values, $player){
     $values[$this->class] += $this->getBV();
   }
 
-  public function updateScores(&$scores){
-  }
+  public function updateScores(&$scores, $player){}
 
 
   public function stateAfterRecruit(){

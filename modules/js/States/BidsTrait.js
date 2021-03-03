@@ -19,6 +19,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_newTurn(n){
       debug("Starting a new turn", n);
       n.args.cards.forEach(card => this.addCard(card, card.location, true) );
+      this.gamedatas.age = n.args.age;
       this.gamedatas.turn = n.args.turn;
       this.gamedatas.tavern = n.args.tavern;
       this.udpateInfoCounters();

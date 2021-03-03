@@ -514,6 +514,7 @@ html {
       width: 750px;
       padding: 20px;
       min-height: 245px;
+      margin-bottom: 20px;
       position: relative;
       display: flex;
       align-items: flex-start; }
@@ -661,10 +662,21 @@ html {
   80% {
     box-shadow: 0 0 0 10px transparent; } }
 #overall-content[data-nplayers="2"] .tavern-cards-holder {
-  min-width: 357px; }
+  min-width: 367.5px; }
 
 #overall-content[data-nplayers="3"] .tavern-cards-holder {
-  min-width: 357px; }
+  min-width: 367.5px; }
+
+#overall-content[data-nplayers="4"] .tavern-cards-holder {
+  min-width: 490px; }
+
+#overall-content[data-nplayers="5"] .tavern-cards-holder {
+  min-width: 612.5px; }
+
+#ebd-body:not(.nidavellir-expansion) #tab-camp {
+  display: none !important; }
+#ebd-body:not(.nidavellir-expansion) #overview-row-6 {
+  display: none !important; }
 
 #card-overlay {
   opacity: 0;
@@ -1165,25 +1177,30 @@ html {
         #popin_showHeroes #popin_showHeroes_contents #hall-container #hall .card {
           margin: 10px 10.5px; }
 
-#popin_showDistinctions {
+#popin_showDistinctions, #popin_distinctionExplorer {
   z-index: 2000;
   padding: 0;
   width: 420px;
   background-image: url("img/background_distinctions.png");
   background-size: 100% 100%;
   filter: drop-shadow(3px 3px 10px black); }
-  #popin_showDistinctions #popin_showDistinctions_contents {
+  #popin_showDistinctions #popin_showDistinctions_contents, #popin_showDistinctions #popin_distinctionExplorer_contents, #popin_distinctionExplorer #popin_showDistinctions_contents, #popin_distinctionExplorer #popin_distinctionExplorer_contents {
     padding: 15px; }
-    #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container {
+    #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container, #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container, #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container, #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container {
       width: 400px;
       height: auto;
       position: relative; }
-      #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation {
+      #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation, #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container #evaluation, #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container #evaluation, #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container #evaluation {
         display: flex;
         flex-flow: row;
         flex-wrap: wrap; }
-        #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation .card {
+        #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation .card, #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container #evaluation .card, #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container #evaluation .card, #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container #evaluation .card {
           margin: 15px; }
+  #popin_showDistinctions #popin_distinctionExplorer_contents, #popin_distinctionExplorer #popin_distinctionExplorer_contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px; }
 
 .notransition {
   -webkit-transition: none !important;

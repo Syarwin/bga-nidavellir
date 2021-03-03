@@ -51,6 +51,7 @@ define([
       setup(gamedatas) {
       	debug('SETUP', gamedatas);
 
+        this.setupOverview();
         this.setupPlayers();
         this.setupCards();
 
@@ -58,8 +59,7 @@ define([
         this.setupInfoPanel();
         this.udpateInfoCounters();
 
-        if(!gamedatas.expansion)
-          dojo.destroy('tab-camp');
+        dojo.toggleClass("ebd-body", "nidavellir-expansion", gamedatas.expansion);
 
         this.inherited(arguments);
       },
@@ -71,12 +71,14 @@ define([
         dojo.query(".tavern-cards-holder").removeClass("selectable");
         dojo.query(".card").removeClass("selectable unselectable");
         dojo.query(".nid-tab").removeClass("focus");
+        if(this._distinctionExplorerCards != null)
+          this._distinctionExplorerModal.destroy();
 
         this.inherited(arguments);
       },
 
       onUpdateActionButtons(){
-        this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
+//        this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
         this.inherited(arguments);
       },
 
@@ -119,15 +121,15 @@ define([
       /*
        * Display a table with a nice overview of current situation for everyone
        */
-      showOverview(){
-        debug("Showing overview:");
-        var dial = new customgame.modal("showOverview", {
+      setupOverview(){
+        this._overviewModal = new customgame.modal("showOverview", {
           class:"nidavellir_popin",
           closeIcon:'fa-times',
           openAnimation:true,
           openAnimationTarget:"tab-score",
           contents:jstpl_overview,
           statusElt:'tab-score',
+          closeAction:'hide',
         });
 
         for(var pId in this.gamedatas.players){
@@ -135,20 +137,27 @@ define([
 
           dojo.place('<th>' + player.name + '</th>', 'overview-headers');
           for(var i = 0; i < 8; i++){
-            dojo.place('<td>' + i + '</td>', "overview-row-" + i);
+            dojo.place('<td id="overview-' + pId + '-'+ i + '"></td>', "overview-row-" + i);
           }
-          dojo.place('<td>' + i + '</td>', "overview-total");
+          dojo.place('<td id="overview-' + pId + '-total"></td>', "overview-total");
         }
+      },
 
-
+      showOverview(){
+        debug("Showing overview:");
+/*
         let box = $("ebd-body").getBoundingClientRect();
         let modalWidth = 1000;
         let newModalWidth = box['width']*0.8;
         let modalScale = newModalWidth / modalWidth;
         if(modalScale > 1) modalScale = 1;
         dojo.style("popin_showOverview", "transform", `scale(${modalScale})`);
+*/
+        this._overviewModal.show();
+      },
 
-        dial.show();
+      onEnteringStatePreEndOfGame(){
+        this.showOverview();
       },
 
 

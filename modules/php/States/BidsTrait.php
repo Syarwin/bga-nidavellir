@@ -196,8 +196,10 @@ trait BidsTrait
       // If all players already played this turn, trade gems
       $ties = Log::getTies();
       foreach($ties as $bid => $info){
-        Players::tradeGems($info['trades']);
-        Notifications::tradeGems($bid, $info['bidders'], $info['trades']);
+        if(!empty($info['trades'])){
+          Players::tradeGems($info['trades']);
+          Notifications::tradeGems($bid, $info['bidders'], $info['trades']);
+        }
       }
 
       // And go on to reveal next bids (if any left)

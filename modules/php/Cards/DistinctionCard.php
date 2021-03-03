@@ -13,7 +13,7 @@ abstract class DistinctionCard extends AbstractCard
     parent::__construct($row);
     $this->class = DISTINCTION;
     $this->grade = [
-      [null],
+      null,
     ];
   }
 
@@ -25,6 +25,8 @@ abstract class DistinctionCard extends AbstractCard
   }
 
   public function updateRanks(&$ranks){}
+
+  public function updateBraveryValues(&$values, $player){}
 
   public function getRecruitementZone(){
     return NEUTRAL;

@@ -174,7 +174,7 @@ class Player extends \NID\Helpers\DB_Manager
   {
     $values = [0, 0, 0, 0, 0, 0];
     foreach($this->getCards() as $card){
-      $card->updateBraveryValues($values);
+      $card->updateBraveryValues($values, $this);
     }
 
     return $values;
@@ -185,7 +185,7 @@ class Player extends \NID\Helpers\DB_Manager
   {
     $ranks = $this->getRanks();
     $ranks[NEUTRAL] = 100; // Neutral does not count in lines
-    
+
     return min($ranks);
   }
 
@@ -238,7 +238,7 @@ class Player extends \NID\Helpers\DB_Manager
     ];
 
     foreach($this->getCards() as $card){
-      $card->updateScores($scores);
+      $card->updateScores($scores, $this);
     }
 
     $scores['total'] = $scores[NEUTRAL] + $scores[BLACKSMITH] + $scores[HUNTER]

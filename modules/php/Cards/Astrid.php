@@ -12,4 +12,8 @@ class Astrid extends HeroCard
       null
     ];
   }
+
+  public function updateBraveryValues(&$values, $player){
+    $values[NEUTRAL] += $player->getMaxCoin();
+  }
 }

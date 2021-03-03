@@ -240,10 +240,34 @@ $machinestates = [
       'transform' => ST_TRANSFORM_COIN,
       'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
+      'explorer' => ST_DISTINCTION_EXPLORER,
     ]
   ],
 
 
+  ST_DISTINCTION_EXPLORER => [
+    "name" => "distinctionExplorer",
+    'description' => clienttranslate('${actplayer} must choose a card'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a card'),
+    'type' => 'activeplayer',
+    'args' => 'argDistinctionExplorer',
+    'possibleactions' => ['recruit'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'next' => ST_NEXT_DISTINCTION,
+      'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
+      'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
+    ]
+  ],
+
+
+  ST_PRE_END_OF_GAME => [
+    "name" => "preEndOfGame",
+    "description" => "",
+    "type" => "game",
+    "action" => "stPreEndOfGame",
+    "transitions" => ['' => ST_GAME_END ]
+  ],
 
   // Final state.
   // Please do not modify (and do not overload action/args methods).

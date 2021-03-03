@@ -30,6 +30,7 @@ class Notifications
     $msg = Globals::getAge() == 1? clienttranslate('Starting turn ${turn} of first age') : clienttranslate('Starting turn ${turn} of second age');
     self::notifyAll('newTurn', $msg, [
       'cards' => $cards,
+      'age' => Globals::getAge(),
       'turn' => Globals::getTurn(),
       'tavern' => -1,
     ]);
@@ -170,6 +171,21 @@ class Notifications
       'gem' => $player->getGem(),
     ]);
   }
+
+
+  public static function distinctionCoin($player, $oldCoin, $newCoin){
+    self::notifyAll('tradeCoin', clienttranslate('${player_name} trades its ${coin_max}${coin_max_type} with the special ${coin_new}${coin_new_type}'), [
+      'player' => $player,
+      'coin_max' => $oldCoin['value'],
+      'coin_max_type' => $oldCoin['type'],
+      'coin_new' => $newCoin['value'],
+      'coin_new_type' => $newCoin['type'],
+
+      'max' => $oldCoin,
+      'new' => $newCoin,
+    ]);
+  }
+
 
 
   public static function updateScores($scores, $ranks){

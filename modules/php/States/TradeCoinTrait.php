@@ -22,6 +22,7 @@ trait TradeCoinTrait
       Notifications::tradeCoin($player, $coinMin, $coinMax, $newCoin);
     }
 
+    Players::updateScores();
     $this->gamestate->nextState('next');
   }
 

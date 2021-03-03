@@ -109,8 +109,8 @@ class Globals extends \APP_DbObject
 
   public function startNewAge()
   {
-    self::inc('currentAge');
     self::set('currentTurn', 0);
+    return self::inc('currentAge');
   }
 
   public function startNewTurn()

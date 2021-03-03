@@ -232,8 +232,9 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
 
 
     show() {
-      if(this.statusElt !== null)
-        dojo.addClass(this.statusElt, "opened"),
+      if(this.statusElt !== null){
+        dojo.addClass(this.statusElt, "opened");
+      }
 
       this.fadeInAnimation().then(() => {
         this._open = true;

@@ -13,5 +13,7 @@ class Idunn extends HeroCard
     ];
   }
 
-  // TODO : score blue more points per card
+  public function updateBraveryValues(&$values, $player){
+    $values[EXPLORER] += $this->getBV() + $player->getRanks()[EXPLORER]*2;
+  }
 }

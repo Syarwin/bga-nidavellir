@@ -28,6 +28,7 @@ define('ST_DISCARD_CARD', 25);
 define('ST_END_OF_AGE', 30);
 
 define('ST_NEXT_DISTINCTION', 31);
+define('ST_DISTINCTION_EXPLORER', 32);
 
 define('ST_PRE_END_OF_GAME', 90);
 define('ST_GAME_END', 99);

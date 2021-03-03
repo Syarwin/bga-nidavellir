@@ -114,6 +114,11 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_tradeCoin(n){
       debug("Notif: trading coins", n);
 
+      if(!$('coin-' + n.args.new.id)){
+        // Distinction
+        this.addCoin(n.args.new, "tab-distinctions");
+      }
+
       // Slide new coin
       let location = n.args.new.location == 'hand'? 'coins-zone-' + n.args.player_id
         : (n.args.player_id == this.player_id?
@@ -140,7 +145,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
 
     onEnteringStateTransformCoin(args){
-      this.makeCoinsSelectable(args.coins, this.onClickCoinTransform.bind(this));
+      if(this.isCurrentPlayerActive()){
+        this.makeCoinsSelectable(args.coins, this.onClickCoinTransform.bind(this));
+      }
     },
 
     onClickCoinTransform(coin){

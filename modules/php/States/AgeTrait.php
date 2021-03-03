@@ -29,6 +29,13 @@ trait AgeTrait
 
 
 
+  public function stPreEndOfGame()
+  {
+    // ATM, just display overview in client
+    $this->gamestate->nextState('');
+  }
+
+
   /***********************
   ***** Distinctions *****
   ***********************/
@@ -38,6 +45,7 @@ trait AgeTrait
     $this->saveCurrentStateAsSource();
     $distinction = Cards::getDistinctionCard(Globals::nextDistinction());
     if(is_null($distinction)){
+      Cards::shuffle(['age', 2]); // After explorer distinction
       $this->gamestate->nextState('done');
       return;
     }
@@ -59,6 +67,7 @@ trait AgeTrait
       Notifications::distinction($player, $distinction);
 
       $distinction->applyEffect($player);
+      $this->gamestate->changeActivePlayer($player->getId());
       $this->nextStateAfterRecruit($distinction, $player);
     }
   }
@@ -72,6 +81,16 @@ trait AgeTrait
     }
 
     return array_keys($ranks, max($ranks));
+  }
+
+
+  public function argDistinctionExplorer()
+  {
+    $cards = Cards::getTopOf(['age', 2], 3);
+    return [
+      'cards' => $cards->getIds(),
+      'cardsObj' => $cards->ui(),
+    ];
   }
 }
 ?>

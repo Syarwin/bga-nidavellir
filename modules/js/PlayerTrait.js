@@ -6,6 +6,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       );
       this._scoresCounters = {};
       this._ranksCounters = {};
+      this._overviewCounters = {};
     },
 
     setupPlayers(){
@@ -39,23 +40,37 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.forEachPlayer(player => {
         this._scoresCounters[player.id] = {};
         this._ranksCounters[player.id] = {};
+        this._overviewCounters[player.id] = {};
 
-        for(var i = 0; i < 6; i++){
-          this._scoresCounters[player.id][i] = new ebg.counter();
-          this._scoresCounters[player.id][i].create('command-zone-score_' + player.id + '_' + i);
+        for(var i = 0; i < 8; i++){
+          if(i < 6) {
+            this._scoresCounters[player.id][i] = new ebg.counter();
+            this._scoresCounters[player.id][i].create('command-zone-score_' + player.id + '_' + i);
 
-          this._ranksCounters[player.id][i] = new ebg.counter();
-          this._ranksCounters[player.id][i].create('command-zone-ranks_' + player.id + '_' + i);
+            this._ranksCounters[player.id][i] = new ebg.counter();
+            this._ranksCounters[player.id][i].create('command-zone-ranks_' + player.id + '_' + i);
+          }
+
+          this._overviewCounters[player.id][i] = new ebg.counter();
+          this._overviewCounters[player.id][i].create('overview-' + player.id + '-' + i);
         }
+
+        this._overviewCounters[player.id]['total'] = new ebg.counter();
+        this._overviewCounters[player.id]['total'].create('overview-' + player.id + '-total');
       });
     },
 
     updatePlayersScores(){
       this.forEachPlayer(player => {
-        for(var i = 0; i < 6; i++){
-          this._scoresCounters[player.id][i].toValue(player.scores[i]);
-          this._ranksCounters[player.id][i].toValue(player.ranks[i]);
+        for(var i = 0; i < 8; i++){
+          if(i < 6){
+            this._scoresCounters[player.id][i].toValue(player.scores[i]);
+            this._ranksCounters[player.id][i].toValue(player.ranks[i]);
+          }
+
+          this._overviewCounters[player.id][i].toValue(player.scores[i]);
         }
+        this._overviewCounters[player.id]["total"].toValue(player.scores['total']);
       });
     },
 

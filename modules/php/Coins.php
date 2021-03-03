@@ -72,7 +72,13 @@ class Coins extends Helpers\Pieces
       self::create($coins, ['hand']);
     }
 
-    // TODO : create distinction
+    // Distinction
+    self::create([
+      [
+        "value" => 3,
+        "type" => COIN_DISTINCTION,
+      ]
+    ], 'distinction');
 	}
 
 
@@ -143,31 +149,22 @@ class Coins extends Helpers\Pieces
 
 
 
-  public static function hunterDistinction($player)
+  public static function hunterDistinction($coin)
   {
-    /*
-    TODO
-
-    // Get the old coin
-    $coins = $player->getCoins()->filter(function($coin){ return $coin['value'] == 0; });
-    $oldCoin = $coins[0];
-
-
-    $newCoin = self::get()
+    $newCoin = self::getSelectQuery()->where('coin_location', 'distinction')->limit(1)->getSingle();
 
     // Put this coin in player's hand
     self::DB()->update([
       'pId' => $coin['pId'],
-      'coin_location' => $keepLocation? $coin['location_raw'] : 'hand',
+      'coin_location' => 'hand',
     ], $newCoin['id']);
 
     // Do whatever is needed to the old coin
     self::DB()->update([
       'pId' => 0,
-      'coin_location' => $coin['type'] == COIN_PLAYER? "discard" : "treasure",
+      'coin_location' => "discard",
     ], $coin['id']);
 
     return self::get($newCoin['id']);
-    */
   }
 }

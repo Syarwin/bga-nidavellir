@@ -34,6 +34,7 @@
       width:750px;
       padding:20px;
       min-height:$scale*350px;
+      margin-bottom:20px;
       position:relative;
       display: flex;
       align-items: flex-start;
@@ -186,9 +187,21 @@
   }
 }
 
-#overall-content[data-nplayers="2"] .tavern-cards-holder { min-width:3*($wCard + $scale*30px); }
-#overall-content[data-nplayers="3"] .tavern-cards-holder { min-width:3*($wCard + $scale*30px); }
+#overall-content[data-nplayers="2"] .tavern-cards-holder { min-width:3*($wCard + $scale*35px); }
+#overall-content[data-nplayers="3"] .tavern-cards-holder { min-width:3*($wCard + $scale*35px); }
+#overall-content[data-nplayers="4"] .tavern-cards-holder { min-width:4*($wCard + $scale*35px); }
+#overall-content[data-nplayers="5"] .tavern-cards-holder { min-width:5*($wCard + $scale*35px); }
 
+
+#ebd-body:not(.nidavellir-expansion) {
+  #tab-camp {
+    display:none !important;
+  }
+
+  #overview-row-6 {
+    display:none !important;
+  }
+}
 
 
 #card-overlay {

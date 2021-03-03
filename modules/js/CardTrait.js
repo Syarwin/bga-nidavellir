@@ -6,6 +6,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       );
       this._callbackOnCard = null;
       this._selectableCards = [];
+      this._distinctionExplorerCards = null;
     },
 
     setupCards(){
@@ -129,6 +130,25 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
           destroy:true,
         });
       }
+    },
+
+
+
+    onEnteringStateDistinctionExplorer(args){
+      this._distinctionExplorerCards = args.cardsObj;
+      this.addPrimaryActionButton("btnShowDistinctionExplorerCards", _("Show cards"), () => this.openDistinctionExplorerModal() )
+      this.openDistinctionExplorerModal();
+    },
+
+    openDistinctionExplorerModal(){
+      this._distinctionExplorerModal = new customgame.modal("distinctionExplorer", {
+        class:"nidavellir_popin",
+        closeIcon:'fa-times',
+      });
+
+      this._distinctionExplorerCards.forEach(card => this.addCard(card, 'popin_distinctionExplorer_contents'));
+      this.makeCardSelectable(this._distinctionExplorerCards.map(card => card.id), this.onClickCardRecruit.bind(this));
+      this._distinctionExplorerModal.show();
     },
   });
 });

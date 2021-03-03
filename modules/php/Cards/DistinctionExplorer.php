@@ -8,4 +8,10 @@ class DistinctionExplorer extends DistinctionCard
     $this->distinctionClass = EXPLORER;
   }
 
+  // TODO : case of tie
+
+  
+  public function stateAfterRecruit(){
+    return 'explorer';
+  }
 }

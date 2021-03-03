@@ -15,10 +15,4 @@ class DistinctionMiner extends DistinctionCard
     Notifications::distinctionGem($player);
   }
 
-
-  public function stateAfterRecruit(){
-    Globals::setTransformValue(5);
-    return 'transform';
-  }
-
 }

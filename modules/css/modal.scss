@@ -206,7 +206,7 @@
 
 
 
-#popin_showDistinctions {
+#popin_showDistinctions, #popin_distinctionExplorer {
   z-index: 2000;
   padding: 0;
   width: 420px;
@@ -214,7 +214,7 @@
   background-size: 100% 100%;
   filter:drop-shadow(3px 3px 10px black);
 
-  #popin_showDistinctions_contents {
+  #popin_showDistinctions_contents, #popin_distinctionExplorer_contents {
     padding:15px;
 
     #evaluation-container {
@@ -233,4 +233,11 @@
       }
     }
   }
+
+ #popin_distinctionExplorer_contents {
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   min-height:420px;
+ }
 }
