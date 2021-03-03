@@ -5,6 +5,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['newTurn', 700],
         ['playerBid', 500],
         ['revealBids', 2000],
+        ['revealUlineBid', 1000],
         ['recruitStart', 500],
         ['tradeGems', 1500],
         ['distinctionGem', 1500],
@@ -150,6 +151,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }, 1000);
     },
 
+    notif_revealUlineBid(n){
+      debug("Notif: reveal Uline bid", n);
+      this.addCoin(n.args.coin);
+    },
+
+
     notif_recruitStart(n) {
       debug("Notif: recruitStart", n);
     },
@@ -182,6 +189,23 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         });
       });
       this._tavernBids = [null, null, null];
+    },
+
+
+    /*************
+    *** ULINE ****
+    *************/
+    onEnteringStateUlineBid(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this.makeCoinsSelectable(args.coins, this.onClickCoinUlineBid.bind(this));
+    },
+
+    onClickCoinUlineBid(coin){
+      this.takeAction("ulineBid", {
+        coinId: coin.id,
+      });
     },
   });
 });

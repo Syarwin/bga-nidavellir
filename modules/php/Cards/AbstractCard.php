@@ -35,6 +35,7 @@ class AbstractCard
    * Getters
    */
   public function getId(){ return $this->id; }
+  public function getPId(){ return $this->pId; }
   public function getClass(){ return $this->class; }
   public function getRanks(){ return is_array($this->grade)? count($this->grade) : 0; }
   public function getBV(){
@@ -44,6 +45,8 @@ class AbstractCard
       : 0;
   }
   public function getZone(){ return $this->zone; }
+
+  public function applyEffect($player){}
 
   public function getUiData() {
     return [

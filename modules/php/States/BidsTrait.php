@@ -16,16 +16,20 @@ trait BidsTrait
   ///////////////////////////////
   public function stPlayersBids()
   {
-    $this->gamestate->setAllPlayersMultiactive();
-    // TODO : handle Uline by setting player inactive
+    $ids = Players::getAll()->getIds();
+    $ulineOwner = Players::getUlineOwnerId();
+    $ids = array_diff($ids, [$ulineOwner]);
+    $this->gamestate->setPlayersMultiactive($ids, '', true);
   }
 
 
 	public function argPlayerBids()
   {
     $data = [ '_private' => [] ];
+    $ulineOwnerId = Players::getUlineOwnerId();
     foreach(Players::getAll() as $pId => $player){
-      $data['_private'][$pId] = $player->getCoinIds();
+      if($pId != $ulineOwnerId)
+        $data['_private'][$pId] = $player->getCoinIds();
     }
     return $data;
 	}
@@ -109,7 +113,7 @@ trait BidsTrait
     $coins = Coins::reveal($currentTavern);
     Notifications::revealBids($coins, $currentTavern);
 
-    $pId = Players::getUlineOwner();
+    $pId = Players::getUlineOwnerId();
     if(is_null($pId)){
       $this->gamestate->nextState("revealed");
     } else {
@@ -124,10 +128,31 @@ trait BidsTrait
    */
   public function argUlineBid()
   {
-    return []; // TODO
+    $player = Players::getActive();
+    return [
+      'coins' => array_map(function($coin){ return $coin['id']; }, $player->getUnbidCoins())
+    ];
   }
 
-  // TODO : action for uline bid
+
+  public function actUlineBid($coinId)
+  {
+    $this->checkAction("bid");
+
+    $coins = $this->argUlineBid()['coins'];
+    if(!in_array($coinId, $coins))
+      throw new \BgaUserException(_("You cannot bid this coin!"));
+
+    $tavern = Globals::getTavern();
+    $coin = Coins::get($coinId);
+    $player = Players::getActive();
+
+    // Bid and reveal
+    Coins::putOnTavern($coin, $tavern);
+    Notifications::revealUlineBid($coin, $tavern);
+
+    $this->gamestate->nextState("revealed");
+  }
 
 
   /*

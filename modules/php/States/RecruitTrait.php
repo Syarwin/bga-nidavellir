@@ -48,6 +48,7 @@ trait RecruitTrait
 
     Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
+    $card->applyEffect($player);
     Players::updateScores();
 
     if($card->getClass() == ROYAL_OFFER){

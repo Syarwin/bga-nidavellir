@@ -2,7 +2,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.coinTrait", null, {
     constructor(){
       this._notifications.push(
-        ['tradeCoin', 1500]
+        ['tradeCoin', 1500],
+        ['ulineRecruited', 1000],
       );
 
       this._callbackOnCoin = null;
@@ -152,6 +153,51 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     onClickCoinTransform(coin){
       this.takeAction('transformCoin', { coinId : coin.id });
+    },
+
+
+
+    /*###################
+    ####### ULINE #######
+    ###################*/
+
+    notif_ulineRecruited(n){
+      debug("Notif: you've just recruited Uline", n);
+      n.args.coins.forEach(coin => {
+        this.slide("coin-" + coin, 'coins-zone-' + this.player_id);
+      })
+    },
+
+
+    onEnteringStateUlineTradeCoin(args){
+      if(this.isCurrentPlayerActive()){
+        this._selectedCoinsForUlineTrade = [];
+        this.makeCoinsSelectable(args.coins, this.onClickCoinUlineTrade.bind(this));
+      }
+    },
+
+
+    onClickCoinUlineTrade(coin){
+      if(this._selectedCoinsForUlineTrade.includes(coin.id)){
+        // Already selected => unselect it
+        dojo.removeClass("coin-" + coin.id, "selected");
+        this._selectedCoinsForUlineTrade.splice(this._selectedCoinsForUlineTrade.indexOf(coin.id), 1)
+      } else if(this._selectedCoinsForUlineTrade.length < 2){
+        // Select it
+        dojo.addClass("coin-" + coin.id, "selected");
+        this._selectedCoinsForUlineTrade.push(coin.id);
+      }
+
+      dojo.destroy("btnConfirmUlineTrade");
+      if(this._selectedCoinsForUlineTrade.length == 2){
+        this.addPrimaryActionButton("btnConfirmUlineTrade", _("Confirm trade"), () => this.onClickConfirmUlineTrade())
+      }
+    },
+
+    onClickConfirmUlineTrade(){
+      this.takeAction('ulineTrade', {
+        coinIds: this._selectedCoinsForUlineTrade.join(';'),
+      });
     },
   });
 });

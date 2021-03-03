@@ -8,6 +8,7 @@ class Ylud extends HeroCard
     $this->id = YLUD;
     $this->name = 'Ylud';
     $this->heroClass = NEUTRAL;
+    $this->advanced = true;
     $this->grade = [
       null
     ];

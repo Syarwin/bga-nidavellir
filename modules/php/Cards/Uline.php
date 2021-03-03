@@ -1,5 +1,7 @@
 <?php
 namespace NID\Cards;
+use NID\Coins;
+use NID\Game\Notifications;
 
 class Uline extends HeroCard
 {
@@ -8,12 +10,20 @@ class Uline extends HeroCard
     $this->id = ULINE;
     $this->name = 'Uline';
     $this->heroClass = NEUTRAL;
+    $this->advanced = true;
     $this->grade = [
       9
     ];
   }
 
-  public function stateAfterRecruit(){
-    return 'ulineRecruited';
+  public function applyEffect($player){
+    $movedCoins = [];
+    foreach($player->getCoins() as $coin){
+      if($coin['location'] == 'bid'){
+        Coins::move($coin['id'], 'hand');
+        $movedCoins[] = $coin['id'];
+      }
+    }
+    Notifications::ulineRecruited($player, $movedCoins);
   }
 }

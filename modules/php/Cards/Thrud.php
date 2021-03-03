@@ -8,6 +8,7 @@ class Thrud extends HeroCard
     $this->id = THRUD;
     $this->name = 'Thrud';
     $this->heroClass = NEUTRAL;
+    $this->advanced = true;
     $this->grade = [
       13
     ];

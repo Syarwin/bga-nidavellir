@@ -9,25 +9,53 @@ trait TradeCoinTrait
 {
   public function stTradeCoin()
   {
-    // TODO : Uline
-
     $player = Players::getActive();
     if($player->shouldTrade()){
       $coins = $player->getUnbidCoins();
 
-      $coinMin = $coins[0]['value'] <= $coins[1]['value']? $coins[0] : $coins[1];
-      $coinMax = $coins[0]['value'] <= $coins[1]['value']? $coins[1] : $coins[0];
-      $newCoin = Coins::trade($coinMax, $coinMin['value'] + $coinMax['value']);
+      // Handle Uline transform when > 2 coins in her hand
+      $ulineOwnerId = Players::getUlineOwnerId();
+      if(count($coins) > 2 && $player->getId() == $ulineOwnerId){
+        $this->gamestate->changeActivePlayer($ulineOwnerId);
+        $this->gamestate->nextState("uline");
+        return;
+      }
 
-      Notifications::tradeCoin($player, $coinMin, $coinMax, $newCoin);
+      $this->tradeCoin($player, $coins[0], $coins[1]);
     }
 
+    $this->gamestate->nextState('next');
+  }
+
+  public function tradeCoin($player, $coin1, $coin2)
+  {
+    $coinMin = $coin1['value'] <= $coin2['value']? $coin1 : $coin2;
+    $coinMax = $coin1['value'] <= $coin2['value']? $coin2 : $coin1;
+    $newCoin = Coins::trade($coinMax, $coinMin['value'] + $coinMax['value']);
+
+    Notifications::tradeCoin($player, $coinMin, $coinMax, $newCoin);
     Players::updateScores();
+  }
+
+
+  public function argUlineTradeCoin()
+  {
+    return $this->argUlineBid(); // Actually the same arg as Uline bid !
+  }
+
+
+  public function actUlineTrade($coinIds)
+  {
+    $coins = Coins::get($coinIds)->toArray();
+    $this->tradeCoin(Players::getActive(), $coins[0], $coins[1]);
     $this->gamestate->nextState('next');
   }
 
 
 
+  /**************************
+  ***** Transform coins *****
+  **************************/
   public function argTransformCoin()
   {
     $player = Players::getActive();

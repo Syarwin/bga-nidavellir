@@ -90,9 +90,10 @@ class Players extends \NID\Helpers\DB_Manager
     return $table[$player->getId()];
   }
 
-  public function getUlineOwner()
+  public function getUlineOwnerId()
   {
-    return null; // TODO
+    return Cards::get(ULINE)->getPId();
+//    return $caris_null($cardOwner)? null : self::get($cardOwner);
   }
 
 

@@ -21,6 +21,7 @@ define('ST_RECRUIT_DWARF', 21);
 define('ST_RECRUIT_HERO', 22);
 
 define('ST_TRADE_COIN', 23);
+define('ST_ULINE_TRADE_COIN', 33);
 
 define('ST_TRANSFORM_COIN', 24);
 define('ST_DISCARD_CARD', 25);

@@ -36,8 +36,6 @@ abstract class DistinctionCard extends AbstractCard
     return $this->distinctionClass;
   }
 
-  public function applyEffect($player){}
-
   public function getNotifString(){
     $basicNames = [
       BLACKSMITH => clienttranslate('blacksmiths'),

@@ -93,12 +93,14 @@ $machinestates = [
 
   ST_ULINE_BID => [
     "name" => "ulineBid",
-    'description' => clienttranslate('${activeplayer} must use Uline\'s power'),
-    'descriptionmyturn' => clienttranslate('${you} must use Uline\'s power'),
+    'description' => clienttranslate('${actplayer} must choose its bid (Uline\'s power)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a coin to bid (Uline\'s power)'),
     'type' => 'activeplayer',
     'args' => 'argUlineBid',
-    'possibleactions' => [],
-    'transitions' => []
+    'possibleactions' => ['bid'],
+    'transitions' => [
+      'revealed' => ST_RESOLVE_BIDS,
+    ]
   ],
 
 
@@ -197,9 +199,22 @@ $machinestates = [
     "action" => "stTradeCoin",
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
-// TODO      'uline' => ST_NEXT_PLAYER,
+      'uline' => ST_ULINE_TRADE_COIN,
     ]
   ],
+
+  ST_ULINE_TRADE_COIN => [
+    "name" => "ulineTradeCoin",
+    'description' => clienttranslate('${actplayer} must choose two coins to trade (Uline\'s power)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose two coins to trade (Uline\'s power)'),
+    'type' => 'activeplayer',
+    'args' => 'argUlineTradeCoin',
+    'possibleactions' => ['trade'],
+    'transitions' => [
+      'next' => ST_NEXT_PLAYER,
+    ]
+  ],
+
 
 
   // Player end of turn

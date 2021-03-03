@@ -114,6 +114,13 @@ class Coins extends Helpers\Pieces
     return $coins;
   }
 
+  // Useful for Uline
+  public static function putOnTavern(&$coin, $tavern)
+  {
+    self::move($coin['id'], ['tavern', $tavern ]);
+    $coin['location'] = 'tavern';
+    $coin['location_arg'] = $tavern;
+  }
 
   public static function clearBids($pId)
   {

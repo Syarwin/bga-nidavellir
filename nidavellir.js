@@ -78,7 +78,10 @@ define([
       },
 
       onUpdateActionButtons(){
-//        this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
+        if(isDebug){
+          this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
+        }
+        
         this.inherited(arguments);
       },
 

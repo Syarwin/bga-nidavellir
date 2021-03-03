@@ -58,6 +58,14 @@ class Notifications
     ]);
   }
 
+  public static function revealUlineBid($coin, $tavern){
+    self::notifyAll('revealUlineBid', clienttranslate('Revealing Uline\'s bid for current tavern'), [
+      'coin' => $coin,
+      'tavern' => $tavern,
+    ]);
+  }
+
+
 
   public static function recruitStart($player, $order){
     self::notifyAll('recruitStart', clienttranslate('${player_name} is choosing in position ${order}'), [
@@ -183,6 +191,12 @@ class Notifications
 
       'max' => $oldCoin,
       'new' => $newCoin,
+    ]);
+  }
+
+  public static function ulineRecruited($player, $movedCoins){
+    self::notify($player->getId(), 'ulineRecruited', '', [
+      'coins' => $movedCoins,
     ]);
   }
 

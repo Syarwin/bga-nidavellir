@@ -91,4 +91,27 @@ class action_nidavellir extends APP_GameAction
     $this->game->actDiscardCards($cardIds);
     self::ajaxResponse();
   }
+
+
+
+  /////////////////////////////
+  /////////// Uline  //////////
+  /////////////////////////////
+  public function ulineBid()
+  {
+    self::setAjaxMode();
+    $coinId = self::getArg("coinId", AT_posint, true);
+    $this->game->actUlineBid($coinId);
+    self::ajaxResponse();
+  }
+
+  public function ulineTrade()
+  {
+    self::setAjaxMode();
+    $raw = self::getArg("coinIds", AT_numberlist, true);
+    $coinIds = explode(';', $raw);
+    $this->game->actUlineTrade($coinIds);
+    self::ajaxResponse();
+  }
+
 }

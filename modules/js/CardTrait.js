@@ -135,6 +135,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
 
     onEnteringStateDistinctionExplorer(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+        
       this._distinctionExplorerCards = args.cardsObj;
       this.addPrimaryActionButton("btnShowDistinctionExplorerCards", _("Show cards"), () => this.openDistinctionExplorerModal() )
       this.openDistinctionExplorerModal();
