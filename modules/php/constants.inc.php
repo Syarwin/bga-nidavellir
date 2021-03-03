@@ -27,8 +27,10 @@ define('ST_ULINE_TRADE_COIN', 33);
 define('ST_TRANSFORM_COIN', 24);
 define('ST_DISCARD_CARD', 25);
 
+define('ST_PRE_END_OF_AGE', 29);
 define('ST_END_OF_AGE', 30);
 
+define('ST_CHOOSE_YLUD_COLUMN', 35);
 define('ST_NEXT_DISTINCTION', 31);
 define('ST_DISTINCTION_EXPLORER', 32);
 

@@ -153,18 +153,26 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
 
     onEnteringStateChooseThrudColumn(args){
-      if(!this.isCurrentPlayerActive())
-        return;
-
-      [1,2,3,4,5].forEach(col => {
-        this.connect($('command-zone_' + this.player_id + '_' + col), 'click', () => this.onClickChooseThrudColumn(col) );
-        dojo.addClass('command-zone_' + this.player_id + '_' + col, "selectable");
-      });
+      if(this.isCurrentPlayerActive())
+        this.makeColumnsSelectable('thrud');
     },
 
-    onClickChooseThrudColumn(col){
-      this.takeAction('chooseThrudColumn', {
-        column: col,
+
+    onEnteringStateChooseYludColumn(args){
+      if(this.isCurrentPlayerActive())
+        this.makeColumnsSelectable('ylud');
+    },
+
+
+    makeColumnsSelectable(hero){
+      [1,2,3,4,5].forEach(col => {
+        dojo.addClass('command-zone_' + this.player_id + '_' + col, "selectable");
+        this.connect($('command-zone_' + this.player_id + '_' + col), 'click', () => {
+          this.takeAction('chooseColumn', {
+            column:col,
+            hero:hero,
+          })
+        });
       });
     },
   });

@@ -201,8 +201,12 @@ class Notifications
   }
 
 
-  public static function moveThrud($player, $card, $silent){
-    $msg = $silent? '' : clienttranslate('${player_name} moves Thrud');
+  public static function changeColumn($player, $card, $silent){
+    $msg = $silent? '' : (
+      $card->getId() == THRUD?
+        clienttranslate('${player_name} moves Thrud')
+        : clienttranslate('${player_name} moves Ylud')
+    );
     self::notifyAll('recruit', $msg, [
       'player' => $player,
       'card'  => $card,

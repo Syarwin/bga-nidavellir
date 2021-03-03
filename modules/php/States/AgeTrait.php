@@ -14,10 +14,21 @@ trait AgeTrait
     $this->gamestate->nextState('turn');
   }
 
+  public function stPreEndOfAge()
+  {
+    $this->saveCurrentStateAsSource();
+
+    $pId = Cards::getYludOwner();
+    if($pId != null){
+      $this->gamestate->changeActivePlayer($pId);
+      $this->gamestate->nextState('placeYlud');
+    }
+    else
+      $this->gamestate->nextState('end');
+  }
+
   public function stEndOfAge()
   {
-    // TODO : relou hero qui se passe juste avant la distinction
-//    $this->saveCurrentStateAsSource();
     if(Globals::getAge() == 1){
       Globals::setCurrentDistinction(0);
       $this->gamestate->nextState('distinctions');

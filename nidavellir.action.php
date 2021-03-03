@@ -114,14 +114,14 @@ class action_nidavellir extends APP_GameAction
     self::ajaxResponse();
   }
 
-  /////////////////////////////
-  /////////// Thrud  //////////
-  /////////////////////////////
-  public function chooseThrudColumn()
+  ////////////////////////////////////
+  /////////// Thrud & Ylud  //////////
+  ////////////////////////////////////
+  public function chooseColumn()
   {
     self::setAjaxMode();
     $column = self::getArg("column", AT_posint, true);
-    $this->game->actChooseThrudColumn($column);
+    $this->game->actChooseColumn($column);
     self::ajaxResponse();
   }
 }

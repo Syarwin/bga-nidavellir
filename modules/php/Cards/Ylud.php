@@ -13,4 +13,13 @@ class Ylud extends HeroCard
       null
     ];
   }
+
+  public function updateRanks(&$ranks){
+    $ranks[$this->zone] += $this->getRanks();
+  }
+
+  public function updateBraveryValues(&$values, $player){
+    $bv = [0, 0, 0, 11, 1, 7];
+    $values[$this->zone] += $bv[$this->zone];
+  }
 }

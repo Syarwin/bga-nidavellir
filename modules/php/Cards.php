@@ -187,7 +187,6 @@ class Cards extends Helpers\Pieces
 
 
 
-
   /*********************
   **** DISTINCTIONS ****
   *********************/
@@ -270,19 +269,18 @@ class Cards extends Helpers\Pieces
 
       $top = self::getTopOf($location);
       if($top != null && $top->getId() == THRUD && $location[2] != NEUTRAL){
-        self::moveThrud(Players::get($pId), NEUTRAL, true);
+        self::changeColumn($top, Players::get($pId), NEUTRAL, true);
       }
 
       self::insertOnTop($card->getId(), $location);
     }
   }
 
-  public static function moveThrud($player, $column, $silent = false)
+  public static function changeColumn($card, $player, $column, $silent = false)
   {
-    $card = self::get(THRUD);
     self::recruit($card, $player->getId(), $column);
     self::refresh($card); // Update location
-    Notifications::moveThrud($player, $card, $silent);
+    Notifications::changeColumn($player, $card, $silent);
   }
 
 

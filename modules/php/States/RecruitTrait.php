@@ -68,7 +68,7 @@ trait RecruitTrait
       $this->gamestate->nextState($nextState);
     else {
       $thrud = Cards::get(THRUD);
-      if($thrud->getZone() == NEUTRAL)
+      if($thrud->getPId() != null && $thrud->getZone() == NEUTRAL)
         $this->gamestate->nextState('placeThrud');
       else if($player->canRecruitHero())
         $this->gamestate->nextState('hero');
@@ -129,14 +129,16 @@ trait RecruitTrait
   /**********************
   ******** THRUD ********
   **********************/
-  public function actChooseThrudColumn($column)
+  public function actChooseColumn($column)
   {
     $this->checkAction('pickColumn');
 
     // Move card
     $player = Players::getActive();
-    $card = Cards::get(THRUD);
-    Cards::moveThrud($player, $column);
+    $card = $this->gamestate->state()['name'] == 'chooseThrudColumn'?
+      Cards::get(THRUD) : Cards::get(YLUD);
+
+    Cards::changeColumn($card, $player, $column);
     Players::updateScores();
     $this->nextStateAfterRecruit($card, $player, true);
   }

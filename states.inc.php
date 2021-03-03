@@ -241,9 +241,39 @@ $machinestates = [
     "action" => "stEndOfTurn",
     "transitions" => [
       'nextTurn' => ST_START_OF_TURN,
-      'nextAge' => ST_END_OF_AGE,
+      'nextAge' => ST_PRE_END_OF_AGE,
     ]
   ],
+
+
+  // Pre-End of age
+  ST_PRE_END_OF_AGE => [
+    "name" => "preEndOfAge",
+    "description" => "",
+    "type" => "game",
+    "action" => "stPreEndOfAge",
+    "transitions" => [
+      'end' => ST_END_OF_AGE,
+      'placeYlud' => ST_CHOOSE_YLUD_COLUMN,
+      'recruitDone' => ST_END_OF_AGE, // Fake transition, used as source
+      'transformDone' => ST_END_OF_AGE, // Fake transition, used as source
+    ]
+  ],
+
+
+  ST_CHOOSE_YLUD_COLUMN => [
+    "name" => "chooseYludColumn",
+    'description' => clienttranslate('${actplayer} must choose where to place Ylud'),
+    'descriptionmyturn' => clienttranslate('${you} must choose where to place Ylud'),
+    'type' => 'activeplayer',
+    'possibleactions' => ['pickColumn'],
+    'transitions' => [
+      'next' => ST_NEXT_PLAYER,
+      'hero' => ST_RECRUIT_HERO,
+      'trade' => ST_TRADE_COIN,
+    ]
+  ],
+
 
 
   // End of age
