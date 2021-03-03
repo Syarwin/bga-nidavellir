@@ -3,6 +3,7 @@ namespace NID;
 use Nidavellir;
 use NID\Game\Players;
 use NID\Game\Globals;
+use NID\Game\Notifications;
 
 /*
  * Cards: all utility functions concerning cards
@@ -168,6 +169,25 @@ class Cards extends Helpers\Pieces
   }
 
 
+
+  public function getOwner($cardId)
+  {
+    return self::get($cardId)->getPId();
+  }
+
+  public function getUlineOwner()
+  {
+    return self::getOwner(ULINE);
+  }
+
+  public function getYludOwner()
+  {
+    return self::getOwner(YLUD);
+  }
+
+
+
+
   /*********************
   **** DISTINCTIONS ****
   *********************/
@@ -241,12 +261,28 @@ class Cards extends Helpers\Pieces
   /*
    * Put a card in corresponding player stack of color
    */
-  public static function recruit($card, $pId)
+  public static function recruit($card, $pId, $forceZone = null)
   {
     if($card->getClass() == ROYAL_OFFER)
       self::move($card->getId(), "discard");
-    else
-      self::insertOnTop($card->getId(), ["command-zone", $pId, $card->getRecruitementZone()] );
+    else {
+      $location = ["command-zone", $pId, $forceZone ?? $card->getRecruitementZone()];
+
+      $top = self::getTopOf($location);
+      if($top != null && $top->getId() == THRUD && $location[2] != NEUTRAL){
+        self::moveThrud(Players::get($pId), NEUTRAL, true);
+      }
+
+      self::insertOnTop($card->getId(), $location);
+    }
+  }
+
+  public static function moveThrud($player, $column, $silent = false)
+  {
+    $card = self::get(THRUD);
+    self::recruit($card, $player->getId(), $column);
+    self::refresh($card); // Update location
+    Notifications::moveThrud($player, $card, $silent);
   }
 
 

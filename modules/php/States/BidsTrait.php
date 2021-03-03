@@ -3,6 +3,7 @@ namespace NID\States;
 
 use Nidavellir;
 use NID\Coins;
+use NID\Cards;
 use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
@@ -17,7 +18,7 @@ trait BidsTrait
   public function stPlayersBids()
   {
     $ids = Players::getAll()->getIds();
-    $ulineOwner = Players::getUlineOwnerId();
+    $ulineOwner = Cards::getUlineOwner();
     $ids = array_diff($ids, [$ulineOwner]);
     $this->gamestate->setPlayersMultiactive($ids, '', true);
   }
@@ -26,7 +27,7 @@ trait BidsTrait
 	public function argPlayerBids()
   {
     $data = [ '_private' => [] ];
-    $ulineOwnerId = Players::getUlineOwnerId();
+    $ulineOwnerId = Cards::getUlineOwner();
     foreach(Players::getAll() as $pId => $player){
       if($pId != $ulineOwnerId)
         $data['_private'][$pId] = $player->getCoinIds();
@@ -113,7 +114,7 @@ trait BidsTrait
     $coins = Coins::reveal($currentTavern);
     Notifications::revealBids($coins, $currentTavern);
 
-    $pId = Players::getUlineOwnerId();
+    $pId = Cards::getUlineOwner();
     if(is_null($pId)){
       $this->gamestate->nextState("revealed");
     } else {

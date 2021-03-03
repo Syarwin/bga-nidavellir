@@ -131,6 +131,19 @@
           position:relative;
           min-height:160px;
 
+          &.selectable {
+            animation-name: borderBlink;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            cursor:pointer;
+
+            &:hover {
+              animation:none;
+              border-width: 3px;
+              margin:-2px;
+            }
+          }
+
           &.card-class_0 { border-color:#848484; }
           &.card-class_1 { border-color:#806ec6; }
           &.card-class_2 { border-color:#09b36d; }

@@ -607,6 +607,15 @@ html {
           padding-top: 10px;
           position: relative;
           min-height: 160px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.selectable {
+            animation-name: borderBlink;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            cursor: pointer; }
+            #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.selectable:hover {
+              animation: none;
+              border-width: 3px;
+              margin: -2px; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_0 {
             border-color: #848484; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_1 {

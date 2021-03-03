@@ -201,6 +201,15 @@ class Notifications
   }
 
 
+  public static function moveThrud($player, $card, $silent){
+    $msg = $silent? '' : clienttranslate('${player_name} moves Thrud');
+    self::notifyAll('recruit', $msg, [
+      'player' => $player,
+      'card'  => $card,
+    ]);
+  }
+
+
 
   public static function updateScores($scores, $ranks){
     self::notifyAll('updateScores', '', [

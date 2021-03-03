@@ -71,6 +71,7 @@ define([
         dojo.query(".tavern-cards-holder").removeClass("selectable");
         dojo.query(".card").removeClass("selectable unselectable");
         dojo.query(".nid-tab").removeClass("focus");
+        dojo.query('.command-zone-container .cards-class').removeClass("selectable");
         if(this._distinctionExplorerCards != null)
           this._distinctionExplorerModal.destroy();
 
@@ -81,7 +82,7 @@ define([
         if(isDebug){
           this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
         }
-        
+
         this.inherited(arguments);
       },
 

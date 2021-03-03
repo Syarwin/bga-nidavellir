@@ -14,7 +14,7 @@ class Thrud extends HeroCard
     ];
   }
 
-  public function stateAfterRecruit(){
-    return 'placeThrud';
+  public function updateRanks(&$ranks){
+    $ranks[$this->zone] += $this->getRanks();
   }
 }

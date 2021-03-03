@@ -19,6 +19,7 @@ define('ST_RESOLVE_BIDS', 14);
 define('ST_NEXT_PLAYER', 20);
 define('ST_RECRUIT_DWARF', 21);
 define('ST_RECRUIT_HERO', 22);
+define('ST_CHOOSE_THRUD_COLUMN', 34);
 
 define('ST_TRADE_COIN', 23);
 define('ST_ULINE_TRADE_COIN', 33);
@@ -111,6 +112,20 @@ define('GRID', 217);
 define('ULINE', 218);
 define('YLUD', 219);
 define('THRUD', 220);
+
+
+define('FAFNIR', 250);
+define('DRAUPNIR', 251);
+define('VEGVISIR', 252);
+define('SVALINN', 253);
+define('MEGINGJORD', 254);
+define('VIDOFNIR', 255);
+define('BRISINGAMENS', 256);
+define('MJOLLNIR', 257);
+define('HOFUD', 258);
+define('HRAFNSMERKI', 259);
+define('JARNGLOFI', 260);
+define('GJALLARHORN', 261);
 
 
 /*

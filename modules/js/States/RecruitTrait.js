@@ -42,8 +42,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       debug("Notif: new recruit", n);
       let card = n.args.card;
 
-      if(card.class < 6) {
-        // DWARF
+      if(card.class < 6 || card.class == 7) {
+        // DWARF AND THRUD
         this.slide('card-' + card.id, card.location)
       }
       else if(card.class == 6){
@@ -147,6 +147,24 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     onClickConfirmDiscard(){
       this.takeAction('discardCards', {
         cardIds: this._selectedCardsForDiscard.join(';'),
+      });
+    },
+
+
+
+    onEnteringStateChooseThrudColumn(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      [1,2,3,4,5].forEach(col => {
+        this.connect($('command-zone_' + this.player_id + '_' + col), 'click', () => this.onClickChooseThrudColumn(col) );
+        dojo.addClass('command-zone_' + this.player_id + '_' + col, "selectable");
+      });
+    },
+
+    onClickChooseThrudColumn(col){
+      this.takeAction('chooseThrudColumn', {
+        column: col,
       });
     },
   });

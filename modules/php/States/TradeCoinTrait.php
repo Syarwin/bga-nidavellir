@@ -4,6 +4,7 @@ use NID\Game\Globals;
 use NID\Game\Players;
 use NID\Game\Notifications;
 use NID\Coins;
+use NID\Cards;
 
 trait TradeCoinTrait
 {
@@ -14,7 +15,7 @@ trait TradeCoinTrait
       $coins = $player->getUnbidCoins();
 
       // Handle Uline transform when > 2 coins in her hand
-      $ulineOwnerId = Players::getUlineOwnerId();
+      $ulineOwnerId = Cards::getUlineOwner();
       if(count($coins) > 2 && $player->getId() == $ulineOwnerId){
         $this->gamestate->changeActivePlayer($ulineOwnerId);
         $this->gamestate->nextState("uline");

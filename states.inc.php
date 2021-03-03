@@ -141,6 +141,7 @@ $machinestates = [
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
       'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
     ]
   ],
 
@@ -173,6 +174,7 @@ $machinestates = [
       'trade' => ST_TRADE_COIN,
       'discard' => ST_DISCARD_CARD,
       'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
     ]
   ],
 
@@ -212,6 +214,20 @@ $machinestates = [
     'possibleactions' => ['trade'],
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
+    ]
+  ],
+
+
+  ST_CHOOSE_THRUD_COLUMN => [
+    "name" => "chooseThrudColumn",
+    'description' => clienttranslate('${actplayer} must choose where to place Thrud'),
+    'descriptionmyturn' => clienttranslate('${you} must choose where to place Thrud'),
+    'type' => 'activeplayer',
+    'possibleactions' => ['pickColumn'],
+    'transitions' => [
+      'next' => ST_NEXT_PLAYER,
+      'hero' => ST_RECRUIT_HERO,
+      'trade' => ST_TRADE_COIN,
     ]
   ],
 
@@ -256,6 +272,7 @@ $machinestates = [
       'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'explorer' => ST_DISTINCTION_EXPLORER,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
     ]
   ],
 
@@ -270,6 +287,8 @@ $machinestates = [
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
       'next' => ST_NEXT_DISTINCTION,
+      'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
       'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
     ]

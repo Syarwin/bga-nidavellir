@@ -61,12 +61,16 @@ trait RecruitTrait
 
 
 
-  public function nextStateAfterRecruit($card, $player){
-    $nextState = $card->stateAfterRecruit();
+  // $bypassCardState useful for Thrud
+  public function nextStateAfterRecruit($card, $player, $bypassCardState = false){
+    $nextState = $bypassCardState? null : $card->stateAfterRecruit();
     if($nextState != null)
       $this->gamestate->nextState($nextState);
     else {
-      if($player->canRecruitHero())
+      $thrud = Cards::get(THRUD);
+      if($thrud->getZone() == NEUTRAL)
+        $this->gamestate->nextState('placeThrud');
+      else if($player->canRecruitHero())
         $this->gamestate->nextState('hero');
       else
         $this->nextStateFromSource('recruitDone');
@@ -118,5 +122,22 @@ trait RecruitTrait
     Players::updateScores();
     $nextState = $player->canRecruitHero()? 'hero' : 'trade';
     $this->gamestate->nextState($nextState);
+  }
+
+
+
+  /**********************
+  ******** THRUD ********
+  **********************/
+  public function actChooseThrudColumn($column)
+  {
+    $this->checkAction('pickColumn');
+
+    // Move card
+    $player = Players::getActive();
+    $card = Cards::get(THRUD);
+    Cards::moveThrud($player, $column);
+    Players::updateScores();
+    $this->nextStateAfterRecruit($card, $player, true);
   }
 }

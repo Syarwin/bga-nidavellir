@@ -90,12 +90,6 @@ class Players extends \NID\Helpers\DB_Manager
     return $table[$player->getId()];
   }
 
-  public function getUlineOwnerId()
-  {
-    return Cards::get(ULINE)->getPId();
-//    return $caris_null($cardOwner)? null : self::get($cardOwner);
-  }
-
 
   public function getMaxWarriorRank()
   {
