@@ -17,7 +17,7 @@ class Bonfur extends HeroCard
 
   public function canBeRecruited($player){
     $stacks = $player->getDiscardableStacks();
-    return count($stacks) >= 2 + (in_array(BLACKSMITH, $stacks)? 1 : 0);
+    return count($stacks) >= 1 + (in_array(BLACKSMITH, $stacks)? 1 : 0);
   }
 
   public function stateAfterRecruit(){

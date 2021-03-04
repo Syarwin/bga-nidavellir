@@ -12,20 +12,17 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
 
     setupRoyalTreasure(){
-      let rows = [
-        [22, 23, 24, 25],
-        [18, 19, 20, 21],
-        [14, 15, 16, 17],
-        [11, 12, 13],
-        [8, 9, 10],
-        [5, 6, 7]
+      let slots = [
+        22, 23, 24, 25,
+        18, 19, 20, 21,
+        14, 15, 16, 17,
+        11, 12, 13,
+        8, 9, 10,
+        5, 6, 7
       ];
 
-      rows.forEach((row, i) => {
-        var oRow = dojo.place('<div class="treasure-row">', 'treasure');
-        row.forEach(slot => {
-          dojo.place('<div class="treasure-slot" id="treasure-slot-' + slot +'"></div>', oRow);
-        })
+      slots.forEach(slot => {
+        dojo.place('<div class="treasure-slot" id="treasure-slot-' + slot +'"></div>', 'treasure');
       })
 
       Object.values(this.gamedatas.royalTreasure).forEach(coin => this.addCoin(coin));

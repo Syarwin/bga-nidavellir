@@ -147,12 +147,11 @@
       background-size:500%;
     }
 
-    &[data-id="300"]::before { background-position-x:0%; }
-    &[data-id="301"]::before { background-position-x:25%; }
-    &[data-id="302"]::before { background-position-x:50%; }
-    &[data-id="303"]::before { background-position-x:75%; }
-    // 304 is the blacksmit special card...
-    &[data-id="305"]::before { background-position-x:100%; }
+    @for $i from 0 through 4 {
+      &[data-id="#{$distinctionStart + $i}"]::before {
+        background-position-x:$i * 25%;
+      }
+    }
 
     .card-grade {
       display:none;
