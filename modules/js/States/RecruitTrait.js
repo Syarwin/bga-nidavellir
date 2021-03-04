@@ -44,6 +44,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       if(card.class < 6 || card.class == 7) {
         // DWARF AND THRUD
+        if(!$('card-' + card.id)) // Happens only for blacksmith distinction in principle
+          this.addCard(card, 'tab-distinctions');
         this.slide('card-' + card.id, card.location)
       }
       else if(card.class == 6){

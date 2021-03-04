@@ -238,6 +238,9 @@ html {
   .card[data-class="8"] .card-grade {
     display: none; }
 
+#ebd-body[data-age="2"] .card[data-class="6"]::before {
+  background-position-x: 100%; }
+
 #nidavellir-board {
   display: flex;
   flex-flow: column;
@@ -323,7 +326,8 @@ html {
           height: 80px;
           display: flex;
           justify-content: center;
-          align-items: center; }
+          align-items: center;
+          filter: drop-shadow(0px 0px 30px black); }
           #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-22 {
             grid-row-start: 1;
             grid-column-start: 1; }
@@ -600,7 +604,7 @@ html {
         #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-wrapper {
           border: 1px solid;
           border-image-slice: 15 14 15 14;
-          border-image-width: 10px 10px 10px 10px;
+          border-image-width: 11px 11px 11px 11px;
           border-image-outset: 0px 0px 0px 0px;
           border-image-repeat: stretch stretch;
           border-image-source: url("img/tavern_border.jpg");
@@ -643,6 +647,9 @@ html {
       flex-flow: column;
       justify-content: center;
       margin-right: auto; }
+      @media (max-width: 1650px) {
+        #nidavellir-board #exterior-wrapper #exterior #tabs-container {
+          width: 160px; } }
       #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab {
         width: 200px;
         height: 112px;

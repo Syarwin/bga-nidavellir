@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards;
+use Nidavellir;
 
 /*
  * HeroCard: basic holder for hero card
@@ -44,4 +45,9 @@ abstract class HeroCard extends AbstractCard
   public function updateBraveryValues(&$values, $player){
     $values[$this->heroClass] += $this->getBV();
   }
+
+  public function getNotifString(){
+    return sprintf( Nidavellir::translate(clienttranslate("a hero (%s)")), $this->name);
+  }
+
 }

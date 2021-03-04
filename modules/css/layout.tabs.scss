@@ -6,7 +6,9 @@
   flex-flow: column;
   justify-content: center;
   margin-right:auto;
-
+  @media (max-width: $breakpoint) {
+    width:160px;
+  }
 
   .nid-tab {
     width:200px;

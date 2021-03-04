@@ -108,7 +108,6 @@
   // ROYAL_OFFER
   &[data-class="6"]{
     &::before { background-position-x: 10 * 100% / 11; }
-    // TODO : AGE II / &[data-class="6"]::before { background-position-x: 11 * 100% / 11; }
     .card-grade {
       display:none;
     }
@@ -159,3 +158,6 @@
   }
 
 }
+
+
+#ebd-body[data-age="2"] .card[data-class="6"]::before { background-position-x: 11 * 100% / 11; }

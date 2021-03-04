@@ -431,28 +431,20 @@ define(["dojo", "dojo/_base/declare","ebg/core/gamegui",], (dojo, declare) => {
     /*
      * Overwrite to allow to more player coloration than player_name and player_name2
      */
-    playerNameFilterGame(args) {
-      if (typeof args == "undefined") {
-        return;
-      }
+     format_string_recursive (log, args) {
+       try {
+         if (log && args) {
+           let player_keys = Object.keys(args).filter(key => key.substr(0, 11) == "player_name");
+           player_keys.forEach(key => {
+             args[key] = this.coloredPlayerName(args[key]);
+           });
+         }
+       } catch (e) {
+         console.error(log,args,"Exception thrown", e.stack);
+       }
 
-      if (this.game) {
-        let player_keys = Object.keys(args).filter(key => key.substr(0, 11) == "player_name");
-        player_keys.forEach(key => {
-          args[key] = this.coloredPlayerName(args[key]);
-        });
-
-        for (argname in args) {
-          if (argname != "i18n" && typeof args[argname] == "object" && args[argname] !== null) {
-            if (typeof args[argname].log != "undefined" && typeof args[argname].args != "undefined") {
-              args[argname].args = this.playerNameFilterGame(args[argname].args);
-            }
-          }
-        }
-      }
-      return args;
-    },
-
+       return this.inherited(arguments);
+     },
 
 
     /*
