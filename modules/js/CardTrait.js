@@ -119,6 +119,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_discardCards(n){
       debug("Notif: discarding cards", n);
+
+      if(!$('card-' + n.args.card.id)){ // Special case of explorer distinction
+        this.addCard(n.args.card, "tab-distinctions");
+      }
       this.slide('card-' + n.args.card.id, 'page-title', {
         duration:1000,
         destroy:true,
@@ -137,7 +141,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     onEnteringStateDistinctionExplorer(args){
       if(!this.isCurrentPlayerActive())
         return;
-        
+
       this._distinctionExplorerCards = args.cardsObj;
       this.addPrimaryActionButton("btnShowDistinctionExplorerCards", _("Show cards"), () => this.openDistinctionExplorerModal() )
       this.openDistinctionExplorerModal();

@@ -299,6 +299,7 @@ $machinestates = [
       'next' => ST_NEXT_DISTINCTION,
       'done' => ST_START_OF_AGE,
       'transform' => ST_TRANSFORM_COIN,
+      'hero' => ST_RECRUIT_HERO,
       'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'explorer' => ST_DISTINCTION_EXPLORER,

@@ -55,6 +55,7 @@ html {
     border: 3px solid red;
     margin-top: -3px;
     margin-left: 7.5px;
+    margin-right: 7.5px;
     animation: none !important;
     transform: scale(1.08);
     z-index: 100; }
@@ -232,7 +233,7 @@ html {
     background-position-x: 50%; }
   .card[data-class="8"][data-id="303"]::before {
     background-position-x: 75%; }
-  .card[data-class="8"][data-id="304"]::before {
+  .card[data-class="8"][data-id="305"]::before {
     background-position-x: 100%; }
   .card[data-class="8"] .card-grade {
     display: none; }
@@ -829,7 +830,8 @@ html {
 .panel-container .coins-zone {
   display: flex;
   justify-content: center;
-  margin: 5px 0px 10px; }
+  margin: 5px 0px 10px;
+  min-height: 40px; }
   .panel-container .coins-zone .coin {
     margin: 0 3px; }
 .panel-container .bids-zone {

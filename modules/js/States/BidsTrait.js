@@ -189,6 +189,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         });
       });
       this._tavernBids = [null, null, null];
+      this.gamedatas.tavern = -1;
+      this.udpateInfoCounters();
     },
 
 

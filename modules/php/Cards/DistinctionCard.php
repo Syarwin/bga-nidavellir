@@ -32,6 +32,8 @@ abstract class DistinctionCard extends AbstractCard
     return NEUTRAL;
   }
 
+  public function applyTieEffect(){}
+    
   public function getDistinctionClass(){
     return $this->distinctionClass;
   }

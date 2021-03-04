@@ -67,6 +67,7 @@ trait AgeTrait
 
     if(count($maxRank) > 1){
       Notifications::distinctionTie($distinction, $maxRank);
+      $distinction->applyTieEffect();
       Cards::discard([$distinction->getId()]);
       $this->gamestate->nextState('next');
     }

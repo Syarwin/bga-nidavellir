@@ -194,6 +194,14 @@ class Notifications
     ]);
   }
 
+
+  public static function discardCardExplorerDistinction($card){
+    self::notifyAll('discardCards', clienttranslate('A ${card_class}${card_class_symbol} is discarded from the age 2 deck'), [
+      'card' => $card,
+    ]);
+  }
+
+
   public static function ulineRecruited($player, $movedCoins){
     self::notify($player->getId(), 'ulineRecruited', '', [
       'coins' => $movedCoins,
@@ -245,8 +253,8 @@ class Notifications
     if(isset($args['card2'])){
       $args['i18n'][] = 'card2_class';
       $c = $args['card2'];
-      $args['card2_class'] = $recruitNames[$c->getClass()];
-      $args['card2_class_symbol'] = $c->getRecruitementZone();// The substitution will be done in JS format_string_recursive function
+      $args['card2_class'] = $c->getNotifString();
+      $args['card2_class_symbol'] = $c->getNotifSymbol();// The substitution will be done in JS format_string_recursive function
       $args['card2'] = $c->getUiData();
     }
   }

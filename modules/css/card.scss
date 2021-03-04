@@ -23,6 +23,7 @@
     border:3px solid red;
     margin-top:-3px;
     margin-left:7.5px;
+    margin-right:7.5px;
     animation:none !important;
     transform:scale(1.08);
     z-index:100;
@@ -146,11 +147,12 @@
       background-size:500%;
     }
 
-    @for $i from 0 through 4 {
-      &[data-id="#{$distinctionStart + $i}"]::before {
-        background-position-x:$i * 25%;
-      }
-    }
+    &[data-id="300"]::before { background-position-x:0%; }
+    &[data-id="301"]::before { background-position-x:25%; }
+    &[data-id="302"]::before { background-position-x:50%; }
+    &[data-id="303"]::before { background-position-x:75%; }
+    // 304 is the blacksmit special card...
+    &[data-id="305"]::before { background-position-x:100%; }
 
     .card-grade {
       display:none;

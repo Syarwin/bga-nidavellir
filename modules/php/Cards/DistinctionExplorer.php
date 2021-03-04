@@ -1,5 +1,7 @@
 <?php
 namespace NID\Cards;
+use NID\Cards;
+use NID\Game\Notifications;
 
 class DistinctionExplorer extends DistinctionCard
 {
@@ -8,9 +10,13 @@ class DistinctionExplorer extends DistinctionCard
     $this->distinctionClass = EXPLORER;
   }
 
-  // TODO : case of tie
+  public function applyTieEffect(){
+    $card = Cards::getTopOf(['age', 2], 1);
+    Cards::discard([$card->getId()]);
+    Notifications::discardCardExplorerDistinction($card);
+  }
 
-  
+
   public function stateAfterRecruit(){
     return 'explorer';
   }
