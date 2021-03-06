@@ -202,7 +202,7 @@ class Pieces extends DB_Manager {
   /**
    * Get specific piece by id
    */
-  public static function get($ids) {
+  public static function get($ids, $raiseExceptionIfNotEnough = true) {
     if(!is_array($ids))
       $ids = [$ids];
 
@@ -211,8 +211,8 @@ class Pieces extends DB_Manager {
         return [];
 
     $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get();
-    if (count($result) != count($ids))
-      throw new \BgaVisibleSystemException("Class Pieces: getMany, some pieces have not been found !");
+    if (count($result) != count($ids) && $raiseExceptionIfNotEnough)
+      throw new \feException("Class Pieces: getMany, some pieces have not been found !" . json_encode($ids));
 
     return $result->count() == 1? $result->first() : $result;
   }

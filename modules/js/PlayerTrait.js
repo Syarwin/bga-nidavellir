@@ -19,6 +19,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         player.no = (player.no + nPlayers - currentPlayerNo) % nPlayers;
 
         this.place('jstpl_playerPanel', player, "overall_player_board_" + player.id);
+        dojo.attr('overall_player_board_' + player.id, "data-color", player.color);
 
         // Gem
         this.place("jstpl_gemContainer", player, "player_board_" + player.id);
@@ -34,6 +35,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       this.setupPlayersScores();
       this.updatePlayersScores();
+      this.updatePlayersOrder();
     },
 
     setupPlayersScores(){
@@ -82,6 +84,16 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this.scoreCtrl[player.id].toValue(n.args.scores[player.id].total);
       });
       this.updatePlayersScores();
+    },
+
+
+    updatePlayersOrder(){
+      if(this.gamedatas.tavern == -1)
+        return;
+
+      this.gamedatas.order.forEach((pId, i) => {
+        dojo.attr("bids-zone-" + pId, "data-order", i);
+      })
     },
   });
 });

@@ -28,6 +28,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         contents:jstpl_heroesModal,
         closeAction:'hide',
         statusElt:"tab-heroes",
+        verticalAlign:'top',
+
+//        scale:0.9,
+//        breakpoint:750,
       });
 
       this.gamedatas.cards.hall.forEach(card => this.addCard(card, card.location));
@@ -48,6 +52,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         contents:jstpl_distinctionsModal,
         closeAction:'hide',
         statusElt:"tab-distinctions",
+
+        scale:0.85,
+        breakpoint:420,
       });
 
       this.gamedatas.cards.evaluation.forEach(card => this.addCard(card, card.location));

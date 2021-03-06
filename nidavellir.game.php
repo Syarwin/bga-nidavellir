@@ -34,6 +34,8 @@ use NID\Cards;
 use NID\Coins;
 use NID\Game\Globals;
 use NID\Game\Players;
+use NID\Game\Log;
+
 
 class Nidavellir extends Table
 {
@@ -83,6 +85,9 @@ class Nidavellir extends Table
       'age' => Globals::getAge(),
       'turn' => Globals::getTurn(),
       'tavern' => Globals::getTavern(),
+
+      'order' => Log::getTurnOrder(),
+      'orderIndex' => Globals::getCurrentPlayerIndex(),
 		];
 	}
 

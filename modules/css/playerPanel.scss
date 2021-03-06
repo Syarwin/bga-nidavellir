@@ -1,3 +1,10 @@
+.player-board[data-color="0000ff"] { background-color:#b9daee; }
+.player-board[data-color="ff0000"] { background-color:#eec6cb; }
+.player-board[data-color="773300"] { background-color:#f0caae; }
+.player-board[data-color="008000"] { background-color:#c9ecba; }
+.player-board[data-color="ffa500"] { background-color:#fddac1; }
+
+
 .panel-container {
   .coins-zone {
     display: flex;
@@ -18,6 +25,7 @@
     height:50px;
     transition:height 800ms;
 
+
     .bids-zone-tavern-holder {
       width: 78px;
       height: 50px;
@@ -32,6 +40,17 @@
       position: relative;
       opacity:1;
       transition:opacity 600ms;
+
+      &::before {
+        content:'';
+        display: block;
+        position: absolute;
+        width:20px;
+        height: 20px;
+        background:blue;
+        left:0;
+        display:none;
+      }
 
       &.tavern-1 {
         background-position-y: 50%;
@@ -116,5 +135,18 @@
 
   @for $i from 1 through 6 {
     &[data-value="#{$i}"] { background-position-x:($i - 1) * 100% / 5; }
+  }
+}
+
+
+
+@for $i from 0 through 2 {
+  #ebd-body[data-tavern="#{$i}"] {
+
+    @for $j from 0 through 5 {
+      .bids-zone[data-order="#{$j}"] .tavern-#{$i}::before {
+        content:'#{$j + 1}';
+      }
+    }
   }
 }

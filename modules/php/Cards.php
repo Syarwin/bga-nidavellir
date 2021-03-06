@@ -155,14 +155,12 @@ class Cards extends Helpers\Pieces
     $values = [];
     foreach(self::$heroes as $hId => $class){
       $hero = self::getHero($hId);
-      if($hero->isSupported($options)){
-        $values[] = [
-          $hId,
-          'hall',
-          HERO,
-          null
-        ];
-      }
+      $values[] = [
+        $hId,
+        $hero->isSupported($options)? 'hall' : 'box',
+        HERO,
+        null
+      ];
     }
 
     self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);
@@ -172,7 +170,7 @@ class Cards extends Helpers\Pieces
 
   public function getOwner($cardId)
   {
-    return self::get($cardId)->getPId();
+    return self::get($cardId)->getPID();
   }
 
   public function getUlineOwner()

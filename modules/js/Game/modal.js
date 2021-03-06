@@ -56,6 +56,9 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
     onHide:null,
 
     statusElt:null, // If specified, will add/remove "opened" class on this element
+
+    scale:1,
+    breakpoint:null, // auto resize if < breakpoint using scale
   };
 
 
@@ -137,6 +140,7 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
         display:'flex',
         justifyContent:'center',
         alignItems:this.verticalAlign,
+        paddingTop:this.verticalAlign == "center"? 0 : "100px",
         transformOrigin:'top left',
       });
 
@@ -161,6 +165,16 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
         "width":bdy.w + "px",
         "height":bdy.h + "px",
       });
+
+      if(this.breakpoint != null){
+        let newModalWidth = bdy.w * this.scale;
+        let modalScale = newModalWidth / this.breakpoint;
+        if(modalScale > 1) modalScale = 1;
+        dojo.style("popin_" + this.id, {
+          transform: `scale(${modalScale})`,
+          transformOrigin: this.verticalAlign == "center"? 'center center' : 'top center',
+        });
+      }
     },
 
 
@@ -236,6 +250,7 @@ define(["dojo", "dojo/_base/declare", "dojo/fx", "dojox/fx/ext-dojo/complex"], f
         dojo.addClass(this.statusElt, "opened");
       }
 
+      this.adjustSize();
       this.fadeInAnimation().then(() => {
         this._open = true;
         if (this.onShow !== null) {

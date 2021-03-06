@@ -19,6 +19,10 @@
     background-image:url('img/tabs.png');
     background-size:100% 400%;
 
+    &.hidden {
+      display:none;
+    }
+
     &:hover, &.opened {
       margin-left:0px;
     }

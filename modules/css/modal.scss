@@ -178,6 +178,7 @@
   z-index: 2000;
   padding: 0;
   width: 750px;
+  max-width:90%;
   background-image: url("img/background_heroes.png");
   background-size: 100% 100%;
   filter:drop-shadow(3px 3px 10px black);
@@ -186,14 +187,15 @@
     padding:15px;
 
     #hall-container {
-      width: 715px;
-      height: 650px;
+      width: 100%;
+      min-height: 650px;
       position: relative;
 
       #hall {
         display: flex;
         flex-flow: row;
         flex-wrap: wrap;
+        justify-content: center;
 
         .card {
           margin:10px 10.5px;

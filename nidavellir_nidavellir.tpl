@@ -134,6 +134,19 @@ var jstpl_playerBoard = `
   <div class="player-board-name" style="color:#\${color}">\${name}</div>
 
   <div class="command-zone-container">
+    <div class="cards-class-header card-class_0">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_0"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_0"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+
     <div class="cards-class-header card-class_1">
       <div class="card-class-ranks">
         <div class="rank"></div>
@@ -193,24 +206,12 @@ var jstpl_playerBoard = `
       </div>
     </div>
 
-    <div class="cards-class-header card-class_0">
-      <div class="card-class-ranks">
-        <div class="rank"></div>
-        <span id="command-zone-ranks_\${id}_0"></span>
-      </div>
-
-      <div class="card-class-score">
-        <span id="command-zone-score_\${id}_0"></span>
-        <i class="fa fa-star"></i>
-      </div>
-    </div>
-
+    <div class="cards-class card-class_0" id="command-zone_\${id}_0"></div>
     <div class="cards-class card-class_1" id="command-zone_\${id}_1"></div>
     <div class="cards-class card-class_2" id="command-zone_\${id}_2"></div>
     <div class="cards-class card-class_3" id="command-zone_\${id}_3"></div>
     <div class="cards-class card-class_4" id="command-zone_\${id}_4"></div>
     <div class="cards-class card-class_5" id="command-zone_\${id}_5"></div>
-    <div class="cards-class card-class_0" id="command-zone_\${id}_0"></div>
   </div>
 </div>
 `

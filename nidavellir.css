@@ -658,6 +658,8 @@ html {
         transition: margin 0.3s;
         background-image: url("img/tabs.png");
         background-size: 100% 400%; }
+        #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.hidden {
+          display: none; }
         #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab:hover, #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.opened {
           margin-left: 0px; }
         #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.focus {
@@ -1021,6 +1023,21 @@ html {
     animation: none;
     border: 2px solid green; }
 
+.player-board[data-color="0000ff"] {
+  background-color: #b9daee; }
+
+.player-board[data-color="ff0000"] {
+  background-color: #eec6cb; }
+
+.player-board[data-color="773300"] {
+  background-color: #f0caae; }
+
+.player-board[data-color="008000"] {
+  background-color: #c9ecba; }
+
+.player-board[data-color="ffa500"] {
+  background-color: #fddac1; }
+
 .panel-container .coins-zone {
   display: flex;
   justify-content: center;
@@ -1049,6 +1066,15 @@ html {
     position: relative;
     opacity: 1;
     transition: opacity 600ms; }
+    .panel-container .bids-zone .bids-zone-tavern-holder::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: blue;
+      left: 0;
+      display: none; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-1 {
       background-position-y: 50%; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-2 {
@@ -1117,6 +1143,45 @@ html {
     background-position-x: 80%; }
   .gem[data-value="6"] {
     background-position-x: 100%; }
+
+#ebd-body[data-tavern="0"] .bids-zone[data-order="0"] .tavern-0::before {
+  content: "1"; }
+#ebd-body[data-tavern="0"] .bids-zone[data-order="1"] .tavern-0::before {
+  content: "2"; }
+#ebd-body[data-tavern="0"] .bids-zone[data-order="2"] .tavern-0::before {
+  content: "3"; }
+#ebd-body[data-tavern="0"] .bids-zone[data-order="3"] .tavern-0::before {
+  content: "4"; }
+#ebd-body[data-tavern="0"] .bids-zone[data-order="4"] .tavern-0::before {
+  content: "5"; }
+#ebd-body[data-tavern="0"] .bids-zone[data-order="5"] .tavern-0::before {
+  content: "6"; }
+
+#ebd-body[data-tavern="1"] .bids-zone[data-order="0"] .tavern-1::before {
+  content: "1"; }
+#ebd-body[data-tavern="1"] .bids-zone[data-order="1"] .tavern-1::before {
+  content: "2"; }
+#ebd-body[data-tavern="1"] .bids-zone[data-order="2"] .tavern-1::before {
+  content: "3"; }
+#ebd-body[data-tavern="1"] .bids-zone[data-order="3"] .tavern-1::before {
+  content: "4"; }
+#ebd-body[data-tavern="1"] .bids-zone[data-order="4"] .tavern-1::before {
+  content: "5"; }
+#ebd-body[data-tavern="1"] .bids-zone[data-order="5"] .tavern-1::before {
+  content: "6"; }
+
+#ebd-body[data-tavern="2"] .bids-zone[data-order="0"] .tavern-2::before {
+  content: "1"; }
+#ebd-body[data-tavern="2"] .bids-zone[data-order="1"] .tavern-2::before {
+  content: "2"; }
+#ebd-body[data-tavern="2"] .bids-zone[data-order="2"] .tavern-2::before {
+  content: "3"; }
+#ebd-body[data-tavern="2"] .bids-zone[data-order="3"] .tavern-2::before {
+  content: "4"; }
+#ebd-body[data-tavern="2"] .bids-zone[data-order="4"] .tavern-2::before {
+  content: "5"; }
+#ebd-body[data-tavern="2"] .bids-zone[data-order="5"] .tavern-2::before {
+  content: "6"; }
 
 #logs .card-class-name {
   font-weight: bold; }
@@ -1367,19 +1432,21 @@ html {
   z-index: 2000;
   padding: 0;
   width: 750px;
+  max-width: 90%;
   background-image: url("img/background_heroes.png");
   background-size: 100% 100%;
   filter: drop-shadow(3px 3px 10px black); }
   #popin_showHeroes #popin_showHeroes_contents {
     padding: 15px; }
     #popin_showHeroes #popin_showHeroes_contents #hall-container {
-      width: 715px;
-      height: 650px;
+      width: 100%;
+      min-height: 650px;
       position: relative; }
       #popin_showHeroes #popin_showHeroes_contents #hall-container #hall {
         display: flex;
         flex-flow: row;
-        flex-wrap: wrap; }
+        flex-wrap: wrap;
+        justify-content: center; }
         #popin_showHeroes #popin_showHeroes_contents #hall-container #hall .card {
           margin: 10px 10.5px; }
 

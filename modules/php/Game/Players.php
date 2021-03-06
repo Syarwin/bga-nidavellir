@@ -32,7 +32,7 @@ class Players extends \NID\Helpers\DB_Manager
     $values = [];
     foreach ($players as $pId => $player) {
       $color = array_shift($colors);
-      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 5, array_shift($gems)];
+      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 19, array_shift($gems)];
     }
     $query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors']);

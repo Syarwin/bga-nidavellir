@@ -88,19 +88,19 @@ define([
 
 
       setupInfoPanel(){
+        this.turnCounter = new ebg.counter();
+        this.turnCounter.create('turn-counter');
+/*
         this.place('jstpl_configPlayerBoard', {
           'age' : _('Age'),
           'turn' : _('Turn'),
         }, 'player_boards', 'first');
         dojo.connect($('show-settings'), 'onclick', () => this.toggleControls() );
-        dojo.connect($('tab-score'), 'onclick', () => this.showOverview() );
-        this.turnCounter = new ebg.counter();
-        this.turnCounter.create('turn-counter');
 
         this.addTooltip( 'show-settings', '', _("Display some settings about the game."));
-        this.addTooltip( 'show-overview', '', _("Display the scoring details."));
 
         this.setupSettings();
+*/
       },
 
       udpateInfoCounters(){
@@ -108,12 +108,13 @@ define([
         this.turnCounter.toValue(this.gamedatas.turn);
         dojo.attr('ebd-body', 'data-tavern', this.gamedatas.tavern);
         dojo.attr('ebd-body', 'data-age', this.gamedatas.age);
+        dojo.toggleClass('tab-distinctions', 'hidden', this.gamedatas.age == 2);
       },
 
 
       updatePlayerOrdering(){
         this.inherited(arguments);
-        dojo.place('player_board_config', 'player_boards', 'first');
+//        dojo.place('player_board_config', 'player_boards', 'first');
       },
 
 
@@ -146,6 +147,8 @@ define([
           }
           dojo.place('<td id="overview-' + pId + '-total"></td>', "overview-total");
         }
+
+        dojo.connect($('tab-score'), 'onclick', () => this.showOverview() );
       },
 
       showOverview(){
