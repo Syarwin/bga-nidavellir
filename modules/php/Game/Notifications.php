@@ -66,6 +66,25 @@ class Notifications
   }
 
 
+  public static function newOrder($order){
+    $msg = [
+      '', '',
+      clienttranslate('Recruiting of current tavern will take place in following order : ${player_name1} then ${player_name2}'),
+      clienttranslate('Recruiting of current tavern will take place in following order : ${player_name1}, ${player_name2} then ${player_name3}'),
+      clienttranslate('Recruiting of current tavern will take place in following order : ${player_name1}, ${player_name2}, ${player_name3} then ${player_name4}'),
+      clienttranslate('Recruiting of current tavern will take place in following order : ${player_name1}, ${player_name2}, ${player_name3}, ${player_name4} then ${player_name5}'),
+    ];
+    $data = [
+      'order' => $order,
+    ];
+    $players = Players::getAll();
+    foreach($order as $i => $pId)
+      $data['player_name' . ($i + 1)] = $players[$pId]->getName();
+
+    self::notifyAll('recruitOrder', $msg[count($order)], $data);
+  }
+
+
 
   public static function recruitStart($player, $order){
     self::notifyAll('recruitStart', clienttranslate('${player_name} is choosing in position ${order}'), [

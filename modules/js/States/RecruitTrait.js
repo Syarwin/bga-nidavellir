@@ -2,6 +2,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.recruitTrait", null, {
     constructor(){
       this._notifications.push(
+        ['recruitOrder', 500],
+        ['recruitStart', 10],
         ['recruit', 1000],
         ['recruitHero', 2500],
         ['distinction', 2500],
@@ -11,6 +13,20 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       //this._selectedCoin = null;
       //this._tavernBids = [null, null, null];
+    },
+
+    notif_recruitOrder(n){
+      debug("Notif: new recruit order", n);
+      this.gamedatas.order = n.args.order;
+      this.updatePlayersOrder();
+      this.gamedatas.orderIndex = 0;
+      this.udpateInfoCounters();
+    },
+
+    notif_recruitStart(n){
+      debug("Notif: start recruiting", n);
+      this.gamedatas.orderIndex = n.args.order - 1;
+      this.udpateInfoCounters();
     },
 
     onEnteringStateRecruitDwarf(args) {

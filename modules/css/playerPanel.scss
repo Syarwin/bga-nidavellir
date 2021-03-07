@@ -43,13 +43,25 @@
 
       &::before {
         content:'';
-        display: block;
         position: absolute;
-        width:20px;
-        height: 20px;
-        background:blue;
-        left:0;
-        display:none;
+        width: 32px;
+        height: 32px;
+        background: rgba(255,255,255,0.9);
+        left: 0;
+        font-family: "Norse";
+        border-radius: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: red;
+        font-size: 32px;
+        border: 1px solid black;
+        bottom: -10px;
+        left: -10px;
+        z-index: 1000;
+        opacity:1;
+        transition: opacity 0.5s;
       }
 
       &.tavern-1 {
@@ -109,11 +121,22 @@
 }
 
 #ebd-body[data-tavern="1"] .panel-container .bids-zone {
+  .tavern-0.bids-zone-tavern-holder::before {
+    display:none;
+  }
+
   .tavern-2 {
     opacity:0;
   }
 }
 
+#ebd-body[data-tavern="2"] .panel-container .bids-zone {
+  .tavern-0, .tavern-1 {
+    &.bids-zone-tavern-holder::before {
+      display:none;
+    }
+  }
+}
 
 
 
@@ -149,4 +172,24 @@
       }
     }
   }
+}
+
+@for $i from 0 through 6 {
+  #ebd-body[data-order-index="#{$i}"] .panel-container {
+    @for $j from 0 through $i - 1 {
+      .bids-zone[data-order="#{$j}"] .bids-zone-tavern-holder::before {
+        opacity:0;
+      }
+    }
+
+    .bids-zone[data-order="#{$i}"] .bids-zone-tavern-holder::before {
+      opacity:1;
+      background-color:red;
+      color:white;
+    }
+  }
+}
+
+#ebd-body[data-order-index="-1"] .panel-container .bids-zone .bids-zone-tavern-holder::before  {
+  opacity:0;
 }

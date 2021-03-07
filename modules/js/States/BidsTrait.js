@@ -145,6 +145,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_revealBids(n){
       debug("Notif: reveal bids", n);
       this.gamedatas.tavern = n.args.tavern;
+      this.gamedatas.orderIndex = -1;
       this.udpateInfoCounters();
       setTimeout(() => {
         Object.values(n.args.coins).forEach(coin => this.addCoin(coin) );
@@ -190,6 +191,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       });
       this._tavernBids = [null, null, null];
       this.gamedatas.tavern = -1;
+      this.gamedatas.orderIndex = -1;
       this.udpateInfoCounters();
     },
 

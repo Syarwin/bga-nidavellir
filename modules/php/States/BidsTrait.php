@@ -200,6 +200,7 @@ trait BidsTrait
     }
 
     Log::storeOrder($order, $ties);
+    Notifications::newOrder($order);
 
 
     // reset of current index for resolution.

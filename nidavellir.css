@@ -1068,13 +1068,25 @@ html {
     transition: opacity 600ms; }
     .panel-container .bids-zone .bids-zone-tavern-holder::before {
       content: '';
-      display: block;
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background: blue;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.9);
       left: 0;
-      display: none; }
+      font-family: "Norse";
+      border-radius: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: red;
+      font-size: 32px;
+      border: 1px solid black;
+      bottom: -10px;
+      left: -10px;
+      z-index: 1000;
+      opacity: 1;
+      transition: opacity 0.5s; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-1 {
       background-position-y: 50%; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-2 {
@@ -1114,8 +1126,13 @@ html {
 #ebd-body[data-tavern="0"] .panel-container .bids-zone .tavern-1, #ebd-body[data-tavern="0"] .panel-container .bids-zone .tavern-2 {
   opacity: 0; }
 
+#ebd-body[data-tavern="1"] .panel-container .bids-zone .tavern-0.bids-zone-tavern-holder::before {
+  display: none; }
 #ebd-body[data-tavern="1"] .panel-container .bids-zone .tavern-2 {
   opacity: 0; }
+
+#ebd-body[data-tavern="2"] .panel-container .bids-zone .tavern-0.bids-zone-tavern-holder::before, #ebd-body[data-tavern="2"] .panel-container .bids-zone .tavern-1.bids-zone-tavern-holder::before {
+  display: none; }
 
 .gem-container {
   position: absolute;
@@ -1182,6 +1199,90 @@ html {
   content: "5"; }
 #ebd-body[data-tavern="2"] .bids-zone[data-order="5"] .tavern-2::before {
   content: "6"; }
+
+#ebd-body[data-order-index="0"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="0"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="0"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="1"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="1"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="2"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="2"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="2"] .panel-container .bids-zone[data-order="2"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="2"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="3"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="2"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="3"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="4"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="2"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="3"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="4"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="5"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="2"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="3"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="4"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="5"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="6"] .bids-zone-tavern-holder::before {
+  opacity: 1;
+  background-color: red;
+  color: white; }
+
+#ebd-body[data-order-index="-1"] .panel-container .bids-zone .bids-zone-tavern-holder::before {
+  opacity: 0; }
 
 #logs .card-class-name {
   font-weight: bold; }

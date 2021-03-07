@@ -107,6 +107,7 @@ define([
         dojo.attr('age-counter', 'data-value', this.gamedatas.age);
         this.turnCounter.toValue(this.gamedatas.turn);
         dojo.attr('ebd-body', 'data-tavern', this.gamedatas.tavern);
+        dojo.attr('ebd-body', 'data-order-index', this.gamedatas.orderIndex);
         dojo.attr('ebd-body', 'data-age', this.gamedatas.age);
         dojo.toggleClass('tab-distinctions', 'hidden', this.gamedatas.age == 2);
       },

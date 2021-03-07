@@ -223,8 +223,8 @@ class Player extends \NID\Helpers\DB_Manager
   {
     $ranks = $this->getRanks();
     $values = $this->getBraveryValues();
-    $blacksmithScores = [0, 3, 7, 12, 18, 25, 33, 42, 52, 63, 75, 88, 102, 117, 133, 150];
-    $hunterScores = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225];
+    $blacksmithScores = [0, 3, 7, 12, 18, 25, 33, 42, 52, 63, 75, 88, 102, 117, 133, 150, 168, 187, 207];
+    $hunterScores = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289];
     $maxWarrior = Players::getMaxWarriorRank();
 
     $scores = [

@@ -131,7 +131,6 @@ class Players extends \NID\Helpers\DB_Manager
   }
 
 
-
   /*
    * Update scores UI
    */
