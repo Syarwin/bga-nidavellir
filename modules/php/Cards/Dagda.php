@@ -8,6 +8,11 @@ class Dagda extends HeroCard
     $this->id = DAGDA;
     $this->name = 'Dagda';
     $this->heroClass = HUNTER;
+    $this->subname = clienttranslate("The Explosive");
+    $this->tooltip = [
+      clienttranslate("Has 3 ranks."),
+      clienttranslate("Immediately place Dagda in your Hunter column, and Immediately discard the last Dwarf card of your choosing from two others columns of your army. The two columns must be different.")
+    ];
     $this->grade = [
       null,
       null,

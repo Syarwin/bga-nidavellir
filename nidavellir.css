@@ -1577,6 +1577,63 @@ html {
     align-items: center;
     min-height: 420px; }
 
+.dijitTooltip .card-tooltip {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center; }
+  .dijitTooltip .card-tooltip div.card-title-holder {
+    text-align: center; }
+    .dijitTooltip .card-tooltip div.card-title-holder .card-title {
+      font-size: 24px;
+      font-weight: bold; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-title:not([data-class="8"]) {
+        font-family: "Norse"; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="1"] {
+        color: #554696; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="2"] {
+        color: #158353; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="3"] {
+        color: #3e9bd6; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="4"] {
+        color: #ef7926; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="5"] {
+        color: #923425; }
+    .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle {
+      margin-left: 5px; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle:not([data-class="8"]) {
+        font-family: "Norse";
+        font-size: 24px; }
+      .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle[data-class="8"] {
+        font-size: 12px; }
+        .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle[data-class="8"]::before {
+          content: '\A';
+          white-space: pre; }
+  .dijitTooltip .card-tooltip .card {
+    width: 196px;
+    height: 289.8px;
+    margin: 15px; }
+    .dijitTooltip .card-tooltip .card .card-grade {
+      width: 117.6px;
+      height: 231.84px; }
+      .dijitTooltip .card-tooltip .card .card-grade .card-rank {
+        width: 90px;
+        height: 38px;
+        font-size: 32px;
+        line-height: 36px; }
+      .dijitTooltip .card-tooltip .card .card-grade .card-class-icon {
+        width: 49px;
+        height: 49px; }
+    .dijitTooltip .card-tooltip .card[data-class="1"] .card-rank::before, .dijitTooltip .card-tooltip .card[data-class="2"] .card-rank::before {
+      width: 26.6px;
+      height: 26.6px;
+      margin: 5.7px 0; }
+  .dijitTooltip .card-tooltip .card-description {
+    margin: 10px;
+    font-size: 14px;
+    max-width: 300px;
+    text-align: justify; }
+
 .notransition {
   -webkit-transition: none !important;
   -moz-transition: none !important;

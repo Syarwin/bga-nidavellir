@@ -7,6 +7,12 @@ class Hourya extends HeroCard
     parent::__construct($row);
     $this->id = HOURYA;
     $this->name = 'Hourya';
+    $this->subname = clienttranslate("The Elusive");
+    $this->tooltip = [
+      clienttranslate("Has 1 rank."),
+      clienttranslate("Add 20 points to your Explorer Bravery Value."),
+      clienttranslate("You need to have 5 ranks in the Explorer column of your army in order to recruit her."),
+    ];
     $this->heroClass = EXPLORER;
     $this->grade = [
       20

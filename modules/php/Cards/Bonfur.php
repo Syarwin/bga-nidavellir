@@ -7,6 +7,11 @@ class Bonfur extends HeroCard
     parent::__construct($row);
     $this->id = BONFUR;
     $this->name = 'Bonfur';
+    $this->subname = clienttranslate("The Tyrannical");
+    $this->tooltip = [
+      clienttranslate("Has 3 ranks."),
+      clienttranslate("Immediately place Bonfur in your Blacksmith column, and Immediately discard the last Dwarf card of your choosing from another of your columns.")
+    ];
     $this->heroClass = BLACKSMITH;
     $this->grade = [
       null,

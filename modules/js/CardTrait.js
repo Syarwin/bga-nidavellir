@@ -70,16 +70,21 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     addCard(card, container, animation = false){
       card.parity = card.id % 2;
       card.ranks = card.grade.length;
+      card.title = card.name? card.name : '';
+      card.subtitle = card.subname? _(card.subname) : '';
+      card.desc = card.tooltip? card.tooltip.map(o => _(o)).join('<br />') : '';
+      card.gradeHtml = card.grade.map(r => this.getRankHtml(r)).join('');
+
       this.place('jstpl_card', card, container);
-      card.grade.forEach(rank => this.addRank(rank, card) );
       dojo.connect($("card-" + card.id), "click", () => this.onClickCard(card) );
+      this.addTooltipHtml('card-' + card.id, this.format_block('jstpl_cardTooltip', card));
 
       if(animation)
         this.slideFromLeft('card-' + card.id);
     },
 
-    addRank(rank, card){
-      this.place('jstpl_rank', { rank : rank ?? '' }, 'card-grade-' + card.id);
+    getRankHtml(rank){
+      return this.format_block('jstpl_rank', { rank : rank ?? '' });
     },
 
 

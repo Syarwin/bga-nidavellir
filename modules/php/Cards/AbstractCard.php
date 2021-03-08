@@ -14,6 +14,9 @@ class AbstractCard
   protected $grade = [];
   protected $pId = null;
   protected $zone = null;
+  protected $name = '';
+  protected $tooltip = [];
+
 
   public function __construct($row) {
     if($row != null) {
@@ -55,7 +58,18 @@ class AbstractCard
       'state'    => $this->state,
       'class'    => $this->class,
       'grade'    => $this->grade,
+      'name'     => $this->getName(),
+      'tooltip'  => $this->getTooltip(),
+      'symbol'   => $this->getNotifSymbol(),
     ];
+  }
+
+  public function getName(){
+    return $this->name;
+  }
+
+  public function getTooltip(){
+    return $this->tooltip;
   }
 
   public function getRecruitementZone(){

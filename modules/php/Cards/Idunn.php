@@ -7,6 +7,11 @@ class Idunn extends HeroCard
     parent::__construct($row);
     $this->id = IDUNN;
     $this->name = 'Idunn';
+    $this->subname = clienttranslate("The Furtive");
+    $this->tooltip = [
+      clienttranslate("Has 1 rank."),
+      clienttranslate("Add 7 points to your Explorer Bravery Value plus 2 points per present rank in this column, including her own.")
+    ];
     $this->heroClass = EXPLORER;
     $this->grade = [
       7

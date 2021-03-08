@@ -21,6 +21,7 @@ abstract class DistinctionCard extends AbstractCard
   public function getUiData() {
     $data = parent::getUiData();
     $data['distinctionClass'] = $this->distinctionClass;
+    $data['subname'] = clienttranslate("(Distinction card)");
     return $data;
   }
 
@@ -33,7 +34,7 @@ abstract class DistinctionCard extends AbstractCard
   }
 
   public function applyTieEffect(){}
-    
+
   public function getDistinctionClass(){
     return $this->distinctionClass;
   }

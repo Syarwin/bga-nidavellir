@@ -10,6 +10,12 @@ abstract class DwergCard extends HeroCard
   public function __construct($row) {
     parent::__construct($row);
     $this->name = 'Dwerg';
+    $this->subname = clienttranslate("The 5 Brothers");
+    $this->tooltip = [
+      clienttranslate("Add X points to your final Bravery Value."),
+      clienttranslate("X depends on the number of recruited brothers."),
+      clienttranslate("X = 13 for 1 brother, X = 40 for 2 brothers, X = 81 for 3 brothers, X = 108 for 4 brothers, X = 135 for 5 brothers.")
+    ];
     $this->heroClass = NEUTRAL;
     $this->grade = [
       null,

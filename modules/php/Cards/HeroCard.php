@@ -8,7 +8,7 @@ use Nidavellir;
 
 abstract class HeroCard extends AbstractCard
 {
-  protected $name = '';
+  protected $subname = '';
   protected $expansion = false;
   protected $advanced = false;
   protected $heroClass = null;
@@ -25,7 +25,7 @@ abstract class HeroCard extends AbstractCard
 
   public function getUiData() {
     $data = parent::getUiData();
-    $data['name'] = $this->name;
+    $data['subname'] = $this->subname;
     $data['heroClass'] = $this->heroClass;
     return $data;
   }

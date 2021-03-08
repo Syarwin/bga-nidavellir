@@ -7,6 +7,8 @@ $hSign3 : 154px * $wSign / 200px;
 
 $wCard: $scale*140px;
 $hCard: $scale*207px;
+$wRank:45px;// 0.6 * $wCard;
+$hRank:19px; //2/5 * $wRank;
 
 
 $heroesStart: 200;

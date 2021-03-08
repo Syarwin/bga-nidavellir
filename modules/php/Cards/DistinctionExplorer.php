@@ -8,6 +8,10 @@ class DistinctionExplorer extends DistinctionCard
   public function __construct($row) {
     parent::__construct($row);
     $this->distinctionClass = EXPLORER;
+    $this->name = clienttranslate("Pioneer of the Kingdom");
+    $this->tooltip = [
+      clienttranslate("Draw 3 cards from the Age 2 deck, keep 1 and shuffled back the two other ones in the Age 2 deck."),
+    ];
   }
 
   public function applyTieEffect(){

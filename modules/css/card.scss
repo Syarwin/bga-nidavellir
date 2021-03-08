@@ -47,9 +47,6 @@
     &[data-class="#{$i}"][data-parity="1"]::before { background-position-x: (2*($i - 1) + 1) * 100% / 11; }
   }
 
-  $wRank:45px;// 0.6 * $wCard;
-  $hRank:19px; //2/5 * $wRank;
-
   .card-grade {
     position: absolute;
     z-index:2;
