@@ -63,7 +63,8 @@ define('ROYAL_OFFER', 6);
 
 define('HERO', 7);
 define('DISTINCTION', 8);
-
+define('MERCENARY', 9);
+define('ARTIFACT', 10);
 
 define('EXTRA_SCORE', 7);
 
@@ -82,6 +83,12 @@ define('COIN_DISTINCTION', 2);
 define('OPTION_SETUP', 102);
 define('BASIC', 0);
 define('NORMAL', 1);
+
+
+define('OPTION_EXPANSION', 103);
+define('NONE', 0);
+define('THINGVELLIR', 1);
+
 
 
 /*
@@ -115,7 +122,19 @@ define('ULINE', 218);
 define('YLUD', 219);
 define('THRUD', 220);
 
+define('ANDUMIA', 221);
+define('HOLDA', 222);
+define('KHRAD', 223);
+define('JARIKA', 224);
+define('OLWYN', 225);
+define('OLWYN_DOUBLE1', 226);
+define('OLWYN_DOUBLE2', 227);
+define('ZOLKUR', 228);
 
+
+/*
+ * ARTIFACTS
+ */
 define('FAFNIR', 250);
 define('DRAUPNIR', 251);
 define('VEGVISIR', 252);
@@ -128,6 +147,24 @@ define('HOFUD', 258);
 define('HRAFNSMERKI', 259);
 define('JARNGLOFI', 260);
 define('GJALLARHORN', 261);
+
+/*
+ * MERCERNARIES
+ */
+define('MERCENARY_0', 300);
+define('MERCENARY_1', 301);
+define('MERCENARY_2', 302);
+define('MERCENARY_3', 303);
+define('MERCENARY_4', 304);
+define('MERCENARY_5', 305);
+
+define('MERCENARY_6', 306);
+define('MERCENARY_7', 307);
+define('MERCENARY_8', 308);
+define('MERCENARY_9', 309);
+define('MERCENARY_10', 310);
+define('MERCENARY_11', 311);
+
 
 
 /*

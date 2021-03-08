@@ -64,12 +64,15 @@ class Nidavellir extends Table
 	 * setupNewGame:
    */
 	protected function setupNewGame( $players, $options = [] ){
+    if($options[OPTION_EXPANSION] == THINGVELLIR)
+      $options[OPTION_SETUP] = NORMAL;
+
     Cards::setupNewGame($players, $options);
 		Players::setupNewGame($players);
     Coins::setupNewGame($players);
 
     Globals::setupNewGame();
-//    Statistics::setupNewGame();
+//    Statistics::setupNewGame(); TODO
 	}
 
 	/*

@@ -145,7 +145,7 @@ class Cards extends Helpers\Pieces
 
   public static function getHero($id, $row = null)
   {
-    $className = '\NID\Cards\\' . self::$heroes[$id];
+    $className = '\NID\Cards\Heroes\\' . self::$heroes[$id];
     return new $className($row);
   }
 
@@ -212,7 +212,7 @@ class Cards extends Helpers\Pieces
 
   public static function getDistinction($id, $row = null)
   {
-    $className = '\NID\Cards\\' . self::$distinctions[$id];
+    $className = '\NID\Cards\Distinctions\\' . self::$distinctions[$id];
     return new $className($row);
   }
 

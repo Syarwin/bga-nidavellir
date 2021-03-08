@@ -33,5 +33,29 @@ $game_options = [
       ],
     ],
     "default" => NORMAL,
+    'displaycondition' => [
+      [
+        'type' => 'otheroptionisnot',
+        'id' => OPTION_EXPANSION,
+        'value' => THINGVELLIR,
+      ]
+    ],
   ],
+
+  OPTION_EXPANSION => [
+    'name' => totranslate("Expansion"),
+    'values' => [
+      NONE => [
+        'name' => totranslate("None"),
+        'description' => totranslate("Only the base game"),
+      ],
+      THINGVELLIR => [
+        'name' => totranslate("Thingvellir"),
+        'tmdisplay' => totranslate("Thingvellir"),
+        'description' => totranlsate("Thingvellir expansion"),
+        'nobeginner' => true,
+      ]
+    ],
+    "default" => NONE,
+  ]
 ];
