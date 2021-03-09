@@ -54,18 +54,26 @@
         display:block;
         position:absolute;
         top:0;
-        left:0;
+        left:-2.5%;
         z-index:-1;
-        width:100%;
+        width:106%;
         height:100%;
-        background-image:url('img/command-zone.png');
-        background-size:100% 100%;
+        background-image:url('img/command_zones.png');
+        background-size:100% 500%;
       }
+      &[data-color="0000ff"]::before {  background-position-y:25%; }
+      &[data-color="ff0000"]::before {  background-position-y:50%; }
+      &[data-color="008000"]::before {  background-position-y:0% }
+      &[data-color="ffa500"]::before {  background-position-y:100%; }
+      &[data-color="773300"]::before {  background-position-y:75%; }
+
+      /*
       &[data-color="0000ff"]::before {  filter:drop-shadow(2px 2px 4px black)  hue-rotate(171deg); }
       &[data-color="ff0000"]::before {  filter:drop-shadow(2px 2px 4px black) saturate(1) hue-rotate(-38deg); }
       &[data-color="008000"]::before {  filter:drop-shadow(2px 2px 4px black)  hue-rotate(56deg); }
       &[data-color="ffa500"]::before {  filter:drop-shadow(2px 2px 4px black) saturate(2) hue-rotate(-20deg); }
       &[data-color="773300"]::before {  filter:drop-shadow(2px 2px 4px black) brightness(0.9) hue-rotate(-8deg); }
+      */
 
       .player-board-name {
         position: absolute;

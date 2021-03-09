@@ -5,7 +5,7 @@ namespace NID\Cards\Distinctions;
  * HeroCard: basic holder for hero card
  */
 
-abstract class DistinctionCard extends NID\Cards\AbstractCard
+abstract class DistinctionCard extends \NID\Cards\AbstractCard
 {
   protected $distinctionClass;
 

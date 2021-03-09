@@ -5,7 +5,7 @@ namespace NID\Cards\Artifacts;
  * ArtifactCard: all utility functions concerning an artifact
  */
 
-class ArtifactCard extends NID\Cards\AbstractCard
+class ArtifactCard extends \NID\Cards\AbstractCard
 {
   protected $age;
 

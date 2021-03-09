@@ -176,12 +176,16 @@
 
 #popin_showHeroes {
   z-index: 2000;
-  padding: 0;
+  padding: 10px 36px 10px 15px;
   width: 750px;
   max-width:90%;
   background-image: url("img/background_heroes.png");
   background-size: 100% 100%;
-  filter:drop-shadow(3px 3px 10px black);
+  //filter:drop-shadow(3px 3px 10px black);
+
+  .nidavellir_popin_closeicon {
+    right:8px;
+  }
 
   #popin_showHeroes_contents {
     padding:15px;
@@ -210,11 +214,15 @@
 
 #popin_showDistinctions, #popin_distinctionExplorer {
   z-index: 2000;
-  padding: 0;
+  padding: 10px 30px 10px 10px;
   width: 420px;
   background-image: url("img/background_distinctions.png");
   background-size: 100% 100%;
-  filter:drop-shadow(3px 3px 10px black);
+  //filter:drop-shadow(3px 3px 10px black);
+
+  .nidavellir_popin_closeicon {
+    right:-7px;
+  }
 
   #popin_showDistinctions_contents, #popin_distinctionExplorer_contents {
     padding:15px;

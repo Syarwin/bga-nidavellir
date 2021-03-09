@@ -6,12 +6,11 @@ use Nidavellir;
  * HeroCard: basic holder for hero card
  */
 
-abstract class HeroCard extends NID\Cards\AbstractCard
+abstract class HeroCard extends \NID\Cards\AbstractCard
 {
   protected $subname = '';
   protected $expansion = false;
   protected $advanced = false;
-  protected $expansion = false;
   protected $heroClass = null;
 
   public function __construct($row) {

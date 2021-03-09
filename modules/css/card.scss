@@ -4,6 +4,7 @@
   margin:0px $scale*15px;
   position:relative;
   border-radius: 5%;
+  box-shadow: 0px 0px 4px black;
 
   &.selectable {
     cursor:pointer;
@@ -37,7 +38,7 @@
     height:100%;
     background-size:cover;
     border-radius: 5%;
-    filter:drop-shadow(0px 0px 4px black);
+//    filter:drop-shadow(0px 0px 4px black);
     background-image:url('img/dwarves.jpg');
     z-index:2;
   }

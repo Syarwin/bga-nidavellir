@@ -64,6 +64,8 @@ class Nidavellir extends Table
 	 * setupNewGame:
    */
 	protected function setupNewGame( $players, $options = [] ){
+    $options[OPTION_EXPANSION] = NONE;
+
     if($options[OPTION_EXPANSION] == THINGVELLIR)
       $options[OPTION_SETUP] = NORMAL;
 

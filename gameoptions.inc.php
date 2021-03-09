@@ -33,6 +33,7 @@ $game_options = [
       ],
     ],
     "default" => NORMAL,
+    /*
     'displaycondition' => [
       [
         'type' => 'otheroptionisnot',
@@ -40,8 +41,9 @@ $game_options = [
         'value' => THINGVELLIR,
       ]
     ],
+    */
   ],
-
+/*
   OPTION_EXPANSION => [
     'name' => totranslate("Expansion"),
     'values' => [
@@ -58,4 +60,5 @@ $game_options = [
     ],
     "default" => NONE,
   ]
+*/
 ];
