@@ -176,7 +176,7 @@
 
 #popin_showHeroes {
   z-index: 2000;
-  width: 1000px;
+  width: 800px;
   max-width:90%;
   //filter:drop-shadow(3px 3px 10px black);
 
@@ -203,8 +203,6 @@
     #hall-container {
       width: 100%;
       position: relative;
-      display: flex;
-      flex-flow:row;
 
       #hall {
         display: flex;
@@ -221,14 +219,6 @@
             transform:scale(1.08);
           }
         }
-      }
-
-      #hero-viewer {
-        width: 200px;
-        flex-shrink: 0;
-        background: rgba(255,255,255,0.6);
-        padding: 2px 10px;
-        border-radius: 7px;
       }
     }
   }
@@ -276,4 +266,84 @@
    align-items: center;
    min-height:420px;
  }
+}
+
+
+
+
+#popin_showHelpsheet {
+  z-index:2000;
+  padding:0;
+  width:70%;
+  min-width:300px;
+  background-image:url("img/background_score.png");
+  background-size: 100% 100%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px black;
+  background-color:white;
+
+  #popin_showHelpsheet_contents {
+    padding:20px;
+
+    #helper-classes {
+      display: flex;
+      flex-flow: column;
+
+      .helper-classes-row {
+        margin:10px 0px;
+        padding:10px;
+        background:rgba(255,255,255,0.5);
+        display: flex;
+        flex-flow: row;
+
+        .helpers-classes-cards {
+          width:220px;
+          flex-shrink: 0;
+          display: flex;
+        }
+
+        .helper-classes-desc {
+          flex-grow: 1;
+          padding:0px 10px;
+
+          h2 {
+            font-family: "Norse";
+            font-weight: bold;
+            font-size:24px;
+          }
+
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top:10px;
+            li {
+              padding: 2px 5px;
+              font-family: "Norse";
+              font-weight: bold;
+              font-size: 20px;
+              border: 1px solid #a8a8a8;
+            }
+          }
+        }
+
+        .helper-classes-symbol {
+          width:140px;
+          height:140px;
+          background-image:url('img/classes.png');
+          background-size: 100% 600%;
+          flex-shrink: 0;
+        }
+
+        @for $i from 1 through 5 {
+          &[data-class="#{$i}"] .helper-classes-symbol { background-position-y: $i * 100% / 5; }
+        }
+
+        &[data-class="1"] h2 { color: #554696; }
+        &[data-class="2"] h2 { color: #158353; }
+        &[data-class="3"] h2{ color: #3e9bd6; }
+        &[data-class="4"] h2{ color: #ef7926; }
+        &[data-class="5"] h2{ color: #923425; }
+      }
+    }
+  }
 }

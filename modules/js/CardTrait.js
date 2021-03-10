@@ -36,8 +36,6 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       this.gamedatas.cards.hall.forEach(card => this.addCard(card, card.location));
       dojo.connect($('tab-heroes'), 'click', () => this.openHeroesModal() );
-
-      this._selectedHero = null;
     },
 
     openHeroesModal(){
@@ -91,18 +89,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
 
     onClickCard(card){
-      if(card.location == 'hall'){
-        if(this._selectedHero != null){
-          dojo.empty("hero-viewer");
-          dojo.removeClass('card-' + this._selectedHero.id, "selected");
-        }
-
-        this._selectedHero = card;
-        this.place('jstpl_cardTooltip', card, "hero-viewer");
-        dojo.addClass('card-' + card.id, "selected");
-        // TODO add button
-      }
-      else if(this._selectableCards.includes(card.id)){
+      if(this._selectableCards.includes(card.id)){
         this._callbackOnCard(card);
       }
     },

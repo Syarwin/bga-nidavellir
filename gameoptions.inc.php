@@ -62,3 +62,7 @@ $game_options = [
   ]
 */
 ];
+
+
+$game_preferences = [
+];

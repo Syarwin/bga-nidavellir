@@ -22,6 +22,7 @@ class Player extends \NID\Helpers\DB_Manager
   protected $score = 0;
   protected $zombie = false;
   protected $gem = 0;
+  protected $autopick = false;
 
   public function __construct($row) {
     if($row != null) {
@@ -33,6 +34,7 @@ class Player extends \NID\Helpers\DB_Manager
       $this->score = $row['player_score'];
       $this->zombie = $row['player_zombie'] == 1;
       $this->gem = $row['player_gem'];
+      $this->autopick = $row['player_autopick'] == 1;
     }
   }
 
@@ -46,6 +48,7 @@ class Player extends \NID\Helpers\DB_Manager
   public function isEliminated(){ return $this->eliminated; }
   public function isZombie(){ return $this->zombie; }
   public function getLastAction($action){ return Log::getLastActionArg($action, $this->id); }
+  public function wantAutopick(){ return $this->autopick; }
 
   public function getGem(){ return $this->gem; }
 
@@ -63,6 +66,7 @@ class Player extends \NID\Helpers\DB_Manager
       'score'     => $this->score,
       'scores'    => $this->getScores(),
       'ranks'     => $this->getRanks(),
+      'autopick'  => $this->autopick,
     ];
   }
 
@@ -223,8 +227,8 @@ class Player extends \NID\Helpers\DB_Manager
   {
     $ranks = $this->getRanks();
     $values = $this->getBraveryValues();
-    $blacksmithScores = [0, 3, 7, 12, 18, 25, 33, 42, 52, 63, 75, 88, 102, 117, 133, 150, 168, 187, 207];
-    $hunterScores = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289];
+    $blacksmithScores = [0, 3, 7, 12, 18, 25, 33, 42, 52, 63, 75, 88, 102, 117, 133, 150, 168, 187, 207, 228, 250, 273, 297, 322, 348, 375];
+    $hunterScores = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441];
     $maxWarrior = Players::getMaxWarriorRank();
 
     $scores = [
@@ -271,5 +275,11 @@ class Player extends \NID\Helpers\DB_Manager
   public function setGemValue($val)
   {
     self::DB()->update(['player_gem' => $val], $this->id);
+  }
+
+
+  public function setAutoPick($mode)
+  {
+    self::DB()->update(['player_autopick' => $mode], $this->id);
   }
 }

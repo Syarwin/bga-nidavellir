@@ -17,14 +17,14 @@ class Players extends \NID\Helpers\DB_Manager
   }
 
 
-  public function setupNewGame($players)
+  public function setupNewGame($players, $isAsync)
   {
     // Create players
     self::DB()->delete();
 
     $gameInfos = Nidavellir::get()->getGameinfos();
     $colors = $gameInfos['player_colors'];
-    $query = self::DB()->multipleInsert(['player_id', 'player_color', 'player_canal', 'player_name', 'player_avatar', 'player_score', 'player_gem']);
+    $query = self::DB()->multipleInsert(['player_id', 'player_color', 'player_canal', 'player_name', 'player_avatar', 'player_score', 'player_gem', 'player_autopick']);
 
     $gems = [1,2,3,4,5];
     array_splice($gems, 0, 5 - count($players));
@@ -32,7 +32,7 @@ class Players extends \NID\Helpers\DB_Manager
     $values = [];
     foreach ($players as $pId => $player) {
       $color = array_shift($colors);
-      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 19, array_shift($gems)];
+      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 19, array_shift($gems), $isAsync? 1 : 0];
     }
     $query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors']);
@@ -42,10 +42,16 @@ class Players extends \NID\Helpers\DB_Manager
     if(true){
       $pId = array_keys($players)[0];
       Cards::addClass($pId, BLACKSMITH);
-      Cards::addClass($pId, HUNTER);
-      Cards::addClass($pId, EXPLORER);
-      Cards::addClass($pId, MINER);
-      Cards::addClass($pId, WARRIOR);
+      Cards::addClass($pId, BLACKSMITH);
+      Cards::addClass($pId, BLACKSMITH);
+      Cards::addClass($pId, BLACKSMITH);
+      Cards::addClass($pId, BLACKSMITH);
+      Cards::addClass($pId, BLACKSMITH);
+      Cards::addClass($pId, BLACKSMITH);
+//      Cards::addClass($pId, HUNTER);
+//      Cards::addClass($pId, EXPLORER);
+//      Cards::addClass($pId, MINER);
+//      Cards::addClass($pId, WARRIOR);
     }
   }
 

@@ -92,6 +92,14 @@ define('THINGVELLIR', 1);
 
 
 /*
+ * User preference option
+ */
+define('AUTOPICK', 102);
+define('OFF', 1);
+define('ON', 2);
+
+
+/*
  * HEROES
  */
 define('KRAAL', 200);

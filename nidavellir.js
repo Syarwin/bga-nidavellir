@@ -90,17 +90,26 @@ define([
       setupInfoPanel(){
         this.turnCounter = new ebg.counter();
         this.turnCounter.create('turn-counter');
-/*
+
         this.place('jstpl_configPlayerBoard', {
-          'age' : _('Age'),
-          'turn' : _('Turn'),
+          autopick:_('Autopick last card'),
+          enabled:_('Enabled'),
+          disabled:_('Disabled'),
         }, 'player_boards', 'first');
         dojo.connect($('show-settings'), 'onclick', () => this.toggleControls() );
-
         this.addTooltip( 'show-settings', '', _("Display some settings about the game."));
 
+        if(this.isReadOnly()){
+          dojo.destroy("autopick-selector");
+        } else {
+          $('autopick').value = this.gamedatas.players[this.player_id].autopick? 1 : 0;
+          dojo.connect($('autopick'), 'change', () => {
+            this.ajaxcall("/nidavellir/nidavellir/setAutopick.html", { autopick: $("autopick").value });
+          });
+        }
+
         this.setupSettings();
-*/
+        this.setupHelper();
       },
 
       udpateInfoCounters(){
@@ -115,7 +124,7 @@ define([
 
       updatePlayerOrdering(){
         this.inherited(arguments);
-//        dojo.place('player_board_config', 'player_boards', 'first');
+        dojo.place('player_board_config', 'player_boards', 'first');
       },
 
 
@@ -154,14 +163,6 @@ define([
 
       showOverview(){
         debug("Showing overview:");
-/*
-        let box = $("ebd-body").getBoundingClientRect();
-        let modalWidth = 1000;
-        let newModalWidth = box['width']*0.8;
-        let modalScale = newModalWidth / modalWidth;
-        if(modalScale > 1) modalScale = 1;
-        dojo.style("popin_showOverview", "transform", `scale(${modalScale})`);
-*/
         this._overviewModal.show();
       },
 
@@ -190,32 +191,90 @@ define([
       },
 
       setupSettings(){
-        /*
-        dojo.place($('preference_control_102').parentNode.parentNode, 'layout-controls-container');
+        this._layoutMode = this.getConfig("NidavellirLayout", "normal");
+        this.setLayoutMode(this._layoutMode);
+        dojo.connect($('layout-normal'), 'click', () => this.setLayoutMode('normal'));
+        dojo.connect($('layout-compact'), 'click', () => this.setLayoutMode('compact'));
+      },
 
-        /*
-         * Simple slider to show the zoom of scoresheet
-        this._speedSlider = document.getElementById('layout-control-animation-speed');
-        noUiSlider.create(this._speedSlider, {
-          start: [100 - this._animationSpeed],
-          step:10,
-          padding:10,
-          range: {
-            'min': [0],
-            'max': [100]
-          },
+      setLayoutMode(layout){
+        this._layoutMode = layout;
+        dojo.attr("ebd-body", "data-mode", layout);
+        localStorage.setItem("NidavellirLayout", layout);
+      },
+
+
+
+
+      /*
+       * Display a helper with global scoring
+       */
+      setupHelper(){
+        let contents = this.format_block('jstpl_helpModal', {
+          warriors: _("Warriors"),
+          hunters: _("Hunters"),
+          miners: _("Miners"),
+          blacksmith: _("Blacksmith"),
+          explorers: _("Explorers"),
+
+          warriorsText: _("Their Bravery Value is equal to the sum of their Bravery Points, to which the Elvaland who gets majority in ranks in the Warrior column, add his coin of highest value."),
+          warriorsText2: _("In case of a tie, all tied Elvalands add their highest value coin to their Warrior Bravery Value."),
+          hunterText: _("Their Bravery Value is equal to the number of Hunters squared."),
+          minersText: _("Their Bravery Value is equal to the sum of their Bravery Points multiplied by the number of ranks in their column."),
+          blacksmithText:_("Their Bravery Value is a mathematical sequence (+3, +4, +5, +6, ...)."),
+          explorerText:_("Their Bravery Value is equal to the sum of their Bravery Points."),
         });
-        this._speedSlider.noUiSlider.on('slide', (arg) => this.setAnimationSpeed(parseInt(arg[0])) );
-        */
+
+        this._helperModal = new customgame.modal("showHelpsheet", {
+          class:"nidavellir_popin",
+          closeIcon:'fa-times',
+          openAnimation:true,
+          openAnimationTarget:"show-help",
+          contents:contents,
+          closeAction:'hide',
+          verticalAlign:'flex-start',
+        });
+
+
+        let grades = [
+          '',
+          ['', ''],
+          ['', ''],
+          [5, 8],
+          [0, 0],
+          [5, 4],
+        ];
+
+        for(var i = 1; i <= 5; i++){
+          let card = {
+            id:-1,
+            parity:0,
+            ranks:1,
+            class:i,
+            gradeHtml: '<div class="card-rank">' + grades[i][0] + '</div>',
+          };
+
+          this.place('jstpl_card', card, 'helpers-cards-' + i);
+
+          card.parity = 1;
+          card.gradeHtml =  '<div class="card-rank">' + grades[i][1] + '</div>';
+          this.place('jstpl_card', card, 'helpers-cards-' + i);
+        }
+
+        dojo.connect($('show-help'), 'onclick', () => this.showHelper() );
       },
 
-/*
-      setAnimationSpeed(speed){
-        this._animationSpeed = 100 - speed;
-        localStorage.setItem("alhambraAnimationSpeed", 100 - speed);
+      showHelper(){
+        debug("Showing overview:");
+        this._helperModal.show();
       },
-*/
 
+
+      /////////////////////////
+      /////////////////////////
+      /////////   LOG   ///////
+      /////////////////////////
+      /////////////////////////
 
       /* This enable to inject translatable styled things to logs or action bar */
       /* @Override */

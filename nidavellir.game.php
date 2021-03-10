@@ -70,7 +70,7 @@ class Nidavellir extends Table
       $options[OPTION_SETUP] = NORMAL;
 
     Cards::setupNewGame($players, $options);
-		Players::setupNewGame($players);
+		Players::setupNewGame($players, self::isAsync());
     Coins::setupNewGame($players);
 
     Globals::setupNewGame();

@@ -13,6 +13,15 @@ trait RecruitTrait
   /**********************
   ******** DWARF ********
   **********************/
+  public function stRecruitDwarf()
+  {
+    $args = $this->argRecruitDwarf();
+    $player = Players::getActive();
+    if(count($args['cards']) == 1 && $player->wantAutopick()){
+      $this->actRecruit($args['cards'][0], false);
+    }
+  }
+
 
   public function argRecruitDwarf()
   {
@@ -32,9 +41,12 @@ trait RecruitTrait
   }
 
 
-  public function actRecruit($cardId)
+  public function actRecruit($cardId, $checkActivity = true)
   {
-    $this->checkAction("recruit");
+    if($checkActivity)
+      $this->checkAction("recruit");
+    else
+      $this->gamestate->checkPossibleAction("recruit");
 
     // Check if cards is in tavern
     $cards = $this->gamestate->state()['args']['cards'];
@@ -43,7 +55,7 @@ trait RecruitTrait
 
     // Move card in corresponding position and notify (useful for replay)
     $card = Cards::get($cardId);
-    $player = Players::getCurrent();
+    $player = Players::getActive();
     $player->recruit($card);
 
     Cards::refresh($card); // Update location
@@ -141,5 +153,15 @@ trait RecruitTrait
     Cards::changeColumn($card, $player, $column);
     Players::updateScores();
     $this->nextStateAfterRecruit($card, $player, true);
+  }
+
+
+  /***********************
+  ******* AUTOPICK *******
+  ***********************/
+  public function actSetAutopick($mode)
+  {
+    $player = Players::getCurrent();
+    $player->setAutoPick($mode);
   }
 }

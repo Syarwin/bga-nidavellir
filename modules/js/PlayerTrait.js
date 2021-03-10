@@ -73,6 +73,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
           this._overviewCounters[player.id][i].toValue(player.scores[i]);
         }
         this._overviewCounters[player.id]["total"].toValue(player.scores['total']);
+
+        // Blacksmith and hunter counter
+        dojo.attr("blacksmith-score-helper-" + player.id, "data-line", player.ranks[1]);
+        dojo.attr("hunter-score-helper-" + player.id, "data-line", player.ranks[2]);
       });
     },
 

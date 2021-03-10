@@ -1,4 +1,8 @@
 define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
+  const AUTOPICK = 102;
+  const OFF = 1;
+  const ON = 2;
+
   return declare("nidavellir.recruitTrait", null, {
     constructor(){
       this._notifications.push(
@@ -49,8 +53,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.openHeroesModal();
     },
 
-    onClickCardRecruit(card){
-      this.takeAction("recruit", { cardId : card.id });
+    onClickCardRecruit(card, isId = false){
+      this.takeAction("recruit", { cardId : isId ? card : card.id });
     },
 
 

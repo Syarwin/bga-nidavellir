@@ -14,7 +14,7 @@
   }
 
 
-  #show-overview, #show-settings {
+  #show-help, #show-settings {
     height:40px;
     width:50px;
     display:flex;
@@ -24,11 +24,7 @@
     &:hover {
       color:grey;
     }
-
     cursor:pointer;
-    &:hover {
-      color:grey;
-    }
 
     svg {
       width:auto;
@@ -60,6 +56,66 @@
 
   &.layoutControlsHidden {
     display:none;
+  }
+
+  .row-data {
+    border:none;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    .row-label {
+      width:auto;
+      float:none;
+      color:black;
+      padding-bottom:0px;
+    }
+
+    .row-value {
+      margin:0;
+    }
+  }
+
+  #layout-mode {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid gray;
+    padding:5px 0;
+    @media (max-width: 1900px) {
+      display:none;
+    }
+
+    #layout-normal, #layout-compact {
+      width:40px;
+      height:40px;
+      display: grid;
+      grid-gap:3px;
+      cursor: pointer;
+
+      div {
+        background-color:black;
+        border-radius: 5px;
+      }
+      &:hover div {
+        background-color:gray;
+      }
+    }
+
+    #layout-normal { grid-template-rows: 1fr 1fr; }
+    #layout-compact { grid-template-rows: 1fr; grid-template-columns: 1fr 1fr; }
+  }
+
+  #autopick-selector {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding:5px;
+
+    select {
+      margin-top:5px;
+    }
   }
 }
 

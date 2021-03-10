@@ -136,6 +136,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the ${tavern_name}'),
     'type' => 'activeplayer',
     'args' => 'argRecruitDwarf',
+    'action' => 'stRecruitDwarf',
     'possibleactions' => ['recruit'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
