@@ -150,7 +150,7 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function getHeroes()
   {
-    return $this->getCards()->filter(function($card){ return $card instanceof \NID\Cards\HeroCard; });
+    return $this->getCards()->filter(function($card){ return $card instanceof \NID\Cards\Heroes\HeroCard; });
   }
 
   public function countHeroes()

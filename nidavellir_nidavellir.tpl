@@ -303,6 +303,7 @@ var jstpl_overview = `
 var jstpl_heroesModal = `
 <div id="hall-container">
   <div id="hall"></div>
+  <div id="hero-viewer"></div>
 </div>
 `;
 

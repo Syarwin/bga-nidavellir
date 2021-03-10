@@ -9,6 +9,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['recruitStart', 500],
         ['tradeGems', 1500],
         ['distinctionGem', 1500],
+        ['clearTavern', 1000],
         ['clearTurn', 1500],
       );
 
@@ -178,6 +179,11 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.place('jstpl_gem', { value : 6 }, 'gem-container-' + n.args.player_id);
     },
 
+
+    notif_clearTavern(n){
+      debug("Clearing tavern cards left", n);
+      dojo.query('#tavern_' + n.args.tavern + ' .card').forEach(this.slideToRightAndDestroy);
+    },
 
     notif_clearTurn(n){
       debug("Clearing turn", n);

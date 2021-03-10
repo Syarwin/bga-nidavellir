@@ -170,6 +170,11 @@ class Notifications
   }
 
 
+  public static function clearTavern($tavern){
+    self::notifyAll('clearTavern', '', [
+      'tavern' => $tavern,
+    ]);
+  }
 
   public static function clearTurn(){
     self::notifyAll('clearTurn', '', []);

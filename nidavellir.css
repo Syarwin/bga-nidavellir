@@ -1090,7 +1090,7 @@ html {
       border: 1px solid black;
       bottom: -10px;
       left: -10px;
-      z-index: 1000;
+      z-index: 900;
       opacity: 1;
       transition: opacity 0.5s; }
     .panel-container .bids-zone .bids-zone-tavern-holder.tavern-1 {
@@ -1537,19 +1537,28 @@ html {
 
 #popin_showHeroes {
   z-index: 2000;
-  padding: 10px 36px 10px 15px;
-  width: 750px;
-  max-width: 90%;
-  background-image: url("img/background_heroes.png");
-  background-size: 100% 100%; }
+  width: 1000px;
+  max-width: 90%; }
+  #popin_showHeroes::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -2%;
+    left: -1%;
+    width: 106%;
+    height: 105%;
+    background-image: url("img/background_heroes.png");
+    background-size: 100% 100%; }
   #popin_showHeroes .nidavellir_popin_closeicon {
-    right: 8px; }
+    right: -3.5%;
+    top: -3%; }
   #popin_showHeroes #popin_showHeroes_contents {
     padding: 15px; }
     #popin_showHeroes #popin_showHeroes_contents #hall-container {
       width: 100%;
-      min-height: 650px;
-      position: relative; }
+      position: relative;
+      display: flex;
+      flex-flow: row; }
       #popin_showHeroes #popin_showHeroes_contents #hall-container #hall {
         display: flex;
         flex-flow: row;
@@ -1557,6 +1566,16 @@ html {
         justify-content: center; }
         #popin_showHeroes #popin_showHeroes_contents #hall-container #hall .card {
           margin: 10px 10.5px; }
+          #popin_showHeroes #popin_showHeroes_contents #hall-container #hall .card.selected {
+            border: 2px solid green;
+            margin: 8px 8.5px;
+            transform: scale(1.08); }
+      #popin_showHeroes #popin_showHeroes_contents #hall-container #hero-viewer {
+        width: 200px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 2px 10px;
+        border-radius: 7px; }
 
 #popin_showDistinctions, #popin_distinctionExplorer {
   z-index: 2000;
@@ -1585,58 +1604,58 @@ html {
     align-items: center;
     min-height: 420px; }
 
-.dijitTooltip .card-tooltip {
+.card-tooltip {
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center; }
-  .dijitTooltip .card-tooltip div.card-title-holder {
+  .card-tooltip div.card-title-holder {
     text-align: center; }
-    .dijitTooltip .card-tooltip div.card-title-holder .card-title {
+    .card-tooltip div.card-title-holder .card-title {
       font-size: 24px;
       font-weight: bold; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-title:not([data-class="8"]) {
+      .card-tooltip div.card-title-holder .card-title:not([data-class="8"]) {
         font-family: "Norse"; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="1"] {
+      .card-tooltip div.card-title-holder .card-title[data-class="1"] {
         color: #554696; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="2"] {
+      .card-tooltip div.card-title-holder .card-title[data-class="2"] {
         color: #158353; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="3"] {
+      .card-tooltip div.card-title-holder .card-title[data-class="3"] {
         color: #3e9bd6; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="4"] {
+      .card-tooltip div.card-title-holder .card-title[data-class="4"] {
         color: #ef7926; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-title[data-class="5"] {
+      .card-tooltip div.card-title-holder .card-title[data-class="5"] {
         color: #923425; }
-    .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle {
+    .card-tooltip div.card-title-holder .card-subtitle {
       margin-left: 5px; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle:not([data-class="8"]) {
+      .card-tooltip div.card-title-holder .card-subtitle:not([data-class="8"]) {
         font-family: "Norse";
         font-size: 24px; }
-      .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle[data-class="8"] {
+      .card-tooltip div.card-title-holder .card-subtitle[data-class="8"] {
         font-size: 12px; }
-        .dijitTooltip .card-tooltip div.card-title-holder .card-subtitle[data-class="8"]::before {
+        .card-tooltip div.card-title-holder .card-subtitle[data-class="8"]::before {
           content: '\A';
           white-space: pre; }
-  .dijitTooltip .card-tooltip .card {
+  .card-tooltip .card {
     width: 196px;
     height: 289.8px;
     margin: 15px; }
-    .dijitTooltip .card-tooltip .card .card-grade {
+    .card-tooltip .card .card-grade {
       width: 117.6px;
       height: 231.84px; }
-      .dijitTooltip .card-tooltip .card .card-grade .card-rank {
+      .card-tooltip .card .card-grade .card-rank {
         width: 90px;
         height: 38px;
         font-size: 32px;
         line-height: 36px; }
-      .dijitTooltip .card-tooltip .card .card-grade .card-class-icon {
+      .card-tooltip .card .card-grade .card-class-icon {
         width: 49px;
         height: 49px; }
-    .dijitTooltip .card-tooltip .card[data-class="1"] .card-rank::before, .dijitTooltip .card-tooltip .card[data-class="2"] .card-rank::before {
+    .card-tooltip .card[data-class="1"] .card-rank::before, .card-tooltip .card[data-class="2"] .card-rank::before {
       width: 26.6px;
       height: 26.6px;
       margin: 5.7px 0; }
-  .dijitTooltip .card-tooltip .card-description {
+  .card-tooltip .card-description {
     margin: 10px;
     font-size: 14px;
     max-width: 300px;

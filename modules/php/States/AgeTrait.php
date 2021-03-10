@@ -42,7 +42,13 @@ trait AgeTrait
 
   public function stPreEndOfGame()
   {
-    // ATM, just display overview in client
+    $pId = Cards::getYludOwner();
+    if($pId != null){
+      $card = Cards::get(YLUD);
+      Cards::changeColumn($card, Players::get($pId), NEUTRAL, true);
+      Players::updateScores();
+    }
+
     $this->gamestate->nextState('');
   }
 

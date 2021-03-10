@@ -295,11 +295,16 @@ class Cards extends Helpers\Pieces
   }
 
 
+  public static function clearTavern($tavern)
+  {
+    self::moveAllInLocation(['tavern', $tavern], 'discard');
+  }
+
   public static function clearTaverns()
   {
-    self::moveAllInLocation(['tavern', '0'], 'discard');
-    self::moveAllInLocation(['tavern', '1'], 'discard');
-    self::moveAllInLocation(['tavern', '2'], 'discard');
+    self::clearTavern(0);
+    self::clearTavern(1);
+    self::clearTavern(2);
   }
 
 

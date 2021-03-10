@@ -25,7 +25,7 @@ trait TurnTrait
       $player->clearBids();
     }
 
-    Cards::clearTaverns(); // Useful in 2p mode only
+    Cards::clearTaverns(); // TODO : useless now
     Notifications::clearTurn();
 
 

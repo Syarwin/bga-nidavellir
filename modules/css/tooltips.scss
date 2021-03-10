@@ -1,81 +1,78 @@
-.dijitTooltip {
+.card-tooltip {
+  display:flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 
-  .card-tooltip {
-    display:flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
+  div.card-title-holder {
+    text-align: center;
+    .card-title {
+      &:not([data-class="8"]) {
+        font-family: "Norse";
+      }
+      font-size:24px;
+      font-weight: bold;
 
-    div.card-title-holder {
-      text-align: center;
-      .card-title {
-        &:not([data-class="8"]) {
-          font-family: "Norse";
-        }
+      &[data-class="1"] { color: #554696; }
+      &[data-class="2"] { color: #158353; }
+      &[data-class="3"] { color: #3e9bd6; }
+      &[data-class="4"] { color: #ef7926; }
+      &[data-class="5"] { color: #923425; }
+    }
+
+    .card-subtitle {
+      margin-left: 5px;
+      &:not([data-class="8"]) {
+        font-family: "Norse";
         font-size:24px;
-        font-weight: bold;
-
-        &[data-class="1"] { color: #554696; }
-        &[data-class="2"] { color: #158353; }
-        &[data-class="3"] { color: #3e9bd6; }
-        &[data-class="4"] { color: #ef7926; }
-        &[data-class="5"] { color: #923425; }
       }
 
-      .card-subtitle {
-        margin-left: 5px;
-        &:not([data-class="8"]) {
-          font-family: "Norse";
-          font-size:24px;
-        }
-
-        &[data-class="8"] {
-          font-size:12px;
-          &::before {
-            content: '\A';
-            white-space: pre;
-          }
+      &[data-class="8"] {
+        font-size:12px;
+        &::before {
+          content: '\A';
+          white-space: pre;
         }
       }
     }
+  }
 
 
-    .card {
-      width:2*$wCard;
-      height:2*$hCard;
-      margin:15px;
+  .card {
+    width:2*$wCard;
+    height:2*$hCard;
+    margin:15px;
 
-      .card-grade {
-        width:0.6 * 2 * $wCard;
-        height:2 * $hCard * 0.8;
+    .card-grade {
+      width:0.6 * 2 * $wCard;
+      height:2 * $hCard * 0.8;
 
-        .card-rank {
-          width:2*$wRank;
-          height:2*$hRank;
-          font-size: 32px;
-          line-height: 36px;
-        }
-
-        .card-class-icon {
-          width:0.25 * 2*$wCard;
-          height:0.25 * 2*$wCard;
-        }
+      .card-rank {
+        width:2*$wRank;
+        height:2*$hRank;
+        font-size: 32px;
+        line-height: 36px;
       }
 
-      &[data-class="1"] .card-rank::before,
-      &[data-class="2"] .card-rank::before {
-        width:0.7*2*$hRank;
-        height:0.7*2*$hRank;
-        margin: 0.15*2*$hRank 0;
+      .card-class-icon {
+        width:0.25 * 2*$wCard;
+        height:0.25 * 2*$wCard;
       }
     }
 
-
-    .card-description {
-      margin:10px;
-      font-size:14px;
-      max-width: 300px;
-      text-align: justify;
+    &[data-class="1"] .card-rank::before,
+    &[data-class="2"] .card-rank::before {
+      width:0.7*2*$hRank;
+      height:0.7*2*$hRank;
+      margin: 0.15*2*$hRank 0;
     }
+  }
+
+
+  .card-description {
+    margin:10px;
+    font-size:14px;
+    max-width: 300px;
+    text-align: justify;
   }
 }

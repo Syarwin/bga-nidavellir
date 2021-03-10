@@ -18,7 +18,7 @@ class DwarfCard extends AbstractCard
         clienttranslate("0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, ..."),
       ],
       MINER => [
-        clienttranslate("Their Bravery Value is equal to othe sum of their Bravery Points multiplied by the number of ranks in their column.")
+        clienttranslate("Their Bravery Value is equal to the sum of their Bravery Points multiplied by the number of ranks in their column.")
       ],
       BLACKSMITH => [
         clienttranslate("Their Bravery Value is a mathematical sequence (+3, +4, +5, +6, ...) :"),

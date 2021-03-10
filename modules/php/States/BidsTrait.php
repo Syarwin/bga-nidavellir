@@ -229,6 +229,14 @@ trait BidsTrait
         }
       }
 
+
+      // Clear tavern in 2p mode
+      if(count($order) == 2){
+        $tavern = Globals::getTavern();
+        Cards::clearTavern($tavern);
+        Notifications::clearTavern($tavern);
+      }
+
       // And go on to reveal next bids (if any left)
       $this->gamestate->nextState("done");
     } else {
