@@ -206,6 +206,7 @@ class Player extends \NID\Helpers\DB_Manager
     foreach($this->getCards() as $card){
       $stacksTops[$card->getZone()] = $card->getClass();
     }
+    $stacksTops[0] = HERO;
 
     $stacks = [];
     foreach($stacksTops as $stack => $type){

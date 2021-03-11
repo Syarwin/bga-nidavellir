@@ -21,6 +21,10 @@ trait BidsTrait
     $ulineOwner = Cards::getUlineOwner();
     $ids = array_diff($ids, [$ulineOwner]);
     $this->gamestate->setPlayersMultiactive($ids, '', true);
+
+    foreach ($ids as $pId) {
+      self::giveExtraTime($pId);
+    }
   }
 
 
@@ -242,6 +246,7 @@ trait BidsTrait
     } else {
       // Otherwise, make player active and go to recruitDwarf state
       $this->gamestate->changeActivePlayer($order[$index]);
+      self::giveExtraTime($order[$index]);
       Notifications::recruitStart(Players::getActive(), $index + 1);
       $this->gamestate->nextState("recruit");
     }
