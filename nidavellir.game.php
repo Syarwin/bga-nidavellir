@@ -100,7 +100,15 @@ class Nidavellir extends Table
 	 * getGameProgression:
 	 */
 	function getGameProgression(){
-		return 50; // TODO
+    $nPlayers = Players::count();
+    $age = Globals::getAge();
+    if($age == 3) return 100;
+
+    $turn = Globals::getTurn();
+    $tavern = Globals::getTavern();
+    $index = Globals::getCurrentPlayerIndex();
+    $totalTurnsPerAge = $nPlayers < 4? 4 : 3;
+		return (3*$nPlayers*(($age - 1) * $totalTurnsPerAge + ($turn - 1)) + 3*$tavern + $index + 1) * 100 / (2 * $totalTurnsPerAge * 3 * $nPlayers);
 	}
 
 
@@ -134,6 +142,10 @@ class Nidavellir extends Table
 	 *      For example, if the game was running with a release of your game named "140430-1345", $from_version is equal to 1404301345
 	 */
 	public function upgradeTableDb($from_version) {
+    if ($from_version <= 2103100110) {
+      $sql = "ALTER TABLE `DBPREFIX_player` ADD `player_autopick` SMALLINT(5) UNSIGNED NOT NULL";
+      self::applyDbUpgradeToAllDB( $sql );
+    }
 	}
 
   ///////////////////////////////////////////////////////////

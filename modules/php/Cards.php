@@ -183,6 +183,11 @@ class Cards extends Helpers\Pieces
     return self::getOwner(YLUD);
   }
 
+  public function getThrudOwner()
+  {
+    return self::getOwner(THRUD);
+  }
+
 
 
   /*********************

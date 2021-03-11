@@ -42,9 +42,9 @@ trait AgeTrait
 
   public function stPreEndOfGame()
   {
-    $pId = Cards::getYludOwner();
+    $pId = Cards::getThrudOwner();
     if($pId != null){
-      $card = Cards::get(YLUD);
+      $card = Cards::get(THRUD);
       Cards::changeColumn($card, Players::get($pId), NEUTRAL, true);
       Players::updateScores();
     }

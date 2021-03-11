@@ -113,6 +113,11 @@ class Globals extends \APP_DbObject
     return self::inc('currentAge');
   }
 
+  public function setEndOfGame()
+  {
+    self::set('currentAge', 3);
+  }
+
   public function startNewTurn()
   {
     self::inc('currentTurn');
@@ -159,4 +164,5 @@ class Globals extends \APP_DbObject
   {
     self::set('sourceState', $state);
   }
+
 }
