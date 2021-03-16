@@ -14,6 +14,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       this.setupHall();
       this.setupDistinctions();
+      if(this.gamedatas.expansion)
+        this.setupCamp();
       dojo.place("<div id='card-overlay'></div>", "ebd-body");
     },
 
@@ -65,6 +67,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._distinctionsDialog.show();
     },
 
+
+    setupCamp(){
+      this.gamedatas.cards.camp.forEach(card => this.addCard(card, card.location));
+    },
 
 
     addCard(card, container, animation = false){

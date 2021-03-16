@@ -23,6 +23,12 @@ class Cards extends Helpers\Pieces
       return self::getHero($card['id'], $card);
     else if($card['class'] == DISTINCTION)
       return self::getDistinction($card['id'], $card);
+
+    // Expansion
+    else if($card['class'] == ARTIFACT)
+      return self::getArtifact($card['id'], $card);
+    else if($card['class'] == MERCENARY)
+    return self::getMercenary($card['id'], $card);
   }
 
   public static function getUiData()
@@ -31,6 +37,7 @@ class Cards extends Helpers\Pieces
       'taverns' => self::getInLocation(['tavern', '%'])->ui(),
       'hall' => self::getInLocation('hall')->ui(),
       'evaluation' => self::getInLocation('evaluation')->ui(),
+      'camp' => self::getInLocation('camp')->ui(),
     ];
   }
 
@@ -54,6 +61,9 @@ class Cards extends Helpers\Pieces
     self::createHeroes($options);
 
     self::createDistinctions();
+
+    if($options[OPTION_EXPANSION] == THINGVELLIR)
+      self::createCamp();
 	}
 
 
@@ -141,6 +151,13 @@ class Cards extends Helpers\Pieces
     ULINE => 'Uline',
     YLUD => 'Ylud',
     THRUD => 'Thrud',
+
+    ANDUMIA => 'Andumia',
+    HOLDA => 'Holda',
+    KHRAD => 'Khrad',
+    JARIKA => 'Jarika',
+    OLWYN => 'Olwyn',
+    ZOLKUR => 'Zolkur'
   ];
 
   public static function getHero($id, $row = null)
@@ -162,6 +179,10 @@ class Cards extends Helpers\Pieces
         null
       ];
     }
+
+    $values[] = [OLWYN_DOUBLE1, 'pending', HERO, json_encode(null)];
+    $values[] = [OLWYN_DOUBLE2, 'pending', HERO, json_encode(null)];
+
 
     self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);
   }
@@ -229,6 +250,64 @@ class Cards extends Helpers\Pieces
     return self::get($ids[$i]);
   }
 
+
+
+  /*************
+  **************
+  **** CAMP ****
+  **************
+  *************/
+  public static $artifacts = [
+    FAFNIR => 'Fafnir',
+    DRAUPNIR => 'Draupnir',
+    VEGVISIR => 'Vegvisir',
+    SVALINN => 'Svalinn',
+    MEGINGJORD => 'Megingjord',
+    VIDOFNIR => 'Vidofnir',
+    BRISINGAMENS => 'Brisingamens',
+    MJOLLNIR => 'Mjollnir',
+    HOFUD => 'Hofud',
+    HRAFNSMERKI => 'Hrafnsmerki',
+    JARNGLOFI => 'Jarnglofi',
+    GJALLARHORN => 'Gjallarhorn',
+  ];
+
+  public static $mercenaries = [
+    MERCENARY_0 => 'Mercenary0',     MERCENARY_1 => 'Mercenary1',     MERCENARY_2 => 'Mercenary2',    MERCENARY_3 => 'Mercenary3',
+    MERCENARY_4 => 'Mercenary4',     MERCENARY_5 => 'Mercenary5',     MERCENARY_6 => 'Mercenary6',    MERCENARY_7 => 'Mercenary7',
+    MERCENARY_8 => 'Mercenary8',     MERCENARY_9 => 'Mercenary9',     MERCENARY_10 => 'Mercenary10',    MERCENARY_11 => 'Mercenary11',
+  ];
+
+  public static function createCamp()
+  {
+    $values = [];
+    foreach(self::$artifacts as $aId => $class){
+      $artifact = self::getArtifact($aId);
+      $values[] = [ $aId, 'campdeck_'.$artifact->getAge(), ARTIFACT, null];
+    }
+    foreach(self::$mercenaries as $mId => $class){
+      $mercenary = self::getMercenary($mId);
+      $values[] = [ $mId, 'campdeck_'.$mercenary->getAge(), MERCENARY, null];
+    }
+    self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);
+    self::shuffle('campdeck_1');
+    self::shuffle('campdeck_2');
+  }
+
+
+  public static function getArtifact($id, $row = null)
+  {
+    $className = '\NID\Cards\Artifacts\\' . self::$artifacts[$id];
+    return new $className($row);
+  }
+
+  public static function getMercenary($id, $row = null)
+  {
+    $className = '\NID\Cards\Mercenaries\\' . self::$mercenaries[$id];
+    return new $className($row);
+  }
+
+
   /****************
   ***** PLAY  *****
   ****************/
@@ -243,9 +322,10 @@ class Cards extends Helpers\Pieces
     $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
 
     return array_merge(
-      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
-      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1])->ui(),
-      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2])->ui()
+        self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
+        self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1])->ui(),
+        self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2])->ui(),
+        self::pickForLocation(5 - self::getInCamp()->count(), ['campdeck', $age], 'camp')->ui()
     );
   }
 
@@ -256,6 +336,15 @@ class Cards extends Helpers\Pieces
   public static function getInTavern($tavern)
   {
     return self::getInLocation(['tavern', $tavern]);
+  }
+
+
+  /*
+   * Return available cards in camp
+   */
+  public static function getInCamp()
+  {
+    return self::getInLocation('camp');
   }
 
 

@@ -20,6 +20,7 @@ define('ST_NEXT_PLAYER', 20);
 define('ST_RECRUIT_DWARF', 21);
 define('ST_RECRUIT_HERO', 22);
 define('ST_CHOOSE_THRUD_COLUMN', 34);
+define('ST_DISCARD_TAVERN_CARD', 36);
 
 define('ST_TRADE_COIN', 23);
 define('ST_ULINE_TRADE_COIN', 33);
@@ -141,6 +142,17 @@ define('ZOLKUR', 228);
 
 
 /*
+ * DISTINCTIONS
+ */
+define('DISTINCTION_WARRIOR', 300);
+define('DISTINCTION_HUNTER', 301);
+define('DISTINCTION_MINER', 302);
+define('DISTINCTION_BLACKSMITH', 303);
+define('DISTINCTION_EXPLORER', 304);
+define('DISTINCTION_BLACKSMITH_SPECIAL', 305);
+
+
+/*
  * ARTIFACTS
  */
 define('FAFNIR', 250);
@@ -159,28 +171,33 @@ define('GJALLARHORN', 261);
 /*
  * MERCERNARIES
  */
-define('MERCENARY_0', 300);
-define('MERCENARY_1', 301);
-define('MERCENARY_2', 302);
-define('MERCENARY_3', 303);
-define('MERCENARY_4', 304);
-define('MERCENARY_5', 305);
+define('MERCENARY_0', 400);
+define('MERCENARY_1', 401);
+define('MERCENARY_2', 402);
+define('MERCENARY_3', 403);
+define('MERCENARY_4', 404);
+define('MERCENARY_5', 405);
 
-define('MERCENARY_6', 306);
-define('MERCENARY_7', 307);
-define('MERCENARY_8', 308);
-define('MERCENARY_9', 309);
-define('MERCENARY_10', 310);
-define('MERCENARY_11', 311);
+define('MERCENARY_6', 406);
+define('MERCENARY_7', 407);
+define('MERCENARY_8', 408);
+define('MERCENARY_9', 409);
+define('MERCENARY_10', 410);
+define('MERCENARY_11', 411);
+
 
 
 
 /*
- * DISTINCTIONS
+ * STATISTICS
  */
-define('DISTINCTION_WARRIOR', 300);
-define('DISTINCTION_HUNTER', 301);
-define('DISTINCTION_MINER', 302);
-define('DISTINCTION_BLACKSMITH', 303);
-define('DISTINCTION_EXPLORER', 304);
-define('DISTINCTION_BLACKSMITH_SPECIAL', 305);
+define('STAT_COINS_BP', 31);
+define('STAT_BLACKSMITH_BP', 32);
+define('STAT_HUNTER_BP', 33);
+define('STAT_EXPLORER_BP', 34);
+define('STAT_MINER_BP', 35);
+define('STAT_WARRIOR_BP', 36);
+define('STAT_NEUTRAL_BP', 37);
+define('STAT_UPGRADE', 38);
+define('STAT_TIES', 39);
+define('STAT_HEROES', 40);

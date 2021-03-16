@@ -176,7 +176,7 @@
 
 @for $i from 0 through 6 {
   #ebd-body[data-order-index="#{$i}"] .panel-container {
-    @for $j from 0 through $i - 1 {
+    @for $j from -1 through $i - 1 {
       .bids-zone[data-order="#{$j}"] .bids-zone-tavern-holder::before {
         opacity:0;
       }

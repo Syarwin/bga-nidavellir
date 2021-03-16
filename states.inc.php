@@ -47,6 +47,7 @@ $machinestates = [
       'start' => ST_BIDS,
       'recruitDone' => ST_TRADE_COIN, // Fake transition, used as source
       'transformDone' => ST_TRADE_COIN, // Fake transition, used as source
+      'zombiePass' => ST_NEXT_PLAYER, // Fake transition, used as source
     ]
   ],
 
@@ -126,14 +127,28 @@ $machinestates = [
 		'transitions' => [
       'recruit' => ST_RECRUIT_DWARF,
       'done' => ST_NEXT_RESOLUTION,
+      'discardTavern' => ST_DISCARD_TAVERN_CARD,
     ],
 	],
+
+  ST_DISCARD_TAVERN_CARD => [
+    "name" => "discardTavernCard",
+    'description' => clienttranslate('${actplayer} must discard a card from the ${tavern_name}'),
+    'descriptionmyturn' => clienttranslate('${you} must discard a card from the ${tavern_name}'),
+    'type' => 'activeplayer',
+    'args' => 'argDiscardTavernCard',
+    'possibleactions' => ['discard'],
+    'transitions' => [
+      'next' => ST_NEXT_PLAYER,
+    ]
+  ],
+
 
 
   ST_RECRUIT_DWARF => [
     "name" => "recruitDwarf",
-    'description' => clienttranslate('${actplayer} must recruit a dwarf at the ${tavern_name}'),
-    'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the ${tavern_name}'),
+    'description' => clienttranslate('${actplayer} must recruit a dwarf at the ${tavern_name}${camp_title}'),
+    'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the ${tavern_name}${camp_title}'),
     'type' => 'activeplayer',
     'args' => 'argRecruitDwarf',
     'action' => 'stRecruitDwarf',
@@ -156,7 +171,6 @@ $machinestates = [
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
-      //'distinction' => ST_NEXT_DISTINCTION,
     ]
   ],
 
@@ -258,6 +272,7 @@ $machinestates = [
       'placeYlud' => ST_CHOOSE_YLUD_COLUMN,
       'recruitDone' => ST_END_OF_AGE, // Fake transition, used as source
       'transformDone' => ST_END_OF_AGE, // Fake transition, used as source
+      'zombiePass' => ST_END_OF_AGE, // Fake transition, used as source
     ]
   ],
 
@@ -303,6 +318,7 @@ $machinestates = [
       'hero' => ST_RECRUIT_HERO,
       'recruitDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'transformDone' => ST_NEXT_DISTINCTION, // Fake transition, used as source
+      'zombiePass' => ST_NEXT_DISTINCTION, // Fake transition, used as source
       'explorer' => ST_DISTINCTION_EXPLORER,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
     ]

@@ -43,7 +43,13 @@ html {
   ***************/
   /**********************
   ***** DISTINCTION *****
-  **********************/ }
+  **********************/
+  /********************
+  ***** MERCENARY *****
+  ********************/
+  /********************
+  ***** ARTIFACTS *****
+  ********************/ }
   .card.selectable {
     cursor: pointer; }
     .card.selectable:hover {
@@ -133,30 +139,30 @@ html {
   .card[data-class="1"] .card-rank {
     background-position-y: 0%; }
   .card[data-class="1"] .card-class-icon {
-    background-position-y: 20%; }
+    background-position-y: 14.2857142857%; }
   .card[data-class="2"] .card-rank {
     background-position-y: 25%; }
   .card[data-class="2"] .card-class-icon {
-    background-position-y: 40%; }
+    background-position-y: 28.5714285714%; }
   .card[data-class="3"] .card-rank {
     background-position-y: 50%; }
   .card[data-class="3"] .card-class-icon {
-    background-position-y: 60%; }
+    background-position-y: 42.8571428571%; }
   .card[data-class="4"] .card-rank {
     background-position-y: 75%; }
   .card[data-class="4"] .card-class-icon {
-    background-position-y: 80%; }
+    background-position-y: 57.1428571429%; }
   .card[data-class="5"] .card-rank {
     background-position-y: 100%; }
   .card[data-class="5"] .card-class-icon {
-    background-position-y: 100%; }
+    background-position-y: 71.4285714286%; }
   .card[data-class="6"]::before {
     background-position-x: 90.9090909091%; }
   .card[data-class="6"] .card-grade {
     display: none; }
   .card[data-class="7"]::before {
     background-image: url("img/heroes.jpg");
-    background-size: 500%; }
+    background-size: 500% 600%; }
   .card[data-class="7"][data-id="200"]::before {
     background-position-x: 0%;
     background-position-y: 0%; }
@@ -174,51 +180,75 @@ html {
     background-position-y: 0%; }
   .card[data-class="7"][data-id="205"]::before {
     background-position-x: 0%;
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   .card[data-class="7"][data-id="206"]::before {
     background-position-x: 25%;
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   .card[data-class="7"][data-id="207"]::before {
     background-position-x: 50%;
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   .card[data-class="7"][data-id="208"]::before {
     background-position-x: 75%;
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   .card[data-class="7"][data-id="209"]::before {
     background-position-x: 100%;
-    background-position-y: 25%; }
+    background-position-y: 20%; }
   .card[data-class="7"][data-id="210"]::before {
     background-position-x: 0%;
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   .card[data-class="7"][data-id="211"]::before {
     background-position-x: 25%;
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   .card[data-class="7"][data-id="212"]::before {
     background-position-x: 50%;
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   .card[data-class="7"][data-id="213"]::before {
     background-position-x: 75%;
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   .card[data-class="7"][data-id="214"]::before {
     background-position-x: 100%;
-    background-position-y: 50%; }
+    background-position-y: 40%; }
   .card[data-class="7"][data-id="215"]::before {
     background-position-x: 0%;
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   .card[data-class="7"][data-id="216"]::before {
     background-position-x: 25%;
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   .card[data-class="7"][data-id="217"]::before {
     background-position-x: 50%;
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   .card[data-class="7"][data-id="218"]::before {
     background-position-x: 75%;
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   .card[data-class="7"][data-id="219"]::before {
     background-position-x: 100%;
-    background-position-y: 75%; }
+    background-position-y: 60%; }
   .card[data-class="7"][data-id="220"]::before {
     background-position-x: 0%;
+    background-position-y: 80%; }
+  .card[data-class="7"][data-id="221"]::before {
+    background-position-x: 25%;
+    background-position-y: 80%; }
+  .card[data-class="7"][data-id="222"]::before {
+    background-position-x: 50%;
+    background-position-y: 80%; }
+  .card[data-class="7"][data-id="223"]::before {
+    background-position-x: 75%;
+    background-position-y: 80%; }
+  .card[data-class="7"][data-id="224"]::before {
+    background-position-x: 100%;
+    background-position-y: 80%; }
+  .card[data-class="7"][data-id="225"]::before {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .card[data-class="7"][data-id="226"]::before {
+    background-position-x: 25%;
+    background-position-y: 100%; }
+  .card[data-class="7"][data-id="227"]::before {
+    background-position-x: 50%;
+    background-position-y: 100%; }
+  .card[data-class="7"][data-id="228"]::before {
+    background-position-x: 75%;
     background-position-y: 100%; }
   .card[data-class="7"] .card-grade {
     display: none; }
@@ -236,6 +266,88 @@ html {
   .card[data-class="8"][data-id="304"]::before {
     background-position-x: 100%; }
   .card[data-class="8"] .card-grade {
+    display: none; }
+  .card[data-class="9"]::before {
+    background-image: url("img/mercenaries.jpg");
+    background-size: 600% 200%; }
+  .card[data-class="9"][data-id="400"]::before {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .card[data-class="9"][data-id="401"]::before {
+    background-position-x: 20%;
+    background-position-y: 0%; }
+  .card[data-class="9"][data-id="402"]::before {
+    background-position-x: 40%;
+    background-position-y: 0%; }
+  .card[data-class="9"][data-id="403"]::before {
+    background-position-x: 60%;
+    background-position-y: 0%; }
+  .card[data-class="9"][data-id="404"]::before {
+    background-position-x: 80%;
+    background-position-y: 0%; }
+  .card[data-class="9"][data-id="405"]::before {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  .card[data-class="9"][data-id="406"]::before {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .card[data-class="9"][data-id="407"]::before {
+    background-position-x: 20%;
+    background-position-y: 100%; }
+  .card[data-class="9"][data-id="408"]::before {
+    background-position-x: 40%;
+    background-position-y: 100%; }
+  .card[data-class="9"][data-id="409"]::before {
+    background-position-x: 60%;
+    background-position-y: 100%; }
+  .card[data-class="9"][data-id="410"]::before {
+    background-position-x: 80%;
+    background-position-y: 100%; }
+  .card[data-class="9"][data-id="411"]::before {
+    background-position-x: 100%;
+    background-position-y: 100%; }
+  .card[data-class="9"] .card-grade {
+    display: none; }
+  .card[data-class="10"]::before {
+    background-image: url("img/artifacts.jpg");
+    background-size: 600% 200%; }
+  .card[data-class="10"][data-id="250"]::before {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .card[data-class="10"][data-id="251"]::before {
+    background-position-x: 20%;
+    background-position-y: 0%; }
+  .card[data-class="10"][data-id="252"]::before {
+    background-position-x: 40%;
+    background-position-y: 0%; }
+  .card[data-class="10"][data-id="253"]::before {
+    background-position-x: 60%;
+    background-position-y: 0%; }
+  .card[data-class="10"][data-id="254"]::before {
+    background-position-x: 80%;
+    background-position-y: 0%; }
+  .card[data-class="10"][data-id="255"]::before {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  .card[data-class="10"][data-id="256"]::before {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .card[data-class="10"][data-id="257"]::before {
+    background-position-x: 20%;
+    background-position-y: 100%; }
+  .card[data-class="10"][data-id="258"]::before {
+    background-position-x: 40%;
+    background-position-y: 100%; }
+  .card[data-class="10"][data-id="259"]::before {
+    background-position-x: 60%;
+    background-position-y: 100%; }
+  .card[data-class="10"][data-id="260"]::before {
+    background-position-x: 80%;
+    background-position-y: 100%; }
+  .card[data-class="10"][data-id="261"]::before {
+    background-position-x: 100%;
+    background-position-y: 100%; }
+  .card[data-class="10"] .card-grade {
     display: none; }
 
 #ebd-body[data-age="2"] .card[data-class="6"]::before {
@@ -720,6 +832,20 @@ html {
               #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-wrapper .tavern-cards-holder .card {
                 transition: left 1s;
                 left: 0px; }
+          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container {
+            grid-column-end: span 2;
+            background-color: rgba(219, 173, 34, 0.72);
+            border-radius: 10px;
+            padding: 15px 3px;
+            box-shadow: 2px 2px 5px black; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container.selectable {
+              animation-name: borderBlink2;
+              animation-duration: 1s;
+              animation-iteration-count: infinite; }
+            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container #camp {
+              display: flex;
+              justify-content: center;
+              align-items: center; }
       #nidavellir-board #exterior-wrapper #exterior #tabs-container {
         width: 200px;
         margin-right: 100px;
@@ -758,6 +884,8 @@ html {
     transform: translateX(0px); } }
           #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.focus:hover, #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab.opened {
             animation: none; }
+          #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-camp {
+            display: none; }
           #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-heroes {
             background-position-y: calc(100% / 3); }
           #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-distinctions {
@@ -1891,8 +2019,6 @@ html {
 #ebd-body[data-tavern="2"] .bids-zone[data-order="5"] .tavern-2::before {
   content: "6"; }
 
-#ebd-body[data-order-index="0"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
-  opacity: 0; }
 #ebd-body[data-order-index="0"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="0"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
@@ -1900,6 +2026,8 @@ html {
   background-color: red;
   color: white; }
 
+#ebd-body[data-order-index="1"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
 #ebd-body[data-order-index="1"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="1"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
@@ -1907,6 +2035,8 @@ html {
   background-color: red;
   color: white; }
 
+#ebd-body[data-order-index="2"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
 #ebd-body[data-order-index="2"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="2"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
@@ -1916,6 +2046,8 @@ html {
   background-color: red;
   color: white; }
 
+#ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
 #ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="3"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
@@ -1927,6 +2059,8 @@ html {
   background-color: red;
   color: white; }
 
+#ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
 #ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="4"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
@@ -1940,6 +2074,8 @@ html {
   background-color: red;
   color: white; }
 
+#ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
 #ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="5"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
@@ -1955,6 +2091,8 @@ html {
   background-color: red;
   color: white; }
 
+#ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="-1"] .bids-zone-tavern-holder::before {
+  opacity: 0; }
 #ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="0"] .bids-zone-tavern-holder::before {
   opacity: 0; }
 #ebd-body[data-order-index="6"] .panel-container .bids-zone[data-order="1"] .bids-zone-tavern-holder::before {
@@ -1994,20 +2132,24 @@ html {
   width: 30px;
   height: 30px;
   background-image: url("img/classes.png");
-  background-size: 100% 600%;
+  background-size: 100% 800%;
   vertical-align: middle;
   margin: -4px 3px 4px; }
   #logs .card-class-symbol.class-0 {
     background-position-y: 0%; }
   #logs .card-class-symbol.class-1 {
-    background-position-y: 20%; }
+    background-position-y: 14.2857142857%; }
   #logs .card-class-symbol.class-2 {
-    background-position-y: 40%; }
+    background-position-y: 28.5714285714%; }
   #logs .card-class-symbol.class-3 {
-    background-position-y: 60%; }
+    background-position-y: 42.8571428571%; }
   #logs .card-class-symbol.class-4 {
-    background-position-y: 80%; }
+    background-position-y: 57.1428571429%; }
   #logs .card-class-symbol.class-5 {
+    background-position-y: 71.4285714286%; }
+  #logs .card-class-symbol.class-9 {
+    background-position-y: 85.7142857143%; }
+  #logs .card-class-symbol.class-10 {
     background-position-y: 100%; }
 #logs .coin {
   display: inline-block;

@@ -151,5 +151,6 @@ class Players extends \NID\Helpers\DB_Manager
     }
 
     Notifications::updateScores($scores, $ranks);
+    Stats::updateScores($scores);
   }
 }

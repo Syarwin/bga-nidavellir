@@ -39,6 +39,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       // activate the cards
       this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
       dojo.addClass("tavern_" + args.tavern, "selectable");
+      if(args.camp){
+        dojo.addClass('camp-container', "selectable");
+      }
     },
 
     onEnteringStateRecruitHero(args) {
@@ -62,17 +65,16 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       debug("Notif: new recruit", n);
       let card = n.args.card;
 
-      if(card.class < 6 || card.class == 7) {
-        // DWARF AND THRUD
-        if(!$('card-' + card.id)) // Happens only for blacksmith distinction in principle
-          this.addCard(card, 'tab-distinctions');
-        this.slide('card-' + card.id, card.location)
-      }
-      else if(card.class == 6){
+      if(card.class == 6){
         // ROYAL OFFER
         this.slide('card-' + card.id, "overall_player_board_" + n.args.player_id, {
           destroy:true,
         });
+      } else {
+        // DWARF AND THRUD
+        if(!$('card-' + card.id)) // Happens only for blacksmith distinction in principle
+          this.addCard(card, 'tab-distinctions');
+        this.slide('card-' + card.id, card.location)
       }
     },
 
@@ -196,6 +198,17 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
           })
         });
       });
+    },
+
+
+
+    // THINGVELLIR 2 players special rule
+    onEnteringStateDiscardTavernCard(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this.makeCardSelectable(args.cards, (card) => this.takeAction('discardTavern', { cardId: card.id }) );
+      dojo.addClass("tavern_" + args.tavern, "selectable");
     },
   });
 });

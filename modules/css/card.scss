@@ -99,7 +99,7 @@
 
   @for $i from 1 through 5 {
     &[data-class="#{$i}"] .card-rank { background-position-y: ($i - 1) * 100% / 4; }
-    &[data-class="#{$i}"] .card-class-icon { background-position-y: $i * 100% / 5; }
+    &[data-class="#{$i}"] .card-class-icon { background-position-y: $i * 100% / 7; }
   }
 
 
@@ -118,13 +118,13 @@
   &[data-class="7"] {
     &::before {
       background-image:url('img/heroes.jpg');
-      background-size:500%;
+      background-size:500% 600%;
     }
 
     @for $i from 0 through $heroesNb - 1 {
       &[data-id="#{$heroesStart + $i}"]::before {
         background-position-x:($i % 5) * 25%;
-        background-position-y:($i  - ($i % 5) )/ 5 * 100% / 4;
+        background-position-y:($i  - ($i % 5) )/ 5 * 100% / 5;
       }
     }
 
@@ -155,6 +155,49 @@
     }
   }
 
+
+  /********************
+  ***** MERCENARY *****
+  ********************/
+  &[data-class="9"] {
+    &::before {
+      background-image:url('img/mercenaries.jpg');
+      background-size:600% 200%;
+    }
+
+    @for $i from 0 through $mercenariesNb - 1 {
+      &[data-id="#{$mercenariesStart + $i}"]::before {
+        background-position-x:($i % 6) * 100% / 5;
+        background-position-y:($i  - ($i % 6) )/ 6 * 100%;
+      }
+    }
+
+    .card-grade {
+      display:none;
+    }
+  }
+
+
+  /********************
+  ***** ARTIFACTS *****
+  ********************/
+  &[data-class="10"] {
+    &::before {
+      background-image:url('img/artifacts.jpg');
+      background-size:600% 200%;
+    }
+
+    @for $i from 0 through $artifactsNb - 1 {
+      &[data-id="#{$artifactsStart + $i}"]::before {
+        background-position-x:($i % 6) * 100% / 5;
+        background-position-y:($i  - ($i % 6) )/ 6 * 100%;
+      }
+    }
+
+    .card-grade {
+      display:none;
+    }
+  }
 }
 
 

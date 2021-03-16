@@ -1,6 +1,7 @@
 <?php
 namespace NID\Game;
 use Nidavellir;
+use NID\Game\Players;
 
 class Stats
 {
@@ -25,20 +26,49 @@ class Stats
 
 
   public static function setupNewGame(){
-    /*
-    TODO
+    $stats = Nidavellir::get()->getStatTypes();
 
-    $stats = thecrew::get()->getStatTypes();
-
-    self::init('table', 'turns_number');
-    self::init('table', 'ending', 0);
+//    self::init('table', 'turns_number');
 
     foreach ($stats['player'] as $key => $value) {
-      if($value['id'] > 10 && $value['type'] == 'int' && $key != 'empty_slots_number')
+      if($value['id'] > 10 && $value['type'] == 'int')
         self::init('player', $key);
     }
-    self::init('player', "empty_slots_number", 33);
-    */
+  }
+
+
+  public function updateScores($scores){
+    foreach($scores as $pId => $score){
+      // Scores
+      $assoc = [
+        "score_coins" => 'coins',
+        "score_blacksmith" => BLACKSMITH,
+        "score_hunter" => HUNTER,
+        "score_explorer" => EXPLORER,
+        "score_miner" => MINER,
+        "score_warrior" => WARRIOR,
+        "score_neutral" => NEUTRAL
+      ];
+
+      foreach($assoc as $statName => $scoreName){
+        $scoreVal = $score[$scoreName];
+        self::set($scoreVal, $statName, $pId);
+      }
+    }
+  }
+
+  public function addTie($bidders){
+    foreach($bidders as $player){
+      self::inc("player_ties", $player);
+    }
+  }
+
+  public function upgradeCoin($player){
+    self::inc("coins_upgrades", $player);
+  }
+
+  public function recruitHero($player){
+    self::inc("player_heroes", $player);
   }
 }
 

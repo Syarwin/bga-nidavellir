@@ -35,6 +35,7 @@ use NID\Coins;
 use NID\Game\Globals;
 use NID\Game\Players;
 use NID\Game\Log;
+use NID\Game\Stats;
 
 
 class Nidavellir extends Table
@@ -64,8 +65,6 @@ class Nidavellir extends Table
 	 * setupNewGame:
    */
 	protected function setupNewGame( $players, $options = [] ){
-    $options[OPTION_EXPANSION] = NONE;
-
     if($options[OPTION_EXPANSION] == THINGVELLIR)
       $options[OPTION_SETUP] = NORMAL;
 
@@ -74,7 +73,7 @@ class Nidavellir extends Table
     Coins::setupNewGame($players);
 
     Globals::setupNewGame();
-//    Statistics::setupNewGame(); TODO
+//    Stats::setupNewGame();
 	}
 
 	/*
@@ -86,7 +85,7 @@ class Nidavellir extends Table
       'expansion' => Globals::isExpansion(),
 			'players' => Players::getUiData($pId),
       'cards' => Cards::getUiData(),
-      'royalTreasure' => NID\Coins::getInLocation('treasure'),
+      'royalTreasure' => Coins::getInLocation('treasure'),
       'age' => Globals::getAge(),
       'turn' => Globals::getTurn(),
       'tavern' => Globals::getTavern(),
@@ -121,11 +120,15 @@ class Nidavellir extends Table
 	 *   You can do whatever you want in order to make sure the turn of this player ends appropriately
 	 */
 	public function zombieTurn($state, $activePlayer) {
-		if (array_key_exists('zombiePass', $state['transitions'])) {
-			$this->gamestate->nextState('zombiePass');
-		} else {
-			throw new BgaVisibleSystemException('Zombie player ' . $activePlayer . ' stuck in unexpected state ' . $state['name']);
-		}
+
+    // Multiactive => make player non-active
+    if ($state['type'] === "multipleactiveplayer") {
+      // Make sure player is in a non blocking status for role turn
+      $this->gamestate->setPlayerNonMultiactive($activePlayer, '');
+    } else {
+      $this->nextStateFromSource('zombiePass');
+    }
+//			throw new BgaVisibleSystemException('Zombie player ' . $activePlayer . ' stuck in unexpected state ' . $state['name']);
 	}
 
 	/////////////////////////////////////

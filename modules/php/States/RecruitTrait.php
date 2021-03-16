@@ -7,6 +7,7 @@ use NID\Cards;
 use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
+use NID\Game\Stats;
 
 trait RecruitTrait
 {
@@ -32,12 +33,23 @@ trait RecruitTrait
     ];
 
     $tavern = Globals::getTavern();
-    return [
-      'i18n' => ['tavern_name'],
+    $data = [
+      'i18n' => ['tavern_name', 'camp_title'],
       'cards' => Cards::getInTavern($tavern)->getIds(),
       'tavern' => $tavern,
       'tavern_name' => $taverns[$tavern],
+      'camp' => false,
+      'camp_title' => '',
     ];
+
+    // THINGVELLIR
+    if(Globals::getCurrentPlayerIndex() == 0){ // TODO : artefact machin truc
+      $data['cards'] = array_merge($data['cards'], Cards::getInCamp()->getIds() );
+      $data['camp_title'] = clienttranslate(" / an artifact or a missionary at the Camp");
+      $data['camp'] = true;
+    }
+
+    return $data;
   }
 
 
@@ -62,6 +74,9 @@ trait RecruitTrait
     Notifications::recruit($player, $card);
     $card->applyEffect($player);
     Players::updateScores();
+    if($card->getClass() == HERO){
+      Stats::recruitHero($player);
+    }
 
     if($card->getClass() == ROYAL_OFFER){
       Globals::setTransformValue($card->getValue());

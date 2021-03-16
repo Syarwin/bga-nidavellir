@@ -63,7 +63,9 @@
             <div class="tavern-cards-holder" id="tavern_2"></div>
           </div>
 
-
+          <div id="camp-container">
+            <div id="camp"></div>
+          </div>
         </div>
       </div>
     </div>

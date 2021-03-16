@@ -8,6 +8,8 @@ use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
 use NID\Game\Log;
+use NID\Game\Stats;
+
 
 
 trait BidsTrait
@@ -172,7 +174,9 @@ trait BidsTrait
     $players = Players::getAll();
     $bids = [];
     foreach ($players as $player) {
-      $bids[$player->getBid($currentTavern)][] = $player;
+      if($player->getBid($currentTavern) !== null){
+        $bids[$player->getBid($currentTavern)][] = $player;
+      }
     }
     krsort($bids, SORT_NUMERIC);
 
@@ -201,6 +205,7 @@ trait BidsTrait
         'bidders' => array_map(function($player){ return $player->getName();}, $bidders),
         'trades' => $trades
       ];
+      Stats::addTie($bidders);
     }
 
     Log::storeOrder($order, $ties);
@@ -219,7 +224,14 @@ trait BidsTrait
    */
   public function stNextPlayer()
   {
-    //$order = Log::getPlayerOrder();
+    $index = Globals::getCurrentPlayerIndex();
+    $tavern = Globals::getTavern();
+    // THINGVELLIR : special rule for 2 players
+    if($index == 0 && Players::count() == 2 && Cards::getInTavern($tavern)->count() == 3){
+      $this->gamestate->nextState("discardTavern");
+      return;
+    }
+
     $order = Log::getTurnOrder();
     $index = Globals::incCurrentPlayerIndex();
 
@@ -235,8 +247,8 @@ trait BidsTrait
 
 
       // Clear tavern in 2p mode
-      if(count($order) == 2){
-        $tavern = Globals::getTavern();
+      $tavern = Globals::getTavern();
+      if(Cards::getInTavern($tavern)->count() != 0){
         Cards::clearTavern($tavern);
         Notifications::clearTavern($tavern);
       }
@@ -250,6 +262,37 @@ trait BidsTrait
       Notifications::recruitStart(Players::getActive(), $index + 1);
       $this->gamestate->nextState("recruit");
     }
+  }
+
+
+  /*
+   * THINGVELLIR 2 player special rule for camp
+   */
+
+  public function argDiscardTavernCard()
+  {
+    $taverns = [
+      GOBLIN_TAVERN => clienttranslate('Laughing Goblin Tavern'),
+      DRAGON_TAVERN => clienttranslate('Dancing Dragon Tavern'),
+      HORSE_TAVERN => clienttranslate('Shining Horse Tavern')
+    ];
+
+    $tavern = Globals::getTavern();
+    return [
+      'i18n' => ['tavern_name'],
+      'cards' => Cards::getInTavern($tavern)->getIds(),
+      'tavern' => $tavern,
+      'tavern_name' => $taverns[$tavern],
+    ];
+  }
+
+  public function actDiscardTavernCard($cardId)
+  {
+    $player = Players::getCurrent();
+    $card = Cards::get($cardId);
+    Cards::discard($cardId);
+    Notifications::discardCards($player, $card);
+    $this->gamestate->nextState('next');
   }
 }
 ?>

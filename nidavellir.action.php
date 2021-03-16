@@ -104,6 +104,14 @@ class action_nidavellir extends APP_GameAction
   }
 
 
+  public function discardTavern()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg("cardId", AT_posint, true);
+    $this->game->actDiscardTavernCard($cardId);
+    self::ajaxResponse();
+  }
+
 
   /////////////////////////////
   /////////// Uline  //////////

@@ -215,5 +215,25 @@
         }
       }
     }
+
+    #camp-container {
+      grid-column-end: span 2;
+      background-color: rgba(219, 173, 34, 0.72);
+      border-radius: 10px;
+      padding: 15px 3px;
+      box-shadow: 2px 2px 5px black;
+
+      &.selectable {
+        animation-name: borderBlink2;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+
+      #camp {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
 }

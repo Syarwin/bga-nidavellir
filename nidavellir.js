@@ -72,6 +72,7 @@ define([
         dojo.query(".card").removeClass("selectable unselectable");
         dojo.query(".nid-tab").removeClass("focus");
         dojo.query('.command-zone-container .cards-class').removeClass("selectable");
+        dojo.removeClass("camp-container", "selectable");
         if(this._distinctionExplorerCards != null)
           this._distinctionExplorerModal.destroy();
 
@@ -146,6 +147,8 @@ define([
           contents:jstpl_overview,
           statusElt:'tab-score',
           closeAction:'hide',
+          scale:0.8,
+          breakpoint:800,
         });
 
         for(var pId in this.gamedatas.players){

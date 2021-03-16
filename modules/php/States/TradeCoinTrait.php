@@ -3,6 +3,7 @@ namespace NID\States;
 use NID\Game\Globals;
 use NID\Game\Players;
 use NID\Game\Notifications;
+use NID\Game\Stats;
 use NID\Coins;
 use NID\Cards;
 
@@ -36,6 +37,7 @@ trait TradeCoinTrait
 
     Notifications::tradeCoin($player, $coinMin, $coinMax, $newCoin);
     Players::updateScores();
+    Stats::upgradeCoin($player);
   }
 
 
@@ -87,6 +89,7 @@ trait TradeCoinTrait
     $newCoin = Coins::trade($coin, $coin['value'] + Globals::getTransformValue(), true);
     Notifications::transformCoin($player, $coin, $newCoin);
     Players::updateScores();
+    Stats::upgradeCoin($player);
 
     if($player->canRecruitHero())
       $this->gamestate->nextState('hero');

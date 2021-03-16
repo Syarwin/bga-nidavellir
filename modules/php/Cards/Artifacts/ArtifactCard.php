@@ -13,4 +13,6 @@ class ArtifactCard extends \NID\Cards\AbstractCard
     parent::__construct($row);
     $this->class = ARTIFACT;
   }
+
+  public function getAge(){ return $this->age; }
 }

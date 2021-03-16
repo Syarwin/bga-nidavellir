@@ -37,7 +37,7 @@ $gameinfos = [
   'disable_player_order_swap_on_rematch' => false,
 
   'game_interface_width' => [
-    'min' => 750,
+    'min' => 820,
     'max' => null
   ],
 

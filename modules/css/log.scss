@@ -16,13 +16,15 @@
     width:30px;
     height:30px;
     background-image: url('img/classes.png');
-    background-size: 100% 600%;
+    background-size: 100% 800%;
     vertical-align: middle;
     margin: -4px 3px 4px;
 
     @for $i from 0 through 5 {
-      &.class-#{$i} { background-position-y: $i * 100% / 5; }
+      &.class-#{$i} { background-position-y: $i * 100% / 7; }
     }
+    &.class-9 { background-position-y: 6 * 100% / 7; }
+    &.class-10 { background-position-y: 7 * 100% / 7; }
   }
 
   .coin {

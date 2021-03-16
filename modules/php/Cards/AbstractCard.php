@@ -100,6 +100,7 @@ class AbstractCard
       WARRIOR => clienttranslate('a warrior'),
       ROYAL_OFFER => clienttranslate('a royal offering'),
       HERO => clienttranslate('a hero'),
+      MERCENARY => clienttranslate('a mercenary'),
     ];
 
     return $recruitNames[$this->getClass()];

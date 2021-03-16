@@ -95,9 +95,15 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(this.gamedatas.tavern == -1)
         return;
 
-      this.gamedatas.order.forEach((pId, i) => {
-        dojo.attr("bids-zone-" + pId, "data-order", i);
-      })
+      // Clear (useful if zombie)
+      this.forEachPlayer(player => dojo.attr("bids-zone-" + player.id, "data-order", -1));
+
+      if(this.gamedatas.order != null){
+        // Update
+        this.gamedatas.order.forEach((pId, i) => {
+          dojo.attr("bids-zone-" + pId, "data-order", i);
+        })
+      }
     },
   });
 });

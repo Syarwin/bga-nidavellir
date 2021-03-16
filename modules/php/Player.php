@@ -71,16 +71,6 @@ class Player extends \NID\Helpers\DB_Manager
   }
 
 
-  /**
-   * saves eliminated status and hp to the database
-   */
-  public function save() {
-    $eliminated = ($this->eliminated) ? 1 : 0;
-    $sql = "UPDATE player SET player_eliminated=$eliminated, player_score= " . $this->hp . " WHERE player_id=" . $this->id;
-    self::DbQuery($sql);
-  }
-
-
   public function getCoins()
   {
     return Coins::getOfPlayer($this->id);
@@ -239,7 +229,10 @@ class Player extends \NID\Helpers\DB_Manager
       EXPLORER => $values[EXPLORER],
       MINER => $values[MINER] * $ranks[MINER],
       WARRIOR => $values[WARRIOR] + ($maxWarrior == $ranks[WARRIOR]? $this->getMaxCoin() : 0),
-      EXTRA_SCORE => $this->getTotalCoinsValue() + ($this->getGem() == 6? 3 : 0)
+      EXTRA_SCORE => $this->getTotalCoinsValue() + ($this->getGem() == 6? 3 : 0),
+
+      'coins' => $this->getTotalCoinsValue(),
+      'warriorBonus' => ($maxWarrior == $ranks[WARRIOR]? $this->getMaxCoin() : 0),
     ];
 
     foreach($this->getCards() as $card){

@@ -42,8 +42,7 @@ class Globals extends \APP_DbObject
   public static function declare($game){
     // Game options label
     $labels = [
-//      "startingMission" => OPTION_MISSION,
-//      "challenge" => OPTION_CHALLENGE,
+      "expansion" => OPTION_EXPANSION,
     ];
 
     // Add globals with indexes starting at 10
@@ -68,7 +67,7 @@ class Globals extends \APP_DbObject
    */
   public function isExpansion()
   {
-   return false;
+   return self::get('expansion') == THINGVELLIR;
   }
 
 
