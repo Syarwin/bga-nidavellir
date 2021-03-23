@@ -4,7 +4,6 @@
   <div id="exterior-wrapper">
     <div id="exterior">
       <div id="tabs-container">
-        <div class="nid-tab" id="tab-camp"></div>
         <div class="nid-tab" id="tab-heroes"></div>
         <div class="nid-tab" id="tab-distinctions"></div>
         <div class="nid-tab" id="tab-score">{SCORE}</div>
@@ -15,6 +14,10 @@
         <div class="treasure-decoration" id="treasure-decoration-1"></div>
         <div class="treasure-decoration" id="treasure-decoration-2"></div>
         <div class="treasure-decoration" id="treasure-decoration-3"></div>
+
+        <div id="camp-container">
+          <div id="camp"></div>
+        </div>
       </div>
 
 
@@ -61,10 +64,6 @@
           </div>
           <div class="tavern-cards-wrapper">
             <div class="tavern-cards-holder" id="tavern_2"></div>
-          </div>
-
-          <div id="camp-container">
-            <div id="camp"></div>
           </div>
         </div>
       </div>
@@ -211,18 +210,6 @@ var jstpl_playerBoard = `
       </div>
     </div>
 
-    <div class="cards-class-header card-class_4">
-      <div class="card-class-ranks">
-        <div class="rank"></div>
-        <span id="command-zone-ranks_\${id}_4"></span>
-      </div>
-
-      <div class="card-class-score">
-        <span id="command-zone-score_\${id}_4"></span>
-        <i class="fa fa-star"></i>
-      </div>
-    </div>
-
     <div class="cards-class-header card-class_5">
       <div class="card-class-ranks">
         <div class="rank"></div>
@@ -231,6 +218,18 @@ var jstpl_playerBoard = `
 
       <div class="card-class-score">
         <span id="command-zone-score_\${id}_5"></span>
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+
+    <div class="cards-class-header card-class_4">
+      <div class="card-class-ranks">
+        <div class="rank"></div>
+        <span id="command-zone-ranks_\${id}_4"></span>
+      </div>
+
+      <div class="card-class-score">
+        <span id="command-zone-score_\${id}_4"></span>
         <i class="fa fa-star"></i>
       </div>
     </div>
@@ -256,8 +255,8 @@ var jstpl_playerBoard = `
     </ul>
     </div>
     <div class="cards-class card-class_3" id="command-zone_\${id}_3"></div>
-    <div class="cards-class card-class_4" id="command-zone_\${id}_4"></div>
     <div class="cards-class card-class_5" id="command-zone_\${id}_5"></div>
+    <div class="cards-class card-class_4" id="command-zone_\${id}_4"></div>
   </div>
 </div>
 `;

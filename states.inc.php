@@ -165,8 +165,9 @@ $machinestates = [
       'transform' => ST_TRANSFORM_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
       'vidofnir' => ST_VIDOFNIR,
+      'hofud' => ST_PRE_HOFUD,
+      'brisingamens' => ST_PRE_BRISINGAMENS,
 
-//      'trade' => ST_TRADE_COIN,
       'recruitDone' => ST_TRADE_COIN,
     ]
   ],
@@ -271,10 +272,67 @@ $machinestates = [
       'trade' => ST_TRADE_COIN,
       'transform' => ST_TRANSFORM_COIN,
       'vidofnir' => ST_VIDOFNIR,
+      'hofud' => ST_PRE_HOFUD,
+      'brisingamens' => ST_PRE_BRISINGAMENS,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ]
   ],
+
+
+
+  ST_PRE_HOFUD => [
+    "name" => "preHofud",
+    "description" => "",
+    "type" => "game",
+    "action" => "stPreHofud",
+    "transitions" => ['' => ST_HOFUD]
+  ],
+
+
+  ST_HOFUD => [
+    "name" => "discardHofud",
+    'description' => clienttranslate('Others must choose a card in the warrior column and discard it'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a card of the warrior column and discard it'),
+    'args' => 'argDiscardHofud',
+    "type" => "multipleactiveplayer",
+    'possibleactions' => ['discard'],
+    'transitions' => [
+      'done' => ST_RESOLVE_STACK,
+    ]
+  ],
+
+
+
+  ST_PRE_BRISINGAMENS => [
+    "name" => "preBrisingamens",
+    "description" => "",
+    "type" => "game",
+    "action" => "stPreBrisingamens",
+    "transitions" => [
+      'recruit' => ST_BRISINGAMENS,
+      'done' => ST_RESOLVE_STACK,
+    ]
+  ],
+
+
+  ST_BRISINGAMENS => [
+    "name" => "brisingamens",
+    'description' => clienttranslate('${actplayer} must pick one card in the discard'),
+    'descriptionmyturn' => clienttranslate('${you} must pick one card in the discard'),
+    'args' => 'argPickDiscardAndumia', // Same arg as Andumia
+    "type" => "activeplayer",
+    'possibleactions' => ['recruit'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+
+      'recruitDone' => ST_PRE_BRISINGAMENS,
+    ]
+  ],
+
+
 
 
   ST_DISCARD_CARD => [
@@ -321,7 +379,7 @@ $machinestates = [
     'description' => clienttranslate('${actplayer} must choose where to place Thrud'),
     'descriptionmyturn' => clienttranslate('${you} must choose where to place Thrud'),
     'type' => 'activeplayer',
-    'possibleactions' => ['pickColumn'],
+    'possibleactions' => ['pickColumn', 'recruit'],
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
       'hero' => ST_RECRUIT_HERO,
@@ -352,6 +410,7 @@ $machinestates = [
     "action" => "stStartMercenaryEnlistment",
     "transitions" => [
       'resolved' => ST_NEXT_PLAYER_ENLIST,
+      'skip' => ST_PRE_END_OF_AGE,
     ]
   ],
 
@@ -391,6 +450,7 @@ $machinestates = [
       'next' => ST_NEXT_PLAYER_ENLIST,
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_ENLIST_MERCENARY,
     ]
@@ -484,7 +544,21 @@ $machinestates = [
     "type" => "game",
     "updateGameProgression" => true,
     "action" => "stPreEndOfGame",
-    "transitions" => ['' => ST_GAME_END ]
+    "transitions" => [
+      'brisingamens' => ST_BRISINGAMENS_DISCARD,
+      'end' => ST_GAME_END
+    ]
+  ],
+
+
+  ST_BRISINGAMENS_DISCARD => [
+    "name" => "brisingamensDiscard",
+    'description' => clienttranslate('${actplayer} must discard a card (Brisingamens\'s effect)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a card (Brisingamens\'s effect)'),
+    'type' => 'activeplayer',
+    'args' => 'argBrisingamensDiscard',
+    'possibleactions' => ['discard'],
+    'transitions' => ['discardDone' => ST_GAME_END ]
   ],
 
   // Final state.

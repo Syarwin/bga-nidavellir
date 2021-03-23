@@ -13,4 +13,10 @@ class Mjollnir extends ArtifactCard
     ];
     $this->grade = [ null ];
   }
+
+  public function updateScores(&$scores, $player){
+    $ranks = $player->getRanks();
+    $ranks[NEUTRAL] = 0;
+    $scores[ARTIFACT_SCORE] += 2*max($ranks);
+  }
 }

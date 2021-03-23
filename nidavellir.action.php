@@ -29,7 +29,6 @@ class action_nidavellir extends APP_GameAction
   }
 
 
-
   public function setAutopick()
   {
     self::setAjaxMode();
@@ -116,6 +115,14 @@ class action_nidavellir extends APP_GameAction
     self::setAjaxMode();
     $cardId = self::getArg("cardId", AT_posint, true);
     $this->game->actDiscardTavernCard($cardId);
+    self::ajaxResponse();
+  }
+
+  public function discardHofud()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg("cardId", AT_posint, true);
+    $this->game->actDiscardHofud($cardId);
     self::ajaxResponse();
   }
 

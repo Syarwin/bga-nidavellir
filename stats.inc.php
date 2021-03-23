@@ -51,7 +51,7 @@ $stats_type = [
     ],
     "score_hunter" => [
       "id" => STAT_HUNTER_BP,
-      "name" => totranslate("Number of Bravery Points earned by blacksmiths"),
+      "name" => totranslate("Number of Bravery Points earned by hunters"),
       "type" => "int"
     ],
     "score_explorer" => [

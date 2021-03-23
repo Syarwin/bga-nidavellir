@@ -3,6 +3,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     constructor(){
       this._notifications.push(
         ['tradeCoin', 1500],
+        ['discardCoin', 1000],
         ['ulineRecruited', 1000],
       );
 
@@ -141,6 +142,15 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
     },
 
+
+    notif_discardCoin(n){
+      debug("Notif: discard coins", n);
+
+      this.slide('coin-' + n.args.max.id, 'treasure', {
+        destroy: true,
+        duration:1000,
+      });
+    },
 
     onEnteringStateTransformCoin(args){
       if(this.isCurrentPlayerActive()){

@@ -38,6 +38,7 @@ class Globals extends \APP_DbObject
     'currentDistinction' => 0,
     'sourceState' => 0,
     'campVisited' => 0,
+    'brisingamens' => 0,
   ];
 
   public static function declare($game){
@@ -175,4 +176,11 @@ class Globals extends \APP_DbObject
   {
     self::set('campVisited', 1);
   }
+
+
+  public function incBrisingamens()
+  {
+    return self::inc('brisingamens', 1);
+  }
+
 }

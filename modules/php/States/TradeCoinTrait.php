@@ -41,14 +41,16 @@ trait TradeCoinTrait
       $target += 2;
 
     // Zolkur swap
-    $zolkur = Cards::get(ZOLKUR);
-    if($zolkur->getPID() == $player->getId() && $zolkur->getZone() == ZOLKUR_ZONE){
-      $tmp = $coinMin;
-      $coinMin = $coinMax;
-      $coinMax = $tmp;
-      Cards::recruit($zolkur, $player->getId(), NEUTRAL);
-      Cards::refresh($zolkur); // Update location
-      Notifications::ZolkurEffect($player, $zolkur);
+    if(Cards::getZolkurOwner() == $player->getId()){
+      $zolkur = Cards::get(ZOLKUR);
+      if($zolkur->getZone() == ZOLKUR_ZONE){
+        $tmp = $coinMin;
+        $coinMin = $coinMax;
+        $coinMax = $tmp;
+        Cards::recruit($zolkur, $player->getId(), NEUTRAL);
+        Cards::refresh($zolkur); // Update location
+        Notifications::ZolkurEffect($player, $zolkur);
+      }
     }
 
     $newCoin = Coins::trade($coinMax, $target);

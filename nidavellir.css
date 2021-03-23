@@ -377,16 +377,20 @@ html {
         position: relative;
         margin-right: 100px;
         margin-left: 20px;
-        flex-shrink: 0; }
+        flex-shrink: 0;
+        flex-flow: column;
+        display: flex;
+        justify-content: space-between; }
+        #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container {
+          height: 580px; }
         @media (max-width: 1650px) {
           #nidavellir-board #exterior-wrapper #exterior #treasure-container {
             width: 566px;
             height: 406px;
             margin: 0;
             margin-top: 20px; } }
-        [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container {
+        [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container {
           width: 566px;
-          height: 406px;
           margin: 0;
           margin-top: 20px; }
         #nidavellir-board #exterior-wrapper #exterior #treasure-container::before {
@@ -403,7 +407,7 @@ html {
             #nidavellir-board #exterior-wrapper #exterior #treasure-container::before {
               transform: translateX(566px) rotate(88deg);
               transform-origin: top left; } }
-          [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container::before {
+          [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container::before, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container::before {
             transform: translateX(566px) rotate(88deg);
             transform-origin: top left; }
         #nidavellir-board #exterior-wrapper #exterior #treasure-container .treasure-decoration {
@@ -449,8 +453,8 @@ html {
               height: 83%;
               width: 93%;
               grid-template-columns: repeat(24, 1fr); } }
-          [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure {
-            height: 83%;
+          [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure {
+            height: 337px;
             width: 93%;
             grid-template-columns: repeat(24, 1fr); }
           #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot {
@@ -587,67 +591,67 @@ html {
               #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-9 {
                 grid-row-start: 4;
                 grid-column-start: 19; } }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-20 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-20, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-20 {
               grid-row-start: 1;
               grid-column-start: 1; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-21 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-21, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-21 {
               grid-row-start: 1;
               grid-column-start: 5; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-22 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-22, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-22 {
               grid-row-start: 1;
               grid-column-start: 9; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-23 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-23, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-23 {
               grid-row-start: 1;
               grid-column-start: 13; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-24 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-24, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-24 {
               grid-row-start: 1;
               grid-column-start: 17; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-25 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-25, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-25 {
               grid-row-start: 1;
               grid-column-start: 21; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-15 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-15, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-15 {
               grid-row-start: 2;
               grid-column-start: 3; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-16 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-16, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-16 {
               grid-row-start: 2;
               grid-column-start: 7; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-17 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-17, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-17 {
               grid-row-start: 2;
               grid-column-start: 11; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-18 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-18, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-18 {
               grid-row-start: 2;
               grid-column-start: 15; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-19 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-19, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-19 {
               grid-row-start: 2;
               grid-column-start: 19; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-10 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-10, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-10 {
               grid-row-start: 3;
               grid-column-start: 3; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-11 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-11, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-11 {
               grid-row-start: 3;
               grid-column-start: 7; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-12 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-12, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-12 {
               grid-row-start: 3;
               grid-column-start: 11; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-13 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-13, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-13 {
               grid-row-start: 3;
               grid-column-start: 15; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-14 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-14, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-14 {
               grid-row-start: 3;
               grid-column-start: 19; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-5 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-5, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-5 {
               grid-row-start: 4;
               grid-column-start: 3; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-6 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-6, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-6 {
               grid-row-start: 4;
               grid-column-start: 7; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-7 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-7, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-7 {
               grid-row-start: 4;
               grid-column-start: 11; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-8 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-8, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-8 {
               grid-row-start: 4;
               grid-column-start: 15; }
-            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-9 {
+            [data-mode="compact"] #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-9, #ebd-body.nidavellir-expansion #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot#treasure-slot-9 {
               grid-row-start: 4;
               grid-column-start: 19; }
             #nidavellir-board #exterior-wrapper #exterior #treasure-container #treasure .treasure-slot .coin {
@@ -846,25 +850,6 @@ html {
               #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns .tavern-cards-wrapper .tavern-cards-holder .card {
                 transition: left 1s;
                 left: 0px; }
-          #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container {
-            grid-column-end: span 2;
-            background-color: rgba(219, 173, 34, 0.72);
-            border-radius: 10px;
-            padding: 15px 3px;
-            box-shadow: 2px 2px 5px black; }
-            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container.selectable {
-              animation-name: borderBlink2;
-              animation-duration: 1s;
-              animation-iteration-count: infinite; }
-            #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container #camp {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              overflow: hidden;
-              min-height: 145px; }
-              #nidavellir-board #exterior-wrapper #exterior #taverns-container #taverns #camp-container #camp .card {
-                transition: left 1s;
-                left: 0px; }
       #nidavellir-board #exterior-wrapper #exterior #tabs-container {
         width: 200px;
         margin-right: 100px;
@@ -943,6 +928,38 @@ html {
           grid-column: 2;
           grid-row: 2;
           margin: 20px auto; }
+      #nidavellir-board #exterior-wrapper #exterior #camp-container {
+        grid-column-end: span 2;
+        background-image: url("img/camp.png");
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px black;
+        position: relative; }
+        #nidavellir-board #exterior-wrapper #exterior #camp-container::before {
+          content: '';
+          display: block;
+          width: 60px;
+          height: 50px;
+          background-image: url("img/camp-sign.png");
+          position: absolute;
+          top: 15px;
+          left: -56px;
+          background-size: 100% 100%;
+          z-index: -1; }
+        #nidavellir-board #exterior-wrapper #exterior #camp-container.selectable {
+          animation-name: borderBlink2;
+          animation-duration: 1s;
+          animation-iteration-count: infinite; }
+        #nidavellir-board #exterior-wrapper #exterior #camp-container #camp {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          min-height: 145px;
+          padding: 15px 3px;
+          border: 2px solid transparent; }
+          #nidavellir-board #exterior-wrapper #exterior #camp-container #camp .card {
+            transition: left 1s;
+            left: 0px; }
   #nidavellir-board #player-boards {
     display: flex;
     flex-flow: row;
@@ -1725,8 +1742,6 @@ html {
 #overall-content[data-nplayers="5"] .tavern-cards-holder {
   min-width: 612.5px; }
 
-#ebd-body:not(.nidavellir-expansion) #tab-camp {
-  display: none !important; }
 #ebd-body:not(.nidavellir-expansion) #overview-row-6 {
   display: none !important; }
 #ebd-body:not(.nidavellir-expansion) #camp-container {

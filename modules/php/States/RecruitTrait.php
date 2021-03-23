@@ -82,15 +82,7 @@ trait RecruitTrait
       Stats::recruitHero($player);
     }
 
-    if($card->getClass() == ROYAL_OFFER){
-      $value = $card->getValue();
-      if(Cards::getJarikaOwner() == $player->getId())
-        $value += 2;
-      Globals::setTransformValue($value);
-      $this->gamestate->nextState("transform");
-    } else {
-      $this->nextStateAfterRecruit($card, $player);
-    }
+    $this->nextStateAfterRecruit($card, $player);
   }
 
 
@@ -99,6 +91,15 @@ trait RecruitTrait
   public function nextStateAfterRecruit($card, $player, $bypassCardState = false){
     // Card require a new state ?
     $nextState = $bypassCardState? null : $card->stateAfterRecruit($player);
+
+    // Royal Offer
+    if($card->getClass() == ROYAL_OFFER){
+      $value = $card->getValue();
+      if(Cards::getJarikaOwner() == $player->getId())
+        $value += 2;
+      Globals::setTransformValue($value);
+      $nextState = 'transform';
+    }
 
     // Thrud has been moved away in command zone ?
     if($nextState == null){
@@ -156,7 +157,7 @@ trait RecruitTrait
   {
     $this->checkAction("discard");
 
-    $discardableCards = $this->argDiscardCard()['cards'];
+    $discardableCards = $this->gamestate->state()['args']['cards'];
     foreach($cardIds as $cId){
       if(!in_array($cId, $discardableCards))
         throw new \BgaUserException(_("You cannot discard this card"));
@@ -222,6 +223,15 @@ trait RecruitTrait
     ];
   }
 
+  /***************************
+  ****** BRISINGAMENS ********
+  ***************************/
+  public function stPreBrisingamens()
+  {
+    $n = Globals::incBrisingamens();
+    $this->gamestate->nextState($n <= 2? 'recruit' : 'done');
+  }
+
 
   /********************
   ******* OLWYN *******
@@ -232,5 +242,48 @@ trait RecruitTrait
     $double2 = Cards::get(OLWYN_DOUBLE2);
     if($double1->getLocation() != "pending" && $double2->getLocation() != "pending")
       $this->gamestate->nextState('finished');
+  }
+
+
+
+  /********************
+  ******* HOFUD *******
+  ********************/
+  public function stPreHofud()
+  {
+    $pIds = Players::getAll()->getIds();
+    $pIds = array_diff($pIds, [Cards::getHofudOwner()]);
+    $this->gamestate->setPlayersMultiactive($pIds, '', true);
+    $this->gamestate->nextState('');
+  }
+
+  public function argDiscardHofud()
+  {
+    $ownerId = Cards::getHofudOwner();
+    $data = [ '_private' => [] ];
+    foreach(Players::getAll() as $pId => $player){
+      if($pId == $ownerId)
+        continue;
+
+      $cards = $player->getCards()->filter(function($card){ return $card->isDiscardable() && $card->getZone() == WARRIOR; });
+      $data['_private'][$pId]['cards'] = array_map(function($card){ return $card->getId(); }, $cards);
+    }
+
+    return $data;
+  }
+
+
+  public function actDiscardHofud($cardId)
+  {
+    $card = Cards::get($cardId);
+    $player = Players::getCurrent();
+    if($card->getPId() != $player->getId() || $card->getZone() != WARRIOR || !$card->isDiscardable())
+      throw new \BgaUserException(_("You cannot discard this card"));
+
+    Cards::discard([$cardId]);
+    $warriors = $player->getCards()->filter(function($card){ return $card->getZone() == WARRIOR; });
+    Notifications::discardHofud($player, $card, $warriors);
+    Players::updateScores();
+    $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
   }
 }

@@ -55,9 +55,24 @@ trait AgeTrait
       Players::updateScores();
     }
 
-    $this->gamestate->nextState('');
+    $pId = Cards::getBrisingamensOwner();
+    if($pId != null){
+      $this->gamestate->changeActivePlayer($pId);
+      $this->gamestate->nextState('brisingamens');
+    } else {
+      $this->gamestate->nextState('end');
+    }
   }
 
+
+  public function argBrisingamensDiscard()
+  {
+    $player = Players::getActive();
+    $cards = $player->getCards()->filter(function($card){ return $card->isDiscardable() && $card->getZone() != NEUTRAL; });
+    return [
+        'cards' => array_map(function($card){ return $card->getId(); }, $cards),
+    ];
+  }
 
   /***********************
   ***** Distinctions *****

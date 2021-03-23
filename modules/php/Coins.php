@@ -167,11 +167,16 @@ class Coins extends Helpers\Pieces
     ], $newCoin['id']);
 
     // Do whatever is needed to the old coin
+    self::discard($coin);
+
+    return self::get($newCoin['id']);
+  }
+
+
+  public static function discard($coin){
     self::DB()->update([
       'pId' => 0,
       'coin_location' => "discard",
     ], $coin['id']);
-
-    return self::get($newCoin['id']);
   }
 }

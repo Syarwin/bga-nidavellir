@@ -210,6 +210,9 @@ class Cards extends Helpers\Pieces
   public function getJarikaOwner() { return self::getOwner(JARIKA); }
   public function getFafnirOwner() { return self::getOwner(FAFNIR); }
   public function getMegingjordOwner() { return self::getOwner(MEGINGJORD); }
+  public function getZolkurOwner() { return self::getOwner(ZOLKUR); }
+  public function getHofudOwner() { return self::getOwner(HOFUD); }
+  public function getBrisingamensOwner() { return self::getOwner(BRISINGAMENS); }
 
 
   /*********************

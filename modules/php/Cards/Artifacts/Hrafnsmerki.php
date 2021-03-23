@@ -14,7 +14,7 @@ class Hrafnsmerki extends ArtifactCard
     $this->grade = [ null ];
   }
 
-  public function updateBraveryValues(&$values, $player){
-    $values[ARTIFACT_SCORE] += 5 * $player->countMercenaries();
+  public function updateScores(&$scores, $player){
+    $scores[ARTIFACT_SCORE] += 5 * $player->countMercenaries();
   }
 }

@@ -2,7 +2,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
   return declare("nidavellir.cardTrait", null, {
     constructor(){
       this._notifications.push(
-        ['discardCards', 1000]
+        ['discardCards', 1000],
+        ['discardHofud', 1000],
       );
       this._callbackOnCard = null;
       this._selectableCards = [];
@@ -90,7 +91,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
     getRankHtml(rank){
-      return this.format_block('jstpl_rank', { rank : rank ?? '' });
+      return this.format_block('jstpl_rank', { rank : rank != null? rank : ''  });
     },
 
 
@@ -155,6 +156,20 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
 
+    notif_discardHofud(n){
+      debug("Notif: discarding card for Hofud", n);
+
+      this.slide('card-' + n.args.card.id, 'page-title', {
+        duration:1000,
+        destroy:true,
+      });
+
+      if(this.player_id == n.args.player_id){
+        n.args.warriors.forEach(cardId => this.slide('card-' + cardId, 'command-zone_' + this.player_id+ '_5'));
+      }
+    },
+
+
     /*********************************
     ****** EXPLORER DISTINCTION ******
     *********************************/
@@ -191,10 +206,21 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.openDiscardModal();
     },
 
+
+    onEnteringStateBrisingamens(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this._discardCards = args.cardsObj;
+      this.addPrimaryActionButton("btnShowDiscardCards", _("Show discard"), () => this.openDiscardModal() )
+      this.openDiscardModal();
+    },
+
     openDiscardModal(){
       this._discardModal = new customgame.modal("discard", {
         class:"nidavellir_popin",
         closeIcon:'fa-times',
+        verticalAlign:'flex-start',
       });
 
       this._discardCards.forEach(card => this.addCard(card, 'popin_discard_contents'));

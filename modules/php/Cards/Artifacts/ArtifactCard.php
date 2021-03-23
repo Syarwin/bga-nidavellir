@@ -15,8 +15,6 @@ class ArtifactCard extends \NID\Cards\AbstractCard
     $this->class = ARTIFACT;
   }
 
-  public function isDiscardable() { return false; }
-
   public function getAge(){ return $this->age; }
 
   public function getRecruitementZone(){

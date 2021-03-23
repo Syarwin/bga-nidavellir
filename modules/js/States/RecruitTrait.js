@@ -244,7 +244,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         return;
 
       this._selectedMercenary = null;
-      args.cards.forEach(cardId => this.slide('card-' + cardId, 'enlist-' + this.player_id) );
+      args.cards.forEach(cardId => {
+        if($('card-' + cardId).parentNode != 'enlist-' + this.player_id)
+          this.slide('card-' + cardId, 'enlist-' + this.player_id)
+      });
       this.makeCardSelectable(args.cards, this.onClickCardEnlist.bind(this) );
 
       [1,2,3,4,5].forEach(col => {
@@ -280,5 +283,53 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         column: col,
       });
     },
+
+
+
+    /**********************
+    ******** HOFUD ********
+    **********************/
+    onEnteringStateDiscardHofud(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this._selectedWarrior = null;
+      args._private.cards.forEach(cardId => this.slide('card-' + cardId, 'enlist-' + this.player_id) );
+      this.makeCardSelectable(args._private.cards, this.onClickCardDiscardHofud.bind(this) );
+    },
+
+    onClickCardDiscardHofud(card){
+      if(this._selectedWarrior != null){
+        dojo.removeClass("card-" + this._selectedWarrior, "selected");
+      }
+
+      dojo.destroy("btnConfirmDiscardHofud");
+      if(this._selectedWarrior != null && this._selectedWarrior == card.id){
+        this._selectedWarrior = null;
+      }
+      else {
+        this._selectedWarrior = card.id;
+        dojo.addClass('card-' + card.id, "selected");
+        this.addPrimaryActionButton("btnConfirmDiscardHofud", _("Confirm"), () => this.onClickConfirmDiscardHofud());
+      }
+    },
+
+    onClickConfirmDiscardHofud(){
+      this.takeAction('discardHofud', {cardId: this._selectedWarrior });
+    },
+
+
+    /*********************************
+    ******** BRISINGAMENS EOG ********
+    *********************************/
+    onEnteringStateBrisingamensDiscard(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this.makeCardSelectable(args.cards, this.onClickCardDiscard.bind(this));
+      this._selectedCardsForDiscard = [];
+      this._amountToDiscard = 1;
+    },
+
   });
 });

@@ -156,7 +156,10 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function getHeroes()
   {
-    return $this->getCards()->filter(function($card){ return $card instanceof \NID\Cards\Heroes\HeroCard; });
+    return $this->getCards()->filter(function($card){
+      return $card instanceof \NID\Cards\Heroes\HeroCard
+        && !in_array($card->getId(), [OLWYN_DOUBLE1, OLWYN_DOUBLE2]);
+    });
   }
 
   public function countHeroes()
@@ -210,6 +213,7 @@ class Player extends \NID\Helpers\DB_Manager
       $stacksTops[$card->getZone()] = $card;
     }
 
+    $stacksTops[NEUTRAL] = null;
     $stacks = [];
     foreach($stacksTops as $stack => $card){
       if($card != null && $card->isDiscardable())

@@ -51,6 +51,51 @@
           margin:20px auto;
         }
       }
+
+
+
+      #camp-container {
+        grid-column-end: span 2;
+//        background-color: rgba(219, 173, 34, 0.72);
+        background-image:url('img/camp.png');
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px black;
+        position:relative;
+
+        &::before {
+          content: '';
+          display: block;
+          width: 60px;
+          height: 50px;
+          background-image: url("img/camp-sign.png");
+          position: absolute;
+          top: 15px;
+          left: -56px;
+          background-size: 100% 100%;
+          z-index: -1;
+        }
+
+        &.selectable {
+          animation-name: borderBlink2;
+          animation-duration: 1s;
+          animation-iteration-count: infinite;
+        }
+
+        #camp {
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          min-height:145px;
+          padding: 15px 3px;
+          border:2px solid transparent;
+
+          .card {
+            transition:left 1s;
+            left:0px;
+          }
+        }
+      }
     }
   }
 
@@ -320,10 +365,6 @@
 
 
 #ebd-body:not(.nidavellir-expansion) {
-  #tab-camp {
-    display:none !important;
-  }
-
   #overview-row-6 {
     display:none !important;
   }

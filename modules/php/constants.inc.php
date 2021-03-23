@@ -26,6 +26,12 @@ define('ST_DISCARD_TAVERN_CARD', 36);
 define('ST_ANDUMIA', 43);
 define('ST_OLWYN', 44);
 
+define('ST_PRE_HOFUD', 45);
+define('ST_HOFUD', 46);
+
+define('ST_PRE_BRISINGAMENS', 47);
+define('ST_BRISINGAMENS', 48);
+
 
 define('ST_TRADE_COIN', 23);
 define('ST_ULINE_TRADE_COIN', 33);
@@ -48,6 +54,7 @@ define('ST_NEXT_DISTINCTION', 31);
 define('ST_DISTINCTION_EXPLORER', 32);
 
 define('ST_PRE_END_OF_GAME', 90);
+define('ST_BRISINGAMENS_DISCARD', 91);
 define('ST_GAME_END', 99);
 
 

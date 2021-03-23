@@ -19,6 +19,11 @@ trait EnlistMercenaryTrait
    */
   public function stStartMercenaryEnlistment()
   {
+    if(!Globals::isExpansion()){
+      $this->gamestate->nextState('skip');
+      return;
+    }
+
     // Sort players by mercenaries
     $players = Players::getAll();
     $amounts = [];

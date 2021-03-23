@@ -1,5 +1,7 @@
 <?php
 namespace NID\Cards\Artifacts;
+use NID\Coins;
+use NID\Game\Notifications;
 
 class Jarnglofi extends ArtifactCard
 {
@@ -13,5 +15,23 @@ class Jarnglofi extends ArtifactCard
       clienttranslate('At the end of Age 2, when counting points, add 24 points to your Final Bravery Value.')
     ];
     $this->grade = [ 24 ];
+  }
+
+  public function updateScores(&$scores, $player){
+    $scores[ARTIFACT_SCORE] += 24;
+  }
+
+
+  public function applyEffect($player){
+    // Get the minimal transformable coin
+    $tradingCoin = null;
+    foreach($player->getCoins() as $coin){
+      if($coin['value'] == 0 || ($coin['value'] == 3 && $coin['type'] == COIN_DISTINCTION)){
+        $tradingCoin = $coin;
+      }
+    }
+
+    Coins::discard($tradingCoin);
+    Notifications::discardTradingCoin($player, $tradingCoin);
   }
 }

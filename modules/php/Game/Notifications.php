@@ -179,6 +179,15 @@ class Notifications
     }
   }
 
+  public static function discardHofud($player, $card, $warriors){
+    self::notifyAll('discardHofud', clienttranslate('${player_name} discards ${card_class}${card_class_symbol} for Hofud\'s effect'), [
+      'player' => $player,
+      'card'  => $card,
+      'warriors' => array_map(function($card){ return $card->getId(); }, $warriors),
+    ]);
+  }
+
+
 
   public static function clearTavern($tavern){
     self::notifyAll('clearTavern', '', [
@@ -231,6 +240,17 @@ class Notifications
       'new' => $newCoin,
     ]);
   }
+
+
+  public static function discardTradingCoin($player, $tradingCoin){
+    self::notifyAll('discardCoin', clienttranslate('${player_name} discard its ${coin_max}${coin_max_type} (Jarnglofi\'s effect)'), [
+      'player' => $player,
+      'coin_max' => $tradingCoin['value'],
+      'coin_max_type' => $tradingCoin['type'],
+      'max' => $tradingCoin,
+    ]);
+  }
+
 
 
   public static function discardCardExplorerDistinction($card){

@@ -21,7 +21,7 @@ abstract class HeroCard extends \NID\Cards\AbstractCard
   public function isSupported($options){
     return (!$this->advanced && !$this->expansion)
       || ($this->advanced && $options[OPTION_SETUP] == NORMAL)
-      || ($this->expansion && $options[OPTION_SETUP] == THINGVELLIR);
+      || ($this->expansion && $options[OPTION_EXPANSION] == THINGVELLIR);
   }
 
   public function isDiscardable() { return false; }

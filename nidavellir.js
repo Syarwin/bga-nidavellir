@@ -172,7 +172,7 @@ define([
         this._overviewModal.show();
       },
 
-      onEnteringStatePreEndOfGame(){
+      onEnteringStateGameEnd(){
         this.showOverview();
       },
 

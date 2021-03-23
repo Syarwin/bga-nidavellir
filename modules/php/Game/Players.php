@@ -39,7 +39,7 @@ class Players extends \NID\Helpers\DB_Manager
     Nidavellir::get()->reloadPlayersBasicInfos();
 
 
-    if(true){
+    if(false){
       $pId = array_keys($players)[0];
       Cards::addClass($pId, BLACKSMITH);
       Cards::addClass($pId, HUNTER);
