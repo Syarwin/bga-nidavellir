@@ -45,6 +45,7 @@ class Nidavellir extends Table
 	use NID\States\BidsTrait;
 	use NID\States\RecruitTrait;
   use NID\States\TradeCoinTrait;
+  use NID\States\EnlistMercenaryTrait;
 
 	public static $instance = null;
 	public function __construct() {
@@ -165,15 +166,4 @@ class Nidavellir extends Table
     return self::_($text);
   }
 
-
-
-  public function saveCurrentStateAsSource(){
-    Globals::setSourceState($this->gamestate->state_id() );
-  }
-
-  public function nextStateFromSource($transition){
-    $sourceState = $this->gamestate->states[Globals::getSourceState()];
-    $newState = $sourceState['transitions'][$transition];
-    $this->gamestate->jumpToState($newState);
-  }
 }

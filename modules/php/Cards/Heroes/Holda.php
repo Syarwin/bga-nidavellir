@@ -18,4 +18,8 @@ class Holda extends HeroCard
       12
     ];
   }
+
+  public function stateAfterRecruit($player){
+    return 'recruitCamp';
+  }
 }

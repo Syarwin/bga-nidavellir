@@ -4,6 +4,7 @@ use NID\Cards;
 use NID\Game\Globals;
 use NID\Game\Notifications;
 use NID\Game\Players;
+use NID\Game\Stack;
 
 trait TurnTrait
 {
@@ -15,7 +16,6 @@ trait TurnTrait
     $cards = Cards::startNewTurn();
     Notifications::startNewTurn($cards);
 
-    $this->saveCurrentStateAsSource();
     $this->gamestate->nextState('start');
   }
 
@@ -31,6 +31,12 @@ trait TurnTrait
 
     $cardsLeft = Cards::countInLocation(['age', Globals::getAge()]);
     $this->gamestate->nextState($cardsLeft == 0? 'nextAge' : 'nextTurn');
+  }
+
+
+  public function stResolveStack()
+  {
+    Stack::resolve();
   }
 }
 ?>

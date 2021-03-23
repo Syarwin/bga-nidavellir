@@ -1,9 +1,12 @@
 <?php
 namespace NID;
 use NID\Coins;
+use NID\Cards;
 use NID\Game\Globals;
 use NID\Game\Log;
 use NID\Game\Players;
+use NID\Game\Stats;
+use NID\Game\Notifications;
 
 /*
  * Player: all utility functions concerning a player
@@ -137,6 +140,15 @@ class Player extends \NID\Helpers\DB_Manager
   }
 
 
+  public function tradeCoin($coin, $value)
+  {
+    $newCoin = Coins::trade($coin, $coin['value'] + $value, true);
+    Notifications::transformCoin($this, $coin, $newCoin);
+    Players::updateScores();
+    Stats::upgradeCoin($this);
+    return $newCoin;
+  }
+
   public function getCards()
   {
     return Cards::getOfPlayer($this->id);
@@ -185,22 +197,22 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function canRecruitHero()
   {
-    return $this->countLines() > $this->countHeroes();
+    return $this->countLines() > $this->countHeroes()
+      && Cards::getMegingjordOwner() != $this->id;
   }
 
 
   // Useful for Dagda and Bonfur
   public function getDiscardableStacks()
   {
-    $stacksTops = [HERO, 0, 0, 0, 0, 0];
+    $stacksTops = [null, null, null, null, null, null];
     foreach($this->getCards() as $card){
-      $stacksTops[$card->getZone()] = $card->getClass();
+      $stacksTops[$card->getZone()] = $card;
     }
-    $stacksTops[0] = HERO;
 
     $stacks = [];
-    foreach($stacksTops as $stack => $type){
-      if($type != HERO)
+    foreach($stacksTops as $stack => $card){
+      if($card != null && $card->isDiscardable())
         $stacks[] = $stack;
     }
 
@@ -230,6 +242,7 @@ class Player extends \NID\Helpers\DB_Manager
       MINER => $values[MINER] * $ranks[MINER],
       WARRIOR => $values[WARRIOR] + ($maxWarrior == $ranks[WARRIOR]? $this->getMaxCoin() : 0),
       EXTRA_SCORE => $this->getTotalCoinsValue() + ($this->getGem() == 6? 3 : 0),
+      ARTIFACT_SCORE => 0,
 
       'coins' => $this->getTotalCoinsValue(),
       'warriorBonus' => ($maxWarrior == $ranks[WARRIOR]? $this->getMaxCoin() : 0),
@@ -240,7 +253,7 @@ class Player extends \NID\Helpers\DB_Manager
     }
 
     $scores['total'] = $scores[NEUTRAL] + $scores[BLACKSMITH] + $scores[HUNTER]
-      + $scores[EXPLORER] + $scores[MINER] + $scores[WARRIOR] + $scores[EXTRA_SCORE];
+      + $scores[EXPLORER] + $scores[MINER] + $scores[WARRIOR] + $scores[ARTIFACT_SCORE] + $scores[EXTRA_SCORE];
 
     return $scores;
   }
@@ -275,5 +288,33 @@ class Player extends \NID\Helpers\DB_Manager
   public function setAutoPick($mode)
   {
     self::DB()->update(['player_autopick' => $mode], $this->id);
+  }
+
+
+/*************************
+****** THINGVELLIR *******
+*************************/
+  public function getUnplacedMercenaries()
+  {
+    return Cards::getOfPlayer($this->id, NEUTRAL)->filter(function($card){ return $card instanceof \NID\Cards\Mercenaries\MercenaryCard; });
+  }
+
+  public function countUnplacedMercenaries()
+  {
+    return count($this->getUnplacedMercenaries());
+  }
+
+  public function countMercenaries()
+  {
+    return count(Cards::getOfPlayer($this->id)->filter(function($card){ return $card instanceof \NID\Cards\Mercenaries\MercenaryCard; }));
+  }
+
+
+  public function canVisitCamp()
+  {
+    return Globals::isExpansion() &&
+      (Globals::getCurrentPlayerIndex() == 0
+        || (Cards::getFafnirOwner() == $this->id && !Globals::wasCampVisited())
+      );
   }
 }

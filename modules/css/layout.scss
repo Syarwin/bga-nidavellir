@@ -72,7 +72,7 @@
       margin-bottom:20px;
       position:relative;
       display: flex;
-      align-items: flex-start;
+      flex-flow:column;
   //    background-color:#838c92;
 
       @for $i from 0 through 5 {
@@ -121,6 +121,12 @@
         font-size: 22px;
       }
 
+      .enlist-mercenaries {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       .command-zone-container {
         display: grid;
         grid-template-columns: repeat(6, auto);
@@ -136,7 +142,7 @@
           font-weight:bold;
           margin:auto;
           font-size:19px;
-          &.card-class_0 .card-class-ranks { visibility: hidden; }
+          &.card-class_0 .card-class-ranks { display: none; }
 
           .card-class-ranks {
             display:flex;
@@ -162,6 +168,12 @@
             &.card-class_#{$i} .rank { background-position-y: $i * 100% / 7; }
           }
 
+          .class-artifact {
+            color:#a48421;
+            i {
+              color:#a48421;
+            }
+          }
 
           i {
             color: #555;
@@ -214,7 +226,7 @@
           }
 
           @for $i from 0 through 5 {
-            &.card-class_#{$i}::before { background-position-y: $i * 100% / 5; }
+            &.card-class_#{$i}::before { background-position-y: $i * 100% / 7; }
           }
 
 
@@ -313,6 +325,10 @@
   }
 
   #overview-row-6 {
+    display:none !important;
+  }
+
+  #camp-container {
     display:none !important;
   }
 }

@@ -14,4 +14,16 @@ class Vegvisir extends ArtifactCard
     ];
     $this->grade = [ 13 ];
   }
+
+  public function getRecruitementZone(){
+    return EXPLORER;
+  }
+
+  public function updateRanks(&$ranks){
+    $ranks[EXPLORER]++;
+  }
+
+  public function updateBraveryValues(&$values, $player){
+    $values[EXPLORER] += 13;
+  }
 }

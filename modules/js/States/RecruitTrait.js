@@ -44,6 +44,16 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
     },
 
+    onEnteringStateRecruitCamp(args) {
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      // activate the cards
+      this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
+      dojo.addClass('camp-container', "selectable");
+    },
+
+
     onEnteringStateRecruitHero(args) {
       if(!this.isCurrentPlayerActive())
         return;
@@ -187,6 +197,11 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this.makeColumnsSelectable('ylud');
     },
 
+    onEnteringStatePlaceOlwynDouble(args){
+      if(this.isCurrentPlayerActive())
+        this.makeColumnsSelectable('olwyn');
+    },
+
 
     makeColumnsSelectable(hero){
       [1,2,3,4,5].forEach(col => {
@@ -208,7 +223,62 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         return;
 
       this.makeCardSelectable(args.cards, (card) => this.takeAction('discardTavern', { cardId: card.id }) );
-      dojo.addClass("tavern_" + args.tavern, "selectable");
+      dojo.addClass("tavern_" + args.tavern, "selectable-discard");
+    },
+
+
+    /******************************
+    *** THINGVELLIR MERCENARIES ***
+    ******************************/
+    onEnteringStateChooseEnlistOrder(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this.addPrimaryActionButton("btnOrderFirst", _("First"), () => this.takeAction("chooseOrder", { position:0 }));
+      this.addPrimaryActionButton("btnOrderLast", _("Last"), () => this.takeAction("chooseOrder", { position:1 }));
+    },
+
+
+    onEnteringStateEnlistMercenary(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this._selectedMercenary = null;
+      args.cards.forEach(cardId => this.slide('card-' + cardId, 'enlist-' + this.player_id) );
+      this.makeCardSelectable(args.cards, this.onClickCardEnlist.bind(this) );
+
+      [1,2,3,4,5].forEach(col => {
+        this.connect($('command-zone_' + this.player_id + '_' + col), 'click', () => this.onClickColumnEnlist(col) );
+      });
+    },
+
+    onClickCardEnlist(card){
+      if(this._selectedMercenary != null){
+        dojo.removeClass("card-" + this._selectedMercenary.id, "selected");
+        [1,2,3,4,5].forEach(col => dojo.removeClass('command-zone_' + this.player_id + '_' + col, "selectable") );
+      }
+
+      if(this._selectedMercenary != null && this._selectedMercenary.id == card.id){
+        this._selectedMercenary = null;
+      }
+      else {
+        this._selectedMercenary = card;
+        dojo.addClass('card-' + card.id, "selected");
+        Object.keys(card.grades).forEach(col => dojo.addClass('command-zone_' + this.player_id + '_' + col, "selectable") )
+      }
+    },
+
+    onClickColumnEnlist(col){
+      if(this._selectedMercenary == null)
+        return;
+
+      if(!Object.keys(this._selectedMercenary.grades).map(Number).includes(col))
+        return;
+
+      this.takeAction('enlist', {
+        cardId:this._selectedMercenary.id,
+        column: col,
+      });
     },
   });
 });

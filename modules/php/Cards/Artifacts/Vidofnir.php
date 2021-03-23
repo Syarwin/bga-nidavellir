@@ -15,4 +15,8 @@ class Vidofnir extends ArtifactCard
     ];
     $this->grade = [ null ];
   }
+
+  public function stateAfterRecruit($player){
+    return 'vidofnir';
+  }
 }

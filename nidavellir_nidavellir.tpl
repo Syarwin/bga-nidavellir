@@ -154,11 +154,18 @@ var jstpl_playerBoard = `
 <div id="player-board-\${no}" data-color="\${color}" class="nidavellir-player-board">
   <div class="player-board-name" style="color:#\${color}">\${name}</div>
 
+  <div class="enlist-mercenaries" id="enlist-\${id}"></div>
+
   <div class="command-zone-container">
     <div class="cards-class-header card-class_0">
       <div class="card-class-ranks">
         <div class="rank"></div>
         <span id="command-zone-ranks_\${id}_0"></span>
+      </div>
+
+      <div class="card-class-score class-artifact">
+        <span id="command-zone-score_\${id}_6"></span>
+        <i class="fa fa-star"></i>
       </div>
 
       <div class="card-class-score">
@@ -253,7 +260,11 @@ var jstpl_playerBoard = `
     <div class="cards-class card-class_5" id="command-zone_\${id}_5"></div>
   </div>
 </div>
-`
+`;
+
+var jstpl_ZolkurZone = `
+<div class="zolkur-zone" id="command-zone_\${id}_80"></div>
+`;
 
 
 

@@ -14,7 +14,7 @@ class Gjallarhorn extends ArtifactCard
     $this->grade = [ null ];
   }
 
-  public function stateAfterRecruit(){
+  public function stateAfterRecruit($player){
     return 'hero';
   }
 }

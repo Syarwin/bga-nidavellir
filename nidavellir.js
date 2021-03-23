@@ -68,13 +68,15 @@ define([
       clearPossible(){
         dojo.query('.coin').removeClass('selected selectable');
         dojo.query(".tavern-coin-holder").removeClass("selectable");
-        dojo.query(".tavern-cards-holder").removeClass("selectable");
-        dojo.query(".card").removeClass("selectable unselectable");
+        dojo.query(".tavern-cards-holder").removeClass("selectable selectable-discard");
+        dojo.query(".card").removeClass("selectable unselectable selected");
         dojo.query(".nid-tab").removeClass("focus");
         dojo.query('.command-zone-container .cards-class').removeClass("selectable");
         dojo.removeClass("camp-container", "selectable");
         if(this._distinctionExplorerCards != null)
           this._distinctionExplorerModal.destroy();
+        if(this._discardModal != null)
+          this._discardModal.destroy();
 
         this.inherited(arguments);
       },
@@ -82,6 +84,7 @@ define([
       onUpdateActionButtons(){
         if(isDebug){
           this.addPrimaryActionButton('btnTest', 'Autobid', () => this.takeAction('autobid') );
+          this.addPrimaryActionButton('btnPass', 'Pass', () => this.takeAction('pass') );
         }
 
         this.inherited(arguments);

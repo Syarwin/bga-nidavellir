@@ -37,6 +37,7 @@ class Globals extends \APP_DbObject
     'transformValue' => 0,
     'currentDistinction' => 0,
     'sourceState' => 0,
+    'campVisited' => 0,
   ];
 
   public static function declare($game){
@@ -101,6 +102,11 @@ class Globals extends \APP_DbObject
     return (int) self::get('sourceState');
   }
 
+  public function wasCampVisited()
+  {
+    return self::get('campVisited') == 1;
+  }
+
 
   /*
    * Setters
@@ -125,6 +131,7 @@ class Globals extends \APP_DbObject
 
   public function incTavern()
   {
+    self::set('campVisited', 0);
     return self::inc('currentTavern', 1);
   }
 
@@ -164,4 +171,8 @@ class Globals extends \APP_DbObject
     self::set('sourceState', $state);
   }
 
+  public function visitCamp()
+  {
+    self::set('campVisited', 1);
+  }
 }

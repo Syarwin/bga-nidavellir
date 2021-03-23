@@ -13,4 +13,9 @@ class Svalinn extends ArtifactCard
     ];
     $this->grade = [ null ];
   }
+
+
+  public function updateScores(&$scores, $player){
+    $scores[ARTIFACT_SCORE] += 5 * $player->countHeroes();
+  }
 }

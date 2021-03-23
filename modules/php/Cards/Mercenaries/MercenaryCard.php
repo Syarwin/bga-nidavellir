@@ -15,6 +15,12 @@ class MercenaryCard extends \NID\Cards\AbstractCard
     $this->grade = [null];
   }
 
+  public function getUiData() {
+    $data = parent::getUiData();
+    $data['grades'] = $this->grades;
+    return $data;
+  }
+
   public function getAge(){ return $this->age; }
 
   public function getTooltip(){
@@ -36,6 +42,9 @@ class MercenaryCard extends \NID\Cards\AbstractCard
   }
 
   public function updateRanks(&$ranks){
+    if($this->zone != NEUTRAL){
+      $ranks[$this->zone]++;
+    }
   }
 
   public function updateBraveryValues(&$values, $player){

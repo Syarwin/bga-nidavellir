@@ -193,3 +193,16 @@
 #ebd-body[data-order-index="-1"] .panel-container .bids-zone .bids-zone-tavern-holder::before  {
   opacity:0;
 }
+
+
+.player-board .zolkur-zone {
+  position:absolute;
+  top:50px;
+  right:-20px;
+  z-index: 2;
+
+  .card {
+    transform: rotate(13deg) scale(0.5);
+    transform-origin: top right;
+  }
+}

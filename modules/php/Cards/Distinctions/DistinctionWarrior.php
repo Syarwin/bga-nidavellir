@@ -1,6 +1,7 @@
 <?php
 namespace NID\Cards\Distinctions;
 use NID\Game\Globals;
+use NID\Cards;
 
 
 class DistinctionWarrior extends DistinctionCard
@@ -15,8 +16,12 @@ class DistinctionWarrior extends DistinctionCard
   }
 
 
-  public function stateAfterRecruit(){
-    Globals::setTransformValue(5);
+  public function stateAfterRecruit($player){
+    $value = 5;
+    if(Cards::getJarikaOwner() == $player->getId())
+      $value += 2;
+
+    Globals::setTransformValue($value);
     return 'transform';
   }
 }

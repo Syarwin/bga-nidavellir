@@ -10,6 +10,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         ['tradeGems', 1500],
         ['distinctionGem', 1500],
         ['clearTavern', 1000],
+        ['clearCamp', 800],
         ['clearTurn', 1500],
       );
 
@@ -199,6 +200,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.gamedatas.tavern = -1;
       this.gamedatas.orderIndex = -1;
       this.udpateInfoCounters();
+    },
+
+
+    notif_clearCamp(n){
+      debug("Clearing camp cards left before age 2", n);
+      dojo.query('#camp .card').forEach(this.slideToRightAndDestroy);
     },
 
 

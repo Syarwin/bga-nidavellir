@@ -61,3 +61,8 @@ html {
   -o-transition: none !important;
   transition: none !important;
 }
+
+
+.action-button.bgabutton.bgabutton_blue.selected {
+  background-image:linear-gradient(#26a633, #85c13d) !important;
+}

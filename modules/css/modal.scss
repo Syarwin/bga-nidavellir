@@ -347,3 +347,31 @@
     }
   }
 }
+
+
+
+#popin_discard {
+  z-index: 2000;
+  padding: 10px 30px 10px 10px;
+  width: 760px;
+  background-image: url("img/background_distinctions.png");
+  background-size: 100% 100%;
+  //filter:drop-shadow(3px 3px 10px black);
+
+  .nidavellir_popin_closeicon {
+    right:-7px;
+  }
+
+ #popin_discard_contents {
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   min-height:420px;
+   flex-wrap: wrap;
+   padding:20px;
+
+   .card {
+     margin:10.5px;
+   }
+ }
+}

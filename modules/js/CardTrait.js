@@ -155,7 +155,9 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
 
-
+    /*********************************
+    ****** EXPLORER DISTINCTION ******
+    *********************************/
     onEnteringStateDistinctionExplorer(args){
       if(!this.isCurrentPlayerActive())
         return;
@@ -174,6 +176,30 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this._distinctionExplorerCards.forEach(card => this.addCard(card, 'popin_distinctionExplorer_contents'));
       this.makeCardSelectable(this._distinctionExplorerCards.map(card => card.id), this.onClickCardRecruit.bind(this));
       this._distinctionExplorerModal.show();
+    },
+
+
+    /********************
+    ****** ANDUMIA ******
+    ********************/
+    onEnteringStatePickDiscardAndumia(args){
+      if(!this.isCurrentPlayerActive())
+        return;
+
+      this._discardCards = args.cardsObj;
+      this.addPrimaryActionButton("btnShowDiscardCards", _("Show discard"), () => this.openDiscardModal() )
+      this.openDiscardModal();
+    },
+
+    openDiscardModal(){
+      this._discardModal = new customgame.modal("discard", {
+        class:"nidavellir_popin",
+        closeIcon:'fa-times',
+      });
+
+      this._discardCards.forEach(card => this.addCard(card, 'popin_discard_contents'));
+      this.makeCardSelectable(this._discardCards.map(card => card.id), this.onClickCardRecruit.bind(this));
+      this._discardModal.show();
     },
   });
 });

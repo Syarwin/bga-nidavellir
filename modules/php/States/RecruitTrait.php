@@ -8,6 +8,7 @@ use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
 use NID\Game\Stats;
+use NID\Game\Stack;
 
 trait RecruitTrait
 {
@@ -43,7 +44,8 @@ trait RecruitTrait
     ];
 
     // THINGVELLIR
-    if(Globals::getCurrentPlayerIndex() == 0){ // TODO : artefact machin truc
+    $player = Players::getActive();
+    if($player->canVisitCamp()){
       $data['cards'] = array_merge($data['cards'], Cards::getInCamp()->getIds() );
       $data['camp_title'] = clienttranslate(" / an artifact or a missionary at the Camp");
       $data['camp'] = true;
@@ -69,6 +71,8 @@ trait RecruitTrait
     $card = Cards::get($cardId);
     $player = Players::getActive();
     $player->recruit($card);
+    if($card->getLocation() == 'camp')
+      Globals::visitCamp();
 
     Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
@@ -79,7 +83,10 @@ trait RecruitTrait
     }
 
     if($card->getClass() == ROYAL_OFFER){
-      Globals::setTransformValue($card->getValue());
+      $value = $card->getValue();
+      if(Cards::getJarikaOwner() == $player->getId())
+        $value += 2;
+      Globals::setTransformValue($value);
       $this->gamestate->nextState("transform");
     } else {
       $this->nextStateAfterRecruit($card, $player);
@@ -90,18 +97,31 @@ trait RecruitTrait
 
   // $bypassCardState useful for Thrud
   public function nextStateAfterRecruit($card, $player, $bypassCardState = false){
-    $nextState = $bypassCardState? null : $card->stateAfterRecruit();
-    if($nextState != null)
-      $this->gamestate->nextState($nextState);
-    else {
+    // Card require a new state ?
+    $nextState = $bypassCardState? null : $card->stateAfterRecruit($player);
+
+    // Thrud has been moved away in command zone ?
+    if($nextState == null){
       $thrud = Cards::get(THRUD);
-      if($thrud->getPId() != null && $thrud->getZone() == NEUTRAL)
-        $this->gamestate->nextState('placeThrud');
-      else if($player->canRecruitHero())
-        $this->gamestate->nextState('hero');
-      else
-        $this->nextStateFromSource('recruitDone');
+      if($thrud->getPId() != null && $thrud->getZone() == NEUTRAL){
+//        $this->gamestate->changeActivePlayer($thrud->getPId());
+        $nextState = 'placeThrud';
+      }
     }
+
+    // Can recruit a hero ?
+    if($nextState == null && $player->canRecruitHero())
+      $nextState = 'hero';
+
+    Stack::nextState('recruitDone', $nextState);
+  }
+
+
+  public function argRecruitCamp()
+  {
+    return [
+      'cards' => Cards::getInCamp()->getIds(),
+    ];
   }
 
 
@@ -147,8 +167,8 @@ trait RecruitTrait
     Cards::discard($cardIds);
     Notifications::discardCards($player, $cards);
     Players::updateScores();
-    $nextState = $player->canRecruitHero()? 'hero' : 'trade';
-    $this->gamestate->nextState($nextState);
+    $newState = $player->canRecruitHero()? 'hero' : null;
+    Stack::nextState('discardDone', $newState);
   }
 
 
@@ -162,8 +182,16 @@ trait RecruitTrait
 
     // Move card
     $player = Players::getActive();
-    $card = $this->gamestate->state()['name'] == 'chooseThrudColumn'?
-      Cards::get(THRUD) : Cards::get(YLUD);
+    $cardAssoc = [
+      'chooseThrudColumn' => THRUD,
+      'chooseYludColumn' => YLUD,
+      'placeOlwynDouble' => OLWYN_DOUBLE1,
+    ];
+    $card = Cards::get($cardAssoc[$this->gamestate->state()['name']]);
+    if($card->getId() == OLWYN_DOUBLE1 && $card->getLocation() != "pending"){
+      $card = Cards::get(OLWYN_DOUBLE2);
+    }
+
 
     Cards::changeColumn($card, $player, $column);
     Players::updateScores();
@@ -178,5 +206,31 @@ trait RecruitTrait
   {
     $player = Players::getCurrent();
     $player->setAutoPick($mode);
+  }
+
+
+
+  /**********************
+  ****** ANDUMIA ********
+  **********************/
+  public function argPickDiscardAndumia()
+  {
+    $cards = Cards::getInLocation('discard');
+    return [
+      'cards' => $cards->getIds(), // Useful for auto check in recruit method
+      'cardsObj' => $cards->ui(),
+    ];
+  }
+
+
+  /********************
+  ******* OLWYN *******
+  ********************/
+  public function stPlaceOlwynDouble()
+  {
+    $double1 = Cards::get(OLWYN_DOUBLE1);
+    $double2 = Cards::get(OLWYN_DOUBLE2);
+    if($double1->getLocation() != "pending" && $double2->getLocation() != "pending")
+      $this->gamestate->nextState('finished');
   }
 }

@@ -208,6 +208,18 @@
           100% {border: 2px dashed white;}
         }
 
+        &.selectable-discard {
+          animation-name: borderBlink3;
+          animation-duration: 1s;
+          animation-iteration-count: infinite;
+        }
+
+        @keyframes borderBlink3 {
+          0% {border: 2px dashed red;}
+          49% {border: 2px dashed red;}
+          50% {border: 2px dashed white;}
+          100% {border: 2px dashed white;}
+        }
 
         .card {
           transition:left 1s;
@@ -233,6 +245,13 @@
         display:flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
+        min-height:145px;
+
+        .card {
+          transition:left 1s;
+          left:0px;
+        }
       }
     }
   }

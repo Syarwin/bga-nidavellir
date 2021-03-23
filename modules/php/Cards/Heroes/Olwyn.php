@@ -19,4 +19,8 @@ class Olwyn extends HeroCard
       9
     ];
   }
+
+  public function stateAfterRecruit($player){
+    return 'olwyn';
+  }
 }

@@ -8,6 +8,7 @@ define('ST_GAME_SETUP', 1);
 define('ST_START_OF_AGE', 3);
 define('ST_START_OF_TURN', 4);
 define('ST_END_OF_TURN', 5);
+define('ST_RESOLVE_STACK', 80);
 
 define('ST_BIDS', 10);
 
@@ -19,17 +20,28 @@ define('ST_RESOLVE_BIDS', 14);
 define('ST_NEXT_PLAYER', 20);
 define('ST_RECRUIT_DWARF', 21);
 define('ST_RECRUIT_HERO', 22);
+define('ST_RECRUIT_CAMP', 37);
 define('ST_CHOOSE_THRUD_COLUMN', 34);
 define('ST_DISCARD_TAVERN_CARD', 36);
+define('ST_ANDUMIA', 43);
+define('ST_OLWYN', 44);
+
 
 define('ST_TRADE_COIN', 23);
 define('ST_ULINE_TRADE_COIN', 33);
 
 define('ST_TRANSFORM_COIN', 24);
 define('ST_DISCARD_CARD', 25);
+define('ST_VIDOFNIR', 42);
 
 define('ST_PRE_END_OF_AGE', 29);
 define('ST_END_OF_AGE', 30);
+
+define('ST_START_MERCENARY_ENLISTMENT', 38);
+define('ST_NEXT_PLAYER_ENLIST', 39);
+define('ST_ENLIST_CHOOSE_ORDER', 41);
+define('ST_ENLIST_MERCENARY', 40);
+
 
 define('ST_CHOOSE_YLUD_COLUMN', 35);
 define('ST_NEXT_DISTINCTION', 31);
@@ -67,6 +79,11 @@ define('DISTINCTION', 8);
 define('MERCENARY', 9);
 define('ARTIFACT', 10);
 
+
+define('ZOLKUR_ZONE', 80);
+
+// Score
+define('ARTIFACT_SCORE', 6);
 define('EXTRA_SCORE', 7);
 
 

@@ -42,12 +42,12 @@ class action_nidavellir extends APP_GameAction
   ///////////////////////////////
   //////////// Bids  ////////////
   ///////////////////////////////
-  public function autobid()
-  {
-    self::setAjaxMode();
-    $this->game->actAutobid();
-    self::ajaxResponse();
-  }
+      public function autobid()
+      {
+        self::setAjaxMode();
+        $this->game->actAutobid();
+        self::ajaxResponse();
+      }
 
   public function playerBid()
   {
@@ -76,6 +76,13 @@ class action_nidavellir extends APP_GameAction
   ///////////////////////////////
   /////////// Recruit  //////////
   ///////////////////////////////
+      public function pass()
+      {
+        self::setAjaxMode();
+        $this->game->gamestate->nextState('recruitDone');
+        self::ajaxResponse();
+      }
+
   public function recruit()
   {
     self::setAjaxMode();
@@ -141,6 +148,41 @@ class action_nidavellir extends APP_GameAction
     self::setAjaxMode();
     $column = self::getArg("column", AT_posint, true);
     $this->game->actChooseColumn($column);
+    self::ajaxResponse();
+  }
+
+
+  //////////////////////////////////////////////
+  /////////// Thingvellir Mercenaries //////////
+  //////////////////////////////////////////////
+  public function chooseOrder()
+  {
+    self::setAjaxMode();
+    $position = self::getArg("position", AT_posint, true);
+    $this->game->actChooseOrder($position);
+    self::ajaxResponse();
+  }
+
+
+  public function enlist()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg("cardId", AT_posint, true);
+    $column = self::getArg("column", AT_posint, true);
+    $this->game->actEnlistMercenary($cardId, $column);
+    self::ajaxResponse();
+  }
+
+
+  ////////////////////////////////
+  /////////// Artifacts //////////
+  ////////////////////////////////
+  public function vidofnirUpgrade()
+  {
+    self::setAjaxMode();
+    $coinId = self::getArg("coinId", AT_posint, true);
+    $transform = self::getArg("transform", AT_posint, true);
+    $this->game->actVidofnirUpgrade($coinId, $transform);
     self::ajaxResponse();
   }
 }

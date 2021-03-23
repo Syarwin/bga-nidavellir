@@ -18,4 +18,8 @@ class Zolkur extends HeroCard
       10
     ];
   }
+
+  public function getRecruitementZone(){
+    return ZOLKUR_ZONE;
+  }
 }

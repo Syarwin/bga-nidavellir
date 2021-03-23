@@ -196,5 +196,69 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         coinIds: this._selectedCoinsForUlineTrade.join(';'),
       });
     },
+
+
+    /*######################
+    ####### VIDOFNIR #######
+    #######################*/
+    onEnteringStateVidofnirTransforms(args){
+      debug("estt");
+      if(this.isCurrentPlayerActive()){
+        this._selectedCoinForVidofnirTransform = null;
+        this._selectedTransformation = null;
+        this.makeCoinsSelectable(args.coins, this.onClickCoinVidofnirTransform.bind(this));
+        args.transformations.forEach(t => this.addPrimaryActionButton('btnVidofnir'+ t, "+" + t, () => this.onClickTransformationVidofnir(t) ) )
+      }
+    },
+
+    onClickCoinVidofnirTransform(coin){
+      if(this._selectedTransformation != null){
+        this._selectedCoinForVidofnirTransform = coin.id;
+        this.actVidofnirUpgrade();
+        return;
+      }
+
+      if(this._selectedCoinForVidofnirTransform == coin.id){
+        // Already selected => unselect it
+        dojo.removeClass("coin-" + coin.id, "selected");
+        this._selectedCoinForVidofnirTransform = null;
+      } else {
+        if(this._selectedCoinForVidofnirTransform != null)
+          dojo.removeClass('coin-' + this._selectedCoinForVidofnirTransform, "selected");
+
+        // Select it
+        dojo.addClass("coin-" + coin.id, "selected");
+        this._selectedCoinForVidofnirTransform = coin.id;
+      }
+    },
+
+
+    onClickTransformationVidofnir(transform){
+      if(this._selectedCoinForVidofnirTransform != null){
+        this._selectedTransformation = transform;
+        this.actVidofnirUpgrade();
+        return;
+      }
+
+      if(this._selectedTransformation == transform){
+        // Already selected => unselect it
+        dojo.removeClass("btnVidofnir" + transform, "selected");
+        this._selectedTransformation = null;
+      } else {
+        if(this._selectedTransformation != null)
+          dojo.removeClass('btnVidofnir' + this._selectedTransformation, "selected");
+
+        // Select it
+        dojo.addClass("btnVidofnir" + transform, "selected");
+        this._selectedTransformation = transform;
+      }
+    },
+
+    actVidofnirUpgrade(){
+      this.takeAction("vidofnirUpgrade", {
+        coinId: this._selectedCoinForVidofnirTransform,
+        transform: this._selectedTransformation,
+      });
+    },
   });
 });

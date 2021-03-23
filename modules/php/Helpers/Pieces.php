@@ -202,19 +202,24 @@ class Pieces extends DB_Manager {
   /**
    * Get specific piece by id
    */
-  public static function get($ids, $raiseExceptionIfNotEnough = true) {
+  public static function get($id, $raiseExceptionIfNotEnough = true) {
+    $result = self::getMany($id, $raiseExceptionIfNotEnough);
+    return $result->count() == 1? $result->first() : $result;
+  }
+
+  public static function getMany($ids, $raiseExceptionIfNotEnough = true){
     if(!is_array($ids))
       $ids = [$ids];
 
     self::checkIdArray($ids);
     if (empty($ids))
-        return [];
+        return new Collection([]);
 
-    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get();
+    $result = self::getSelectQuery()->whereIn(static::$prefix."id", $ids)->get(false);
     if (count($result) != count($ids) && $raiseExceptionIfNotEnough)
       throw new \feException("Class Pieces: getMany, some pieces have not been found !" . json_encode($ids));
 
-    return $result->count() == 1? $result->first() : $result;
+    return $result;
   }
 
 
@@ -349,7 +354,7 @@ class Pieces extends DB_Manager {
     $pieces = self::getTopOf($fromLocation, $nbr, false);
     $ids = $pieces->getIds();
     self::getUpdateQuery($ids, $toLocation, $state)->run();
-    $pieces = self::get($ids);
+    $pieces = self::getMany($ids);
 
     // No more pieces in deck & reshuffle is active => form another deck
     if (array_key_exists($fromLocation, static::$autoreshuffleCustom) && count($pieces) < $nbr && static::$autoreshuffle && $deckReform){

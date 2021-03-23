@@ -18,4 +18,8 @@ class Andumia extends HeroCard
       12
     ];
   }
+
+  public function stateAfterRecruit($player){
+    return 'andumia';
+  }
 }

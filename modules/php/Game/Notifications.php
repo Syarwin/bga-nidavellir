@@ -102,6 +102,16 @@ class Notifications
   }
 
 
+  public static function ZolkurEffect($player, $card){
+    self::notifyAll('recruit', clienttranslate('Zolkur\'s effect allows ${player_name} to trade its lower coin'), [
+      'player' => $player,
+      'card'  => $card,
+    ]);
+  }
+
+
+
+
   public static function tradeGems($bid, $bidders, $trades){
     $msgs = [
       '', '',
@@ -174,6 +184,10 @@ class Notifications
     self::notifyAll('clearTavern', '', [
       'tavern' => $tavern,
     ]);
+  }
+
+  public static function clearCamp(){
+    self::notifyAll('clearCamp', '', []);
   }
 
   public static function clearTurn(){
@@ -253,6 +267,30 @@ class Notifications
       'ranks' => $ranks,
     ]);
   }
+
+
+
+  /**********************
+  ***** THINGVELLIR *****
+  **********************/
+  public static function newEnlistOrder($order){
+    $msg = [
+      '', '', '',
+      clienttranslate('Enlisting of mercenaries will take place in following order : ${player_name1} then ${player_name2}'),
+      clienttranslate('Enlisting of mercenaries will take place in following order : ${player_name1}, ${player_name2} then ${player_name3}'),
+      clienttranslate('Enlisting of mercenaries will take place in following order : ${player_name1}, ${player_name2}, ${player_name3} then ${player_name4}'),
+      clienttranslate('Enlisting of mercenaries will take place in following order : ${player_name1}, ${player_name2}, ${player_name3}, ${player_name4} then ${player_name5}'),
+    ];
+    $data = [
+      'order' => $order,
+    ];
+    $players = Players::getAll();
+    foreach($order as $i => $pId)
+      $data['player_name' . ($i + 1)] = $players[$pId]->getName();
+
+    self::notifyAll('enlistOrder', $msg[count($order)], $data);
+  }
+
 
 
   /*

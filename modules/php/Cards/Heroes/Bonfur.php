@@ -25,7 +25,7 @@ class Bonfur extends HeroCard
     return count($stacks) >= 1 + (in_array(BLACKSMITH, $stacks)? 1 : 0);
   }
 
-  public function stateAfterRecruit(){
+  public function stateAfterRecruit($player){
     return 'discard';
   }
 

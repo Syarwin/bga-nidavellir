@@ -1,6 +1,7 @@
 <?php
 namespace NID\Cards\Heroes;
 use \NID\Game\Globals;
+use \NID\Cards;
 
 class Grid extends HeroCard
 {
@@ -19,8 +20,12 @@ class Grid extends HeroCard
     ];
   }
 
-  public function stateAfterRecruit(){
-    Globals::setTransformValue(7);
+  public function stateAfterRecruit($player){
+    $value = 7;
+    if(Cards::getJarikaOwner() == $player->getId())
+      $value += 2;
+
+    Globals::setTransformValue($value);
     return 'transform';
   }
 }

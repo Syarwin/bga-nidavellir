@@ -7,7 +7,7 @@ class Ylud extends HeroCard
     parent::__construct($row);
     $this->id = YLUD;
     $this->name = 'Ylud';
-    $this->subname = clienttranslate("The Unpredicatble");
+    $this->subname = clienttranslate("The Unpredictable");
     $this->tooltip = [
       clienttranslate("Place it in your Command Zone."),
       clienttranslate("Just before the resolution of the last Tavern of an age, place/move Ylud to a column of your choice, and consider Ylud as a dwarf of this class."),

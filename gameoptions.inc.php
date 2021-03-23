@@ -48,12 +48,14 @@ $game_options = [
         'name' => totranslate("None"),
         'description' => totranslate("Only the base game"),
       ],
+      /*
       THINGVELLIR => [
         'name' => totranslate("Thingvellir"),
         'tmdisplay' => totranslate("Thingvellir"),
         'description' => totranslate("Thingvellir expansion"),
         'nobeginner' => true,
       ]
+      */
     ],
     "default" => NONE,
   ]

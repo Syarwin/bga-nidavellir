@@ -13,4 +13,9 @@ class Draupnir extends ArtifactCard
     ];
     $this->grade = [ null ];
   }
+
+  public function updateScores(&$scores, $player){
+    $coins = $player->getCoins()->filter(function($coin){ return $coin['value'] >= 15; });
+    $scores[ARTIFACT_SCORE] += 6 * count($coins);
+  }
 }

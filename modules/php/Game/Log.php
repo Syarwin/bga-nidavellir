@@ -61,6 +61,12 @@ class Log extends \NID\Helpers\DB_Manager
   }
 
 
+  public static function storeEnlistOrder($order)
+  {
+    self::insert(null, "enlistOrder", [ 'order' => $order ]);
+  }
+
+
 /////////////////////////////////
 /////////////////////////////////
 //////////   Getters   //////////
@@ -86,6 +92,11 @@ class Log extends \NID\Helpers\DB_Manager
   public static function getTurnOrder()
   {
     return self::getLastActionArg('turnOrder', -1)['order'];
+  }
+
+  public static function getEnlistOrder()
+  {
+    return self::getLastActionArg('enlistOrder', -1)['order'];
   }
 
   public static function getTies()

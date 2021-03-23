@@ -157,6 +157,8 @@ class Cards extends Helpers\Pieces
     KHRAD => 'Khrad',
     JARIKA => 'Jarika',
     OLWYN => 'Olwyn',
+    OLWYN_DOUBLE1 => 'OlwynDouble1',
+    OLWYN_DOUBLE2 => 'OlwynDouble2',
     ZOLKUR => 'Zolkur'
   ];
 
@@ -171,6 +173,9 @@ class Cards extends Helpers\Pieces
   {
     $values = [];
     foreach(self::$heroes as $hId => $class){
+      if(in_array($hId, [OLWYN_DOUBLE1, OLWYN_DOUBLE2]))
+        continue;
+
       $hero = self::getHero($hId);
       $values[] = [
         $hId,
@@ -180,8 +185,9 @@ class Cards extends Helpers\Pieces
       ];
     }
 
-    $values[] = [OLWYN_DOUBLE1, 'pending', HERO, json_encode(null)];
-    $values[] = [OLWYN_DOUBLE2, 'pending', HERO, json_encode(null)];
+    // Adding Olwyn's doubles in a hidden location
+    $values[] = [OLWYN_DOUBLE1, 'pending', HERO, null];
+    $values[] = [OLWYN_DOUBLE2, 'pending', HERO, null];
 
 
     self::DB()->multipleInsert(['card_id', 'card_location', 'class', 'grade'])->values($values);
@@ -191,24 +197,19 @@ class Cards extends Helpers\Pieces
 
   public function getOwner($cardId)
   {
-    return self::get($cardId)->getPID();
+    try {
+      return self::get($cardId)->getPID();
+    } catch(\feException $e){
+      return null;
+    }
   }
 
-  public function getUlineOwner()
-  {
-    return self::getOwner(ULINE);
-  }
-
-  public function getYludOwner()
-  {
-    return self::getOwner(YLUD);
-  }
-
-  public function getThrudOwner()
-  {
-    return self::getOwner(THRUD);
-  }
-
+  public function getUlineOwner() {  return self::getOwner(ULINE); }
+  public function getYludOwner() { return self::getOwner(YLUD); }
+  public function getThrudOwner() { return self::getOwner(THRUD); }
+  public function getJarikaOwner() { return self::getOwner(JARIKA); }
+  public function getFafnirOwner() { return self::getOwner(FAFNIR); }
+  public function getMegingjordOwner() { return self::getOwner(MEGINGJORD); }
 
 
   /*********************
@@ -376,9 +377,9 @@ class Cards extends Helpers\Pieces
   }
 
 
-  public static function getOfPlayer($pId)
+  public static function getOfPlayer($pId, $zone = '%')
   {
-    return self::getInLocation(['command-zone', $pId, '%'], null, ['card_state', 'ASC']);
+    return self::getInLocation(['command-zone', $pId, $zone], null, ['card_state', 'ASC']);
   }
 
 
@@ -402,6 +403,12 @@ class Cards extends Helpers\Pieces
   }
 
 
+  public static function clearCamp()
+  {
+    self::moveAllInLocation('camp', 'discard_camp');
+  }
+
+
   public static function getTopOfStacks($pId, $stacks)
   {
     $cards = [];
@@ -413,8 +420,9 @@ class Cards extends Helpers\Pieces
     return $cards;
   }
 
-  public static function discard($cardIds)
+  public static function discard($cardIds, $putInTheBox = false)
   {
-    self::move($cardIds, "discard");
+    // $putInTheBox is useful for cards that shouldn't be selectable by Anduma
+    self::move($cardIds, $putInTheBox? "box" : "discard");
   }
 }

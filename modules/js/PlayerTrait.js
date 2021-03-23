@@ -20,6 +20,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
         this.place('jstpl_playerPanel', player, "overall_player_board_" + player.id);
         dojo.attr('overall_player_board_' + player.id, "data-color", player.color);
+        // Zolkur zone
+        this.place('jstpl_ZolkurZone', player, "overall_player_board_" + player.id);
 
         // Gem
         this.place("jstpl_gemContainer", player, "player_board_" + player.id);
@@ -31,6 +33,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         // Board
         this.place('jstpl_playerBoard', player, "player-boards");
         Object.values(player.cards).forEach(card => this.addCard(card, card.location) );
+
       });
 
       this.setupPlayersScores();
@@ -45,10 +48,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this._overviewCounters[player.id] = {};
 
         for(var i = 0; i < 8; i++){
-          if(i < 6) {
+          if(i <= 6) {
             this._scoresCounters[player.id][i] = new ebg.counter();
             this._scoresCounters[player.id][i].create('command-zone-score_' + player.id + '_' + i);
+          }
 
+          if(i < 6){
             this._ranksCounters[player.id][i] = new ebg.counter();
             this._ranksCounters[player.id][i].create('command-zone-ranks_' + player.id + '_' + i);
           }
@@ -65,8 +70,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     updatePlayersScores(){
       this.forEachPlayer(player => {
         for(var i = 0; i < 8; i++){
-          if(i < 6){
+          if(i <= 6){
             this._scoresCounters[player.id][i].toValue(player.scores[i]);
+          }
+          if(i < 6){
             this._ranksCounters[player.id][i].toValue(player.ranks[i]);
           }
 

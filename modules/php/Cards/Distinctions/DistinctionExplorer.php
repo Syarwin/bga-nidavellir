@@ -16,12 +16,12 @@ class DistinctionExplorer extends DistinctionCard
 
   public function applyTieEffect(){
     $card = Cards::getTopOf(['age', 2], 1);
-    Cards::discard([$card->getId()]);
+    Cards::discard([$card->getId()], true);
     Notifications::discardCardExplorerDistinction($card);
   }
 
 
-  public function stateAfterRecruit(){
+  public function stateAfterRecruit($player){
     return 'explorer';
   }
 }

@@ -24,6 +24,8 @@ abstract class HeroCard extends \NID\Cards\AbstractCard
       || ($this->expansion && $options[OPTION_SETUP] == THINGVELLIR);
   }
 
+  public function isDiscardable() { return false; }
+
   public function getUiData() {
     $data = parent::getUiData();
     $data['subname'] = $this->subname;

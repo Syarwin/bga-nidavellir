@@ -5,26 +5,32 @@ use NID\Cards;
 use NID\Game\Players;
 use NID\Game\Globals;
 use NID\Game\Notifications;
+use NID\Game\Stack;
 
 trait AgeTrait
 {
   public function stStartOfAge()
   {
     Globals::startNewAge();
+
+    if(Globals::getAge() == 2){
+      Cards::clearCamp();
+      Notifications::clearCamp();
+    }
+
     $this->gamestate->nextState('turn');
   }
 
   public function stPreEndOfAge()
   {
-    $this->saveCurrentStateAsSource();
-
     $pId = Cards::getYludOwner();
+    $newState = null;
     if($pId != null){
       $this->gamestate->changeActivePlayer($pId);
-      $this->gamestate->nextState('placeYlud');
+      $newState = 'placeYlud';
     }
-    else
-      $this->gamestate->nextState('end');
+
+    Stack::nextState('end', $newState);
   }
 
   public function stEndOfAge()
@@ -59,10 +65,9 @@ trait AgeTrait
   public function stNextDistinction()
   {
     // Proceed next distinction
-    $this->saveCurrentStateAsSource();
     $distinction = Cards::getDistinctionCard(Globals::nextDistinction());
     if(is_null($distinction)){
-      Cards::shuffle(['age', 2]); // After explorer distinction
+      Cards::shuffle(['age', 2]); // After explorer distinction and before age 2, shuffle deck
       $this->gamestate->nextState('done');
       return;
     }
@@ -74,7 +79,7 @@ trait AgeTrait
     if(count($maxRank) > 1){
       Notifications::distinctionTie($distinction, $maxRank);
       $distinction->applyTieEffect();
-      Cards::discard([$distinction->getId()]);
+      Cards::discard([$distinction->getId()], true);
       $this->gamestate->nextState('next');
     }
     else {

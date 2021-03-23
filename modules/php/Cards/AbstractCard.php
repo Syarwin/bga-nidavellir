@@ -41,6 +41,7 @@ class AbstractCard
   public function getPId(){ return $this->pId; }
   public function getClass(){ return $this->class; }
   public function getRanks(){ return is_array($this->grade)? count($this->grade) : 0; }
+  public function getLocation(){ return $this->location; }
   public function getBV(){
     //var_dump($this->grade);
     return is_array($this->grade)?
@@ -48,6 +49,7 @@ class AbstractCard
       : 0;
   }
   public function getZone(){ return $this->zone; }
+  public function isDiscardable() { return true; }
 
   public function applyEffect($player){}
 
@@ -87,7 +89,7 @@ class AbstractCard
   public function updateScores(&$scores, $player){}
 
 
-  public function stateAfterRecruit(){
+  public function stateAfterRecruit($player){
     return null;
   }
 
@@ -101,6 +103,7 @@ class AbstractCard
       ROYAL_OFFER => clienttranslate('a royal offering'),
       HERO => clienttranslate('a hero'),
       MERCENARY => clienttranslate('a mercenary'),
+      ARTIFACT => clienttranslate('an artifact'),
     ];
 
     return $recruitNames[$this->getClass()];

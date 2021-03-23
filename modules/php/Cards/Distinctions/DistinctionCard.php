@@ -17,6 +17,8 @@ abstract class DistinctionCard extends \NID\Cards\AbstractCard
     ];
   }
 
+  public function isDiscardable() { return false; }
+
 
   public function getUiData() {
     $data = parent::getUiData();

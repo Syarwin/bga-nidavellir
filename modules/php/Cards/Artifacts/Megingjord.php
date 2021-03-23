@@ -14,4 +14,8 @@ class Megingjord extends ArtifactCard
     ];
     $this->grade = [ 28 ];
   }
+
+  public function updateScores(&$scores, $player){
+    $scores[ARTIFACT_SCORE] += 28;
+  }
 }
