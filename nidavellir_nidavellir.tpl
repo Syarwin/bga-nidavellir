@@ -7,6 +7,7 @@
         <div class="nid-tab" id="tab-heroes"></div>
         <div class="nid-tab" id="tab-distinctions"></div>
         <div class="nid-tab" id="tab-score">{SCORE}</div>
+        <div class="nid-tab" id="tab-discard">{DISCARD}</div>
       </div>
 
       <div id="treasure-container">
@@ -156,6 +157,7 @@ var jstpl_playerBoard = `
   <div class="enlist-mercenaries" id="enlist-\${id}"></div>
 
   <div class="command-zone-container">
+    <div class="hero-line" id="hero-line-\${id}" data-n="\${line}"></div>
     <div class="cards-class-header card-class_0">
       <div class="card-class-ranks">
         <div class="rank"></div>

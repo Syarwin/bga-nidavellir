@@ -98,6 +98,7 @@ class Notifications
     self::notifyAll($type, clienttranslate('${player_name} recruits ${card_class}${card_class_symbol}'), [
       'player' => $player,
       'card'  => $card,
+      'line' => $player->getHeroLine(),
     ]);
   }
 
@@ -268,11 +269,14 @@ class Notifications
 
 
   public static function changeColumn($player, $card, $silent){
-    $msg = $silent? '' : (
-      $card->getId() == THRUD?
-        clienttranslate('${player_name} moves Thrud')
-        : clienttranslate('${player_name} moves Ylud')
-    );
+    $msg = [
+      THRUD => clienttranslate('${player_name} moves Thrud'),
+      YLUD => clienttranslate('${player_name} moves Ylud'),
+      OLWYN_DOUBLE1 => clienttranslate('${player_name} places first Olwyn\'s double'),
+      OLWYN_DOUBLE2 => clienttranslate('${player_name} places second Olwyn\'s double'),
+    ];
+
+    $msg = $silent? '' : $msg[$card->getId()];
     self::notifyAll('recruit', $msg, [
       'player' => $player,
       'card'  => $card,

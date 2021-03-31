@@ -1,7 +1,7 @@
 #tabs-container {
   width:200px;
   margin-right: 100px;
-  height:400px;
+  height:auto;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -54,7 +54,7 @@
     &#tab-camp { display:none; }
     &#tab-heroes { background-position-y:calc(100% / 3); }
     &#tab-distinctions { background-position-y:calc(2 * 100% / 3); }
-    &#tab-score {
+    &#tab-score, &#tab-discard {
       background-position-y: 100%;
       text-transform: capitalize;
       font-size: 30px;
@@ -63,6 +63,11 @@
       line-height: 113px;
       text-indent: 53px;
       text-shadow: 0px 0px 19px white;
+    }
+    &#tab-discard {
+      background-position-y:0%;
+      line-height: 102px;
+      text-indent: 34px;
     }
   }
 }

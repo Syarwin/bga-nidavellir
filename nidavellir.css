@@ -161,6 +161,8 @@ html {
     background-position-x: 90.9090909091%; }
   .card[data-class="6"] .card-grade {
     display: none; }
+  .card[data-class="6"][data-offer="5"]::before {
+    background-position-x: 100%; }
   .card[data-class="7"]::before {
     background-image: url("img/heroes.jpg");
     background-size: 500% 600%; }
@@ -350,9 +352,6 @@ html {
     background-position-y: 100%; }
   .card[data-class="10"] .card-grade {
     display: none; }
-
-#ebd-body[data-age="2"] .card[data-class="6"]::before {
-  background-position-x: 100%; }
 
 #nidavellir-board {
   display: flex;
@@ -853,7 +852,7 @@ html {
       #nidavellir-board #exterior-wrapper #exterior #tabs-container {
         width: 200px;
         margin-right: 100px;
-        height: 400px;
+        height: auto;
         display: flex;
         flex-flow: column;
         justify-content: center;
@@ -894,7 +893,7 @@ html {
             background-position-y: calc(100% / 3); }
           #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-distinctions {
             background-position-y: calc(2 * 100% / 3); }
-          #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-score {
+          #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-score, #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-discard {
             background-position-y: 100%;
             text-transform: capitalize;
             font-size: 30px;
@@ -903,6 +902,10 @@ html {
             line-height: 113px;
             text-indent: 53px;
             text-shadow: 0px 0px 19px white; }
+          #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-discard {
+            background-position-y: 0%;
+            line-height: 102px;
+            text-indent: 34px; }
       @media (max-width: 1650px) {
         #nidavellir-board #exterior-wrapper #exterior #taverns-container {
           order: 1;
@@ -1036,7 +1039,39 @@ html {
         grid-template-columns: repeat(6, auto);
         margin-top: 40px;
         grid-gap: 5px;
-        width: 100%; }
+        width: 100%;
+        position: relative; }
+        #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line {
+          position: absolute;
+          width: 665px;
+          height: 0px;
+          z-index: 10;
+          left: 119px;
+          border-top: 1px dashed rgba(0, 0, 0, 0.4); }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="0"] {
+            top: 39px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="1"] {
+            top: 62.284px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="2"] {
+            top: 85.568px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="3"] {
+            top: 108.852px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="4"] {
+            top: 132.136px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="5"] {
+            top: 155.42px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="6"] {
+            top: 178.704px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="7"] {
+            top: 201.988px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="8"] {
+            top: 225.272px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="9"] {
+            top: 248.556px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="10"] {
+            top: 271.84px; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .hero-line[data-n="-1"] {
+            display: none; }
         #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header {
           width: 90%;
           display: flex;
@@ -2565,18 +2600,18 @@ html {
           width: 140px;
           height: 140px;
           background-image: url("img/classes.png");
-          background-size: 100% 600%;
+          background-size: 100% 800%;
           flex-shrink: 0; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="1"] .helper-classes-symbol {
-          background-position-y: 20%; }
+          background-position-y: 14.2857142857%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="2"] .helper-classes-symbol {
-          background-position-y: 40%; }
+          background-position-y: 28.5714285714%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="3"] .helper-classes-symbol {
-          background-position-y: 60%; }
+          background-position-y: 42.8571428571%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="4"] .helper-classes-symbol {
-          background-position-y: 80%; }
+          background-position-y: 57.1428571429%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="5"] .helper-classes-symbol {
-          background-position-y: 100%; }
+          background-position-y: 71.4285714286%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="1"] h2 {
           color: #554696; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="2"] h2 {
@@ -2592,6 +2627,7 @@ html {
   z-index: 2000;
   padding: 10px 30px 10px 10px;
   width: 760px;
+  min-height: 500px;
   background-image: url("img/background_distinctions.png");
   background-size: 100% 100%; }
   #popin_discard .nidavellir_popin_closeicon {

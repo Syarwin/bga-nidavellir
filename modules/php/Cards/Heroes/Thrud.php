@@ -20,7 +20,9 @@ class Thrud extends HeroCard
     ];
   }
 
-  public function updateRanks(&$ranks){
-    $ranks[$this->zone] += $this->getRanks();
+  public function updateRanks(&$ranks, $ThrudIncluded){
+    if($ThrudIncluded){
+      $ranks[$this->zone] += $this->getRanks();
+    }
   }
 }

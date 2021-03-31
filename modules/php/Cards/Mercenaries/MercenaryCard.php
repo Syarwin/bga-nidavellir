@@ -41,12 +41,15 @@ class MercenaryCard extends \NID\Cards\AbstractCard
     return MERCENARY;
   }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks,$uselessExceptThrud){
     if($this->zone != NEUTRAL){
       $ranks[$this->zone]++;
     }
   }
 
   public function updateBraveryValues(&$values, $player){
+    if($this->zone != NEUTRAL){
+      $values[$this->zone] += $this->grades[$this->zone];
+    }
   }
 }

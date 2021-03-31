@@ -70,6 +70,7 @@ class Player extends \NID\Helpers\DB_Manager
       'scores'    => $this->getScores(),
       'ranks'     => $this->getRanks(),
       'autopick'  => $this->autopick,
+      'line'      => $this->getHeroLine(),
     ];
   }
 
@@ -167,12 +168,17 @@ class Player extends \NID\Helpers\DB_Manager
     return count($this->getHeroes());
   }
 
+  public function getHeroLine()
+  {
+    return Cards::getMegingjordOwner() == $this->id ? -1 : ($this->countHeroes() + 1);
+  }
 
-  public function getRanks()
+
+  public function getRanks($ThrudIncluded = false)
   {
     $ranks = [0, 0, 0, 0, 0, 0];
     foreach($this->getCards() as $card){
-      $card->updateRanks($ranks);
+      $card->updateRanks($ranks, $ThrudIncluded);
     }
 
     return $ranks;
@@ -192,7 +198,7 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function countLines()
   {
-    $ranks = $this->getRanks();
+    $ranks = $this->getRanks(true);
     $ranks[NEUTRAL] = 100; // Neutral does not count in lines
 
     return min($ranks);

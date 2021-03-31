@@ -25,7 +25,7 @@ class ArtifactCard extends \NID\Cards\AbstractCard
     return ARTIFACT;
   }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks,$uselessExceptThrud){
   }
 
   public function updateBraveryValues(&$values, $player){

@@ -15,6 +15,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       this.setupHall();
       this.setupDistinctions();
+      this.setupDiscard();
       if(this.gamedatas.expansion)
         this.setupCamp();
       dojo.place("<div id='card-overlay'></div>", "ebd-body");
@@ -69,6 +70,25 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     },
 
 
+    setupDiscard(){
+      this._discardDialog = new customgame.modal("discard", {
+        class:"nidavellir_popin",
+        closeIcon:'fa-times',
+        openAnimation:true,
+        openAnimationTarget:"tab-discard",
+        closeAction:'hide',
+        statusElt:"tab-discard",
+        verticalAlign:'flex-start',
+      });
+
+      this.gamedatas.cards.discard.forEach(card => this.addCard(card, 'popin_discard_contents'));
+      dojo.connect($('tab-discard'), 'click', () => this.openDiscardModal() );
+    },
+
+    openDiscardModal(){
+      this._discardDialog.show();
+    },
+
     setupCamp(){
       this.gamedatas.cards.camp.forEach(card => this.addCard(card, card.location));
     },
@@ -81,10 +101,13 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       card.subtitle = card.subname? _(card.subname) : '';
       card.desc = card.tooltip? card.tooltip.map(o => _(o)).join('<br />') : '';
       card.gradeHtml = card.grade.map(r => this.getRankHtml(r)).join('');
-
       this.place('jstpl_card', card, container);
       dojo.connect($("card-" + card.id), "click", () => this.onClickCard(card) );
       this.addTooltipHtml('card-' + card.id, this.format_block('jstpl_cardTooltip', card));
+
+      if(card.class == 6){ // ROYAL OFFERING
+        dojo.attr('card-' + card.id, "data-offer", card.grade[0]);
+      }
 
       if(animation)
         this.slideFromLeft('card-' + card.id);
@@ -127,12 +150,25 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       dojo.style(elem, "left", "0px")
     },
 
-    slideToRightAndDestroy(elem){
+    slideToRightAndDestroy(elem, toDiscard = true){
       elem = typeof elem == 'string'? $(elem) : elem;
       let stack = elem.parentNode;
       let x = (stack.offsetWidth - elem.offsetLeft + 100);
       dojo.style(elem, "left", x + "px");
-      setTimeout(() => dojo.destroy(elem), 1000);
+      setTimeout(() => {
+        if(toDiscard) {
+          dojo.place(elem, 'popin_discard_contents');
+          dojo.style(elem, "left", "0px");
+        }
+        else
+          dojo.destroy(elem)
+      }, 1000);
+    },
+
+    slideToDiscard(id){
+      this.slide('card-' + id, 'tab-discard', {
+        duration:1000,
+      }).then(() => dojo.place('card-' + id, 'popin_discard_contents') );
     },
 
 
@@ -142,16 +178,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(!$('card-' + n.args.card.id)){ // Special case of explorer distinction
         this.addCard(n.args.card, "tab-distinctions");
       }
-      this.slide('card-' + n.args.card.id, 'page-title', {
-        duration:1000,
-        destroy:true,
-      });
 
+      this.slideToDiscard(n.args.card.id);
       if(n.args.card2){
-        this.slide('card-' + n.args.card2.id, 'page-title', {
-          duration:1000,
-          destroy:true,
-        });
+        this.slideToDiscard(n.args.card2.id);
       }
     },
 
@@ -159,10 +189,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     notif_discardHofud(n){
       debug("Notif: discarding card for Hofud", n);
 
-      this.slide('card-' + n.args.card.id, 'page-title', {
-        duration:1000,
-        destroy:true,
-      });
+      this.slideToDiscard(n.args.card.id);
 
       if(this.player_id == n.args.player_id){
         n.args.warriors.forEach(cardId => this.slide('card-' + cardId, 'command-zone_' + this.player_id+ '_5'));
@@ -201,8 +228,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(!this.isCurrentPlayerActive())
         return;
 
-      this._discardCards = args.cardsObj;
-      this.addPrimaryActionButton("btnShowDiscardCards", _("Show discard"), () => this.openDiscardModal() )
+      this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
       this.openDiscardModal();
     },
 
@@ -211,21 +237,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       if(!this.isCurrentPlayerActive())
         return;
 
-      this._discardCards = args.cardsObj;
-      this.addPrimaryActionButton("btnShowDiscardCards", _("Show discard"), () => this.openDiscardModal() )
+      this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
       this.openDiscardModal();
-    },
-
-    openDiscardModal(){
-      this._discardModal = new customgame.modal("discard", {
-        class:"nidavellir_popin",
-        closeIcon:'fa-times',
-        verticalAlign:'flex-start',
-      });
-
-      this._discardCards.forEach(card => this.addCard(card, 'popin_discard_contents'));
-      this.makeCardSelectable(this._discardCards.map(card => card.id), this.onClickCardRecruit.bind(this));
-      this._discardModal.show();
     },
   });
 });

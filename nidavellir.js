@@ -66,6 +66,12 @@ define([
 
 
       clearPossible(){
+        this._selectableCards = [];
+        this._callbackOnCard = null;
+        this._discardCards = [];
+        this._selectableCoins = [];
+        this._callbackOnCoin = null;
+
         dojo.query('.coin').removeClass('selected selectable');
         dojo.query(".tavern-coin-holder").removeClass("selectable");
         dojo.query(".tavern-cards-holder").removeClass("selectable selectable-discard");
@@ -75,8 +81,8 @@ define([
         dojo.removeClass("camp-container", "selectable");
         if(this._distinctionExplorerCards != null)
           this._distinctionExplorerModal.destroy();
-        if(this._discardModal != null)
-          this._discardModal.destroy();
+        if(this._discardDialog != null)
+          this._discardDialog.hide();
 
         this.inherited(arguments);
       },

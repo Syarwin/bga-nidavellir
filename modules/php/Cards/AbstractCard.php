@@ -78,7 +78,7 @@ class AbstractCard
     return $this->class;
   }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks, $uselessExceptThrud){
     $ranks[$this->class] += $this->getRanks();
   }
 
@@ -111,5 +111,9 @@ class AbstractCard
 
   public function getNotifSymbol(){
     return $this->getRecruitementZone();
+  }
+
+  public function getPriority(){
+    return (int) (0 + $this->grade[0]);
   }
 }

@@ -86,6 +86,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
           this.addCard(card, 'tab-distinctions');
         this.slide('card-' + card.id, card.location)
       }
+      dojo.attr('hero-line-' + n.args.player_id, 'data-n', n.args.line);
     },
 
 
@@ -106,6 +107,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       setTimeout(() => {
         dojo.removeClass("card-overlay", "active");
         this.slide('card-' + card.id, card.location);
+        dojo.attr('hero-line-' + n.args.player_id, 'data-n', n.args.line);
       }, 1500);
     },
 
@@ -199,12 +201,13 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     onEnteringStatePlaceOlwynDouble(args){
       if(this.isCurrentPlayerActive())
-        this.makeColumnsSelectable('olwyn');
+        this.makeColumnsSelectable('olwyn', args.columns);
     },
 
 
-    makeColumnsSelectable(hero){
-      [1,2,3,4,5].forEach(col => {
+    makeColumnsSelectable(hero, columns = 0){
+      columns = columns || [1,2,3,4,5];
+      columns.forEach(col => {
         dojo.addClass('command-zone_' + this.player_id + '_' + col, "selectable");
         this.connect($('command-zone_' + this.player_id + '_' + col), 'click', () => {
           this.takeAction('chooseColumn', {
@@ -245,7 +248,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
       this._selectedMercenary = null;
       args.cards.forEach(cardId => {
-        if($('card-' + cardId).parentNode != 'enlist-' + this.player_id)
+        if($('card-' + cardId).parentNode.id != 'enlist-' + this.player_id)
           this.slide('card-' + cardId, 'enlist-' + this.player_id)
       });
       this.makeCardSelectable(args.cards, this.onClickCardEnlist.bind(this) );

@@ -178,6 +178,26 @@
         margin-top: 40px;
         grid-gap: 5px;
         width:100%;
+        position:relative;
+
+
+        .hero-line {
+          position: absolute;
+          width: 665px;
+          height: 0px;
+          z-index: 10;
+          left: 119px;
+          border-top:1px dashed rgba(0, 0, 0, 0.4);
+
+          @for $i from 0 through 10 {
+            &[data-n="#{$i}"] {
+              top: 39px + $i * 23.284px;
+            }
+          }
+          &[data-n="-1"] {
+            display:none;
+          }
+        }
 
         .cards-class-header {
           width:90%;

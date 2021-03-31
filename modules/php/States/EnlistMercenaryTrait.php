@@ -63,9 +63,14 @@ trait EnlistMercenaryTrait
     $pId = $order[$index] ?? null;
 
     if($index == 0){
-      $this->gamestate->changeActivePlayer($pId);
-      self::giveExtraTime($pId);
-      $this->gamestate->nextState("chooseOrder");
+      $player = Players::get($pId);
+      if($player->countUnplacedMercenaries() > 0){
+        $this->gamestate->changeActivePlayer($pId);
+        self::giveExtraTime($pId);
+        $this->gamestate->nextState("chooseOrder");
+      } else {
+        $this->gamestate->nextState("end");
+      }
       return;
     }
 

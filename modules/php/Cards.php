@@ -38,6 +38,7 @@ class Cards extends Helpers\Pieces
       'hall' => self::getInLocation('hall')->ui(),
       'evaluation' => self::getInLocation('evaluation')->ui(),
       'camp' => self::getInLocation('camp')->ui(),
+      'discard' => self::getInLocation('discard')->ui(),
     ];
   }
 

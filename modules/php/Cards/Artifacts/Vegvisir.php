@@ -19,7 +19,7 @@ class Vegvisir extends ArtifactCard
     return EXPLORER;
   }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks,$uselessExceptThrud){
     $ranks[EXPLORER]++;
   }
 

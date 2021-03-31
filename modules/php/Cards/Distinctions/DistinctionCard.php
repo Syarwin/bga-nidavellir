@@ -27,7 +27,7 @@ abstract class DistinctionCard extends \NID\Cards\AbstractCard
     return $data;
   }
 
-  public function updateRanks(&$ranks){}
+  public function updateRanks(&$ranks,$uselessExceptThrud){}
 
   public function updateBraveryValues(&$values, $player){}
 

@@ -15,7 +15,7 @@ class OlwynDouble2 extends HeroCard
 
   public function isDiscardable() { return true; }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks,$uselessExceptThrud){
     $ranks[$this->zone]++;
   }
 }

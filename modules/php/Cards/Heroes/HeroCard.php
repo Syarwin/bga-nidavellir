@@ -37,7 +37,7 @@ abstract class HeroCard extends \NID\Cards\AbstractCard
     return $this->heroClass;
   }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks,$uselessExceptThrud){
     $ranks[$this->heroClass] += $this->getRanks();
   }
 

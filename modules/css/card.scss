@@ -110,6 +110,7 @@
     .card-grade {
       display:none;
     }
+    &[data-offer="5"]::before { background-position-x: 11 * 100% / 11; }
   }
 
 
@@ -200,6 +201,3 @@
     }
   }
 }
-
-
-#ebd-body[data-age="2"] .card[data-class="6"]::before { background-position-x: 11 * 100% / 11; }

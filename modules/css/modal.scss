@@ -330,12 +330,12 @@
           width:140px;
           height:140px;
           background-image:url('img/classes.png');
-          background-size: 100% 600%;
+          background-size: 100% 800%;
           flex-shrink: 0;
         }
 
         @for $i from 1 through 5 {
-          &[data-class="#{$i}"] .helper-classes-symbol { background-position-y: $i * 100% / 5; }
+          &[data-class="#{$i}"] .helper-classes-symbol { background-position-y: $i * 100% / 7; }
         }
 
         &[data-class="1"] h2 { color: #554696; }
@@ -354,6 +354,7 @@
   z-index: 2000;
   padding: 10px 30px 10px 10px;
   width: 760px;
+  min-height: 500px;
   background-image: url("img/background_distinctions.png");
   background-size: 100% 100%;
   //filter:drop-shadow(3px 3px 10px black);

@@ -248,6 +248,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must choose where to place Olwyn double'),
     'type' => 'activeplayer',
     'action' => 'stPlaceOlwynDouble',
+    'args' => 'argPlaceOlwynDouble',
     'possibleactions' => ['pickColumn'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
@@ -346,7 +347,8 @@ $machinestates = [
     'possibleactions' => ['discard'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
-      'discardDone' => ST_RESOLVE_STACK,
+      'recruitDone' => ST_RESOLVE_STACK,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
     ]
   ],
 
@@ -481,6 +483,7 @@ $machinestates = [
       'next' => ST_NEXT_PLAYER,
       'hero' => ST_RECRUIT_HERO,
       'trade' => ST_TRADE_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ]
@@ -558,7 +561,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argBrisingamensDiscard',
     'possibleactions' => ['discard'],
-    'transitions' => ['discardDone' => ST_GAME_END ]
+    'transitions' => ['recruitDone' => ST_GAME_END ]
   ],
 
   // Final state.

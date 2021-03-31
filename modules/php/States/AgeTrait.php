@@ -115,7 +115,7 @@ trait AgeTrait
   {
     $ranks = [];
     foreach(Players::getAll() as $player){
-      $ranks[$player->getId()] = $player->getRanks()[$class];
+      $ranks[$player->getId()] = $player->getRanks(true)[$class];
     }
 
     return array_keys($ranks, max($ranks));

@@ -10,7 +10,7 @@ class Ylud extends HeroCard
     $this->subname = clienttranslate("The Unpredictable");
     $this->tooltip = [
       clienttranslate("Place it in your Command Zone."),
-      clienttranslate("Just before the resolution of the last Tavern of an age, place/move Ylud to a column of your choice, and consider Ylud as a dwarf of this class."),
+      clienttranslate("Just after the resolution of the last Tavern of an age, place/move Ylud to a column of your choice, and consider Ylud as a dwarf of this class."),
       clienttranslate("She takes the value corresponding to the column where she is at the end of Age 2 and her rank couns in the Warrior majority if placed in this column."),
       clienttranslate("Placing Ylud in your army may trigger a Hero card recruitment."),
     ];
@@ -21,7 +21,7 @@ class Ylud extends HeroCard
     ];
   }
 
-  public function updateRanks(&$ranks){
+  public function updateRanks(&$ranks,$uselessExceptThrud){
     $ranks[$this->zone] += $this->getRanks();
   }
 

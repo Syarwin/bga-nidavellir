@@ -183,12 +183,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_clearTavern(n){
       debug("Clearing tavern cards left", n);
-      dojo.query('#tavern_' + n.args.tavern + ' .card').forEach(this.slideToRightAndDestroy);
+      dojo.query('#tavern_' + n.args.tavern + ' .card').forEach(card => this.slideToRightAndDestroy(card, true) );
     },
 
     notif_clearTurn(n){
       debug("Clearing turn", n);
-      dojo.query('.tavern-cards-holder .card').forEach(this.slideToRightAndDestroy);
+      dojo.query('.tavern-cards-holder .card').forEach(card => this.slideToRightAndDestroy(card, true) );
       this.forEachPlayer(player => {
         dojo.query('#overall_player_board_' + player.id + ' .coin').forEach(coin => {
           this.slide(coin, "coins-zone-" + player.id, {
@@ -205,7 +205,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_clearCamp(n){
       debug("Clearing camp cards left before age 2", n);
-      dojo.query('#camp .card').forEach(this.slideToRightAndDestroy);
+      dojo.query('#camp .card').forEach(card => this.slideToRightAndDestroy(card, false));
     },
 
 
