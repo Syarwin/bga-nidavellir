@@ -120,7 +120,7 @@ var jstpl_coin = `
 
 
 var jstpl_card = `
-<div class="card" id="card-\${id}" data-id="\${id}" data-class="\${class}" data-parity="\${parity}" data-ranks="\${ranks}">
+<div class="card" id="card-\${id}" data-id="\${id}" data-class="\${class}" data-parity="\${parity}" data-ranks="\${ranks}" data-offer="\${offer}">
   <div class="card-grade" id="card-grade-\${id}">
     \${gradeHtml}
     <div class="card-class-icon"></div>
@@ -134,7 +134,7 @@ var jstpl_cardTooltip = `
     <span class="card-title" data-class="\${symbol}">\${title}</span>
     <span class="card-subtitle" data-class="\${class}">\${subtitle}</span>
   </div>
-  <div class="card" data-id="\${id}" data-class="\${class}" data-parity="\${parity}" data-ranks="\${ranks}">
+  <div class="card" data-id="\${id}" data-class="\${class}" data-parity="\${parity}" data-ranks="\${ranks}" data-offer="\${offer}">
     <div class="card-grade" id="card-grade-\${id}">
       \${gradeHtml}
       <div class="card-class-icon"></div>

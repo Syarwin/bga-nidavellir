@@ -97,17 +97,14 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
     addCard(card, container, animation = false){
       card.parity = card.id % 2;
       card.ranks = card.grade.length;
-      card.title = card.name? card.name : '';
+      card.title = card.name? _(card.name) : '';
       card.subtitle = card.subname? _(card.subname) : '';
       card.desc = card.tooltip? card.tooltip.map(o => _(o)).join('<br />') : '';
+      card.offer = card.class == 6? card.grade[0] : ''; // ROYAL OFFERING
       card.gradeHtml = card.grade.map(r => this.getRankHtml(r)).join('');
       this.place('jstpl_card', card, container);
       dojo.connect($("card-" + card.id), "click", () => this.onClickCard(card) );
       this.addTooltipHtml('card-' + card.id, this.format_block('jstpl_cardTooltip', card));
-
-      if(card.class == 6){ // ROYAL OFFERING
-        dojo.attr('card-' + card.id, "data-offer", card.grade[0]);
-      }
 
       if(animation)
         this.slideFromLeft('card-' + card.id);

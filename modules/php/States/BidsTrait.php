@@ -195,14 +195,14 @@ trait BidsTrait
         continue; // No tie
 
       $trades = [];
-      for($i = 0; $i < count($bidders) / 2; $i++){
-        $p1 = $bidders[$i];
-        $p2 = $bidders[count($bidders) - 1 - $i];
-        if($p1->getGem() != 6 && $p2->getGem() != 6)
-          $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem() ];
+      $fbidders = array_values(array_filter($bidders, function($p){ return $p->getGem() != 6; }));
+      for($i = 0; $i < count($fbidders) / 2; $i++){
+        $p1 = $fbidders[$i];
+        $p2 = $fbidders[count($fbidders) - 1 - $i];
+        $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem() ];
       }
       $ties[$bid] = [
-        'bidders' => array_map(function($player){ return $player->getName();}, $bidders),
+        'bidders' => array_map(function($player){ return $player->getName();}, $fbidders),
         'trades' => $trades
       ];
       Stats::addTie($bidders);

@@ -263,6 +263,7 @@ define([
             parity:0,
             ranks:1,
             class:i,
+            offer:'',
             gradeHtml: '<div class="card-rank">' + grades[i][0] + '</div>',
           };
 
@@ -295,8 +296,12 @@ define([
           if (log && args && !args.processed) {
             args.processed = true;
 
+
             // Representation of the class of a card
             if (args.card_class !== undefined) {
+              if(typeof args.card_class != "string"){
+                args.card_class = dojo.string.substitute(_(args.card_class.log), args.card_class.args);
+              }
               args.card_class = dojo.string.substitute("<span class='card-class-name class-${class}'>${name}</span>", {
                 'name' : _(args.card_class),
                 'class' : args.card_class_symbol,

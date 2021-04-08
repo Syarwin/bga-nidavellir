@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards\Heroes;
+use NID\Cards;
 
 class Khrad extends HeroCard
 {
@@ -31,6 +32,10 @@ class Khrad extends HeroCard
     }
 
     // Add +10
-    $player->tradeCoin($minCoin, 10);
+    $up = 10;
+    if(Cards::getJarikaOwner() == $player->getId())
+      $up += 2;
+
+    $player->tradeCoin($up, $up);
   }
 }

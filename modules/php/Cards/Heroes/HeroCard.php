@@ -50,7 +50,12 @@ abstract class HeroCard extends \NID\Cards\AbstractCard
   }
 
   public function getNotifString(){
-    return sprintf( Nidavellir::translate(clienttranslate("a hero (%s)")), $this->name);
+    return [
+      'log' => clienttranslate('a hero (${hero_name})'),
+      'args' => [
+        'hero_name' => $this->name,
+      ]
+    ];
   }
 
 }

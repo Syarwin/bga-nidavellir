@@ -360,7 +360,7 @@ class Cards extends Helpers\Pieces
   public static function recruit($card, $pId, $forceZone = null)
   {
     if($card->getClass() == ROYAL_OFFER)
-      self::move($card->getId(), "discard");
+      self::discard([$card->getId()], true); // Put back in the box
     else {
       $location = ["command-zone", $pId, $forceZone ?? $card->getRecruitementZone()];
 

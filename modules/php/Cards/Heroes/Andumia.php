@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards\Heroes;
+use NID\Cards;
 
 class Andumia extends HeroCard
 {
@@ -17,6 +18,10 @@ class Andumia extends HeroCard
     $this->grade = [
       12
     ];
+  }
+
+  public function canBeRecruited($player){
+    return Cards::countInLocation('discard') > 0;
   }
 
   public function stateAfterRecruit($player){
