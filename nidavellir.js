@@ -38,7 +38,16 @@ define([
      nidavellir.bidsTrait,
      nidavellir.recruitTrait,
    ], {
-      constructor(){},
+      constructor(){
+        // Fix mobile viewport (remove CSS zoom)
+        this.default_viewport = 'width=840';
+      },
+
+      onScreenWidthChange () {
+        dojo.style('page-content', 'zoom', '');
+        dojo.style('page-title', 'zoom', '');
+        dojo.style('right-side-first-part', 'zoom', '');
+      },
 
       /*
        * Setup:
