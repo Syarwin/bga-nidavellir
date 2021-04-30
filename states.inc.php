@@ -238,6 +238,7 @@ $machinestates = [
       'hero' => ST_RECRUIT_HERO,
       'transform' => ST_TRANSFORM_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'olwyn' => ST_OLWYN,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ]
@@ -255,6 +256,7 @@ $machinestates = [
       'hero' => ST_RECRUIT_HERO,
       'transform' => ST_TRANSFORM_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'olwyn' => ST_OLWYN,
 
       'recruitDone' => ST_OLWYN,
       'finished' => ST_RESOLVE_STACK,

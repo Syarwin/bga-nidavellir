@@ -133,6 +133,16 @@ trait RecruitTrait
       }
     }
 
+    // Olwyn doubles need to be placed somewhere ?
+    if($nextState == null){
+      $double1 = Cards::get(OLWYN_DOUBLE1);
+      $double2 = Cards::get(OLWYN_DOUBLE2);
+      if(($double1->getPId() != null && $double1->getZone() == NEUTRAL) || ($double2->getPId() != null && $double2->getZone() == NEUTRAL)){
+        $nextState = 'olwyn';
+      }
+    }
+
+
     // Can recruit a hero ?
     if($nextState == null && $player->canRecruitHero())
       $nextState = 'hero';
@@ -211,7 +221,7 @@ trait RecruitTrait
       'placeOlwynDouble' => OLWYN_DOUBLE1,
     ];
     $card = Cards::get($cardAssoc[$this->gamestate->state()['name']]);
-    if($card->getId() == OLWYN_DOUBLE1 && $card->getLocation() != "pending"){
+    if($card->getId() == OLWYN_DOUBLE1 && $card->getLocation() != "pending" && $card->getZone() != NEUTRAL){
       $card = Cards::get(OLWYN_DOUBLE2);
     }
 
@@ -261,8 +271,13 @@ trait RecruitTrait
   {
     $columns = [BLACKSMITH, HUNTER, MINER, WARRIOR, EXPLORER];
     $double1 = Cards::get(OLWYN_DOUBLE1);
-    if($double1->getLocation() != "pending"){
+    $player = Players::getActive();
+    if($double1->getLocation() != "pending" && $double1->getPId() == $player->getId()){
       $columns = array_values(array_diff($columns, [$double1->getZone()]));
+    }
+    $double2 = Cards::get(OLWYN_DOUBLE2); // Very edgy case that happens only when discarding olwyn double...
+    if($double2->getLocation() != "pending" && $double2->getPId() == $player->getId()){
+      $columns = array_values(array_diff($columns, [$double2->getZone()]));
     }
     return [
       'columns' => $columns,
@@ -273,7 +288,7 @@ trait RecruitTrait
   {
     $double1 = Cards::get(OLWYN_DOUBLE1);
     $double2 = Cards::get(OLWYN_DOUBLE2);
-    if($double1->getLocation() != "pending" && $double2->getLocation() != "pending")
+    if($double1->getLocation() != "pending" && $double2->getLocation() != "pending" && $double1->getZone() != NEUTRAL && $double2->getZone() != NEUTRAL)
       $this->gamestate->nextState('finished');
   }
 
