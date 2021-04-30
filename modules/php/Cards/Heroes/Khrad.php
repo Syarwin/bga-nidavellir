@@ -20,22 +20,8 @@ class Khrad extends HeroCard
     ];
   }
 
-  public function applyEffect($player){
-    // Get the minimal transformable coin
-    $min = 30;
-    $minCoin = null;
-    foreach($player->getCoins() as $coin){
-      if($coin['value'] < $min && $coin['value'] != 0 && ($coin['value'] != 3 || $coin['type'] != COIN_DISTINCTION)){
-        $min = $coin['value'];
-        $minCoin = $coin;
-      }
-    }
 
-    // Add +10
-    $up = 10;
-    if(Cards::getJarikaOwner() == $player->getId())
-      $up += 2;
-
-    $player->tradeCoin($up, $up);
+  public function stateAfterRecruit($player){
+    return 'khradTransform';
   }
 }

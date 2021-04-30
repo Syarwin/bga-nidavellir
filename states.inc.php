@@ -220,6 +220,7 @@ $machinestates = [
       'recruitCamp' => ST_RECRUIT_CAMP,
       'andumia' => ST_ANDUMIA,
       'olwyn' => ST_OLWYN,
+      'khradTransform' => ST_KHRAD_TRANSFORM,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ]
@@ -260,6 +261,19 @@ $machinestates = [
     ]
   ],
 
+
+  ST_KHRAD_TRANSFORM => [
+    "name" => "khradTransform",
+    'description' => clienttranslate('${actplayer} must choose a coin to upgrade (Khrad\'s effect)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a coin to upgrade (Khrad\'s effect)'),
+    'type' => 'activeplayer',
+    'action' => 'stKhradTransform',
+    'args' => 'argKhradTransform',
+    'possibleactions' => ['transform'],
+    'transitions' => [
+      'transformDone' => ST_RESOLVE_STACK,
+    ]
+  ],
 
   ST_RECRUIT_CAMP => [
     "name" => "recruitCamp",

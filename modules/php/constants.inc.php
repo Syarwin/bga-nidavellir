@@ -25,6 +25,7 @@ define('ST_CHOOSE_THRUD_COLUMN', 34);
 define('ST_DISCARD_TAVERN_CARD', 36);
 define('ST_ANDUMIA', 43);
 define('ST_OLWYN', 44);
+define('ST_KHRAD_TRANSFORM', 49);
 
 define('ST_PRE_HOFUD', 45);
 define('ST_HOFUD', 46);

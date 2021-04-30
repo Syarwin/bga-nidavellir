@@ -41,10 +41,6 @@ abstract class HeroCard extends \NID\Cards\AbstractCard
     $ranks[$this->heroClass] += $this->getRanks();
   }
 
-  public function canBeRecruited($player){
-    return true;
-  }
-
   public function updateBraveryValues(&$values, $player){
     $values[$this->heroClass] += $this->getBV();
   }

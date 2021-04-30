@@ -78,6 +78,10 @@ class AbstractCard
     return $this->class;
   }
 
+  public function canBeRecruited($player){
+    return true;
+  }
+
   public function updateRanks(&$ranks, $uselessExceptThrud){
     $ranks[$this->class] += $this->getRanks();
   }

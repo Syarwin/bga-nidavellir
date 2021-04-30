@@ -100,6 +100,7 @@ class action_nidavellir extends APP_GameAction
   }
 
 
+
   public function discardCards()
   {
     self::setAjaxMode();

@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards\Artifacts;
+use NID\Cards;
 
 class Brisingamens extends ArtifactCard
 {
@@ -13,6 +14,10 @@ class Brisingamens extends ArtifactCard
       clienttranslate("At the end of Age 2, before counting points, discard a Dwarf card of your choice from your army. This card can be taken anywhere, in any column, but it cannot be a Hero card."),
     ];
     $this->grade = [ null ];
+  }
+
+  public function canBeRecruited($player){
+    return Cards::countInLocation('discard') > 1;
   }
 
   public function stateAfterRecruit($player){

@@ -158,10 +158,15 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       }
     },
 
+    onEnteringStateKhradTransform(args){
+      if(this.isCurrentPlayerActive()){
+        this.makeCoinsSelectable(args.coins, this.onClickCoinTransform.bind(this));
+      }
+    },
+
     onClickCoinTransform(coin){
       this.takeAction('transformCoin', { coinId : coin.id });
     },
-
 
 
     /*###################

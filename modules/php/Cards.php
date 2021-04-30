@@ -330,7 +330,7 @@ class Cards extends Helpers\Pieces
         self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
         self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1])->ui(),
         self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2])->ui(),
-        self::pickForLocation(5 - self::getInCamp()->count(), ['campdeck', $age], 'camp')->ui()
+        self::pickForLocation(5 - self::countInLocation('camp'), ['campdeck', $age], 'camp')->ui()
     );
   }
 
@@ -349,9 +349,10 @@ class Cards extends Helpers\Pieces
    */
   public static function getInCamp()
   {
-    return self::getInLocation('camp');
+    $camp = self::getInLocation('camp');
+    $fcamp = $camp->filter(function($card){ return $card->canBeRecruited(null); });
+    return array_map(function($card){ return $card->getId(); }, $fcamp);
   }
-
 
 
   /*

@@ -69,7 +69,7 @@ trait RecruitTrait
     // THINGVELLIR
     $player = Players::getActive();
     if($player->canVisitCamp()){
-      $data['cards'] = array_merge($data['cards'], Cards::getInCamp()->getIds() );
+      $data['cards'] = array_merge($data['cards'], Cards::getInCamp() );
       $data['camp_title'] = clienttranslate(" / an artifact or a missionary at the Camp");
       $data['camp'] = true;
     }
@@ -144,7 +144,7 @@ trait RecruitTrait
   public function argRecruitCamp()
   {
     return [
-      'cards' => Cards::getInCamp()->getIds(),
+      'cards' => Cards::getInCamp(),
     ];
   }
 
@@ -321,5 +321,43 @@ trait RecruitTrait
     Notifications::discardHofud($player, $card, $warriors);
     Players::updateScores();
     $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
+  }
+
+
+  /********************
+  ******* KHRAD *******
+  ********************/
+  public function argKhradTransform()
+  {
+    $player = Players::getActive();
+    $min = 30;
+    $minCoins = null;
+    foreach($player->getCoins() as $coin){
+      if($coin['value'] < $min && $coin['value'] != 0 && ($coin['value'] != 3 || $coin['type'] != COIN_DISTINCTION)){
+        $min = $coin['value'];
+        $minCoins = [$coin['id']];
+      } elseif($coin['value'] == $min){
+        $minCoins[] = $coin['id'];
+      }
+    }
+
+    return [
+      'coins' => $minCoins,
+    ];
+  }
+
+  public function stKhradTransform()
+  {
+    $player = Players::getActive();
+    // Add +10
+    $up = 10;
+    if(Cards::getJarikaOwner() == $player->getId())
+      $up += 2;
+    Globals::setTransformValue($up);
+
+
+    $coins = $this->argKhradTransform()['coins'];
+    if(count($coins) == 1)
+      $this->actTransformCoin($coins[0]);
   }
 }
