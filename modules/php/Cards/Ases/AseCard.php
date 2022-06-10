@@ -1,24 +1,17 @@
 <?php
-namespace NID\Cards\Artifacts;
+namespace NID\Cards\Ases;
 use Nidavellir;
 
 /*
- * ArtifactCard: all utility functions concerning an artifact
+ * AseCard: all utility functions concerning an Ase
  */
 
-class ArtifactCard extends \NID\Cards\AbstractCard
+class AseCard extends \NID\Cards\AbstractCard
 {
-  protected $age;
-
   public function __construct($row)
   {
     parent::__construct($row);
-    $this->class = ARTIFACT;
-  }
-
-  public function getAge()
-  {
-    return $this->age;
+    $this->class = ASE;
   }
 
   public function getRecruitementZone()
@@ -28,7 +21,7 @@ class ArtifactCard extends \NID\Cards\AbstractCard
 
   public function getNotifSymbol()
   {
-    return ARTIFACT;
+    return ASE;
   }
 
   public function updateRanks(&$ranks, $uselessExceptThrud)
@@ -41,6 +34,6 @@ class ArtifactCard extends \NID\Cards\AbstractCard
 
   public function getNotifString()
   {
-    return sprintf(Nidavellir::translate(clienttranslate('an artifact (%s)')), $this->name);
+    return sprintf(Nidavellir::translate(clienttranslate('an ase (%s)')), $this->name);
   }
 }

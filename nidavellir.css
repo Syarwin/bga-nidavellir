@@ -49,7 +49,10 @@ html {
   ********************/
   /********************
   ***** ARTIFACTS *****
-  ********************/ }
+  ********************/
+  /**********************
+  ****** MYTHOLOGY ******
+  **********************/ }
   .card.selectable {
     cursor: pointer; }
     .card.selectable:hover {
@@ -77,25 +80,25 @@ html {
     border-radius: 5%;
     background-image: url("img/dwarves.jpg");
     z-index: 2; }
-  .card[data-class="1"][data-parity="0"]::before {
+  .card[data-class='1'][data-parity='0']::before {
     background-position-x: 0%; }
-  .card[data-class="1"][data-parity="1"]::before {
+  .card[data-class='1'][data-parity='1']::before {
     background-position-x: 9.0909090909%; }
-  .card[data-class="2"][data-parity="0"]::before {
+  .card[data-class='2'][data-parity='0']::before {
     background-position-x: 18.1818181818%; }
-  .card[data-class="2"][data-parity="1"]::before {
+  .card[data-class='2'][data-parity='1']::before {
     background-position-x: 27.2727272727%; }
-  .card[data-class="3"][data-parity="0"]::before {
+  .card[data-class='3'][data-parity='0']::before {
     background-position-x: 36.3636363636%; }
-  .card[data-class="3"][data-parity="1"]::before {
+  .card[data-class='3'][data-parity='1']::before {
     background-position-x: 45.4545454545%; }
-  .card[data-class="4"][data-parity="0"]::before {
+  .card[data-class='4'][data-parity='0']::before {
     background-position-x: 54.5454545455%; }
-  .card[data-class="4"][data-parity="1"]::before {
+  .card[data-class='4'][data-parity='1']::before {
     background-position-x: 63.6363636364%; }
-  .card[data-class="5"][data-parity="0"]::before {
+  .card[data-class='5'][data-parity='0']::before {
     background-position-x: 72.7272727273%; }
-  .card[data-class="5"][data-parity="1"]::before {
+  .card[data-class='5'][data-parity='1']::before {
     background-position-x: 81.8181818182%; }
   .card .card-grade {
     position: absolute;
@@ -127,7 +130,7 @@ html {
       background-image: url("img/classes.png");
       background-size: cover;
       margin-left: 4px; }
-  .card[data-class="1"] .card-rank::before, .card[data-class="2"] .card-rank::before {
+  .card[data-class='1'] .card-rank::before, .card[data-class='2'] .card-rank::before {
     content: '';
     display: inline-block;
     width: 13.3px;
@@ -135,222 +138,290 @@ html {
     margin: 2.85px 0;
     background-image: url("img/rank-values.png");
     background-size: cover; }
-  .card[data-class="2"] .card-rank::before {
+  .card[data-class='2'] .card-rank::before {
     background-position-x: 100%; }
-  .card[data-class="1"] .card-rank {
+  .card[data-class='1'] .card-rank {
     background-position-y: 0%; }
-  .card[data-class="1"] .card-class-icon {
+  .card[data-class='1'] .card-class-icon {
     background-position-y: 14.2857142857%; }
-  .card[data-class="2"] .card-rank {
+  .card[data-class='2'] .card-rank {
     background-position-y: 25%; }
-  .card[data-class="2"] .card-class-icon {
+  .card[data-class='2'] .card-class-icon {
     background-position-y: 28.5714285714%; }
-  .card[data-class="3"] .card-rank {
+  .card[data-class='3'] .card-rank {
     background-position-y: 50%; }
-  .card[data-class="3"] .card-class-icon {
+  .card[data-class='3'] .card-class-icon {
     background-position-y: 42.8571428571%; }
-  .card[data-class="4"] .card-rank {
+  .card[data-class='4'] .card-rank {
     background-position-y: 75%; }
-  .card[data-class="4"] .card-class-icon {
+  .card[data-class='4'] .card-class-icon {
     background-position-y: 57.1428571429%; }
-  .card[data-class="5"] .card-rank {
+  .card[data-class='5'] .card-rank {
     background-position-y: 100%; }
-  .card[data-class="5"] .card-class-icon {
+  .card[data-class='5'] .card-class-icon {
     background-position-y: 71.4285714286%; }
-  .card[data-class="6"]::before {
+  .card[data-class='6']::before {
     background-position-x: 90.9090909091%; }
-  .card[data-class="6"] .card-grade {
+  .card[data-class='6'] .card-grade {
     display: none; }
-  .card[data-class="6"][data-offer="5"]::before {
+  .card[data-class='6'][data-offer='5']::before {
     background-position-x: 100%; }
-  .card[data-class="7"]::before {
+  .card[data-class='7']::before {
     background-image: url("img/heroes.jpg");
     background-size: 500% 600%; }
-  .card[data-class="7"][data-id="200"]::before {
+  .card[data-class='7'][data-id='200']::before {
     background-position-x: 0%;
     background-position-y: 0%; }
-  .card[data-class="7"][data-id="201"]::before {
+  .card[data-class='7'][data-id='201']::before {
     background-position-x: 25%;
     background-position-y: 0%; }
-  .card[data-class="7"][data-id="202"]::before {
+  .card[data-class='7'][data-id='202']::before {
     background-position-x: 50%;
     background-position-y: 0%; }
-  .card[data-class="7"][data-id="203"]::before {
+  .card[data-class='7'][data-id='203']::before {
     background-position-x: 75%;
     background-position-y: 0%; }
-  .card[data-class="7"][data-id="204"]::before {
+  .card[data-class='7'][data-id='204']::before {
     background-position-x: 100%;
     background-position-y: 0%; }
-  .card[data-class="7"][data-id="205"]::before {
+  .card[data-class='7'][data-id='205']::before {
     background-position-x: 0%;
     background-position-y: 20%; }
-  .card[data-class="7"][data-id="206"]::before {
+  .card[data-class='7'][data-id='206']::before {
     background-position-x: 25%;
     background-position-y: 20%; }
-  .card[data-class="7"][data-id="207"]::before {
+  .card[data-class='7'][data-id='207']::before {
     background-position-x: 50%;
     background-position-y: 20%; }
-  .card[data-class="7"][data-id="208"]::before {
+  .card[data-class='7'][data-id='208']::before {
     background-position-x: 75%;
     background-position-y: 20%; }
-  .card[data-class="7"][data-id="209"]::before {
+  .card[data-class='7'][data-id='209']::before {
     background-position-x: 100%;
     background-position-y: 20%; }
-  .card[data-class="7"][data-id="210"]::before {
+  .card[data-class='7'][data-id='210']::before {
     background-position-x: 0%;
     background-position-y: 40%; }
-  .card[data-class="7"][data-id="211"]::before {
+  .card[data-class='7'][data-id='211']::before {
     background-position-x: 25%;
     background-position-y: 40%; }
-  .card[data-class="7"][data-id="212"]::before {
+  .card[data-class='7'][data-id='212']::before {
     background-position-x: 50%;
     background-position-y: 40%; }
-  .card[data-class="7"][data-id="213"]::before {
+  .card[data-class='7'][data-id='213']::before {
     background-position-x: 75%;
     background-position-y: 40%; }
-  .card[data-class="7"][data-id="214"]::before {
+  .card[data-class='7'][data-id='214']::before {
     background-position-x: 100%;
     background-position-y: 40%; }
-  .card[data-class="7"][data-id="215"]::before {
+  .card[data-class='7'][data-id='215']::before {
     background-position-x: 0%;
     background-position-y: 60%; }
-  .card[data-class="7"][data-id="216"]::before {
+  .card[data-class='7'][data-id='216']::before {
     background-position-x: 25%;
     background-position-y: 60%; }
-  .card[data-class="7"][data-id="217"]::before {
+  .card[data-class='7'][data-id='217']::before {
     background-position-x: 50%;
     background-position-y: 60%; }
-  .card[data-class="7"][data-id="218"]::before {
+  .card[data-class='7'][data-id='218']::before {
     background-position-x: 75%;
     background-position-y: 60%; }
-  .card[data-class="7"][data-id="219"]::before {
+  .card[data-class='7'][data-id='219']::before {
     background-position-x: 100%;
     background-position-y: 60%; }
-  .card[data-class="7"][data-id="220"]::before {
+  .card[data-class='7'][data-id='220']::before {
     background-position-x: 0%;
     background-position-y: 80%; }
-  .card[data-class="7"][data-id="221"]::before {
+  .card[data-class='7'][data-id='221']::before {
     background-position-x: 25%;
     background-position-y: 80%; }
-  .card[data-class="7"][data-id="222"]::before {
+  .card[data-class='7'][data-id='222']::before {
     background-position-x: 50%;
     background-position-y: 80%; }
-  .card[data-class="7"][data-id="223"]::before {
+  .card[data-class='7'][data-id='223']::before {
     background-position-x: 75%;
     background-position-y: 80%; }
-  .card[data-class="7"][data-id="224"]::before {
+  .card[data-class='7'][data-id='224']::before {
     background-position-x: 100%;
     background-position-y: 80%; }
-  .card[data-class="7"][data-id="225"]::before {
+  .card[data-class='7'][data-id='225']::before {
     background-position-x: 0%;
     background-position-y: 100%; }
-  .card[data-class="7"][data-id="226"]::before {
+  .card[data-class='7'][data-id='226']::before {
     background-position-x: 25%;
     background-position-y: 100%; }
-  .card[data-class="7"][data-id="227"]::before {
+  .card[data-class='7'][data-id='227']::before {
     background-position-x: 50%;
     background-position-y: 100%; }
-  .card[data-class="7"][data-id="228"]::before {
+  .card[data-class='7'][data-id='228']::before {
     background-position-x: 75%;
     background-position-y: 100%; }
-  .card[data-class="7"] .card-grade {
+  .card[data-class='7'] .card-grade {
     display: none; }
-  .card[data-class="8"]::before {
+  .card[data-class='8']::before {
     background-image: url("img/distinctions.jpg");
     background-size: 500%; }
-  .card[data-class="8"][data-id="300"]::before {
+  .card[data-class='8'][data-id='300']::before {
     background-position-x: 0%; }
-  .card[data-class="8"][data-id="301"]::before {
+  .card[data-class='8'][data-id='301']::before {
     background-position-x: 25%; }
-  .card[data-class="8"][data-id="302"]::before {
+  .card[data-class='8'][data-id='302']::before {
     background-position-x: 50%; }
-  .card[data-class="8"][data-id="303"]::before {
+  .card[data-class='8'][data-id='303']::before {
     background-position-x: 75%; }
-  .card[data-class="8"][data-id="304"]::before {
+  .card[data-class='8'][data-id='304']::before {
     background-position-x: 100%; }
-  .card[data-class="8"] .card-grade {
+  .card[data-class='8'] .card-grade {
     display: none; }
-  .card[data-class="9"]::before {
+  .card[data-class='9']::before {
     background-image: url("img/mercenaries.jpg");
     background-size: 600% 200%; }
-  .card[data-class="9"][data-id="400"]::before {
+  .card[data-class='9'][data-id='400']::before {
     background-position-x: 0%;
     background-position-y: 0%; }
-  .card[data-class="9"][data-id="401"]::before {
+  .card[data-class='9'][data-id='401']::before {
     background-position-x: 20%;
     background-position-y: 0%; }
-  .card[data-class="9"][data-id="402"]::before {
+  .card[data-class='9'][data-id='402']::before {
     background-position-x: 40%;
     background-position-y: 0%; }
-  .card[data-class="9"][data-id="403"]::before {
+  .card[data-class='9'][data-id='403']::before {
     background-position-x: 60%;
     background-position-y: 0%; }
-  .card[data-class="9"][data-id="404"]::before {
+  .card[data-class='9'][data-id='404']::before {
     background-position-x: 80%;
     background-position-y: 0%; }
-  .card[data-class="9"][data-id="405"]::before {
+  .card[data-class='9'][data-id='405']::before {
     background-position-x: 100%;
     background-position-y: 0%; }
-  .card[data-class="9"][data-id="406"]::before {
+  .card[data-class='9'][data-id='406']::before {
     background-position-x: 0%;
     background-position-y: 100%; }
-  .card[data-class="9"][data-id="407"]::before {
+  .card[data-class='9'][data-id='407']::before {
     background-position-x: 20%;
     background-position-y: 100%; }
-  .card[data-class="9"][data-id="408"]::before {
+  .card[data-class='9'][data-id='408']::before {
     background-position-x: 40%;
     background-position-y: 100%; }
-  .card[data-class="9"][data-id="409"]::before {
+  .card[data-class='9'][data-id='409']::before {
     background-position-x: 60%;
     background-position-y: 100%; }
-  .card[data-class="9"][data-id="410"]::before {
+  .card[data-class='9'][data-id='410']::before {
     background-position-x: 80%;
     background-position-y: 100%; }
-  .card[data-class="9"][data-id="411"]::before {
+  .card[data-class='9'][data-id='411']::before {
     background-position-x: 100%;
     background-position-y: 100%; }
-  .card[data-class="9"] .card-grade {
+  .card[data-class='9'] .card-grade {
     display: none; }
-  .card[data-class="10"]::before {
+  .card[data-class='10']::before {
     background-image: url("img/artifacts.jpg");
     background-size: 600% 200%; }
-  .card[data-class="10"][data-id="250"]::before {
+  .card[data-class='10'][data-id='250']::before {
     background-position-x: 0%;
     background-position-y: 0%; }
-  .card[data-class="10"][data-id="251"]::before {
+  .card[data-class='10'][data-id='251']::before {
     background-position-x: 20%;
     background-position-y: 0%; }
-  .card[data-class="10"][data-id="252"]::before {
+  .card[data-class='10'][data-id='252']::before {
     background-position-x: 40%;
     background-position-y: 0%; }
-  .card[data-class="10"][data-id="253"]::before {
+  .card[data-class='10'][data-id='253']::before {
     background-position-x: 60%;
     background-position-y: 0%; }
-  .card[data-class="10"][data-id="254"]::before {
+  .card[data-class='10'][data-id='254']::before {
     background-position-x: 80%;
     background-position-y: 0%; }
-  .card[data-class="10"][data-id="255"]::before {
+  .card[data-class='10'][data-id='255']::before {
     background-position-x: 100%;
     background-position-y: 0%; }
-  .card[data-class="10"][data-id="256"]::before {
+  .card[data-class='10'][data-id='256']::before {
     background-position-x: 0%;
     background-position-y: 100%; }
-  .card[data-class="10"][data-id="257"]::before {
+  .card[data-class='10'][data-id='257']::before {
     background-position-x: 20%;
     background-position-y: 100%; }
-  .card[data-class="10"][data-id="258"]::before {
+  .card[data-class='10'][data-id='258']::before {
     background-position-x: 40%;
     background-position-y: 100%; }
-  .card[data-class="10"][data-id="259"]::before {
+  .card[data-class='10'][data-id='259']::before {
     background-position-x: 60%;
     background-position-y: 100%; }
-  .card[data-class="10"][data-id="260"]::before {
+  .card[data-class='10'][data-id='260']::before {
     background-position-x: 80%;
     background-position-y: 100%; }
-  .card[data-class="10"][data-id="261"]::before {
+  .card[data-class='10'][data-id='261']::before {
     background-position-x: 100%;
     background-position-y: 100%; }
-  .card[data-class="10"] .card-grade {
+  .card[data-class='10'] .card-grade {
+    display: none; }
+  .card[data-class='11']::before, .card[data-class='12']::before, .card[data-class='13']::before, .card[data-class='14']::before {
+    background-image: url("img/idavoll_cards.jpg");
+    background-size: 500% 500%; }
+  .card[data-class='11'][data-id='500']::before, .card[data-class='12'][data-id='500']::before, .card[data-class='13'][data-id='500']::before, .card[data-class='14'][data-id='500']::before {
+    background-position-x: 0%;
+    background-position-y: 0%; }
+  .card[data-class='11'][data-id='501']::before, .card[data-class='12'][data-id='501']::before, .card[data-class='13'][data-id='501']::before, .card[data-class='14'][data-id='501']::before {
+    background-position-x: 25%;
+    background-position-y: 0%; }
+  .card[data-class='11'][data-id='502']::before, .card[data-class='12'][data-id='502']::before, .card[data-class='13'][data-id='502']::before, .card[data-class='14'][data-id='502']::before {
+    background-position-x: 50%;
+    background-position-y: 0%; }
+  .card[data-class='11'][data-id='503']::before, .card[data-class='12'][data-id='503']::before, .card[data-class='13'][data-id='503']::before, .card[data-class='14'][data-id='503']::before {
+    background-position-x: 75%;
+    background-position-y: 0%; }
+  .card[data-class='11'][data-id='504']::before, .card[data-class='12'][data-id='504']::before, .card[data-class='13'][data-id='504']::before, .card[data-class='14'][data-id='504']::before {
+    background-position-x: 100%;
+    background-position-y: 0%; }
+  .card[data-class='11'][data-id='505']::before, .card[data-class='12'][data-id='505']::before, .card[data-class='13'][data-id='505']::before, .card[data-class='14'][data-id='505']::before {
+    background-position-x: 0%;
+    background-position-y: 25%; }
+  .card[data-class='11'][data-id='506']::before, .card[data-class='12'][data-id='506']::before, .card[data-class='13'][data-id='506']::before, .card[data-class='14'][data-id='506']::before {
+    background-position-x: 25%;
+    background-position-y: 25%; }
+  .card[data-class='11'][data-id='507']::before, .card[data-class='12'][data-id='507']::before, .card[data-class='13'][data-id='507']::before, .card[data-class='14'][data-id='507']::before {
+    background-position-x: 50%;
+    background-position-y: 25%; }
+  .card[data-class='11'][data-id='508']::before, .card[data-class='12'][data-id='508']::before, .card[data-class='13'][data-id='508']::before, .card[data-class='14'][data-id='508']::before {
+    background-position-x: 75%;
+    background-position-y: 25%; }
+  .card[data-class='11'][data-id='509']::before, .card[data-class='12'][data-id='509']::before, .card[data-class='13'][data-id='509']::before, .card[data-class='14'][data-id='509']::before {
+    background-position-x: 100%;
+    background-position-y: 25%; }
+  .card[data-class='11'][data-id='510']::before, .card[data-class='12'][data-id='510']::before, .card[data-class='13'][data-id='510']::before, .card[data-class='14'][data-id='510']::before {
+    background-position-x: 0%;
+    background-position-y: 50%; }
+  .card[data-class='11'][data-id='511']::before, .card[data-class='12'][data-id='511']::before, .card[data-class='13'][data-id='511']::before, .card[data-class='14'][data-id='511']::before {
+    background-position-x: 25%;
+    background-position-y: 50%; }
+  .card[data-class='11'][data-id='512']::before, .card[data-class='12'][data-id='512']::before, .card[data-class='13'][data-id='512']::before, .card[data-class='14'][data-id='512']::before {
+    background-position-x: 50%;
+    background-position-y: 50%; }
+  .card[data-class='11'][data-id='513']::before, .card[data-class='12'][data-id='513']::before, .card[data-class='13'][data-id='513']::before, .card[data-class='14'][data-id='513']::before {
+    background-position-x: 75%;
+    background-position-y: 50%; }
+  .card[data-class='11'][data-id='514']::before, .card[data-class='12'][data-id='514']::before, .card[data-class='13'][data-id='514']::before, .card[data-class='14'][data-id='514']::before {
+    background-position-x: 100%;
+    background-position-y: 50%; }
+  .card[data-class='11'][data-id='515']::before, .card[data-class='12'][data-id='515']::before, .card[data-class='13'][data-id='515']::before, .card[data-class='14'][data-id='515']::before {
+    background-position-x: 0%;
+    background-position-y: 75%; }
+  .card[data-class='11'][data-id='516']::before, .card[data-class='12'][data-id='516']::before, .card[data-class='13'][data-id='516']::before, .card[data-class='14'][data-id='516']::before {
+    background-position-x: 25%;
+    background-position-y: 75%; }
+  .card[data-class='11'][data-id='517']::before, .card[data-class='12'][data-id='517']::before, .card[data-class='13'][data-id='517']::before, .card[data-class='14'][data-id='517']::before {
+    background-position-x: 50%;
+    background-position-y: 75%; }
+  .card[data-class='11'][data-id='518']::before, .card[data-class='12'][data-id='518']::before, .card[data-class='13'][data-id='518']::before, .card[data-class='14'][data-id='518']::before {
+    background-position-x: 75%;
+    background-position-y: 75%; }
+  .card[data-class='11'][data-id='519']::before, .card[data-class='12'][data-id='519']::before, .card[data-class='13'][data-id='519']::before, .card[data-class='14'][data-id='519']::before {
+    background-position-x: 100%;
+    background-position-y: 75%; }
+  .card[data-class='11'][data-id='520']::before, .card[data-class='12'][data-id='520']::before, .card[data-class='13'][data-id='520']::before, .card[data-class='14'][data-id='520']::before {
+    background-position-x: 0%;
+    background-position-y: 100%; }
+  .card[data-class='11'] .card-grade, .card[data-class='12'] .card-grade, .card[data-class='13'] .card-grade, .card[data-class='14'] .card-grade {
     display: none; }
 
 #nidavellir-board {
@@ -2262,16 +2333,19 @@ html {
     justify-content: space-around;
     align-items: center;
     margin-bottom: 10px; }
-  #player_config #show-help, #player_config #show-settings {
+  #player_config #show-help,
+  #player_config #show-settings {
     height: 40px;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer; }
-    #player_config #show-help:hover, #player_config #show-settings:hover {
+    #player_config #show-help:hover,
+    #player_config #show-settings:hover {
       color: grey; }
-    #player_config #show-help svg, #player_config #show-settings svg {
+    #player_config #show-help svg,
+    #player_config #show-settings svg {
       width: auto;
       height: 40px; }
   #player_config #show-settings .fa-primary {
@@ -2312,16 +2386,19 @@ html {
     @media (max-width: 1900px) {
       #layout-controls-container #layout-mode {
         display: none; } }
-    #layout-controls-container #layout-mode #layout-normal, #layout-controls-container #layout-mode #layout-compact {
+    #layout-controls-container #layout-mode #layout-normal,
+    #layout-controls-container #layout-mode #layout-compact {
       width: 40px;
       height: 40px;
       display: grid;
       grid-gap: 3px;
       cursor: pointer; }
-      #layout-controls-container #layout-mode #layout-normal div, #layout-controls-container #layout-mode #layout-compact div {
+      #layout-controls-container #layout-mode #layout-normal div,
+      #layout-controls-container #layout-mode #layout-compact div {
         background-color: black;
         border-radius: 5px; }
-      #layout-controls-container #layout-mode #layout-normal:hover div, #layout-controls-container #layout-mode #layout-compact:hover div {
+      #layout-controls-container #layout-mode #layout-normal:hover div,
+      #layout-controls-container #layout-mode #layout-compact:hover div {
         background-color: gray; }
     #layout-controls-container #layout-mode #layout-normal {
       grid-template-rows: 1fr 1fr; }
@@ -2337,11 +2414,20 @@ html {
     #layout-controls-container #autopick-selector select {
       margin-top: 5px; }
 
-#overall-content[data-nplayers="2"] #turn-counter::after, #overall-content[data-nplayers="3"] #turn-counter::after {
+#overall-content[data-nplayers='2'] #turn-counter::after,
+#overall-content[data-nplayers='3'] #turn-counter::after {
   content: '/4'; }
 
-#overall-content[data-nplayers="4"] #turn-counter::after, #overall-content[data-nplayers="5"] #turn-counter::after {
+#overall-content[data-nplayers='4'] #turn-counter::after,
+#overall-content[data-nplayers='5'] #turn-counter::after {
   content: '/3'; }
+
+#ebd-body.nidavellir-idavoll #overall-content[data-nplayers='2'] #turn-counter::after,
+#ebd-body.nidavellir-idavoll #overall-content[data-nplayers='3'] #turn-counter::after {
+  content: '/5'; }
+#ebd-body.nidavellir-idavoll #overall-content[data-nplayers='4'] #turn-counter::after,
+#ebd-body.nidavellir-idavoll #overall-content[data-nplayers='5'] #turn-counter::after {
+  content: '/4'; }
 
 .nidavellir_popin {
   width: 80%;

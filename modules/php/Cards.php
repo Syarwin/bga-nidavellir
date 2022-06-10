@@ -26,11 +26,18 @@ class Cards extends Helpers\Pieces
       return self::getDistinction($card['id'], $card);
     }
 
-    // Expansion
+    // Thingvellir
     elseif ($card['class'] == ARTIFACT) {
       return self::getArtifact($card['id'], $card);
     } elseif ($card['class'] == MERCENARY) {
       return self::getMercenary($card['id'], $card);
+    }
+
+    // Idavoll
+    elseif ($card['class'] == ANIMAL) {
+      return self::getAnimal($card['id'], $card);
+    } elseif ($card['class'] == ASE) {
+      return self::getAse($card['id'], $card);
     }
   }
 
@@ -70,7 +77,7 @@ class Cards extends Helpers\Pieces
     }
 
     if ($options[OPTION_IDAVOLL] == IDAVOLL) {
-      die('toto');
+      self::createMythology();
     }
   }
 
@@ -356,6 +363,55 @@ class Cards extends Helpers\Pieces
     return new $className($row);
   }
 
+  /*******************
+   *******************
+   **** MYTHOLOGY ****
+   *******************
+   ******************/
+  public static $animals = [
+    DURATHOR => 'Durathor',
+    GARM => 'Garm',
+    HREASVELG => 'Hreasvelg',
+    NIDHOGG => 'Nidhogg',
+    RATATOSK => 'Ratatosk',
+  ];
+
+  public static $ases = [
+    FRIGG => 'Frigg',
+    THOR => 'Thor',
+    FREYA => 'Freya',
+    LOKI => 'Loki',
+    ODIN => 'Odin',
+  ];
+
+  public static function createMythology()
+  {
+    $values = [];
+    foreach (self::$animals as $aId => $class) {
+      $values[] = [$aId, 'mythology', ANIMAL, null];
+    }
+    foreach (self::$ases as $aId => $class) {
+      $values[] = [$aId, 'mythology', ASE, null];
+    }
+
+    self::DB()
+      ->multipleInsert(['card_id', 'card_location', 'class', 'grade'])
+      ->values($values);
+    self::shuffle('mythology');
+  }
+
+  public static function getAnimal($id, $row = null)
+  {
+    $className = '\NID\Cards\Animals\\' . self::$animals[$id];
+    return new $className($row);
+  }
+
+  public static function getAse($id, $row = null)
+  {
+    $className = '\NID\Cards\Ases\\' . self::$ases[$id];
+    return new $className($row);
+  }
+
   /****************
    ***** PLAY  *****
    ****************/
@@ -368,10 +424,11 @@ class Cards extends Helpers\Pieces
     $age = Globals::getAge();
     $nPlayers = Players::count();
     $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
+    $dancingDragonLocation = Globals::getTurn() <= 3 && Globals::isIdavoll() ? 'mythology' : ['age', $age];
 
     return array_merge(
       self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
-      self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 1])->ui(),
+      self::pickForLocation($nCardsPerTavern, $dancingDragonLocation, ['tavern', 1])->ui(),
       self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 2])->ui(),
       self::pickForLocation(5 - self::countInLocation('camp'), ['campdeck', $age], 'camp')->ui()
     );

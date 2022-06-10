@@ -1,71 +1,76 @@
 .card {
-  width:$wCard;
-  height:$hCard;
-  margin:0px $scale*15px;
-  position:relative;
+  width: $wCard;
+  height: $hCard;
+  margin: 0px $scale * 15px;
+  position: relative;
   border-radius: 5%;
   box-shadow: 0px 0px 4px black;
 
   &.selectable {
-    cursor:pointer;
-//    box-shadow: 0px 0px 5px 2px red;
+    cursor: pointer;
+    //    box-shadow: 0px 0px 5px 2px red;
     &:hover {
       transform: scale(1.1);
-      z-index:100;
+      z-index: 100;
     }
   }
 
-  &.unselectable, &.unselectable:hover {
-    transform:none;
-    cursor:not-allowed;
+  &.unselectable,
+  &.unselectable:hover {
+    transform: none;
+    cursor: not-allowed;
   }
 
   &.selected {
-    border:3px solid red;
-    margin-top:-3px;
-    margin-bottom:-3px;
-    margin-left:7.5px;
-    margin-right:7.5px;
-    animation:none !important;
-    transform:scale(1.08);
-    z-index:100;
+    border: 3px solid red;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+    animation: none !important;
+    transform: scale(1.08);
+    z-index: 100;
   }
 
   &::before {
-    content:'';
-    position:absolute;
-    display:block;
-    width:100%;
-    height:100%;
-    background-size:cover;
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
     border-radius: 5%;
-//    filter:drop-shadow(0px 0px 4px black);
-    background-image:url('img/dwarves.jpg');
-    z-index:2;
+    //    filter:drop-shadow(0px 0px 4px black);
+    background-image: url('img/dwarves.jpg');
+    z-index: 2;
   }
 
   @for $i from 1 through 5 {
-    &[data-class="#{$i}"][data-parity="0"]::before { background-position-x: 2*($i - 1) * 100% / 11; }
-    &[data-class="#{$i}"][data-parity="1"]::before { background-position-x: (2*($i - 1) + 1) * 100% / 11; }
+    &[data-class='#{$i}'][data-parity='0']::before {
+      background-position-x: 2 * ($i - 1) * 100% / 11;
+    }
+    &[data-class='#{$i}'][data-parity='1']::before {
+      background-position-x: (2 * ($i - 1) + 1) * 100% / 11;
+    }
   }
 
   .card-grade {
     position: absolute;
-    z-index:2;
-    width:0.6 * $wCard;
-    height:$hCard * 0.8;
+    z-index: 2;
+    width: 0.6 * $wCard;
+    height: $hCard * 0.8;
     display: flex;
     flex-flow: column;
-    padding-top:4%;
+    padding-top: 4%;
 
     .card-rank {
-      order:1;
-      width:$wRank;
-      height:$hRank;
-      background-image:url('img/ranks.png');
-      background-size:100% 500%;
+      order: 1;
+      width: $wRank;
+      height: $hRank;
+      background-image: url('img/ranks.png');
+      background-size: 100% 500%;
       font-family: 'Norse';
-      color:white;
+      color: white;
       text-shadow: 0px 0px 2px black;
       font-weight: bold;
       padding-left: 20%;
@@ -76,128 +81,155 @@
     }
 
     .card-class-icon {
-      order:4;
-      width:0.25 * $wCard;
-      height:0.25 * $wCard;
-      background-image:url('img/classes.png');
-      background-size:cover;
-      margin-left:4px;
+      order: 4;
+      width: 0.25 * $wCard;
+      height: 0.25 * $wCard;
+      background-image: url('img/classes.png');
+      background-size: cover;
+      margin-left: 4px;
     }
   }
 
-  &[data-class="1"] .card-rank::before,
-  &[data-class="2"] .card-rank::before {
-    content:'';
+  &[data-class='1'] .card-rank::before,
+  &[data-class='2'] .card-rank::before {
+    content: '';
     display: inline-block;
-    width:0.7*$hRank;
-    height:0.7*$hRank;
-    margin: 0.15*$hRank 0;
-    background-image:url('img/rank-values.png');
-    background-size:cover;
+    width: 0.7 * $hRank;
+    height: 0.7 * $hRank;
+    margin: 0.15 * $hRank 0;
+    background-image: url('img/rank-values.png');
+    background-size: cover;
   }
-  &[data-class="2"] .card-rank::before { background-position-x:100%; }
-
+  &[data-class='2'] .card-rank::before {
+    background-position-x: 100%;
+  }
 
   @for $i from 1 through 5 {
-    &[data-class="#{$i}"] .card-rank { background-position-y: ($i - 1) * 100% / 4; }
-    &[data-class="#{$i}"] .card-class-icon { background-position-y: $i * 100% / 7; }
+    &[data-class='#{$i}'] .card-rank {
+      background-position-y: ($i - 1) * 100% / 4;
+    }
+    &[data-class='#{$i}'] .card-class-icon {
+      background-position-y: $i * 100% / 7;
+    }
   }
-
 
   // ROYAL_OFFER
-  &[data-class="6"]{
-    &::before { background-position-x: 10 * 100% / 11; }
-    .card-grade {
-      display:none;
+  &[data-class='6'] {
+    &::before {
+      background-position-x: 10 * 100% / 11;
     }
-    &[data-offer="5"]::before { background-position-x: 11 * 100% / 11; }
+    .card-grade {
+      display: none;
+    }
+    &[data-offer='5']::before {
+      background-position-x: 11 * 100% / 11;
+    }
   }
-
 
   /***************
   ***** HERO *****
   ***************/
-  &[data-class="7"] {
+  &[data-class='7'] {
     &::before {
-      background-image:url('img/heroes.jpg');
-      background-size:500% 600%;
+      background-image: url('img/heroes.jpg');
+      background-size: 500% 600%;
     }
 
     @for $i from 0 through $heroesNb - 1 {
-      &[data-id="#{$heroesStart + $i}"]::before {
-        background-position-x:($i % 5) * 25%;
-        background-position-y:($i  - ($i % 5) )/ 5 * 100% / 5;
+      &[data-id='#{$heroesStart + $i}']::before {
+        background-position-x: ($i % 5) * 25%;
+        background-position-y: ($i - ($i % 5))/ 5 * 100% / 5;
       }
     }
 
     .card-grade {
-      display:none;
+      display: none;
     }
   }
-
-
 
   /**********************
   ***** DISTINCTION *****
   **********************/
-  &[data-class="8"] {
+  &[data-class='8'] {
     &::before {
-      background-image:url('img/distinctions.jpg');
-      background-size:500%;
+      background-image: url('img/distinctions.jpg');
+      background-size: 500%;
     }
 
     @for $i from 0 through 4 {
-      &[data-id="#{$distinctionStart + $i}"]::before {
-        background-position-x:$i * 25%;
+      &[data-id='#{$distinctionStart + $i}']::before {
+        background-position-x: $i * 25%;
       }
     }
 
     .card-grade {
-      display:none;
+      display: none;
     }
   }
-
 
   /********************
   ***** MERCENARY *****
   ********************/
-  &[data-class="9"] {
+  &[data-class='9'] {
     &::before {
-      background-image:url('img/mercenaries.jpg');
-      background-size:600% 200%;
+      background-image: url('img/mercenaries.jpg');
+      background-size: 600% 200%;
     }
 
     @for $i from 0 through $mercenariesNb - 1 {
-      &[data-id="#{$mercenariesStart + $i}"]::before {
-        background-position-x:($i % 6) * 100% / 5;
-        background-position-y:($i  - ($i % 6) )/ 6 * 100%;
+      &[data-id='#{$mercenariesStart + $i}']::before {
+        background-position-x: ($i % 6) * 100% / 5;
+        background-position-y: ($i - ($i % 6))/ 6 * 100%;
       }
     }
 
     .card-grade {
-      display:none;
+      display: none;
     }
   }
-
 
   /********************
   ***** ARTIFACTS *****
   ********************/
-  &[data-class="10"] {
+  &[data-class='10'] {
     &::before {
-      background-image:url('img/artifacts.jpg');
-      background-size:600% 200%;
+      background-image: url('img/artifacts.jpg');
+      background-size: 600% 200%;
     }
 
     @for $i from 0 through $artifactsNb - 1 {
-      &[data-id="#{$artifactsStart + $i}"]::before {
-        background-position-x:($i % 6) * 100% / 5;
-        background-position-y:($i  - ($i % 6) )/ 6 * 100%;
+      &[data-id='#{$artifactsStart + $i}']::before {
+        background-position-x: ($i % 6) * 100% / 5;
+        background-position-y: ($i - ($i % 6))/ 6 * 100%;
       }
     }
 
     .card-grade {
-      display:none;
+      display: none;
+    }
+  }
+
+  /**********************
+  ****** MYTHOLOGY ******
+  **********************/
+  &[data-class='11'],
+  &[data-class='12'],
+  &[data-class='13'],
+  &[data-class='14'] {
+    &::before {
+      background-image: url('img/idavoll_cards.jpg');
+      background-size: 500% 500%;
+    }
+
+    @for $i from 0 through $mythologyNb - 1 {
+      &[data-id='#{$mythologyStart + $i}']::before {
+        background-position-x: ($i % 5) * 100% / 4;
+        background-position-y: ($i - ($i % 5)) / 5 * 100% / 4;
+      }
+    }
+
+    .card-grade {
+      display: none;
     }
   }
 }

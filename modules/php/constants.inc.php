@@ -33,7 +33,6 @@ define('ST_HOFUD', 46);
 define('ST_PRE_BRISINGAMENS', 47);
 define('ST_BRISINGAMENS', 48);
 
-
 define('ST_TRADE_COIN', 23);
 define('ST_ULINE_TRADE_COIN', 33);
 
@@ -49,7 +48,6 @@ define('ST_NEXT_PLAYER_ENLIST', 39);
 define('ST_ENLIST_CHOOSE_ORDER', 41);
 define('ST_ENLIST_MERCENARY', 40);
 
-
 define('ST_CHOOSE_YLUD_COLUMN', 35);
 define('ST_NEXT_DISTINCTION', 31);
 define('ST_DISTINCTION_EXPLORER', 32);
@@ -57,7 +55,6 @@ define('ST_DISTINCTION_EXPLORER', 32);
 define('ST_PRE_END_OF_GAME', 90);
 define('ST_BRISINGAMENS_DISCARD', 91);
 define('ST_GAME_END', 99);
-
 
 /*
  * Globals
@@ -67,9 +64,7 @@ define('GOBLIN_TAVERN', 0);
 define('DRAGON_TAVERN', 1);
 define('HORSE_TAVERN', 2);
 
-
 define('CURRENT_PLAYER_INDEX', 11);
-
 
 /*
  * Type of cards
@@ -87,13 +82,16 @@ define('DISTINCTION', 8);
 define('MERCENARY', 9);
 define('ARTIFACT', 10);
 
+define('ANIMAL', 11);
+define('ASE', 12);
+define('GIANT', 13);
+define('VALKYRIE', 14);
 
 define('ZOLKUR_ZONE', 80);
 
 // Score
 define('ARTIFACT_SCORE', 6);
 define('EXTRA_SCORE', 7);
-
 
 /*
  * Type of coins
@@ -102,14 +100,12 @@ define('COIN_PLAYER', 0);
 define('COIN_TREASURE', 1);
 define('COIN_DISTINCTION', 2);
 
-
 /*
  * Game option
  */
 define('OPTION_SETUP', 102);
 define('BASIC', 0);
 define('NORMAL', 1);
-
 
 define('OPTION_THINGVELLIR', 103);
 define('NONE', 0);
@@ -118,14 +114,12 @@ define('THINGVELLIR', 1);
 define('OPTION_IDAVOLL', 104);
 define('IDAVOLL', 2);
 
-
 /*
  * User preference option
  */
 define('AUTOPICK', 102);
 define('OFF', 1);
 define('ON', 2);
-
 
 /*
  * HEROES
@@ -167,7 +161,6 @@ define('OLWYN_DOUBLE1', 226);
 define('OLWYN_DOUBLE2', 227);
 define('ZOLKUR', 228);
 
-
 /*
  * DISTINCTIONS
  */
@@ -177,7 +170,6 @@ define('DISTINCTION_MINER', 302);
 define('DISTINCTION_BLACKSMITH', 303);
 define('DISTINCTION_EXPLORER', 304);
 define('DISTINCTION_BLACKSMITH_SPECIAL', 305);
-
 
 /*
  * ARTIFACTS
@@ -212,8 +204,34 @@ define('MERCENARY_9', 409);
 define('MERCENARY_10', 410);
 define('MERCENARY_11', 411);
 
+/*
+ * MYTHOLOGY
+ */
+define('LOKI', 500);
+define('ODIN', 501);
+define('FREYA', 502);
+define('FRIGG', 503);
+define('THOR', 504);
 
+define('GYMIR', 505);
+define('THRIVALDI', 506);
+define('SURT', 507);
+define('HRUNGNIR', 508);
+define('SKYMIR', 509);
 
+define('SVAFA', 510);
+define('HILDR', 511);
+define('BRYNHILDR', 512);
+define('OLRUN', 513);
+define('SIGRDRIFA', 514);
+
+define('RATATOSK', 515);
+define('NIDHOGG', 516);
+define('GARM', 517);
+define('DURATHOR', 518);
+define('HREASVELG', 519);
+
+define('GULLINBURSTI', 520);
 
 /*
  * STATISTICS
