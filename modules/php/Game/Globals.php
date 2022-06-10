@@ -44,7 +44,8 @@ class Globals extends \APP_DbObject
   public static function declare($game){
     // Game options label
     $labels = [
-      "expansion" => OPTION_EXPANSION,
+      "thingvellir" => OPTION_THINGVELLIR,
+      "idavoll" => OPTION_IDAVOLL,
     ];
 
     // Add globals with indexes starting at 10
@@ -67,9 +68,14 @@ class Globals extends \APP_DbObject
   /*
    * Getters
    */
-  public function isExpansion()
+  public function isThingvellir()
   {
-   return self::get('expansion') == THINGVELLIR;
+   return self::get('thingvellir') == THINGVELLIR;
+  }
+
+  public function isIdavoll()
+  {
+   return self::get('idavoll') == IDAVOLL;
   }
 
 

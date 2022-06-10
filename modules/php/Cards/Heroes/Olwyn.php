@@ -5,7 +5,7 @@ class Olwyn extends HeroCard
 {
   public function __construct($row) {
     parent::__construct($row);
-    $this->expansion = true;
+    $this->thingvellir = true;
     $this->id = OLWYN;
     $this->name = 'Olwyn';
     $this->subname = clienttranslate("The Illusionist");

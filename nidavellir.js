@@ -68,7 +68,7 @@ define([
         this.setupInfoPanel();
         this.udpateInfoCounters();
 
-        dojo.toggleClass("ebd-body", "nidavellir-expansion", gamedatas.expansion);
+        dojo.toggleClass("ebd-body", "nidavellir-thingvellir", gamedatas.thingvellir);
 
         this.inherited(arguments);
       },

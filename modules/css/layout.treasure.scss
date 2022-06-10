@@ -1,7 +1,7 @@
 #treasure-container {
   width:378px;
   height:566px;
-  #ebd-body.nidavellir-expansion & { height:580px; }
+  #ebd-body.nidavellir-thingvellir & { height:580px; }
   position:relative;
   margin-right:100px;
   margin-left:20px;
@@ -16,7 +16,7 @@
     margin:0;
     margin-top:20px;
   }
-  [data-mode="compact"] &, #ebd-body.nidavellir-expansion & {
+  [data-mode="compact"] &, #ebd-body.nidavellir-thingvellir & {
     width:566px;
 //    height:406px;
     margin:0;
@@ -40,7 +40,7 @@
       transform: translateX(566px) rotate(88deg);
       transform-origin: top left;
     }
-    [data-mode="compact"] &, #ebd-body.nidavellir-expansion & {
+    [data-mode="compact"] &, #ebd-body.nidavellir-thingvellir & {
       transform: translateX(566px) rotate(88deg);
       transform-origin: top left;
     }
@@ -101,7 +101,7 @@
       width: 93%;
       grid-template-columns: repeat(24,1fr);
     }
-    [data-mode="compact"] &, #ebd-body.nidavellir-expansion & {
+    [data-mode="compact"] &, #ebd-body.nidavellir-thingvellir & {
       height: 337px; //83%;
       width: 93%;
       grid-template-columns: repeat(24,1fr);
@@ -141,7 +141,7 @@
         }
       }
 
-      [data-mode="compact"] &, #ebd-body.nidavellir-expansion & {
+      [data-mode="compact"] &, #ebd-body.nidavellir-thingvellir & {
         @each $i, $row in $treasureLayoutHorizontal {
           @for $j from 1 through length($row) {
             $slot: nth($row, $j);

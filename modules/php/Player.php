@@ -322,7 +322,7 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function canVisitCamp()
   {
-    return Globals::isExpansion() &&
+    return Globals::isThingvellir() &&
       (Globals::getCurrentPlayerIndex() == 0
         || (Cards::getFafnirOwner() == $this->id && !Globals::wasCampVisited())
       );

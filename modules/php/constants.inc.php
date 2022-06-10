@@ -111,10 +111,12 @@ define('BASIC', 0);
 define('NORMAL', 1);
 
 
-define('OPTION_EXPANSION', 103);
+define('OPTION_THINGVELLIR', 103);
 define('NONE', 0);
 define('THINGVELLIR', 1);
 
+define('OPTION_IDAVOLL', 104);
+define('IDAVOLL', 2);
 
 
 /*

@@ -9,7 +9,7 @@ use Nidavellir;
 abstract class HeroCard extends \NID\Cards\AbstractCard
 {
   protected $subname = '';
-  protected $expansion = false;
+  protected $thingvellir = false;
   protected $advanced = false;
   protected $heroClass = null;
 
@@ -19,9 +19,9 @@ abstract class HeroCard extends \NID\Cards\AbstractCard
   }
 
   public function isSupported($options){
-    return (!$this->advanced && !$this->expansion)
+    return (!$this->advanced && !$this->thingvellir)
       || ($this->advanced && $options[OPTION_SETUP] == NORMAL)
-      || ($this->expansion && $options[OPTION_EXPANSION] == THINGVELLIR);
+      || ($this->thingvellir && $options[OPTION_THINGVELLIR] == THINGVELLIR);
   }
 
   public function isDiscardable() { return false; }

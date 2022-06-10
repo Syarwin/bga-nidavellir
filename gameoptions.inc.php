@@ -36,22 +36,43 @@ $game_options = [
     'displaycondition' => [
       [
         'type' => 'otheroptionisnot',
-        'id' => OPTION_EXPANSION,
+        'id' => OPTION_THINGVELLIR,
         'value' => THINGVELLIR,
+      ],
+      [
+        'type' => 'otheroptionisnot',
+        'id' => OPTION_IDAVOLL,
+        'value' => IDAVOLL,
       ]
     ],
   ],
-  OPTION_EXPANSION => [
-    'name' => totranslate("Expansion"),
+  OPTION_THINGVELLIR => [
+    'name' => totranslate("Thingvellir expansion"),
     'values' => [
       NONE => [
-        'name' => totranslate("None"),
-        'description' => totranslate("Only the base game"),
+        'name' => totranslate("No"),
+        'description' => totranslate("Thingvellir expansion excluded"),
       ],
       THINGVELLIR => [
-        'name' => totranslate("Thingvellir"),
+        'name' => totranslate("Yes"),
         'tmdisplay' => totranslate("Thingvellir"),
-        'description' => totranslate("Thingvellir expansion"),
+        'description' => totranslate("Thingvellir expansion included"),
+        'nobeginner' => true,
+      ]
+    ],
+    "default" => NONE,
+  ],
+  OPTION_IDAVOLL => [
+    'name' => totranslate("Idavoll expansion"),
+    'values' => [
+      NONE => [
+        'name' => totranslate("No"),
+        'description' => totranslate("Idavoll expansion excluded"),
+      ],
+      IDAVOLL => [
+        'name' => totranslate("Yes"),
+        'tmdisplay' => totranslate("Idavoll"),
+        'description' => totranslate("Idavoll expansion included"),
         'nobeginner' => true,
       ]
     ],

@@ -19,7 +19,7 @@ trait EnlistMercenaryTrait
    */
   public function stStartMercenaryEnlistment()
   {
-    if(!Globals::isExpansion()){
+    if(!Globals::isThingvellir()){
       $this->gamestate->nextState('skip');
       return;
     }

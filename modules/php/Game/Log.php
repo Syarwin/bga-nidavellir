@@ -84,14 +84,14 @@ class Log extends \NID\Helpers\DB_Manager
 
   public static function getLastActionArg($action, $pId, $limit = 1)
   {
-    return self::getLastAction($action, $pId, $limit)['arg'];
+    return self::getLastAction($action, $pId, $limit)['arg'] ?? [];
   }
 
 
 
   public static function getTurnOrder()
   {
-    return self::getLastActionArg('turnOrder', -1)['order'];
+    return self::getLastActionArg('turnOrder', -1)['order'] ?? null;
   }
 
   public static function getEnlistOrder()

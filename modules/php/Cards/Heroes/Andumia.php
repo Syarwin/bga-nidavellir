@@ -6,7 +6,7 @@ class Andumia extends HeroCard
 {
   public function __construct($row) {
     parent::__construct($row);
-    $this->expansion = true;
+    $this->thingvellir = true;
     $this->id = ANDUMIA;
     $this->name = 'Andumia';
     $this->subname = clienttranslate("The Necromancer");

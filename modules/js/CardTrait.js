@@ -16,7 +16,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       this.setupHall();
       this.setupDistinctions();
       this.setupDiscard();
-      if(this.gamedatas.expansion)
+      if(this.gamedatas.thingvellir)
         this.setupCamp();
       dojo.place("<div id='card-overlay'></div>", "ebd-body");
     },
