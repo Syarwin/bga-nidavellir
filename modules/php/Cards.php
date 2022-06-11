@@ -249,6 +249,18 @@ class Cards extends Helpers\Pieces
   {
     return self::getOwner(BRISINGAMENS);
   }
+  public function getDurathorOwner()
+  {
+    return self::getOwner(DURATHOR);
+  }
+  public function getRatatoskOwner()
+  {
+    return self::getOwner(RATATOSK);
+  }
+  public function getGarmkOwner()
+  {
+    return self::getOwner(GARM);
+  }
 
   /*********************
    **** DISTINCTIONS ****

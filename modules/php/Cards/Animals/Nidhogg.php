@@ -14,7 +14,12 @@ class Nidhogg extends AnimalCard
         'Ajoute 5 points à votre Valeur de Bravoure + 2 points par grade présent dans la colonne , y compris le sien.'
       ),
     ];
-    $this->animalClass = BLACKSMITH;
+    $this->animalClass = WARRIOR;
     $this->grade = [5];
+  }
+
+  public function updateBraveryValues(&$values, $player)
+  {
+    $values[WARRIOR] += $this->getBV() + $player->getRanks()[WARRIOR] * 2;
   }
 }

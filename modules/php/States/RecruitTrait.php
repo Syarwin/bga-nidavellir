@@ -180,7 +180,7 @@ trait RecruitTrait
     $recruit = $player->getLastAction("recruit");
     $card = Cards::get($recruit['card']['id']);
     return [
-      'n' => $card->getDiscardRequirement(),
+      'n' => $card->getDiscardRequirement($player),
       'cards' => array_map(function($card){ return $card->getId(); }, $player->getDiscardableCards()),
     ];
   }

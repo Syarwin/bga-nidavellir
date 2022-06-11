@@ -20,4 +20,9 @@ class Garm extends AnimalCard
     $this->animalClass = EXPLORER;
     $this->grade = [9, 0];
   }
+
+  public function updateBraveryValues(&$values, $player)
+  {
+    $values[EXPLORER] += $this->getBV() + $player->getRanks()[EXPLORER] * 1;
+  }
 }

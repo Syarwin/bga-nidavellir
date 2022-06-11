@@ -29,7 +29,7 @@ class Bonfur extends HeroCard
     return 'discard';
   }
 
-  public function getDiscardRequirement(){
+  public function getDiscardRequirement($player){
     return 1;
   }
 }

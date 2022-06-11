@@ -1,16 +1,16 @@
 .nidavellir_popin {
-  width:80%;
-  position:relative;
+  width: 80%;
+  position: relative;
 
   .nidavellir_popin_closeicon {
     background-color: #60322e;
     border-radius: 50%;
     width: 45px;
     height: 45px;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    position:absolute;
+    position: absolute;
     top: -15px;
     right: -15px;
     font-size: 100%;
@@ -18,86 +18,99 @@
 
     &:hover {
       text-decoration: none;
-      color:#CCC !important;
-      transform:scale(1.1);
+      color: #ccc !important;
+      transform: scale(1.1);
     }
 
     i {
-      margin-top:-2px;
+      margin-top: -2px;
     }
   }
 }
 
-
-
 #popin_showOverview {
-  z-index:2000;
-  padding:0;
-  width:auto;
-  min-width:300px;
-  background-image:url("img/background_score.png");
+  z-index: 2000;
+  padding: 0;
+  width: auto;
+  min-width: 300px;
+  background-image: url('img/background_score.png');
   background-size: 100% 100%;
   border-radius: 10px;
   box-shadow: 2px 2px 10px black;
-  background-color:white;
+  background-color: white;
 
   #popin_showOverview_close {
-
   }
 
   #popin_showOverview_contents {
-    padding:30px;
+    padding: 30px;
 
     table {
-      width:100%;
+      width: 100%;
       border-collapse: separate;
       border-spacing: 2px 6px;
 
       th {
-        min-width:50px;
-        height:50px;
+        min-width: 50px;
+        height: 50px;
         vertical-align: middle;
         text-align: center;
 
-        background: rgb(140,140,140);
+        background: rgb(140, 140, 140);
         background: linear-gradient(90deg, #ddd 0%, #fff 20%, #fff 80%, #ddd 100%);
-        font-family: "Norse";
+        font-family: 'Norse';
         font-weight: bold;
-        font-size:25px;
+        font-size: 25px;
         box-shadow: 0px 0px 11px -2px black;
-        padding:3px 30px;
+        padding: 3px 30px;
 
         &:first-of-type {
-          background:none;
-          border-right:none;
+          background: none;
+          border-right: none;
           box-shadow: none;
         }
       }
 
       tbody {
         tr {
-          height:45px;
+          height: 45px;
 
-          &#overview-row-0 td { background-color:#8c949990; }
-          &#overview-row-1 td { background-color:#8d85ac90; }
-          &#overview-row-2 td { background-color:#719b8a90; }
-          &#overview-row-3 td { background-color:#9fb7c790; }
-          &#overview-row-4 td { background-color:#c7a97f90; }
-          &#overview-row-5 td { background-color:#a8757090; }
-          &#overview-row-6 td { background-color:#ddc85590; }
-          &#overview-row-7 td { background-color:#f7f7f790; }
+          &#overview-row-0 td {
+            background-color: #8c949990;
+          }
+          &#overview-row-1 td {
+            background-color: #8d85ac90;
+          }
+          &#overview-row-2 td {
+            background-color: #719b8a90;
+          }
+          &#overview-row-3 td {
+            background-color: #9fb7c790;
+          }
+          &#overview-row-4 td {
+            background-color: #c7a97f90;
+          }
+          &#overview-row-5 td {
+            background-color: #a8757090;
+          }
+          &#overview-row-6 td {
+            background-color: #ddc85590;
+          }
+          &#overview-row-7 td {
+            background-color: #f7f7f790;
+          }
 
           td {
             vertical-align: middle;
             text-align: center;
-            padding:5px 8px;
-            word-wrap:anywhere;
-            font-family: "Norse";
+            padding: 5px 8px;
+            word-wrap: anywhere;
+            font-family: 'Norse';
             font-weight: bold;
-            font-size:20px;
+            font-size: 20px;
 
             &:first-of-type {
-              border-right:none;
+              border-right: none;
             }
 
             i {
@@ -107,19 +120,19 @@
             }
 
             &.row-header {
-              padding:0;
+              padding: 0;
               position: relative;
               width: 100px;
 
               .row-rank {
                 height: 65px;
                 width: 72%;
-                background-image: url("img/ranks_scoring.png");
+                background-image: url('img/ranks_scoring.png');
                 background-size: 100% 800%;
                 position: absolute;
                 top: -3px;
                 left: 0;
-                display:flex;
+                display: flex;
                 justify-content: center;
                 align-items: center;
               }
@@ -128,41 +141,43 @@
 
           @for $i from 0 through 7 {
             &#overview-row-#{$i} td.row-header {
-              .row-rank { background-position-y:$i * 100% / 7; }
+              .row-rank {
+                background-position-y: $i * 100% / 7;
+              }
             }
           }
 
           &#overview-total {
-            height:80px;
+            height: 80px;
 
             td {
-              position:relative;
+              position: relative;
               line-height: 44px;
-              font-size:24px;
+              font-size: 24px;
               vertical-align: top;
 
               &::before {
-                content:'';
-                display:block;
-                position:absolute;
-                top:0px;
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0px;
                 left: -4%;
                 width: 110%;
-                height:100%;
-                background-image:url('img/players_scores.png');
-                background-size:100% 500%;
-                z-index:-1;
-                opacity:0.8;
+                height: 100%;
+                background-image: url('img/players_scores.png');
+                background-size: 100% 500%;
+                z-index: -1;
+                opacity: 0.8;
               }
             }
 
             td:nth-of-type(1)::before {
-              display:none;
+              display: none;
             }
 
             @for $i from 0 through 4 {
               td:nth-of-type(#{$i + 2})::before {
-                background-position-y:$i * 25%;
+                background-position-y: $i * 25%;
               }
             }
           }
@@ -172,12 +187,10 @@
   }
 }
 
-
-
 #popin_showHeroes {
   z-index: 2000;
   width: 800px;
-  max-width:90%;
+  max-width: 90%;
   //filter:drop-shadow(3px 3px 10px black);
 
   &::before {
@@ -188,7 +201,7 @@
     left: -1%;
     width: 106%;
     height: 105%;
-    background-image: url("img/background_heroes.png");
+    background-image: url('img/background_heroes.png');
     background-size: 100% 100%;
   }
 
@@ -198,7 +211,7 @@
   }
 
   #popin_showHeroes_contents {
-    padding:15px;
+    padding: 15px;
 
     #hall-container {
       width: 100%;
@@ -211,12 +224,12 @@
         justify-content: center;
 
         .card {
-          margin:10px 10.5px;
+          margin: 10px 10.5px;
 
           &.selected {
             border: 2px solid green;
             margin: 8px 8.5px;
-            transform:scale(1.08);
+            transform: scale(1.08);
           }
         }
       }
@@ -224,101 +237,98 @@
   }
 }
 
-
-
-
-#popin_showDistinctions, #popin_distinctionExplorer {
+#popin_showDistinctions,
+#popin_distinctionExplorer {
   z-index: 2000;
   padding: 10px 30px 10px 10px;
   width: 420px;
-  background-image: url("img/background_distinctions.png");
+  background-image: url('img/background_distinctions.png');
   background-size: 100% 100%;
   //filter:drop-shadow(3px 3px 10px black);
 
   .nidavellir_popin_closeicon {
-    right:-7px;
+    right: -7px;
   }
 
-  #popin_showDistinctions_contents, #popin_distinctionExplorer_contents {
-    padding:15px;
+  #popin_showDistinctions_contents,
+  #popin_distinctionExplorer_contents {
+    padding: 15px;
 
     #evaluation-container {
-      width:400px;
-      height:auto;
-      position:relative;
+      width: 400px;
+      height: auto;
+      position: relative;
 
       #evaluation {
         display: flex;
         flex-flow: row;
         flex-wrap: wrap;
-        justify-content:center;
+        justify-content: center;
 
         .card {
-          margin:15px;
+          margin: 15px;
         }
       }
     }
   }
 
- #popin_distinctionExplorer_contents {
-   display:flex;
-   justify-content: center;
-   align-items: center;
-   min-height:420px;
- }
+  #popin_distinctionExplorer_contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    flex-wrap: wrap;
+  }
 }
 
-
-
-
 #popin_showHelpsheet {
-  z-index:2000;
-  padding:0;
-  width:70%;
-  min-width:300px;
-  background-image:url("img/background_score.png");
+  z-index: 2000;
+  padding: 0;
+  width: 70%;
+  min-width: 300px;
+  background-image: url('img/background_score.png');
   background-size: 100% 100%;
   border-radius: 10px;
   box-shadow: 2px 2px 10px black;
-  background-color:white;
+  background-color: white;
 
   #popin_showHelpsheet_contents {
-    padding:20px;
+    padding: 20px;
 
     #helper-classes {
       display: flex;
       flex-flow: column;
 
       .helper-classes-row {
-        margin:10px 0px;
-        padding:10px;
-        background:rgba(255,255,255,0.5);
+        margin: 10px 0px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.5);
         display: flex;
         flex-flow: row;
 
         .helpers-classes-cards {
-          width:220px;
+          width: 220px;
           flex-shrink: 0;
           display: flex;
         }
 
         .helper-classes-desc {
           flex-grow: 1;
-          padding:0px 10px;
+          padding: 0px 10px;
 
           h2 {
-            font-family: "Norse";
+            font-family: 'Norse';
             font-weight: bold;
-            font-size:24px;
+            font-size: 24px;
           }
 
           ul {
             display: flex;
             flex-wrap: wrap;
-            margin-top:10px;
+            margin-top: 10px;
             li {
               padding: 2px 5px;
-              font-family: "Norse";
+              font-family: 'Norse';
               font-weight: bold;
               font-size: 20px;
               border: 1px solid #a8a8a8;
@@ -327,52 +337,62 @@
         }
 
         .helper-classes-symbol {
-          width:140px;
-          height:140px;
-          background-image:url('img/classes.png');
+          width: 140px;
+          height: 140px;
+          background-image: url('img/classes.png');
           background-size: 100% 800%;
           flex-shrink: 0;
         }
 
         @for $i from 1 through 5 {
-          &[data-class="#{$i}"] .helper-classes-symbol { background-position-y: $i * 100% / 7; }
+          &[data-class='#{$i}'] .helper-classes-symbol {
+            background-position-y: $i * 100% / 7;
+          }
         }
 
-        &[data-class="1"] h2 { color: #554696; }
-        &[data-class="2"] h2 { color: #158353; }
-        &[data-class="3"] h2{ color: #3e9bd6; }
-        &[data-class="4"] h2{ color: #ef7926; }
-        &[data-class="5"] h2{ color: #923425; }
+        &[data-class='1'] h2 {
+          color: #554696;
+        }
+        &[data-class='2'] h2 {
+          color: #158353;
+        }
+        &[data-class='3'] h2 {
+          color: #3e9bd6;
+        }
+        &[data-class='4'] h2 {
+          color: #ef7926;
+        }
+        &[data-class='5'] h2 {
+          color: #923425;
+        }
       }
     }
   }
 }
-
-
 
 #popin_discard {
   z-index: 2000;
   padding: 10px 30px 10px 10px;
   width: 760px;
   min-height: 500px;
-  background-image: url("img/background_distinctions.png");
+  background-image: url('img/background_distinctions.png');
   background-size: 100% 100%;
   //filter:drop-shadow(3px 3px 10px black);
 
   .nidavellir_popin_closeicon {
-    right:-7px;
+    right: -7px;
   }
 
- #popin_discard_contents {
-   display:flex;
-   justify-content: center;
-   align-items: center;
-   min-height:420px;
-   flex-wrap: wrap;
-   padding:20px;
+  #popin_discard_contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    flex-wrap: wrap;
+    padding: 20px;
 
-   .card {
-     margin:10.5px;
-   }
- }
+    .card {
+      margin: 10.5px;
+    }
+  }
 }

@@ -2447,7 +2447,7 @@ html {
     color: white !important; }
     .nidavellir_popin .nidavellir_popin_closeicon:hover {
       text-decoration: none;
-      color: #CCC !important;
+      color: #ccc !important;
       transform: scale(1.1); }
     .nidavellir_popin .nidavellir_popin_closeicon i {
       margin-top: -2px; }
@@ -2475,7 +2475,7 @@ html {
         text-align: center;
         background: #8c8c8c;
         background: linear-gradient(90deg, #ddd 0%, #fff 20%, #fff 80%, #ddd 100%);
-        font-family: "Norse";
+        font-family: 'Norse';
         font-weight: bold;
         font-size: 25px;
         box-shadow: 0px 0px 11px -2px black;
@@ -2507,7 +2507,7 @@ html {
           text-align: center;
           padding: 5px 8px;
           word-wrap: anywhere;
-          font-family: "Norse";
+          font-family: 'Norse';
           font-weight: bold;
           font-size: 20px; }
           #popin_showOverview #popin_showOverview_contents table tbody tr td:first-of-type {
@@ -2613,32 +2613,48 @@ html {
             margin: 8px 8.5px;
             transform: scale(1.08); }
 
-#popin_showDistinctions, #popin_distinctionExplorer {
+#popin_showDistinctions,
+#popin_distinctionExplorer {
   z-index: 2000;
   padding: 10px 30px 10px 10px;
   width: 420px;
   background-image: url("img/background_distinctions.png");
   background-size: 100% 100%; }
-  #popin_showDistinctions .nidavellir_popin_closeicon, #popin_distinctionExplorer .nidavellir_popin_closeicon {
+  #popin_showDistinctions .nidavellir_popin_closeicon,
+  #popin_distinctionExplorer .nidavellir_popin_closeicon {
     right: -7px; }
-  #popin_showDistinctions #popin_showDistinctions_contents, #popin_showDistinctions #popin_distinctionExplorer_contents, #popin_distinctionExplorer #popin_showDistinctions_contents, #popin_distinctionExplorer #popin_distinctionExplorer_contents {
+  #popin_showDistinctions #popin_showDistinctions_contents,
+  #popin_showDistinctions #popin_distinctionExplorer_contents,
+  #popin_distinctionExplorer #popin_showDistinctions_contents,
+  #popin_distinctionExplorer #popin_distinctionExplorer_contents {
     padding: 15px; }
-    #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container, #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container, #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container, #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container {
+    #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container,
+    #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container,
+    #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container,
+    #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container {
       width: 400px;
       height: auto;
       position: relative; }
-      #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation, #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container #evaluation, #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container #evaluation, #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container #evaluation {
+      #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation,
+      #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container #evaluation,
+      #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container #evaluation,
+      #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container #evaluation {
         display: flex;
         flex-flow: row;
         flex-wrap: wrap;
         justify-content: center; }
-        #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation .card, #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container #evaluation .card, #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container #evaluation .card, #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container #evaluation .card {
+        #popin_showDistinctions #popin_showDistinctions_contents #evaluation-container #evaluation .card,
+        #popin_showDistinctions #popin_distinctionExplorer_contents #evaluation-container #evaluation .card,
+        #popin_distinctionExplorer #popin_showDistinctions_contents #evaluation-container #evaluation .card,
+        #popin_distinctionExplorer #popin_distinctionExplorer_contents #evaluation-container #evaluation .card {
           margin: 15px; }
-  #popin_showDistinctions #popin_distinctionExplorer_contents, #popin_distinctionExplorer #popin_distinctionExplorer_contents {
+  #popin_showDistinctions #popin_distinctionExplorer_contents,
+  #popin_distinctionExplorer #popin_distinctionExplorer_contents {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 420px; }
+    min-height: 420px;
+    flex-wrap: wrap; }
 
 #popin_showHelpsheet {
   z-index: 2000;
@@ -2669,7 +2685,7 @@ html {
           flex-grow: 1;
           padding: 0px 10px; }
           #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row .helper-classes-desc h2 {
-            font-family: "Norse";
+            font-family: 'Norse';
             font-weight: bold;
             font-size: 24px; }
           #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row .helper-classes-desc ul {
@@ -2678,7 +2694,7 @@ html {
             margin-top: 10px; }
             #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row .helper-classes-desc ul li {
               padding: 2px 5px;
-              font-family: "Norse";
+              font-family: 'Norse';
               font-weight: bold;
               font-size: 20px;
               border: 1px solid #a8a8a8; }
@@ -2688,25 +2704,25 @@ html {
           background-image: url("img/classes.png");
           background-size: 100% 800%;
           flex-shrink: 0; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="1"] .helper-classes-symbol {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='1'] .helper-classes-symbol {
           background-position-y: 14.2857142857%; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="2"] .helper-classes-symbol {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='2'] .helper-classes-symbol {
           background-position-y: 28.5714285714%; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="3"] .helper-classes-symbol {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='3'] .helper-classes-symbol {
           background-position-y: 42.8571428571%; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="4"] .helper-classes-symbol {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='4'] .helper-classes-symbol {
           background-position-y: 57.1428571429%; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="5"] .helper-classes-symbol {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='5'] .helper-classes-symbol {
           background-position-y: 71.4285714286%; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="1"] h2 {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='1'] h2 {
           color: #554696; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="2"] h2 {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='2'] h2 {
           color: #158353; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="3"] h2 {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='3'] h2 {
           color: #3e9bd6; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="4"] h2 {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='4'] h2 {
           color: #ef7926; }
-        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class="5"] h2 {
+        #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='5'] h2 {
           color: #923425; }
 
 #popin_discard {

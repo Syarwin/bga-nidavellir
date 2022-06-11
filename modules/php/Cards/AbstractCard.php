@@ -41,9 +41,9 @@ class AbstractCard
   public function getPId(){ return $this->pId; }
   public function getClass(){ return $this->class; }
   public function getRanks(){ return is_array($this->grade)? count($this->grade) : 0; }
+  public function getGrade(){ return $this->grade; }
   public function getLocation(){ return $this->location; }
   public function getBV(){
-    //var_dump($this->grade);
     return is_array($this->grade)?
       array_reduce($this->grade, function($carry, $rank){ return $carry + $rank; }, 0)
       : 0;
