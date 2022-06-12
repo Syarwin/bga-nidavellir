@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `card` (
   `card_state` int(10),
   `class` int(10),
   `grade` varchar(255),
+  `flag` SMALLINT(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

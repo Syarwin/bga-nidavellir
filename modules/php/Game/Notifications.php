@@ -316,6 +316,27 @@ class Notifications
   }
 
 
+  /**********************
+  ******* IDAVOLL *******
+  **********************/
+
+  public static function denyCapture($player, $card, $giant){
+    self::notifyAll('denyCapture', clienttranslate('${player_name} does not capture the dwarf and lose the giant\'s effect'), [
+      'player' => $player,
+      'card'  => $card,
+      'giant' => $giant,
+    ]);
+  }
+
+
+  public static function capture($player, $giant, $card){
+    self::notifyAll('capture', clienttranslate('${player_name} captures ${card_class}${card_class_symbol} and trigger the giant\'s effect'), [
+      'player' => $player,
+      'card'  => $card,
+      'giant' => $giant->getUiData(),
+    ]);
+  }
+
 
   /*
    * Automatically adds some standard field about player and/or card

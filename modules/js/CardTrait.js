@@ -106,6 +106,12 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       dojo.connect($("card-" + card.id), "click", () => this.onClickCard(card) );
       this.addTooltipHtml('card-' + card.id, this.format_block('jstpl_cardTooltip', card));
 
+      if(card.class == 13 && card.flag == 0 && card.location.substr(0, 12) == "command-zone"){
+        // GIANT
+        let tokenLocation = card.location.substr(0, card.location.length - 1) + card.giantClass;
+        dojo.attr(tokenLocation, 'data-capture', '1');
+      }
+
       if(animation)
         this.slideFromLeft('card-' + card.id);
     },

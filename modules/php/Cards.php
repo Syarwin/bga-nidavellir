@@ -13,7 +13,7 @@ class Cards extends Helpers\Pieces
 {
   protected static $table = 'card';
   protected static $prefix = 'card_';
-  protected static $customFields = ['class', 'grade'];
+  protected static $customFields = ['class', 'grade', 'flag'];
   protected static function cast($card)
   {
     if (in_array($card['class'], [BLACKSMITH, HUNTER, WARRIOR, MINER, EXPLORER])) {
@@ -38,6 +38,8 @@ class Cards extends Helpers\Pieces
       return self::getAnimal($card['id'], $card);
     } elseif ($card['class'] == ASE) {
       return self::getAse($card['id'], $card);
+    } elseif ($card['class'] == GIANT) {
+      return self::getGiant($card['id'], $card);
     }
   }
 
@@ -396,6 +398,14 @@ class Cards extends Helpers\Pieces
     ODIN => 'Odin',
   ];
 
+  public static $giants = [
+    SKYMIR => 'Skymir',
+    SURT => 'Surt',
+    GYMIR => 'Gymir',
+    HRUNGNIR => 'Hrungnir',
+    THRIVALDI => 'Thrivaldi',
+  ];
+
   public static function createMythology()
   {
     $values = [];
@@ -404,6 +414,9 @@ class Cards extends Helpers\Pieces
     }
     foreach (self::$ases as $aId => $class) {
       $values[] = [$aId, 'mythology', ASE, null];
+    }
+    foreach (self::$giants as $aId => $class) {
+      $values[] = [$aId, 'mythology', GIANT, null];
     }
 
     self::DB()
@@ -421,6 +434,12 @@ class Cards extends Helpers\Pieces
   public static function getAse($id, $row = null)
   {
     $className = '\NID\Cards\Ases\\' . self::$ases[$id];
+    return new $className($row);
+  }
+
+  public static function getGiant($id, $row = null)
+  {
+    $className = '\NID\Cards\Giants\\' . self::$giants[$id];
     return new $className($row);
   }
 

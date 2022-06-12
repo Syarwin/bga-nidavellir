@@ -160,6 +160,11 @@ class Nidavellir extends Table
       $sql = 'ALTER TABLE `DBPREFIX_player` ADD `player_autopick` SMALLINT(5) UNSIGNED NOT NULL';
       self::applyDbUpgradeToAllDB($sql);
     }
+
+    if ($from_version <= 2104301643) {
+      $sql = 'ALTER TABLE `DBPREFIX_card` ADD `flag` SMALLINT(5) NOT NULL DEFAULT 0';
+      self::applyDbUpgradeToAllDB($sql);
+    }
   }
 
   ///////////////////////////////////////////////////////////

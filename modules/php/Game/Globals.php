@@ -9,22 +9,25 @@ use Nidavellir;
 class Globals extends \APP_DbObject
 {
   /* Exposing methods from Table object singleton instance */
-  protected static function init($name, $value){
+  protected static function init($name, $value)
+  {
     Nidavellir::get()->setGameStateInitialValue($name, $value);
   }
 
-  protected static function set($name, $value){
+  protected static function set($name, $value)
+  {
     Nidavellir::get()->setGameStateValue($name, $value);
   }
 
-  public static function get($name){
+  public static function get($name)
+  {
     return Nidavellir::get()->getGameStateValue($name);
   }
 
-  protected static function inc($name, $value = 1){
+  protected static function inc($name, $value = 1)
+  {
     return Nidavellir::get()->incGameStateValue($name, $value);
   }
-
 
   /*
    * Declare globals (in the constructor of game.php)
@@ -39,18 +42,20 @@ class Globals extends \APP_DbObject
     'sourceState' => 0,
     'campVisited' => 0,
     'brisingamens' => 0,
+    'captureTokens' => 0,
   ];
 
-  public static function declare($game){
+  public static function declare($game)
+  {
     // Game options label
     $labels = [
-      "thingvellir" => OPTION_THINGVELLIR,
-      "idavoll" => OPTION_IDAVOLL,
+      'thingvellir' => OPTION_THINGVELLIR,
+      'idavoll' => OPTION_IDAVOLL,
     ];
 
     // Add globals with indexes starting at 10
     $id = 10;
-    foreach(self::$globals as $name => $initValue){
+    foreach (self::$globals as $name => $initValue) {
       $labels[$name] = $id++;
     }
     $game->initGameStateLabels($labels);
@@ -59,8 +64,9 @@ class Globals extends \APP_DbObject
   /*
    * Init
    */
-  public static function setupNewGame(){
-    foreach(self::$globals as $name => $initValue){
+  public static function setupNewGame()
+  {
+    foreach (self::$globals as $name => $initValue) {
       self::init($name, $initValue);
     }
   }
@@ -70,14 +76,13 @@ class Globals extends \APP_DbObject
    */
   public function isThingvellir()
   {
-   return self::get('thingvellir') == THINGVELLIR;
+    return self::get('thingvellir') == THINGVELLIR;
   }
 
   public function isIdavoll()
   {
-   return self::get('idavoll') == IDAVOLL;
+    return self::get('idavoll') == IDAVOLL;
   }
-
 
   public function getAge()
   {
@@ -114,7 +119,6 @@ class Globals extends \APP_DbObject
     return self::get('campVisited') == 1;
   }
 
-
   /*
    * Setters
    */
@@ -141,7 +145,6 @@ class Globals extends \APP_DbObject
     self::set('campVisited', 0);
     return self::inc('currentTavern', 1);
   }
-
 
   public function incCurrentPlayerIndex($step = 1)
   {
@@ -183,10 +186,31 @@ class Globals extends \APP_DbObject
     self::set('campVisited', 1);
   }
 
-
   public function incBrisingamens()
   {
     return self::inc('brisingamens', 1);
   }
 
+  /*
+   * Giant tokens
+   */
+  public function getCaptureTokens()
+  {
+    $t = (int) self::get('captureTokens');
+    $bin = [false];
+    for ($i = 1; $i <= 5; $i++) {
+      $bin[$i] = $t % 2 == 1;
+      $t = intdiv($t, 2);
+    }
+
+    return $bin;
+  }
+
+  public function setCaptureToken($class, $value)
+  {
+    $t = self::getCaptureTokens();
+    $t[$class] = $value;
+    $n = $t[1] + 2 * $t[2] + 4 * $t[3] + 8 * $t[4] + 16 * $t[5];
+    self::set('captureTokens', $n);
+  }
 }

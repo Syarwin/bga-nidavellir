@@ -383,4 +383,34 @@ class Player extends \NID\Helpers\DB_Manager
     return Globals::isThingvellir() &&
       (Globals::getCurrentPlayerIndex() == 0 || (Cards::getFafnirOwner() == $this->id && !Globals::wasCampVisited()));
   }
+
+  /**********************
+   ****** IDAVOLL *******
+   **********************/
+   public function getCapturingGiant($card)
+   {
+     foreach ($this->getCards() as $giant) {
+       if ($giant->getClass() == GIANT && $giant->canCapture($card)) {
+         return $giant;
+       }
+     }
+
+     return null;
+   }
+
+
+  public function canCapture($card)
+  {
+    return !is_null($this->getCapturingGiant($card));
+  }
+
+  public function denyCapture($card)
+  {
+    foreach ($this->getCards() as $giant) {
+      if ($giant->getClass() == GIANT && $giant->canCapture($card)) {
+        $giant->denyCapture();
+        Notifications::denyCapture($this, $card, $giant);
+      }
+    }
+  }
 }

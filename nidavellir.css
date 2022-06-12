@@ -1241,6 +1241,27 @@ html {
             background-position-y: 57.1428571429%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_5::before {
             background-position-y: 71.4285714286%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class[data-capture="1"]::after {
+            content: '';
+            display: block;
+            position: absolute;
+            z-index: 1;
+            width: 28px;
+            height: 39px;
+            top: -70px;
+            left: calc(50% - 14px);
+            background-image: url("img/giant_tokens.png");
+            background-size: 500%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_1::after {
+            background-position-x: 0%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_2::after {
+            background-position-x: 25%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_3::after {
+            background-position-x: 50%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_4::after {
+            background-position-x: 75%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_5::after {
+            background-position-x: 100%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class .card {
             margin: 0px 8.5px; }
             #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class .card[data-ranks="0"] {

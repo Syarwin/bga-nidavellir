@@ -16,6 +16,7 @@ class AbstractCard
   protected $zone = null;
   protected $name = '';
   protected $tooltip = [];
+  protected $flag = 0;
 
 
   public function __construct($row) {
@@ -25,6 +26,7 @@ class AbstractCard
       $this->location = $row['location'];
       $this->state = $row['state'];
       $this->class = $row['class'];
+      $this->flag = $row['flag'];
       $this->grade = json_decode($row['grade']);
 
       if($data[0] == "command-zone"){

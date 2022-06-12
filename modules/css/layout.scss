@@ -295,6 +295,24 @@
           }
 
 
+          &[data-capture="1"]::after {
+            content: '';
+            display: block;
+            position: absolute;
+            z-index: 1;
+            width: 28px;
+            height: 39px;
+            top: -70px;
+            left: calc(50% - 14px);
+            background-image: url("img/giant_tokens.png");
+            background-size: 500%;
+          }
+
+          @for $i from 1 through 5 {
+            &.card-class_#{$i}::after { background-position-x: ($i - 1) * 100% / 4; }
+          }
+
+
           .card {
             margin: 0px 8.5px;
 

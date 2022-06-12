@@ -86,7 +86,8 @@ class action_nidavellir extends APP_GameAction
   {
     self::setAjaxMode();
     $cardId = self::getArg("cardId", AT_posint, true);
-    $this->game->actRecruit($cardId);
+    $capture = self::getArg("capture", AT_bool, false, false);
+    $this->game->actRecruit($cardId, $capture);
     self::ajaxResponse();
   }
 

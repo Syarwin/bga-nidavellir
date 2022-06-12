@@ -233,6 +233,10 @@ define('HREASVELG', 519);
 
 define('GULLINBURSTI', 520);
 
+define('GIANT_PENDING', 0);
+define('GIANT_CAPTURED', 1);
+define('GIANT_DENIED', 2);
+
 /*
  * STATISTICS
  */
