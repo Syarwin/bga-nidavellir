@@ -169,6 +169,11 @@ var jstpl_playerBoard = `
         <i class="fa fa-star"></i>
       </div>
 
+      <div class="card-class-score class-mythology">
+        <span id="command-zone-score_\${id}_7"></span>
+        <i class="fa fa-star"></i>
+      </div>
+
       <div class="card-class-score">
         <span id="command-zone-score_\${id}_0"></span>
         <i class="fa fa-star"></i>
@@ -351,6 +356,9 @@ var jstpl_overview = `
       <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-row-7">
+      <td class="row-header"><div class="row-rank"></div></td>
+    </tr>
+    <tr id="overview-row-8">
       <td class="row-header"><div class="row-rank"></div></td>
     </tr>
     <tr id="overview-total">

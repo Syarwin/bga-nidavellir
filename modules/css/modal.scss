@@ -128,7 +128,7 @@
                 height: 65px;
                 width: 72%;
                 background-image: url('img/ranks_scoring.png');
-                background-size: 100% 800%;
+                background-size: 100% 900%;
                 position: absolute;
                 top: -3px;
                 left: 0;
@@ -139,10 +139,10 @@
             }
           }
 
-          @for $i from 0 through 7 {
+          @for $i from 0 through 8 {
             &#overview-row-#{$i} td.row-header {
               .row-rank {
-                background-position-y: $i * 100% / 7;
+                background-position-y: $i * 100% / 8;
               }
             }
           }

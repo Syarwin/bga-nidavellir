@@ -216,7 +216,7 @@
               width: 30px;
               height: 29px;
               background-image: url("img/ranks_scoring.png");
-              background-size: 100% 800%;
+              background-size: 100% 900%;
               margin-bottom: -6px;
             }
 
@@ -229,14 +229,21 @@
             }
           }
 
-          @for $i from 0 through 5 {
-            &.card-class_#{$i} .rank { background-position-y: $i * 100% / 7; }
+          @for $i from 0 through 6 {
+            &.card-class_#{$i} .rank { background-position-y: $i * 100% / 8; }
           }
 
           .class-artifact {
             color:#a48421;
             i {
               color:#a48421;
+            }
+          }
+
+          .class-mythology {
+            color:#cc448a;
+            i {
+              color:#cc448a;
             }
           }
 
@@ -410,8 +417,21 @@
   #camp-container {
     display:none !important;
   }
+
+  .card-class-score.class-artifact {
+    display:none !important;
+  }
 }
 
+#ebd-body:not(.nidavellir-idavoll) {
+  #overview-row-7 {
+    display:none !important;
+  }
+
+  .card-class-score.class-mythology {
+    display:none !important;
+  }
+}
 
 #card-overlay {
   opacity:0;

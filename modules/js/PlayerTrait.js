@@ -47,8 +47,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
         this._ranksCounters[player.id] = {};
         this._overviewCounters[player.id] = {};
 
-        for(var i = 0; i < 8; i++){
-          if(i <= 6) {
+        for(var i = 0; i < 9; i++){
+          if(i <= 7) {
             this._scoresCounters[player.id][i] = new ebg.counter();
             this._scoresCounters[player.id][i].create('command-zone-score_' + player.id + '_' + i);
           }
@@ -69,8 +69,8 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     updatePlayersScores(){
       this.forEachPlayer(player => {
-        for(var i = 0; i < 8; i++){
-          if(i <= 6){
+        for(var i = 0; i < 9; i++){
+          if(i <= 7){
             this._scoresCounters[player.id][i].toValue(player.scores[i]);
           }
           if(i < 6){

@@ -281,6 +281,7 @@ class Player extends \NID\Helpers\DB_Manager
       WARRIOR => $values[WARRIOR] + ($maxWarrior == $ranks[WARRIOR] ? $this->getMaxCoin() : 0),
       EXTRA_SCORE => $this->getTotalCoinsValue() + ($this->getGem() == 6 ? 3 : 0),
       ARTIFACT_SCORE => 0,
+      MYTHOLOGY_SCORE => 0,
 
       'coins' => $this->getTotalCoinsValue(),
       'warriorBonus' => $maxWarrior == $ranks[WARRIOR] ? $this->getMaxCoin() : 0,
@@ -298,6 +299,7 @@ class Player extends \NID\Helpers\DB_Manager
       $scores[MINER] +
       $scores[WARRIOR] +
       $scores[ARTIFACT_SCORE] +
+      $scores[MYTHOLOGY_SCORE] +
       $scores[EXTRA_SCORE];
 
     return $scores;

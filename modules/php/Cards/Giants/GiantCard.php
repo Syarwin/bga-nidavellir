@@ -53,7 +53,6 @@ class GiantCard extends \NID\Cards\AbstractCard
 
   public function applyEffect($player)
   {
-    // TODO : notify
   }
 
   public function getRecruitementZone()

@@ -16,4 +16,11 @@ class Surt extends GiantCard
     $this->grade = [null];
     $this->giantClass = WARRIOR;
   }
+
+  public function updateScores(&$scores, $player)
+  {
+    if ($this->getActivationStatus() == GIANT_CAPTURED) {
+      $scores[MYTHOLOGY_SCORE] += $player->getMaxCoin();
+    }
+  }
 }

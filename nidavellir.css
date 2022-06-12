@@ -1159,7 +1159,7 @@ html {
               width: 30px;
               height: 29px;
               background-image: url("img/ranks_scoring.png");
-              background-size: 100% 800%;
+              background-size: 100% 900%;
               margin-bottom: -6px; }
             #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header .card-class-ranks span {
               margin-left: 2px; }
@@ -1169,19 +1169,25 @@ html {
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_0 .rank {
             background-position-y: 0%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_1 .rank {
-            background-position-y: 14.2857142857%; }
+            background-position-y: 12.5%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_2 .rank {
-            background-position-y: 28.5714285714%; }
+            background-position-y: 25%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_3 .rank {
-            background-position-y: 42.8571428571%; }
+            background-position-y: 37.5%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_4 .rank {
-            background-position-y: 57.1428571429%; }
+            background-position-y: 50%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_5 .rank {
-            background-position-y: 71.4285714286%; }
+            background-position-y: 62.5%; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header.card-class_6 .rank {
+            background-position-y: 75%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header .class-artifact {
             color: #a48421; }
             #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header .class-artifact i {
               color: #a48421; }
+          #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header .class-mythology {
+            color: #cc448a; }
+            #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header .class-mythology i {
+              color: #cc448a; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class-header i {
             color: #555;
             font-size: 14px; }
@@ -1873,6 +1879,13 @@ html {
   display: none !important; }
 #ebd-body:not(.nidavellir-thingvellir) #camp-container {
   display: none !important; }
+#ebd-body:not(.nidavellir-thingvellir) .card-class-score.class-artifact {
+  display: none !important; }
+
+#ebd-body:not(.nidavellir-idavoll) #overview-row-7 {
+  display: none !important; }
+#ebd-body:not(.nidavellir-idavoll) .card-class-score.class-mythology {
+  display: none !important; }
 
 #card-overlay {
   opacity: 0;
@@ -2545,7 +2558,7 @@ html {
               height: 65px;
               width: 72%;
               background-image: url("img/ranks_scoring.png");
-              background-size: 100% 800%;
+              background-size: 100% 900%;
               position: absolute;
               top: -3px;
               left: 0;
@@ -2555,18 +2568,20 @@ html {
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-0 td.row-header .row-rank {
           background-position-y: 0%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-1 td.row-header .row-rank {
-          background-position-y: 14.2857142857%; }
+          background-position-y: 12.5%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-2 td.row-header .row-rank {
-          background-position-y: 28.5714285714%; }
+          background-position-y: 25%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-3 td.row-header .row-rank {
-          background-position-y: 42.8571428571%; }
+          background-position-y: 37.5%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-4 td.row-header .row-rank {
-          background-position-y: 57.1428571429%; }
+          background-position-y: 50%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-5 td.row-header .row-rank {
-          background-position-y: 71.4285714286%; }
+          background-position-y: 62.5%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-6 td.row-header .row-rank {
-          background-position-y: 85.7142857143%; }
+          background-position-y: 75%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-7 td.row-header .row-rank {
+          background-position-y: 87.5%; }
+        #popin_showOverview #popin_showOverview_contents table tbody tr#overview-row-8 td.row-header .row-rank {
           background-position-y: 100%; }
         #popin_showOverview #popin_showOverview_contents table tbody tr#overview-total {
           height: 80px; }

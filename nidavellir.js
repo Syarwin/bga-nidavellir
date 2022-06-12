@@ -174,7 +174,7 @@ define([
           let player = this.gamedatas.players[pId];
 
           dojo.place('<th>' + player.name + '</th>', 'overview-headers');
-          for(var i = 0; i < 8; i++){
+          for(var i = 0; i < 9; i++){
             dojo.place('<td id="overview-' + pId + '-'+ i + '"></td>', "overview-row-" + i);
           }
           dojo.place('<td id="overview-' + pId + '-total"></td>', "overview-total");

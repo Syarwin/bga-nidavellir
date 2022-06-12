@@ -430,6 +430,7 @@ trait RecruitTrait
     $giant = $player->getCapturingGiant($card);
     $giant->capture($card);
     $giant->applyEffect($player);
+    Players::updateScores();
     $this->gamestate->nextState("recruitDone");
   }
 }

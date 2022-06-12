@@ -91,7 +91,8 @@ define('ZOLKUR_ZONE', 80);
 
 // Score
 define('ARTIFACT_SCORE', 6);
-define('EXTRA_SCORE', 7);
+define('MYTHOLOGY_SCORE', 7);
+define('EXTRA_SCORE', 8);
 
 /*
  * Type of coins

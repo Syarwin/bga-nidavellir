@@ -78,6 +78,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
     onEnteringStatePromptCapture(args) {
       let cardId = args.cardId;
+      $(`card-${cardId}`).classList.add('selected');
       this.addPrimaryActionButton('btnCapture', _('Capture'), () =>
         this.takeAction('recruit', { cardId, capture: true }),
       );
