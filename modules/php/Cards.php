@@ -455,7 +455,7 @@ class Cards extends Helpers\Pieces
     $age = Globals::getAge();
     $nPlayers = Players::count();
     $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
-    $dancingDragonLocation = Globals::getTurn() <= 3 && Globals::isIdavoll() ? 'mythology' : ['age', $age];
+    $dancingDragonLocation = ($age == 1 && Globals::getTurn() <= 3 && Globals::isIdavoll()) ? 'mythology' : ['age', $age];
 
     return array_merge(
       self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),

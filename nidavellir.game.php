@@ -114,11 +114,15 @@ class Nidavellir extends Table
     $tavern = Globals::getTavern();
     $index = Globals::getCurrentPlayerIndex();
     $totalTurnsPerAge = $nPlayers < 4 ? 4 : 3;
+    $totalTurns = 2 * $totalTurnsPerAge;
+
     if (Globals::isIdavoll()) {
       $totalTurnsPerAge++;
+      $totalTurns++;
     }
+
     return ((3 * $nPlayers * (($age - 1) * $totalTurnsPerAge + ($turn - 1)) + 3 * $tavern + $index + 1) * 100) /
-      (2 * $totalTurnsPerAge * 3 * $nPlayers);
+      ($totalTurns * 3 * $nPlayers);
   }
 
   ////////////////////////////////////
