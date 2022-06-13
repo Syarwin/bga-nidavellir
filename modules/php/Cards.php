@@ -40,6 +40,8 @@ class Cards extends Helpers\Pieces
       return self::getAse($card['id'], $card);
     } elseif ($card['class'] == GIANT) {
       return self::getGiant($card['id'], $card);
+    } elseif ($card['class'] == VALKYRIE) {
+      return self::getValkyrie($card['id'], $card);
     }
   }
 
@@ -406,17 +408,28 @@ class Cards extends Helpers\Pieces
     THRIVALDI => 'Thrivaldi',
   ];
 
+  public static $valkyries = [
+    BRYNHILDR => 'Brynhildr',
+    HILDR => 'Hildr',
+    OLRUN => 'Olrun',
+    SIGRDRIFA => 'Sigrdrifa',
+    SVAFA => 'Svafa',
+  ];
+
   public static function createMythology()
   {
     $values = [];
     foreach (self::$animals as $aId => $class) {
       $values[] = [$aId, 'mythology', ANIMAL, null];
     }
-    foreach (self::$ases as $aId => $class) {
-      $values[] = [$aId, 'mythology', ASE, null];
-    }
+    // foreach (self::$ases as $aId => $class) {
+    //   $values[] = [$aId, 'mythology', ASE, null];
+    // }
     foreach (self::$giants as $aId => $class) {
       $values[] = [$aId, 'mythology', GIANT, null];
+    }
+    foreach (self::$valkyries as $aId => $class) {
+      $values[] = [$aId, 'mythology', VALKYRIE, null];
     }
 
     self::DB()
@@ -440,6 +453,12 @@ class Cards extends Helpers\Pieces
   public static function getGiant($id, $row = null)
   {
     $className = '\NID\Cards\Giants\\' . self::$giants[$id];
+    return new $className($row);
+  }
+
+  public static function getValkyrie($id, $row = null)
+  {
+    $className = '\NID\Cards\Valkyries\\' . self::$valkyries[$id];
     return new $className($row);
   }
 

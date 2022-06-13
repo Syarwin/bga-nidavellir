@@ -62,6 +62,7 @@ class AbstractCard
       'state'    => $this->state,
       'class'    => $this->class,
       'grade'    => $this->grade,
+      'flag'     => $this->flag,
       'name'     => $this->getName(),
       'tooltip'  => $this->getTooltip(),
       'symbol'   => $this->getNotifSymbol(),

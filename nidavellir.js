@@ -274,6 +274,7 @@ define([
             ranks:1,
             class:i,
             offer:'',
+            flag:0,
             gradeHtml: '<div class="card-rank">' + grades[i][0] + '</div>',
           };
 

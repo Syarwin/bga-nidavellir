@@ -21,7 +21,6 @@ class GiantCard extends \NID\Cards\AbstractCard
   public function getUiData()
   {
     $data = parent::getUiData();
-    $data['flag'] = $this->flag;
     $data['giantClass'] = $this->giantClass;
     return $data;
   }

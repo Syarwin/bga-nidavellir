@@ -1,5 +1,5 @@
 .card-tooltip {
-  display:flex;
+  display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
@@ -7,28 +7,38 @@
   div.card-title-holder {
     text-align: center;
     .card-title {
-      &:not([data-class="8"]) {
-        font-family: "Norse";
+      &:not([data-class='8']) {
+        font-family: 'Norse';
       }
-      font-size:24px;
+      font-size: 24px;
       font-weight: bold;
 
-      &[data-class="1"] { color: #554696; }
-      &[data-class="2"] { color: #158353; }
-      &[data-class="3"] { color: #3e9bd6; }
-      &[data-class="4"] { color: #ef7926; }
-      &[data-class="5"] { color: #923425; }
+      &[data-class='1'] {
+        color: #554696;
+      }
+      &[data-class='2'] {
+        color: #158353;
+      }
+      &[data-class='3'] {
+        color: #3e9bd6;
+      }
+      &[data-class='4'] {
+        color: #ef7926;
+      }
+      &[data-class='5'] {
+        color: #923425;
+      }
     }
 
     .card-subtitle {
       margin-left: 5px;
-      &:not([data-class="8"]) {
-        font-family: "Norse";
-        font-size:24px;
+      &:not([data-class='8']) {
+        font-family: 'Norse';
+        font-size: 24px;
       }
 
-      &[data-class="8"] {
-        font-size:12px;
+      &[data-class='8'] {
+        font-size: 12px;
         &::before {
           content: '\A';
           white-space: pre;
@@ -37,41 +47,87 @@
     }
   }
 
-
   .card {
-    width:2*$wCard;
-    height:2*$hCard;
-    margin:15px;
+    width: 2 * $wCard;
+    height: 2 * $hCard;
+    margin: 15px;
 
     .card-grade {
-      width:0.6 * 2 * $wCard;
-      height:2 * $hCard * 0.8;
+      width: 0.6 * 2 * $wCard;
+      height: 2 * $hCard * 0.8;
 
       .card-rank {
-        width:2*$wRank;
-        height:2*$hRank;
+        width: 2 * $wRank;
+        height: 2 * $hRank;
         font-size: 32px;
         line-height: 36px;
       }
 
       .card-class-icon {
-        width:0.25 * 2*$wCard;
-        height:0.25 * 2*$wCard;
+        width: 0.25 * 2 * $wCard;
+        height: 0.25 * 2 * $wCard;
       }
     }
 
-    &[data-class="1"] .card-rank::before,
-    &[data-class="2"] .card-rank::before {
-      width:0.7*2*$hRank;
-      height:0.7*2*$hRank;
-      margin: 0.15*2*$hRank 0;
+    &[data-class='1'] .card-rank::before,
+    &[data-class='2'] .card-rank::before {
+      width: 0.7 * 2 * $hRank;
+      height: 0.7 * 2 * $hRank;
+      margin: 0.15 * 2 * $hRank 0;
+    }
+
+    &[data-class='14'] {
+      &::after {
+        width: 50px;
+        height: 50px;
+      }
+
+      &[data-flag='0']::after {
+        top: 62px;
+        left: 32px;
+      }
+      &[data-flag='1']::after {
+        top: 116px;
+        left: 34px;
+      }
+      &[data-flag='2']::after {
+        top: 170px;
+        left: 36px;
+      }
+      &[data-flag='3']::after {
+        top: 224px;
+        left: 40px;
+      }
+
+      &[data-id='512'],
+      &[data-id='513'] {
+        &[data-flag='0']::after {
+          top: 50px;
+          left: 30px;
+        }
+        &[data-flag='1']::after {
+          top: 96px;
+          left: 32px;
+        }
+        &[data-flag='2']::after {
+          top: 142px;
+          left: 34px;
+        }
+        &[data-flag='3']::after {
+          top: 188px;
+          left: 36px;
+        }
+        &[data-flag='4']::after {
+          top: 234px;
+          left: 38px;
+        }
+      }
     }
   }
 
-
   .card-description {
-    margin:10px;
-    font-size:14px;
+    margin: 10px;
+    font-size: 14px;
     max-width: 300px;
     text-align: justify;
   }

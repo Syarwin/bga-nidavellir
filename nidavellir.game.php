@@ -125,6 +125,11 @@ class Nidavellir extends Table
       ($totalTurns * 3 * $nPlayers);
   }
 
+  public function tp()
+  {
+    Cards::get(OLRUN)->increaseForce();
+  }
+
   ////////////////////////////////////
   ////////////   Zombie   ////////////
   ////////////////////////////////////

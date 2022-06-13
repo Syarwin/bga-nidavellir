@@ -232,4 +232,92 @@
       display: none;
     }
   }
+
+  &[data-class='14'] {
+    .card-grade {
+      display: none;
+      background: #19755fe0;
+      width: 97px;
+      height: 13px;
+      top: 3px;
+      border-radius: 5px;
+      flex-flow: row;
+      justify-content: space-around;
+      align-items: center;
+      padding: 1px 0px 2px;
+      color: white;
+      font-size: 13px;
+
+      .card-class-icon {
+        display: none;
+      }
+    }
+
+    @for $i from 0 through 5 {
+      &[data-flag='#{$i}'] .card-grade .valkyrie-force:nth-of-type(#{$i + 1}) {
+        color: #ffc002;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.command-zone-container .cards-class .card[data-class='14']:not(:last-child) .card-grade {
+  display: flex;
+}
+
+.card[data-class='14'] {
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url('img/tokens.png');
+    background-size: 100% 300%;
+    background-position-y: 100%;
+    z-index: 2;
+    transition: top 0.8s, left 0.8s;
+  }
+
+  &[data-flag='0']::after {
+    top: 31px;
+    left: 16px;
+  }
+  &[data-flag='1']::after {
+    top: 58px;
+    left: 17px;
+  }
+  &[data-flag='2']::after {
+    top: 85px;
+    left: 18px;
+  }
+  &[data-flag='3']::after {
+    top: 112px;
+    left: 20px;
+  }
+
+  &[data-id='512'],
+  &[data-id='513'] {
+    &[data-flag='0']::after {
+      top: 25px;
+      left: 15px;
+    }
+    &[data-flag='1']::after {
+      top: 48px;
+      left: 16px;
+    }
+    &[data-flag='2']::after {
+      top: 71px;
+      left: 17px;
+    }
+    &[data-flag='3']::after {
+      top: 94px;
+      left: 18px;
+    }
+    &[data-flag='4']::after {
+      top: 117px;
+      left: 19px;
+    }
+  }
 }

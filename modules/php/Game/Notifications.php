@@ -330,10 +330,20 @@ class Notifications
 
 
   public static function capture($player, $giant, $card){
-    self::notifyAll('capture', clienttranslate('${player_name} captures ${card_class}${card_class_symbol} and trigger the giant\'s effect'), [
+    self::notifyAll('capture', clienttranslate('${player_name} captures ${card_class}${card_class_symbol} and trigger ${giant_name}\'s effect'), [
       'player' => $player,
       'card'  => $card,
       'giant' => $giant->getUiData(),
+    ]);
+  }
+
+
+  public static function increaseForce($player, $valkyrie, $force){
+    self::notifyAll('increaseForce', clienttranslate('${player_name} increases ${valkyrie_name}\'s force'), [
+      'player' => $player,
+      'valkyrie_name' => $valkyrie->getName(),
+      'valkyrieId' => $valkyrie->getId(),
+      'force' => $force,
     ]);
   }
 
