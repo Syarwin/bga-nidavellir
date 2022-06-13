@@ -122,6 +122,9 @@ trait RecruitTrait
     if ($card->getLocation() == 'camp' && $this->gamestate->state()['name'] == 'recruitDwarf') {
       Globals::visitCamp();
     }
+    if ($card->getClass() == HERO) {
+      Cards::increaseForce(SIGRDRIFA, $player); // Valkyrie
+    }
 
     Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
@@ -431,6 +434,6 @@ trait RecruitTrait
     $giant->capture($card);
     $giant->applyEffect($player);
     Players::updateScores();
-    $this->gamestate->nextState("recruitDone");
+    $this->gamestate->nextState('recruitDone');
   }
 }

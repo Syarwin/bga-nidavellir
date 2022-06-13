@@ -462,6 +462,14 @@ class Cards extends Helpers\Pieces
     return new $className($row);
   }
 
+  public static function increaseForce($id, $player)
+  {
+    if (self::getOwner($id) == $player->getId()) {
+      $card = self::get($id);
+      $card->increaseForce();
+    }
+  }
+
   /****************
    ***** PLAY  *****
    ****************/
@@ -474,7 +482,7 @@ class Cards extends Helpers\Pieces
     $age = Globals::getAge();
     $nPlayers = Players::count();
     $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
-    $dancingDragonLocation = ($age == 1 && Globals::getTurn() <= 3 && Globals::isIdavoll()) ? 'mythology' : ['age', $age];
+    $dancingDragonLocation = $age == 1 && Globals::getTurn() <= 3 && Globals::isIdavoll() ? 'mythology' : ['age', $age];
 
     return array_merge(
       self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),

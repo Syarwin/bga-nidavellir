@@ -98,6 +98,7 @@ trait AgeTrait
     } else {
       $player = Players::get($maxRank[0]);
       $player->recruit($distinction);
+      Cards::increaseForce(HILDR, $player); // Valkyrie
 
       Cards::refresh($distinction); // Update location
       Notifications::distinction($player, $distinction);

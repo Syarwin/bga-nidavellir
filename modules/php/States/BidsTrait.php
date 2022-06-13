@@ -10,8 +10,6 @@ use NID\Game\Notifications;
 use NID\Game\Log;
 use NID\Game\Stats;
 
-
-
 trait BidsTrait
 {
   ///////////////////////////////
@@ -29,41 +27,39 @@ trait BidsTrait
     }
   }
 
-
-	public function argPlayerBids()
+  public function argPlayerBids()
   {
-    $data = [ '_private' => [] ];
+    $data = ['_private' => []];
     $ulineOwnerId = Cards::getUlineOwner();
-    foreach(Players::getAll() as $pId => $player){
-      if($pId != $ulineOwnerId)
+    foreach (Players::getAll() as $pId => $player) {
+      if ($pId != $ulineOwnerId) {
         $data['_private'][$pId] = $player->getCoinIds();
+      }
     }
     return $data;
-	}
-
+  }
 
   public function actPlayerBid($coinId, $tavern)
   {
-    $this->checkAction("bid");
+    $this->checkAction('bid');
 
     // Check if coins belongs to player
     $coin = Coins::get($coinId);
     $player = Players::getCurrent();
-    if($coin['pId'] != $player->getId())
-      throw new \BgaUserException(_("This coin is not yours!"));
+    if ($coin['pId'] != $player->getId()) {
+      throw new \BgaUserException(_('This coin is not yours!'));
+    }
 
     // Move coin in corresponding position and notify (useful for replay)
     $player->bid($coinId, $tavern);
     Notifications::bid($player, $coin, $tavern);
   }
 
-
-
   public function actAutobid()
   {
     $player = Players::getCurrent();
     $coins = $player->getCoinIds();
-    for($i = 0; $i < 3; $i++){
+    for ($i = 0; $i < 3; $i++) {
       $player->bid($coins[$i], $i);
       $coin = Coins::get($coins[$i]);
       Notifications::bid($player, $coin, $i);
@@ -72,27 +68,23 @@ trait BidsTrait
     $this->actConfirmBids();
   }
 
-
   public function actConfirmBids()
   {
-    $this->checkAction("bid");
+    $this->checkAction('bid');
 
     // Check number of bids
     $player = Players::getCurrent();
-    if(count($player->getBids()) != 3){
-      throw new \BgaUserException(_("You still have coins to bids!"));
+    if (count($player->getBids()) != 3) {
+      throw new \BgaUserException(_('You still have coins to bids!'));
     }
 
     $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
   }
 
-
   public function actChangeBids()
   {
     $this->gamestate->setPlayersMultiactive([self::getCurrentPlayerId()], '');
   }
-
-
 
   /////////////////////////////
   /////// Bids are over  //////
@@ -101,10 +93,9 @@ trait BidsTrait
   {
     // Are we done with the three tavers ?
     $currentTavern = Globals::incTavern();
-    $nextState = in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN])? "reveal" : "finished";
+    $nextState = in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN]) ? 'reveal' : 'finished';
     $this->gamestate->nextState($nextState);
   }
-
 
   //////////////////////////////////
   /////// Reveal and resolve  //////
@@ -121,14 +112,13 @@ trait BidsTrait
     Notifications::revealBids($coins, $currentTavern);
 
     $pId = Cards::getUlineOwner();
-    if(is_null($pId)){
-      $this->gamestate->nextState("revealed");
+    if (is_null($pId)) {
+      $this->gamestate->nextState('revealed');
     } else {
       $this->gamestate->changeActivePlayer($pId);
-      $this->gamestate->nextState("uline");
+      $this->gamestate->nextState('uline');
     }
   }
-
 
   /*
    * argUlineBid: Uline owner can choose whatever coin left in his hand for current bid
@@ -137,18 +127,20 @@ trait BidsTrait
   {
     $player = Players::getActive();
     return [
-      'coins' => array_map(function($coin){ return $coin['id']; }, $player->getUnbidCoins())
+      'coins' => array_map(function ($coin) {
+        return $coin['id'];
+      }, $player->getUnbidCoins()),
     ];
   }
 
-
   public function actUlineBid($coinId)
   {
-    $this->checkAction("bid");
+    $this->checkAction('bid');
 
     $coins = $this->argUlineBid()['coins'];
-    if(!in_array($coinId, $coins))
-      throw new \BgaUserException(_("You cannot bid this coin!"));
+    if (!in_array($coinId, $coins)) {
+      throw new \BgaUserException(_('You cannot bid this coin!'));
+    }
 
     $tavern = Globals::getTavern();
     $coin = Coins::get($coinId);
@@ -158,9 +150,8 @@ trait BidsTrait
     Coins::putOnTavern($coin, $tavern);
     Notifications::revealUlineBid($coin, $tavern);
 
-    $this->gamestate->nextState("revealed");
+    $this->gamestate->nextState('revealed');
   }
-
 
   /*
    * stResolveBids: compute the order of players according to bids and gem
@@ -174,7 +165,7 @@ trait BidsTrait
     $players = Players::getAll();
     $bids = [];
     foreach ($players as $player) {
-      if($player->getBid($currentTavern) !== null){
+      if ($player->getBid($currentTavern) !== null) {
         $bids[$player->getBid($currentTavern)][] = $player;
       }
     }
@@ -183,27 +174,36 @@ trait BidsTrait
     // Then by gems
     $order = [];
     $ties = [];
-    foreach($bids as $bid => &$bidders){
+    foreach ($bids as $bid => &$bidders) {
       //Log::addTie($bidders);
-      usort($bidders, function($p1, $p2){ return $p2->getGem() - $p1->getGem(); });
-      foreach($bidders as $player){
+      usort($bidders, function ($p1, $p2) {
+        return $p2->getGem() - $p1->getGem();
+      });
+      foreach ($bidders as $player) {
         array_push($order, $player->getId());
       }
 
       // TIES
-      if(count($bidders) == 1)
-        continue; // No tie
+      if (count($bidders) == 1) {
+        continue;
+      } // No tie
 
       $trades = [];
-      $fbidders = array_values(array_filter($bidders, function($p){ return $p->getGem() != 6; }));
-      for($i = 0; $i < count($fbidders) / 2; $i++){
+      $fbidders = array_values(
+        array_filter($bidders, function ($p) {
+          return $p->getGem() != 6;
+        })
+      );
+      for ($i = 0; $i < count($fbidders) / 2; $i++) {
         $p1 = $fbidders[$i];
         $p2 = $fbidders[count($fbidders) - 1 - $i];
-        $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem() ];
+        $trades[] = [$p1->getId(), $p1->getGem(), $p2->getId(), $p2->getGem()];
       }
       $ties[$bid] = [
-        'bidders' => array_map(function($player){ return $player->getName();}, $fbidders),
-        'trades' => $trades
+        'bidders' => array_map(function ($player) {
+          return $player->getName();
+        }, $fbidders),
+        'trades' => $trades,
       ];
       Stats::addTie($bidders);
     }
@@ -211,13 +211,11 @@ trait BidsTrait
     Log::storeOrder($order, $ties);
     Notifications::newOrder($order);
 
-
     // reset of current index for resolution.
     Globals::resetCurrentPlayerIndex();
 
-    $this->gamestate->nextState("resolved");
+    $this->gamestate->nextState('resolved');
   }
-
 
   /*
    * stNextPlayer: make the next player in current turn order active
@@ -227,43 +225,44 @@ trait BidsTrait
     $index = Globals::getCurrentPlayerIndex();
     $tavern = Globals::getTavern();
     // THINGVELLIR : special rule for 2 players
-    if($index == 0 && Players::count() == 2 && Cards::getInTavern($tavern)->count() == 3){
-      $this->gamestate->nextState("discardTavern");
+    if ($index == 0 && Players::count() == 2 && Cards::getInTavern($tavern)->count() == 3) {
+      $this->gamestate->nextState('discardTavern');
       return;
     }
 
     $order = Log::getTurnOrder();
     $index = Globals::incCurrentPlayerIndex();
 
-    if($index >= count($order)){
+    if ($index >= count($order)) {
       // If all players already played this turn, trade gems
       $ties = Log::getTies();
-      foreach($ties as $bid => $info){
-        if(!empty($info['trades'])){
+      foreach ($ties as $bid => $info) {
+        if (!empty($info['trades'])) {
           Players::tradeGems($info['trades']);
           Notifications::tradeGems($bid, $info['bidders'], $info['trades']);
         }
       }
 
-
       // Clear tavern in 2p mode
       $tavern = Globals::getTavern();
-      if(Cards::getInTavern($tavern)->count() != 0){
+      if (Cards::getInTavern($tavern)->count() != 0) {
         Cards::clearTavern($tavern);
         Notifications::clearTavern($tavern);
       }
 
       // And go on to reveal next bids (if any left)
-      $this->gamestate->nextState("done");
+      $this->gamestate->nextState('done');
     } else {
       // Otherwise, make player active and go to recruitDwarf state
       $this->gamestate->changeActivePlayer($order[$index]);
       self::giveExtraTime($order[$index]);
       Notifications::recruitStart(Players::getActive(), $index + 1);
-      $this->gamestate->nextState("recruit");
+      if ($index == 0) {
+        Cards::increaseForce(BRYNHILDR, Players::getActive()); // Valkyrie
+      }
+      $this->gamestate->nextState('recruit');
     }
   }
-
 
   /*
    * THINGVELLIR 2 player special rule for camp
@@ -274,7 +273,7 @@ trait BidsTrait
     $taverns = [
       GOBLIN_TAVERN => clienttranslate('Laughing Goblin Tavern'),
       DRAGON_TAVERN => clienttranslate('Dancing Dragon Tavern'),
-      HORSE_TAVERN => clienttranslate('Shining Horse Tavern')
+      HORSE_TAVERN => clienttranslate('Shining Horse Tavern'),
     ];
 
     $tavern = Globals::getTavern();
