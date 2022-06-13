@@ -8,11 +8,10 @@ class Odin extends AseCard
     parent::__construct($row);
     $this->id = ODIN;
     $this->name = 'Odin';
-    $this->tooltip = [
-      clienttranslate(
-        'À la fin de votre tour vous pouvez remettre une de vos cartes Héros/Héroïne Neutre dans la réserve disponible et recruter une carte Héros/Héroïne Neutre disponible en remplacement. Appliquez l’éventuel effet de cette carte.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate(
+      'At the end of your turn, you may put one of your Neutral Heroes back in the reserve and recruit another Neutral Hero instead.'
+    );
+    $this->tooltip[] = clienttranslate('Then, possibly apply the effect of the newly recruited Hero.');
     $this->grade = [0];
   }
 }

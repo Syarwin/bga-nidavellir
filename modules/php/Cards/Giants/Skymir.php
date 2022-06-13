@@ -15,5 +15,11 @@ class Skymir extends GiantCard
     ];
     $this->grade = [null];
     $this->giantClass = HUNTER;
+    $this->tooltip[] = clienttranslate(
+      'Capture the next Hunter card you recruit to draw 5 Mythology cards from the Mythology deck and keep 2.'
+    );
+    $this->tooltip[] = clienttranslate(
+      'Put the 3 remaining cards under the Mythology card deck next to the Royal Treasure.'
+    );
   }
 }

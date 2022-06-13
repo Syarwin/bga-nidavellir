@@ -9,10 +9,10 @@ class Ratatosk extends AnimalCard
     $this->id = RATATOSK;
     $this->name = 'Ratatosk';
     $this->tooltip = [
-      clienttranslate('Has 1 rank.'),
-      clienttranslate('Ajoute 2 points à votre Valeur de Bravoure'),
+      clienttranslate('Has 1 Miner rank.'),
+      clienttranslate('Adds 2 points to your Miner Bravery Value.'),
       clienttranslate(
-        'Lors du décompte final, chaque paire de grade de valeur 0 ajoute 1 point à la Valeur de Bravoure des avant la multiplication par le nombre de grades.'
+        'When determining the Bravery Value for each class, each pair of 0 point rank adds 1 point to the Miner Bravery Value before the multiplication by the amount of ranks.'
       ),
     ];
     $this->animalClass = MINER;

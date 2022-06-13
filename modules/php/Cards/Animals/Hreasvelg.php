@@ -9,8 +9,8 @@ class Hreasvelg extends AnimalCard
     $this->id = HREASVELG;
     $this->name = 'Hreasvelg';
     $this->tooltip = [
-      clienttranslate('Has 1 rank.'),
-      clienttranslate('Prenez la carte spéciale Gullinbursti et placez-la dans la colonne de votre choix.'),
+      clienttranslate('Has 1 Blacksmith rank.'),
+      clienttranslate('Take the special card Gullinbursti and place it in the column of your choice.'),
     ];
     $this->animalClass = BLACKSMITH;
     $this->grade = [null];

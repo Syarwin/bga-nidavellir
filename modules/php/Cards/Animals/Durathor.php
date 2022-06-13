@@ -9,8 +9,8 @@ class Durathor extends AnimalCard
     $this->id = DURATHOR;
     $this->name = 'Durathor';
     $this->tooltip = [
-      clienttranslate('Has 1 rank.'),
-      clienttranslate('Réduit l’effet de défausse de Dagda d’une carte'),
+      clienttranslate('Has 1 Hunter rank.'),
+      clienttranslate('Reduce the discard effect of Dagda by one card.'),
     ];
     $this->animalClass = HUNTER;
     $this->grade = [null];

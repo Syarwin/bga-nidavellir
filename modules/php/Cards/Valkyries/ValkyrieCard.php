@@ -18,6 +18,9 @@ class ValkyrieCard extends \NID\Cards\AbstractCard
     parent::__construct($row);
     $this->grade = [null];
     $this->class = VALKYRIE;
+    $this->tooltip = [
+      clienttranslate('As soon as you recruit a Valkyrie, put her in your Command Zone and place 1 Strength token on the highest notch of the card.'),
+    ];
   }
 
   public function getUiData()

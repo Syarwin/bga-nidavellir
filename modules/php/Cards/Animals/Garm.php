@@ -9,12 +9,12 @@ class Garm extends AnimalCard
     $this->id = GARM;
     $this->name = 'Garm';
     $this->tooltip = [
-      clienttranslate('Has 2 ranks.'),
+      clienttranslate('Has 2 Explorer ranks.'),
       clienttranslate(
-        'Réduit l’effet de défausse de Dagda d’une carteAjoute 9 et 0 points à votre Valeur de Bravoure + 1 point par grade présent dans la colonne, y compris les siens.'
+        'Adds 9 and 0 points to your Explorer Bravey Value + 1 point per rank present in the Explorer column, including his own.'
       ),
       clienttranslate(
-        'Si vous remportez la Distinction : piochez parmi 6 cartes du paquet de l’Âge 2 (au lieu de 3) et gardez-en 1.'
+        'If you win the Explorer Distinction: draw 6 cards from the Age 2 deck (instead of 3) and keep 1.'
       ),
     ];
     $this->animalClass = EXPLORER;

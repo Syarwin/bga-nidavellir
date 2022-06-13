@@ -9,11 +9,10 @@ class Sigrdrifa extends ValkyrieCard
     parent::__construct($row);
     $this->id = SIGRDRIFA;
     $this->name = 'Sigrdrifa';
-    $this->tooltip = [
-      clienttranslate(
-        'Chaque fois que vous recrutez une carte Héros/Héroïne, peu importe la façon, descendez d’une encoche le jeton Force sur cette Valkyrie.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate(
+      'Each time you recruit a Hero card, regardless of how, move down one notch the Strength token on this Valkyrie.'
+    );
+    $this->tooltip[] = clienttranslate('Note: the ability of Odin does not trigger Sigrdrifa');
     $this->forces = [0, 0, 8, 16];
   }
 }

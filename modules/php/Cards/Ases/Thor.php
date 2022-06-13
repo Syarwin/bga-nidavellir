@@ -8,11 +8,11 @@ class Thor extends AseCard
     parent::__construct($row);
     $this->id = THOR;
     $this->name = 'Thor';
-    $this->tooltip = [
-      clienttranslate(
-        'Au moment où un effet de défausse s’active, vous pouvez le bloquer. Cet effet fonctionne dans le jeu de base sur l’effet de défausse de Bonfur, sur 1 des effets de défausse de Dagda. Dans Thingvellir, cet effet fonctionne sur le Brisingamen et sur Hofud.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate('When a discard effect should trigger, you can cancel it.');
+    $this->tooltip[] = clienttranslate(
+      'In the base game, this effect works on the discard effect of Bonfur, on 1 of the discard effect of Dagda.'
+    );
+    $this->tooltip[] = clienttranslate('In thingvellir, it works on the Brisingamen and on Hofud');
     $this->grade = [8];
   }
 }

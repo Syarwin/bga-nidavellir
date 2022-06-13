@@ -16,6 +16,10 @@ class GiantCard extends \NID\Cards\AbstractCard
   {
     parent::__construct($row);
     $this->class = GIANT;
+    $this->tooltip = [
+      clienttranslate('As soon as you have recruited a Giant, put it in the Command Zone and place 1 Capture token at the top of the column of the matching class.'),
+      clienttranslate('During an upcoming recruitment, if you recruit a Dwarf of this class, you can choose between capturing the Dwarf card or placing it in your Army'),
+    ];
   }
 
   public function getUiData()

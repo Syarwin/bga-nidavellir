@@ -9,11 +9,10 @@ class Olrun extends ValkyrieCard
     parent::__construct($row);
     $this->id = OLRUN;
     $this->name = 'Ölrun';
-    $this->tooltip = [
-      clienttranslate(
-        'Dès que vous placez Ölrun dans votre zone de Commandement, placez 1 jeton de Classe dessus. Chaque fois que vous allez recruter une carte possédant au moins un grade de la couleur de la classe choisie dans votre armée : descendez d’une encoche le jeton Force sur cette Valkyrie.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate('As soon as you place Ölrun in your Command Zone, place 1 Class token on her.');
+    $this->tooltip[] = clienttranslate(
+      'Each time you recruit a card with at least a rank of the chosen class in your Army, move down one notch the Strength token on this Valkyrie.'
+    );
     $this->forces = [0, 3, 6, 10, 16];
   }
 }

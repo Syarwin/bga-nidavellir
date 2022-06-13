@@ -12,6 +12,14 @@ class AseCard extends \NID\Cards\AbstractCard
   {
     parent::__construct($row);
     $this->class = ASE;
+    $this->tooltip = [
+      clienttranslate(
+        'As soon as you recruit one of the gods, put the card in your Command Zone with 1 Power token on it.'
+      ),
+      clienttranslate(
+        'You may activate his or her ability once in a game by discarding the Power Token of the matching God card.'
+      ),
+    ];
   }
 
   public function getRecruitementZone()

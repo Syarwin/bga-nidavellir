@@ -1,6 +1,7 @@
 <?php
 namespace NID;
 use Nidavellir;
+use NID\Game\Players;
 
 /*
  * Coins: all utility functions concerning coins
@@ -149,6 +150,14 @@ class Coins extends Helpers\Pieces
       'pId' => 0,
       'coin_location' => $coin['type'] == COIN_PLAYER? "discard" : "treasure",
     ], $coin['id']);
+
+    $newValue = Coins::get($newCoin)['value'];
+    if ($newValue > $target) {
+      $player =  Players::get($coin['pId']);
+      for($i = 0; $i < $newValue - $target; $i++) {
+        Cards::increaseForce(SVAFA,$player); // Valkyrie
+      }
+    }
 
     return self::get($newCoin['id']);
   }

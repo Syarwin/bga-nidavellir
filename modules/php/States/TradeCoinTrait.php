@@ -55,11 +55,6 @@ trait TradeCoinTrait
     }
 
     $newCoin = Coins::trade($coinMax, $target);
-    $newValue = Coins::get($newCoin)['value'];
-    if ($newValue > $target) {
-      Cards::increaseForce(SVAFA, Players::getActive()); // Valkyrie
-    }
-
     Notifications::tradeCoin($player, $coinMin, $coinMax, $newCoin);
     Players::updateScores();
     Stats::upgradeCoin($player);

@@ -9,11 +9,7 @@ class Gymir extends GiantCard
     parent::__construct($row);
     $this->id = GYMIR;
     $this->name = 'Gymir';
-    $this->tooltip = [
-      clienttranslate(
-        'Capturez la prochaine carte que vous recruterez pour gagner le triple de sa Valeur de Bravoure lors du décompte final.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate('Capture the next Explorer card you recruit to earn 3 times its Bravery Value when counting the final Bravery Value.');
     $this->grade = [null];
     $this->giantClass = EXPLORER;
   }

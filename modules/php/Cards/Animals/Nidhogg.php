@@ -9,9 +9,9 @@ class Nidhogg extends AnimalCard
     $this->id = NIDHOGG;
     $this->name = 'Nidhogg';
     $this->tooltip = [
-      clienttranslate('Has 1 rank.'),
+      clienttranslate('Has 1 Warrior rank.'),
       clienttranslate(
-        'Ajoute 5 points à votre Valeur de Bravoure + 2 points par grade présent dans la colonne , y compris le sien.'
+        'Adds 5 points to your Warrior Bravery Values + 2 points per rank present in the Warrior column, including his own.'
       ),
     ];
     $this->animalClass = WARRIOR;

@@ -8,11 +8,10 @@ class Freya extends AseCard
     parent::__construct($row);
     $this->id = FREYA;
     $this->name = 'Freya';
-    $this->tooltip = [
-      clienttranslate(
-        'À la fin de l’Entrée des Nains et des naines, avant le choix des mises, vous pouvez échanger une carte d’une taverne contre une carte d’une autre taverne. Loki a la priorité sur le pouvoir de Freya.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate(
+      'At the end of the Entrance of the Dwarves and before the biddings, you may swap one card in a tavern with a card in another tavern.'
+    );
+    $this->tooltip[] = clienttranslate('Loki has priority on the ability of Freya');
     $this->grade = [15];
   }
 }

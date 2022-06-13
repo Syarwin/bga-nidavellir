@@ -8,11 +8,10 @@ class Hrungnir extends GiantCard
     parent::__construct($row);
     $this->id = HRUNGNIR;
     $this->name = 'Hrungnir';
-    $this->tooltip = [
-      clienttranslate(
-        'Capturez la prochaine carte que vous recruterez pour transformer immédiatement chacune de vos pièces à +2 . Cet effet ne s’applique pas sur la pièce d’échange (0 ou 3 spéciale). Réalisez les transformations dans l’ordre de votre plateau en commen- çant par la pièce posée sur l’emplacement du Gobelin Rieur jusqu’aux pièces de votre bourse, d’abord la gauche, puis la droite. Toutes les règles de base des transformations de pièces s’appliquent normalement.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate('Capture the next Miner card you recruit to transform immediately each of your coins with +2.');
+    $this->tooltip[] = clienttranslate('This effect does not applyy to the trading coins (0 or Special 3).');
+    $this->tooltip[] = clienttranslate('Apply the transformations in the order of your board, starting with the coin for the Laughing Goblin to the coins in your pouch.');
+    $this->tooltip[] = clienttranslate('All the basic rules for coin transformation are to be applied as usual.');
     $this->grade = [null];
     $this->giantClass = MINER;
   }

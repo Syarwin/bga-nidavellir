@@ -9,11 +9,9 @@ class Hildr extends ValkyrieCard
     parent::__construct($row);
     $this->id = HILDR;
     $this->name = 'Hildr';
-    $this->tooltip = [
-      clienttranslate(
-        'Lors de l’Évaluation des troupes, pour chaque Distinction que vous remportez, descendez d’une encoche le jeton Force sur cette Valkyrie.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate(
+      'During Troop Evaluation, for each Distinction you are awarded, move down one notch the Strength token on this Valkyrie.'
+    );
     $this->forces = [0, 8, 16, 0];
   }
 }

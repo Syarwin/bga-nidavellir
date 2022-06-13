@@ -8,11 +8,11 @@ class Frigg extends AseCard
     parent::__construct($row);
     $this->id = FRIGG;
     $this->name = 'Frigg';
-    $this->tooltip = [
-      clienttranslate(
-        'Au moment de choisir une carte Nain/Naine ou Offrande Royale dans la taverne en cours de résolution, placez 1 des cartes de cette taverne sous la pioche pour piocher 3 cartes de l’Âge en cours et en garder 1. Remettez les 2 autres cartes sous la pioche dans l’ordre de votre choix. Vous aurez alors connaissance de 3 cartes de la dernière taverne de cet Âge.'
-      ),
-    ];
+    $this->tooltip[] = clienttranslate(
+      'When you choose a Dwarf card or a Royal Offering in the Tavern being resolved, place 1 of the cards below the deck to draw 3 cards from the current Age deck and keep 1.'
+    );
+    $this->tooltip[] = clienttranslate('Put the remaining cards under the deck in the order of your choice');
+    $this->tooltip[] = clienttranslate('You will then know 3 cards of the last Tavern of this Age.');
     $this->grade = [12];
   }
 }
