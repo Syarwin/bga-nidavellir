@@ -340,13 +340,13 @@
           width: 140px;
           height: 140px;
           background-image: url('img/classes.png');
-          background-size: 100% 800%;
+          background-size: 100% 1200%;
           flex-shrink: 0;
         }
 
         @for $i from 1 through 5 {
           &[data-class='#{$i}'] .helper-classes-symbol {
-            background-position-y: $i * 100% / 7;
+            background-position-y: $i * 100% / 11;
           }
         }
 

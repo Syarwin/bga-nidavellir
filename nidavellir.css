@@ -143,23 +143,23 @@ html {
   .card[data-class='1'] .card-rank {
     background-position-y: 0%; }
   .card[data-class='1'] .card-class-icon {
-    background-position-y: 14.2857142857%; }
+    background-position-y: 9.0909090909%; }
   .card[data-class='2'] .card-rank {
     background-position-y: 25%; }
   .card[data-class='2'] .card-class-icon {
-    background-position-y: 28.5714285714%; }
+    background-position-y: 18.1818181818%; }
   .card[data-class='3'] .card-rank {
     background-position-y: 50%; }
   .card[data-class='3'] .card-class-icon {
-    background-position-y: 42.8571428571%; }
+    background-position-y: 27.2727272727%; }
   .card[data-class='4'] .card-rank {
     background-position-y: 75%; }
   .card[data-class='4'] .card-class-icon {
-    background-position-y: 57.1428571429%; }
+    background-position-y: 36.3636363636%; }
   .card[data-class='5'] .card-rank {
     background-position-y: 100%; }
   .card[data-class='5'] .card-class-icon {
-    background-position-y: 71.4285714286%; }
+    background-position-y: 45.4545454545%; }
   .card[data-class='6']::before {
     background-position-x: 90.9090909091%; }
   .card[data-class='6'] .card-grade {
@@ -1313,15 +1313,15 @@ html {
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_0::before {
             background-position-y: 0%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_1::before {
-            background-position-y: 14.2857142857%; }
+            background-position-y: 9.0909090909%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_2::before {
-            background-position-y: 28.5714285714%; }
+            background-position-y: 18.1818181818%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_3::before {
-            background-position-y: 42.8571428571%; }
+            background-position-y: 27.2727272727%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_4::before {
-            background-position-y: 57.1428571429%; }
+            background-position-y: 36.3636363636%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class.card-class_5::before {
-            background-position-y: 71.4285714286%; }
+            background-position-y: 45.4545454545%; }
           #nidavellir-board #player-boards .nidavellir-player-board .command-zone-container .cards-class[data-capture="1"]::after {
             content: '';
             display: block;
@@ -2400,24 +2400,32 @@ html {
   width: 30px;
   height: 30px;
   background-image: url("img/classes.png");
-  background-size: 100% 800%;
+  background-size: 100% 1200%;
   vertical-align: middle;
   margin: -4px 3px 4px; }
   #logs .card-class-symbol.class-0 {
     background-position-y: 0%; }
   #logs .card-class-symbol.class-1 {
-    background-position-y: 14.2857142857%; }
+    background-position-y: 9.0909090909%; }
   #logs .card-class-symbol.class-2 {
-    background-position-y: 28.5714285714%; }
+    background-position-y: 18.1818181818%; }
   #logs .card-class-symbol.class-3 {
-    background-position-y: 42.8571428571%; }
+    background-position-y: 27.2727272727%; }
   #logs .card-class-symbol.class-4 {
-    background-position-y: 57.1428571429%; }
+    background-position-y: 36.3636363636%; }
   #logs .card-class-symbol.class-5 {
-    background-position-y: 71.4285714286%; }
+    background-position-y: 45.4545454545%; }
   #logs .card-class-symbol.class-9 {
-    background-position-y: 85.7142857143%; }
+    background-position-y: 54.5454545455%; }
   #logs .card-class-symbol.class-10 {
+    background-position-y: 63.6363636364%; }
+  #logs .card-class-symbol.class-11 {
+    background-position-y: 72.7272727273%; }
+  #logs .card-class-symbol.class-12 {
+    background-position-y: 81.8181818182%; }
+  #logs .card-class-symbol.class-13 {
+    background-position-y: 90.9090909091%; }
+  #logs .card-class-symbol.class-14 {
     background-position-y: 100%; }
 #logs .coin {
   display: inline-block;
@@ -2813,18 +2821,18 @@ html {
           width: 140px;
           height: 140px;
           background-image: url("img/classes.png");
-          background-size: 100% 800%;
+          background-size: 100% 1200%;
           flex-shrink: 0; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='1'] .helper-classes-symbol {
-          background-position-y: 14.2857142857%; }
+          background-position-y: 9.0909090909%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='2'] .helper-classes-symbol {
-          background-position-y: 28.5714285714%; }
+          background-position-y: 18.1818181818%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='3'] .helper-classes-symbol {
-          background-position-y: 42.8571428571%; }
+          background-position-y: 27.2727272727%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='4'] .helper-classes-symbol {
-          background-position-y: 57.1428571429%; }
+          background-position-y: 36.3636363636%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='5'] .helper-classes-symbol {
-          background-position-y: 71.4285714286%; }
+          background-position-y: 45.4545454545%; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='1'] h2 {
           color: #554696; }
         #popin_showHelpsheet #popin_showHelpsheet_contents #helper-classes .helper-classes-row[data-class='2'] h2 {

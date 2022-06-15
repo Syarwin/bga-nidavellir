@@ -109,7 +109,7 @@
       background-position-y: ($i - 1) * 100% / 4;
     }
     &[data-class='#{$i}'] .card-class-icon {
-      background-position-y: $i * 100% / 7;
+      background-position-y: $i * 100% / 11;
     }
   }
 

@@ -298,7 +298,7 @@
           }
 
           @for $i from 0 through 5 {
-            &.card-class_#{$i}::before { background-position-y: $i * 100% / 7; }
+            &.card-class_#{$i}::before { background-position-y: $i * 100% / 11; }
           }
 
 
