@@ -14,4 +14,9 @@ class Freya extends AseCard
     $this->tooltip[] = clienttranslate('Loki has priority on the ability of Freya');
     $this->grade = [15];
   }
+
+  public function updateScores(&$scores, $player)
+  {
+    $scores[MYTHOLOGY_SCORE] += 15;
+  }
 }

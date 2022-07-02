@@ -15,4 +15,9 @@ class Frigg extends AseCard
     $this->tooltip[] = clienttranslate('You will then know 3 cards of the last Tavern of this Age.');
     $this->grade = [12];
   }
+
+  public function updateScores(&$scores, $player)
+  {
+    $scores[MYTHOLOGY_SCORE] += 12;
+  }
 }

@@ -15,4 +15,9 @@ class Thor extends AseCard
     $this->tooltip[] = clienttranslate('In thingvellir, it works on the Brisingamen and on Hofud');
     $this->grade = [8];
   }
+
+  public function updateScores(&$scores, $player)
+  {
+    $scores[MYTHOLOGY_SCORE] += 8;
+  }
 }

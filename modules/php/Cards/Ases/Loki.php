@@ -17,4 +17,9 @@ class Loki extends AseCard
     );
     $this->grade = [8];
   }
+
+  public function updateScores(&$scores, $player)
+  {
+    $scores[MYTHOLOGY_SCORE] += 8;
+  }
 }
