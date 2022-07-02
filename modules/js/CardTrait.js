@@ -1,7 +1,12 @@
 define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
   return declare('nidavellir.cardTrait', null, {
     constructor() {
-      this._notifications.push(['discardCards', 1000], ['discardHofud', 1000], ['increaseForce', 800]);
+      this._notifications.push(
+        ['discardCards', 1000],
+        ['discardHofud', 1000],
+        ['increaseForce', 800],
+        ['useAsePower', 800],
+      );
       this._callbackOnCard = null;
       this._selectableCards = [];
       this._distinctionExplorerCards = null;
@@ -93,8 +98,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       card.desc = card.tooltip ? card.tooltip.map((o) => _(o)).join('<br />') : '';
       card.offer = card.class == 6 ? card.grade[0] : ''; // ROYAL OFFERING
       card.gradeHtml = card.grade.map((r) => this.getRankHtml(r)).join('');
-      if(card.class == 14){// VALKYRIE
-        card.gradeHtml = card.forces.map((r) => `<div class='valkyrie-force'>${r}</div>`).join('');        
+      if (card.class == 14) {
+        // VALKYRIE
+        card.gradeHtml = card.forces.map((r) => `<div class='valkyrie-force'>${r}</div>`).join('');
       }
 
       this.place('jstpl_card', card, container);
@@ -194,6 +200,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       let content = this.tooltips[cardId].label;
       content = content.replace(/data-flag="[0-9]*"/g, `data-flag="${n.args.force}"`);
+      this.tooltips[cardId].label = content;
+    },
+
+    notif_useAsePower(n) {
+      debug('Notif: use Ase power', n);
+      let cardId = `card-${n.args.aseId}`;
+      $(cardId).dataset.flag = 1;
+
+      let content = this.tooltips[cardId].label;
+      content = content.replace(/data-flag="[0-9]*"/g, `data-flag="1"`);
       this.tooltips[cardId].label = content;
     },
 

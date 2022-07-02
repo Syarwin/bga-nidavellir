@@ -151,7 +151,7 @@ class Coins extends Helpers\Pieces
       'coin_location' => $coin['type'] == COIN_PLAYER? "discard" : "treasure",
     ], $coin['id']);
 
-    $newValue = Coins::get($newCoin)['value'];
+    $newValue = $newCoin['value'];
     if ($newValue > $target) {
       $player =  Players::get($coin['pId']);
       for($i = 0; $i < $newValue - $target; $i++) {

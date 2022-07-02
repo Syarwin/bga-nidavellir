@@ -389,17 +389,16 @@ class Player extends \NID\Helpers\DB_Manager
   /**********************
    ****** IDAVOLL *******
    **********************/
-   public function getCapturingGiant($card)
-   {
-     foreach ($this->getCards() as $giant) {
-       if ($giant->getClass() == GIANT && $giant->canCapture($card)) {
-         return $giant;
-       }
-     }
+  public function getCapturingGiant($card)
+  {
+    foreach ($this->getCards() as $giant) {
+      if ($giant->getClass() == GIANT && $giant->canCapture($card)) {
+        return $giant;
+      }
+    }
 
-     return null;
-   }
-
+    return null;
+  }
 
   public function canCapture($card)
   {
@@ -414,5 +413,10 @@ class Player extends \NID\Helpers\DB_Manager
         Notifications::denyCapture($this, $card, $giant);
       }
     }
+  }
+
+  public function canUseAse($id)
+  {
+    return Cards::canUseAse($id, $this);
   }
 }

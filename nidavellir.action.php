@@ -194,4 +194,15 @@ class action_nidavellir extends APP_GameAction
     $this->game->actVidofnirUpgrade($coinId, $transform);
     self::ajaxResponse();
   }
+
+
+  //////////////////////////////////////////////
+  ///////////// Idavoll Mercenaries ////////////
+  //////////////////////////////////////////////
+  public function actUseThorPower()
+  {
+    self::setAjaxMode();
+    $this->game->actUseThorPower();
+    self::ajaxResponse();
+  }
 }

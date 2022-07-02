@@ -321,3 +321,28 @@
     }
   }
 }
+
+// ASE Token
+.card[data-class='12'] {
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url('img/tokens.png');
+    background-size: 100% 300%;
+    z-index: 2;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    top: 2px;
+    right: 4px;
+    transition: opacity 0.7s;
+    opacity: 0;
+  }
+
+  &[data-flag='0']::after {
+    opacity: 1;
+  }
+}

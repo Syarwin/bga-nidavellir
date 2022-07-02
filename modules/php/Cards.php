@@ -419,12 +419,12 @@ class Cards extends Helpers\Pieces
   public static function createMythology()
   {
     $values = [];
-    foreach (self::$animals as $aId => $class) {
-      $values[] = [$aId, 'mythology', ANIMAL, null];
-    }
-    // foreach (self::$ases as $aId => $class) {
-    //   $values[] = [$aId, 'mythology', ASE, null];
+    // foreach (self::$animals as $aId => $class) {
+    //   $values[] = [$aId, 'mythology', ANIMAL, null];
     // }
+    foreach (self::$ases as $aId => $class) {
+      $values[] = [$aId, 'mythology', ASE, null];
+    }
     foreach (self::$giants as $aId => $class) {
       $values[] = [$aId, 'mythology', GIANT, null];
     }
@@ -467,6 +467,14 @@ class Cards extends Helpers\Pieces
     if (self::getOwner($id) == $player->getId()) {
       $card = self::get($id);
       $card->increaseForce();
+    }
+  }
+
+  public static function canUseAse($id, $player)
+  {
+    if (self::getOwner($id) == $player->getId()) {
+      $card = self::get($id);
+      return $card->canUsePower();
     }
   }
 

@@ -42,7 +42,7 @@ class Globals extends \APP_DbObject
     'sourceState' => 0,
     'campVisited' => 0,
     'brisingamens' => 0,
-    'captureTokens' => 0,
+    'thor' => 0,
   ];
 
   public static function declare($game)
@@ -119,6 +119,11 @@ class Globals extends \APP_DbObject
     return self::get('campVisited') == 1;
   }
 
+  public function getThorCardId()
+  {
+    return self::get('thor');
+  }
+
   /*
    * Setters
    */
@@ -191,26 +196,8 @@ class Globals extends \APP_DbObject
     return self::inc('brisingamens', 1);
   }
 
-  /*
-   * Giant tokens
-   */
-  public function getCaptureTokens()
+  public function setThor($cardId)
   {
-    $t = (int) self::get('captureTokens');
-    $bin = [false];
-    for ($i = 1; $i <= 5; $i++) {
-      $bin[$i] = $t % 2 == 1;
-      $t = intdiv($t, 2);
-    }
-
-    return $bin;
-  }
-
-  public function setCaptureToken($class, $value)
-  {
-    $t = self::getCaptureTokens();
-    $t[$class] = $value;
-    $n = $t[1] + 2 * $t[2] + 4 * $t[3] + 8 * $t[4] + 16 * $t[5];
-    self::set('captureTokens', $n);
+    return self::set('thor', $cardId);
   }
 }

@@ -499,6 +499,25 @@ html {
   top: 117px;
   left: 19px; }
 
+.card[data-class='12']::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: url("img/tokens.png");
+  background-size: 100% 300%;
+  z-index: 2;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  top: 2px;
+  right: 4px;
+  transition: opacity 0.7s;
+  opacity: 0; }
+.card[data-class='12'][data-flag='0']::after {
+  opacity: 1; }
+
 #nidavellir-board {
   display: flex;
   flex-flow: column;
@@ -2944,6 +2963,12 @@ html {
     .card-tooltip .card[data-class='14'][data-id='512'][data-flag='4']::after, .card-tooltip .card[data-class='14'][data-id='513'][data-flag='4']::after {
       top: 234px;
       left: 38px; }
+    .card-tooltip .card[data-class='12']::after {
+      width: 50px;
+      height: 50px;
+      top: 4px;
+      right: 6px;
+      border-radius: 20px; }
   .card-tooltip .card-description {
     margin: 10px;
     font-size: 14px;

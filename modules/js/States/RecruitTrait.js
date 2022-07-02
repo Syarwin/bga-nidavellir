@@ -128,7 +128,6 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.attr(tokenLocation, 'data-capture', '0');
     },
 
-
     notif_recruitHero(n) {
       debug('Notif: new hero recruit', n);
       let card = n.args.card;
@@ -195,6 +194,10 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.makeCardSelectable(args.cards, this.onClickCardDiscard.bind(this));
         this._selectedCardsForDiscard = [];
         this._amountToDiscard = args.n;
+
+        if (args.thor) {
+          this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () => this.takeAction('actUseThorPower', {}));
+        }
       }
     },
 

@@ -360,11 +360,12 @@ $machinestates = [
     'descriptionmyturnsingle' => clienttranslate('${you} must discard a card'),
     'type' => 'activeplayer',
     'args' => 'argDiscardCard',
-    'possibleactions' => ['discard'],
+    'possibleactions' => ['discard', 'actUseThorPower'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
       'recruitDone' => ST_RESOLVE_STACK,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'discard' => ST_DISCARD_CARD,
     ]
   ],
 

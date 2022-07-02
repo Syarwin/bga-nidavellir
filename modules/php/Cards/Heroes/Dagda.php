@@ -23,7 +23,8 @@ class Dagda extends HeroCard
   public function canBeRecruited($player)
   {
     $stacks = $player->getDiscardableStacks();
-    return count($stacks) >= $this->getDiscardRequirement($player) + (in_array(HUNTER, $stacks) ? 1 : 0);
+    return count($stacks) >=
+      $this->getDiscardRequirement($player) + (in_array(HUNTER, $stacks) ? 1 : 0) - ($player->canUseAse(THOR) ? 1 : 0);
   }
 
   public function stateAfterRecruit($player)

@@ -219,7 +219,8 @@ trait RecruitTrait
     $recruit = $player->getLastAction('recruit');
     $card = Cards::get($recruit['card']['id']);
     return [
-      'n' => $card->getDiscardRequirement($player),
+      'n' => $card->getDiscardRequirement($player) - (Globals::getThorCardId() == $card->getId() ? 1 : 0),
+      'thor' => $player->canUseAse(THOR),
       'cards' => array_map(function ($card) {
         return $card->getId();
       }, $player->getDiscardableCards()),
@@ -243,6 +244,28 @@ trait RecruitTrait
     Notifications::discardCards($player, $cards);
     Players::updateScores();
     $this->nextStateAfterRecruit(null, $player, true);
+  }
+
+  public function actUseThorPower()
+  {
+    $this->checkAction('actUseThorPower');
+    $args = $this->gamestate->state()['args'];
+    if (!$args['thor']) {
+      throw new \BgaUserException(_('You cannot use Thor Power'));
+    }
+
+    $player = Players::getActive();
+    $recruit = $player->getLastAction('recruit');
+    $card = Cards::get($recruit['card']['id']);
+    $thor = Cards::get(THOR);
+    $thor->usePower();
+    Globals::setThor($card->getId());
+
+    if ($card->getDiscardRequirement($player) == 1) {
+      $this->nextStateAfterRecruit(null, $player, true);
+    } else {
+      $this->gamestate->nextState('discard');
+    }
   }
 
   /**********************

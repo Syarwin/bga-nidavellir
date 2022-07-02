@@ -334,6 +334,16 @@ class Notifications
       'player' => $player,
       'card'  => $card,
       'giant' => $giant->getUiData(),
+      'giant_name' => $giant->getName(),
+    ]);
+  }
+
+
+  public static function useAsePower($player, $ase){
+    self::notifyAll('useAsePower', clienttranslate('${player_name} uses ${ase_name}\'s effect'), [
+      'player' => $player,
+      'ase_name' => $ase->getName(),
+      'aseId' => $ase->getId(),
     ]);
   }
 

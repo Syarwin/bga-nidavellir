@@ -1,6 +1,9 @@
 <?php
 namespace NID\Cards\Ases;
-use Nidavellir;
+use \NID\Cards;
+use \NID\Game\Players;
+use \NID\Game\Notifications;
+
 
 /*
  * AseCard: all utility functions concerning an Ase
@@ -20,6 +23,22 @@ class AseCard extends \NID\Cards\AbstractCard
         'You may activate his or her ability once in a game by discarding the Power Token of the matching God card.'
       ),
     ];
+  }
+
+  public function getActivationStatus()
+  {
+    return $this->flag;
+  }
+
+  public function canUsePower()
+  {
+    return $this->getActivationStatus() == GIANT_PENDING;
+  }
+
+  public function usePower()
+  {
+    Notifications::useAsePower(Players::get($this->pId), $this);
+    Cards::DB()->update(['flag' => 1], $this->id);
   }
 
   public function getRecruitementZone()
