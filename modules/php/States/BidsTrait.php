@@ -94,6 +94,17 @@ trait BidsTrait
     // Are we done with the three tavers ?
     $currentTavern = Globals::incTavern();
     $nextState = in_array($currentTavern, [GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN]) ? 'reveal' : 'finished';
+
+    // Handle ODIN
+    if ($nextState == 'finished') {
+      $odinOwner = Cards::getOwner(ODIN);
+      if ($odinOwner != null) {
+        $player = Players::get($odinOwner);
+        if ($player->canUseAse(ODIN)) {
+          $nextState = 'odin';
+        }
+      }
+    }
     $this->gamestate->nextState($nextState);
   }
 

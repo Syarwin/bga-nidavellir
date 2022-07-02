@@ -40,6 +40,8 @@ define('ST_TRANSFORM_COIN', 24);
 define('ST_DISCARD_CARD', 25);
 define('ST_VIDOFNIR', 42);
 
+define('ST_ODIN', 50);
+
 define('ST_PRE_END_OF_AGE', 29);
 define('ST_END_OF_AGE', 30);
 

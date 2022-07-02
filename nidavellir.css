@@ -2981,6 +2981,9 @@ html {
   -o-transition: none !important;
   transition: none !important; }
 
+#customActions .bgabutton.selected {
+  background: linear-gradient(rgba(89, 219, 78, 0.87), rgba(87, 149, 59, 0.89)); }
+
 .action-button.bgabutton.bgabutton_blue.selected {
   background-image: linear-gradient(#26a633, #85c13d) !important; }
 

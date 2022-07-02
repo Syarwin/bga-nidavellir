@@ -14,6 +14,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         ['recruitHero', 2500],
         ['distinction', 2500],
         ['distinctionTie', 2500],
+        ['returnCard', 1000],
       );
       this._activeStates.push('recruitDwarf');
 
@@ -196,7 +197,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this._amountToDiscard = args.n;
 
         if (args.thor) {
-          this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () => this.takeAction('actUseThorPower', {}));
+          this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () =>
+            this.takeAction('actUseThorPower', {}),
+          );
         }
       }
     },
@@ -349,6 +352,52 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.makeCardSelectable(args.cards, this.onClickCardDiscard.bind(this));
       this._selectedCardsForDiscard = [];
       this._amountToDiscard = 1;
+    },
+
+    /**********************
+     ******** ODIN ********
+     *********************/
+    onEnteringStateOdin(args) {
+      if (!this.isCurrentPlayerActive()) return;
+
+      this._selectedHero = null;
+      Object.keys(args.cards).forEach((cardId) => {
+        this.addPrimaryActionButton(
+          'btnReturn' + cardId,
+          this.format_string_recursive(_('Return ${hero_name}'), { hero_name: args.cards[cardId] }),
+          () => {
+            if (this._selectedHero !== null) {
+              $('btnReturn' + this._selectedHero).classList.remove('selected');
+            }
+
+            this._selectedHero = cardId;
+            $('btnReturn' + cardId).classList.add('selected');
+            this.gamedatas.gamestate.descriptionmyturn = _('Choose an available neutral hero');
+            this.updatePageTitle();
+
+            dojo.query('#hall .card').addClass('unselectable');
+            this.makeCardSelectable(args.heroes, this.onClickCardExchangeOdin.bind(this));
+            dojo.addClass('tab-heroes', 'focus');
+            this.openHeroesModal();
+          },
+        );
+      });
+
+      this.addPrimaryActionButton('btnSkip', _("Don't use"), () => this.takeAction('actSkipOdinPower', {}));
+    },
+
+    onClickCardExchangeOdin(card, isId = false) {
+      let cardId = isId ? card : card.id;
+      this.takeAction('actUseOdinPower', {
+        cardId: this._selectedHero,
+        heroId: cardId,
+      });
+    },
+
+    notif_returnCard(n) {
+      debug('Notif: return card', n);
+      let card = n.args.card;
+      this.slide('card-' + card.id, card.location);
     },
   });
 });

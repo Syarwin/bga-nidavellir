@@ -17,50 +17,47 @@
 $machinestates = [
   // The initial state. Please do not modify.
   ST_GAME_SETUP => [
-    "name" => "gameSetup",
-    "description" => "",
-    "type" => "manager",
-    "action" => "stGameSetup",
-    "transitions" => [ "" => ST_START_OF_AGE ]
+    'name' => 'gameSetup',
+    'description' => '',
+    'type' => 'manager',
+    'action' => 'stGameSetup',
+    'transitions' => ['' => ST_START_OF_AGE],
   ],
 
   // Start of an age or distinction
   ST_START_OF_AGE => [
-    "name" => "startOfAge",
-    "description" => "",
-    "type" => "game",
-    "action" => "stStartOfAge",
-    "transitions" => [
-      "turn" => ST_START_OF_TURN,
-    ]
+    'name' => 'startOfAge',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stStartOfAge',
+    'transitions' => [
+      'turn' => ST_START_OF_TURN,
+    ],
   ],
-
 
   // Start of turn : draw the cards
   ST_START_OF_TURN => [
-    "name" => "startOfTurn",
-    "description" => "",
-    "type" => "game",
-    "action" => "stStartOfTurn",
-    "updateGameProgression" => true,
-    "transitions" => [
+    'name' => 'startOfTurn',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stStartOfTurn',
+    'updateGameProgression' => true,
+    'transitions' => [
       'start' => ST_BIDS,
-    ]
+    ],
   ],
-
 
   // Virtual states that allow to resolve stack of states
   ST_RESOLVE_STACK => [
-    "name" => "resolveStack",
-    "description" => '',
-    "type" => "game",
-    "action" => "stResolveStack",
-    "transitions" => []
+    'name' => 'resolveStack',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stResolveStack',
+    'transitions' => [],
   ],
 
-
   ST_BIDS => [
-    "name" => "playerBids",
+    'name' => 'playerBids',
     'description' => clienttranslate('Waiting for other players to bid'),
     'descriptionmyturn' => clienttranslate('${you} must bid for the three taverns'),
     'descriptionmyturngeneric' => clienttranslate('${you} must bid for the three taverns'),
@@ -71,36 +68,34 @@ $machinestates = [
     'possibleactions' => ['bid'],
     'transitions' => [
       'done' => ST_NEXT_RESOLUTION,
-    ]
+    ],
   ],
-
 
   ST_NEXT_RESOLUTION => [
-    "name" => "nextResolution",
-    "description" => "",
-    "type" => "game",
-    "action" => "stNextResolution",
-    "transitions" => [
+    'name' => 'nextResolution',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stNextResolution',
+    'transitions' => [
       'reveal' => ST_REVEAL_BIDS,
       'finished' => ST_END_OF_TURN,
-    ]
+      'odin' => ST_ODIN,
+    ],
   ],
-
 
   ST_REVEAL_BIDS => [
-    "name" => "resolveBids",
-    "description" => '',
-    "type" => "game",
-    "action" => "stRevealBids",
-    "transitions" => [
+    'name' => 'resolveBids',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stRevealBids',
+    'transitions' => [
       'revealed' => ST_RESOLVE_BIDS,
       'uline' => ST_ULINE_BID,
-    ]
+    ],
   ],
 
-
   ST_ULINE_BID => [
-    "name" => "ulineBid",
+    'name' => 'ulineBid',
     'description' => clienttranslate('${actplayer} must choose its bid (Uline\'s power)'),
     'descriptionmyturn' => clienttranslate('${you} must choose a coin to bid (Uline\'s power)'),
     'type' => 'activeplayer',
@@ -108,38 +103,34 @@ $machinestates = [
     'possibleactions' => ['bid'],
     'transitions' => [
       'revealed' => ST_RESOLVE_BIDS,
-    ]
+    ],
   ],
-
-
-
 
   ST_RESOLVE_BIDS => [
-    "name" => "resolveBids",
-    "description" => '',
-    "type" => "game",
-    "action" => "stResolveBids",
-    "transitions" => [
-      "resolved" => ST_NEXT_PLAYER,
-    ]
+    'name' => 'resolveBids',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stResolveBids',
+    'transitions' => [
+      'resolved' => ST_NEXT_PLAYER,
+    ],
   ],
 
-
   ST_NEXT_PLAYER => [
-		'name' => 'nextPlayer',
-		'description' => '',
-		'type' => 'game',
-		'action' => 'stNextPlayer',
-    "updateGameProgression" => true,
-		'transitions' => [
+    'name' => 'nextPlayer',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stNextPlayer',
+    'updateGameProgression' => true,
+    'transitions' => [
       'recruit' => ST_RECRUIT_DWARF,
       'done' => ST_NEXT_RESOLUTION,
       'discardTavern' => ST_DISCARD_TAVERN_CARD,
     ],
-	],
+  ],
 
   ST_DISCARD_TAVERN_CARD => [
-    "name" => "discardTavernCard",
+    'name' => 'discardTavernCard',
     'description' => clienttranslate('${actplayer} must discard a card from the ${tavern_name}'),
     'descriptionmyturn' => clienttranslate('${you} must discard a card from the ${tavern_name}'),
     'type' => 'activeplayer',
@@ -147,13 +138,11 @@ $machinestates = [
     'possibleactions' => ['discard'],
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
-    ]
+    ],
   ],
 
-
-
   ST_RECRUIT_DWARF => [
-    "name" => "recruitDwarf",
+    'name' => 'recruitDwarf',
     'description' => clienttranslate('${actplayer} must recruit a dwarf at the ${tavern_name}${camp_title}'),
     'descriptionmyturn' => clienttranslate('${you} must recruit a dwarf at the ${tavern_name}${camp_title}'),
     'type' => 'activeplayer',
@@ -169,11 +158,11 @@ $machinestates = [
       'brisingamens' => ST_PRE_BRISINGAMENS,
 
       'recruitDone' => ST_TRADE_COIN,
-    ]
+    ],
   ],
 
   ST_TRANSFORM_COIN => [
-    "name" => "transformCoin",
+    'name' => 'transformCoin',
     'description' => clienttranslate('${actplayer} must choose a coin to transform (+${value})'),
     'descriptionmyturn' => clienttranslate('${you} must choose a coin to transform (+${value})'),
     'type' => 'activeplayer',
@@ -184,27 +173,29 @@ $machinestates = [
       'trade' => ST_TRADE_COIN,
 
       'transformDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
   ST_VIDOFNIR => [
-    "name" => "vidofnirTransforms",
-    'description' => clienttranslate('${actplayer} must choose which transformations to make (Vidofnir and Vedrfölnir\'s effect)'),
-    'descriptionmyturn' => clienttranslate('${you} must choose which transformations to make (Vidofnir and Vedrfölnir\'s effect)'),
+    'name' => 'vidofnirTransforms',
+    'description' => clienttranslate(
+      '${actplayer} must choose which transformations to make (Vidofnir and Vedrfölnir\'s effect)'
+    ),
+    'descriptionmyturn' => clienttranslate(
+      '${you} must choose which transformations to make (Vidofnir and Vedrfölnir\'s effect)'
+    ),
     'type' => 'activeplayer',
     'args' => 'argVidofnirTransform',
-    "action" => 'stVidofnirTransform',
+    'action' => 'stVidofnirTransform',
     'possibleactions' => ['vidofnirTransform'],
     'transitions' => [
       'vidofnir' => ST_VIDOFNIR,
       'done' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
-
-
   ST_RECRUIT_HERO => [
-    "name" => "recruitHero",
+    'name' => 'recruitHero',
     'description' => clienttranslate('${actplayer} must recruit a hero'),
     'descriptionmyturn' => clienttranslate('${you} must recruit a hero'),
     'type' => 'activeplayer',
@@ -223,12 +214,11 @@ $machinestates = [
       'khradTransform' => ST_KHRAD_TRANSFORM,
 
       'recruitDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
-
   ST_ANDUMIA => [
-    "name" => "pickDiscardAndumia",
+    'name' => 'pickDiscardAndumia',
     'description' => clienttranslate('${actplayer} must pick one card in the discard'),
     'descriptionmyturn' => clienttranslate('${you} must pick one card in the discard'),
     'type' => 'activeplayer',
@@ -241,11 +231,11 @@ $machinestates = [
       'olwyn' => ST_OLWYN,
 
       'recruitDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
   ST_OLWYN => [
-    "name" => "placeOlwynDouble",
+    'name' => 'placeOlwynDouble',
     'description' => clienttranslate('${actplayer} must choose where to place Olwyn double'),
     'descriptionmyturn' => clienttranslate('${you} must choose where to place Olwyn double'),
     'type' => 'activeplayer',
@@ -260,12 +250,11 @@ $machinestates = [
 
       'recruitDone' => ST_OLWYN,
       'finished' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
-
   ST_KHRAD_TRANSFORM => [
-    "name" => "khradTransform",
+    'name' => 'khradTransform',
     'description' => clienttranslate('${actplayer} must choose a coin to upgrade (Khrad\'s effect)'),
     'descriptionmyturn' => clienttranslate('${you} must choose a coin to upgrade (Khrad\'s effect)'),
     'type' => 'activeplayer',
@@ -274,13 +263,17 @@ $machinestates = [
     'possibleactions' => ['transform'],
     'transitions' => [
       'transformDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
   ST_RECRUIT_CAMP => [
-    "name" => "recruitCamp",
-    'description' => clienttranslate('${actplayer} must recruit a mercenary or an artifact at the camp (Holda\'s effect)'),
-    'descriptionmyturn' => clienttranslate('${you} must recruit a mercenary or an artifact at the camp (Holda\'s effect)'),
+    'name' => 'recruitCamp',
+    'description' => clienttranslate(
+      '${actplayer} must recruit a mercenary or an artifact at the camp (Holda\'s effect)'
+    ),
+    'descriptionmyturn' => clienttranslate(
+      '${you} must recruit a mercenary or an artifact at the camp (Holda\'s effect)'
+    ),
     'type' => 'activeplayer',
     'args' => 'argRecruitCamp',
     'possibleactions' => ['recruit'],
@@ -293,52 +286,46 @@ $machinestates = [
       'brisingamens' => ST_PRE_BRISINGAMENS,
 
       'recruitDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
-
-
 
   ST_PRE_HOFUD => [
-    "name" => "preHofud",
-    "description" => "",
-    "type" => "game",
-    "action" => "stPreHofud",
-    "transitions" => ['' => ST_HOFUD]
+    'name' => 'preHofud',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stPreHofud',
+    'transitions' => ['' => ST_HOFUD],
   ],
 
-
   ST_HOFUD => [
-    "name" => "discardHofud",
+    'name' => 'discardHofud',
     'description' => clienttranslate('Others must choose a card in the warrior column and discard it'),
     'descriptionmyturn' => clienttranslate('${you} must choose a card of the warrior column and discard it'),
     'args' => 'argDiscardHofud',
-    "type" => "multipleactiveplayer",
+    'type' => 'multipleactiveplayer',
     'possibleactions' => ['discard'],
     'transitions' => [
       'done' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
-
-
 
   ST_PRE_BRISINGAMENS => [
-    "name" => "preBrisingamens",
-    "description" => "",
-    "type" => "game",
-    "action" => "stPreBrisingamens",
-    "transitions" => [
+    'name' => 'preBrisingamens',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stPreBrisingamens',
+    'transitions' => [
       'recruit' => ST_BRISINGAMENS,
       'done' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
-
   ST_BRISINGAMENS => [
-    "name" => "brisingamens",
+    'name' => 'brisingamens',
     'description' => clienttranslate('${actplayer} must pick one card in the discard'),
     'descriptionmyturn' => clienttranslate('${you} must pick one card in the discard'),
     'args' => 'argPickDiscardAndumia', // Same arg as Andumia
-    "type" => "activeplayer",
+    'type' => 'activeplayer',
     'possibleactions' => ['recruit'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
@@ -346,14 +333,11 @@ $machinestates = [
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_PRE_BRISINGAMENS,
-    ]
+    ],
   ],
 
-
-
-
   ST_DISCARD_CARD => [
-    "name" => "discardCard",
+    'name' => 'discardCard',
     'description' => clienttranslate('${actplayer} must discard ${n} cards'),
     'descriptionmyturn' => clienttranslate('${you} must discard ${n} cards'),
     'descriptionsingle' => clienttranslate('${actplayer} must discard a card'),
@@ -366,22 +350,22 @@ $machinestates = [
       'recruitDone' => ST_RESOLVE_STACK,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
       'discard' => ST_DISCARD_CARD,
-    ]
+    ],
   ],
 
   ST_TRADE_COIN => [
-    "name" => "tradeCoin",
+    'name' => 'tradeCoin',
     'description' => '',
     'type' => 'game',
-    "action" => "stTradeCoin",
+    'action' => 'stTradeCoin',
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
       'uline' => ST_ULINE_TRADE_COIN,
-    ]
+    ],
   ],
 
   ST_ULINE_TRADE_COIN => [
-    "name" => "ulineTradeCoin",
+    'name' => 'ulineTradeCoin',
     'description' => clienttranslate('${actplayer} must choose two coins to trade (Uline\'s power)'),
     'descriptionmyturn' => clienttranslate('${you} must choose two coins to trade (Uline\'s power)'),
     'type' => 'activeplayer',
@@ -389,12 +373,11 @@ $machinestates = [
     'possibleactions' => ['trade'],
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
-    ]
+    ],
   ],
 
-
   ST_CHOOSE_THRUD_COLUMN => [
-    "name" => "chooseThrudColumn",
+    'name' => 'chooseThrudColumn',
     'description' => clienttranslate('${actplayer} must choose where to place Thrud'),
     'descriptionmyturn' => clienttranslate('${you} must choose where to place Thrud'),
     'type' => 'activeplayer',
@@ -404,49 +387,70 @@ $machinestates = [
       'hero' => ST_RECRUIT_HERO,
 
       'recruitDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
 
+  ST_ODIN => [
+    'name' => 'odin',
+    'description' => clienttranslate('${actplayer} may use Odin power to exchange a neutral Hero'),
+    'descriptionmyturn' => clienttranslate('${you} may use Odin power to exchange a neutral Hero'),
+    'type' => 'activeplayer',
+    'args' => 'argOdin',
+    'possibleactions' => ['actUseOdinPower', 'actSkipOdinPower'],
+    'transitions' => [
+      'done' => ST_END_OF_TURN,
+      'recruitDone' => ST_END_OF_TURN,
 
+      'hero' => ST_RECRUIT_HERO,
+      'trade' => ST_TRADE_COIN,
+      'discard' => ST_DISCARD_CARD,
+      'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'recruitCamp' => ST_RECRUIT_CAMP,
+      'andumia' => ST_ANDUMIA,
+      'olwyn' => ST_OLWYN,
+      'khradTransform' => ST_KHRAD_TRANSFORM,
+    ],
+  ],
 
   // Player end of turn
   ST_END_OF_TURN => [
-    "name" => "endOfTurn",
-    "description" => "",
-    "type" => "game",
-    "action" => "stEndOfTurn",
-    "transitions" => [
+    'name' => 'endOfTurn',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stEndOfTurn',
+    'transitions' => [
       'nextTurn' => ST_START_OF_TURN,
       'nextAge' => ST_START_MERCENARY_ENLISTMENT,
-    ]
+    ],
   ],
 
   // Mercenary enlistment
   ST_START_MERCENARY_ENLISTMENT => [
-    "name" => "startMercenaryEnlistment",
-    "description" => "",
-    "type" => "game",
-    "action" => "stStartMercenaryEnlistment",
-    "transitions" => [
+    'name' => 'startMercenaryEnlistment',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stStartMercenaryEnlistment',
+    'transitions' => [
       'resolved' => ST_NEXT_PLAYER_ENLIST,
       'skip' => ST_PRE_END_OF_AGE,
-    ]
+    ],
   ],
 
   ST_NEXT_PLAYER_ENLIST => [
-    "name" => "nextPlayerMercenaryEnlistment",
-    "description" => "",
-    "type" => "game",
-    "action" => "stNextPlayerEnlist",
-    "transitions" => [
+    'name' => 'nextPlayerMercenaryEnlistment',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stNextPlayerEnlist',
+    'transitions' => [
       'chooseOrder' => ST_ENLIST_CHOOSE_ORDER,
       'end' => ST_PRE_END_OF_AGE,
       'enlist' => ST_ENLIST_MERCENARY,
-    ]
+    ],
   ],
 
   ST_ENLIST_CHOOSE_ORDER => [
-    "name" => "chooseEnlistOrder",
+    'name' => 'chooseEnlistOrder',
     'description' => clienttranslate('${actplayer} must choose to either enlist mercenaries first or last'),
     'descriptionmyturn' => clienttranslate('${you} must choose to either enlist mercenaries first or last'),
     'type' => 'activeplayer',
@@ -454,11 +458,11 @@ $machinestates = [
     'transitions' => [
       'first' => ST_ENLIST_MERCENARY,
       'last' => ST_NEXT_PLAYER_ENLIST,
-    ]
+    ],
   ],
 
   ST_ENLIST_MERCENARY => [
-    "name" => "enlistMercenary",
+    'name' => 'enlistMercenary',
     'description' => clienttranslate('${actplayer} must choose a mercenary and a column to place it'),
     'descriptionmyturn' => clienttranslate('${you} must choose a mercenary and a column to place it'),
     'args' => 'argEnlistMercenary',
@@ -472,26 +476,23 @@ $machinestates = [
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_ENLIST_MERCENARY,
-    ]
+    ],
   ],
-
-
 
   // Pre-End of age
   ST_PRE_END_OF_AGE => [
-    "name" => "preEndOfAge",
-    "description" => "",
-    "type" => "game",
-    "action" => "stPreEndOfAge",
-    "transitions" => [
+    'name' => 'preEndOfAge',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stPreEndOfAge',
+    'transitions' => [
       'end' => ST_END_OF_AGE,
       'placeYlud' => ST_CHOOSE_YLUD_COLUMN,
-    ]
+    ],
   ],
 
-
   ST_CHOOSE_YLUD_COLUMN => [
-    "name" => "chooseYludColumn",
+    'name' => 'chooseYludColumn',
     'description' => clienttranslate('${actplayer} must choose where to place Ylud'),
     'descriptionmyturn' => clienttranslate('${you} must choose where to place Ylud'),
     'type' => 'activeplayer',
@@ -503,31 +504,28 @@ $machinestates = [
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
-
-
 
   // End of age
   ST_END_OF_AGE => [
-    "name" => "endOfAge",
-    "description" => "",
-    "type" => "game",
-    "action" => "stEndOfAge",
-    "transitions" => [
+    'name' => 'endOfAge',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stEndOfAge',
+    'transitions' => [
       'distinctions' => ST_NEXT_DISTINCTION,
       'scores' => ST_PRE_END_OF_GAME,
-    ]
+    ],
   ],
-
 
   // Distinctions
   ST_NEXT_DISTINCTION => [
-    "name" => "nextDistinction",
-    "description" => "",
-    "type" => "game",
-    "action" => "stNextDistinction",
-    "transitions" => [
+    'name' => 'nextDistinction',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stNextDistinction',
+    'transitions' => [
       'next' => ST_NEXT_DISTINCTION,
       'done' => ST_START_OF_AGE,
       'transform' => ST_TRANSFORM_COIN,
@@ -536,12 +534,11 @@ $machinestates = [
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_NEXT_DISTINCTION,
-    ]
+    ],
   ],
 
-
   ST_DISTINCTION_EXPLORER => [
-    "name" => "distinctionExplorer",
+    'name' => 'distinctionExplorer',
     'description' => clienttranslate('${actplayer} must choose a card'),
     'descriptionmyturn' => clienttranslate('${you} must choose a card'),
     'type' => 'activeplayer',
@@ -554,40 +551,38 @@ $machinestates = [
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
       'recruitDone' => ST_RESOLVE_STACK,
-    ]
+    ],
   ],
-
 
   ST_PRE_END_OF_GAME => [
-    "name" => "preEndOfGame",
-    "description" => "",
-    "type" => "game",
-    "updateGameProgression" => true,
-    "action" => "stPreEndOfGame",
-    "transitions" => [
+    'name' => 'preEndOfGame',
+    'description' => '',
+    'type' => 'game',
+    'updateGameProgression' => true,
+    'action' => 'stPreEndOfGame',
+    'transitions' => [
       'brisingamens' => ST_BRISINGAMENS_DISCARD,
-      'end' => ST_GAME_END
-    ]
+      'end' => ST_GAME_END,
+    ],
   ],
 
-
   ST_BRISINGAMENS_DISCARD => [
-    "name" => "brisingamensDiscard",
+    'name' => 'brisingamensDiscard',
     'description' => clienttranslate('${actplayer} must discard a card (Brisingamens\'s effect)'),
     'descriptionmyturn' => clienttranslate('${you} must choose a card (Brisingamens\'s effect)'),
     'type' => 'activeplayer',
     'args' => 'argBrisingamensDiscard',
     'possibleactions' => ['discard'],
-    'transitions' => ['recruitDone' => ST_GAME_END ]
+    'transitions' => ['recruitDone' => ST_GAME_END],
   ],
 
   // Final state.
   // Please do not modify (and do not overload action/args methods).
   ST_GAME_END => [
-    "name" => "gameEnd",
-    "description" => clienttranslate("End of game"),
-    "type" => "manager",
-    "action" => "stGameEnd",
-    "args" => "argGameEnd"
-  ]
+    'name' => 'gameEnd',
+    'description' => clienttranslate('End of game'),
+    'type' => 'manager',
+    'action' => 'stGameEnd',
+    'args' => 'argGameEnd',
+  ],
 ];

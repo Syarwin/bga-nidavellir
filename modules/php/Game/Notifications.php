@@ -357,6 +357,14 @@ class Notifications
     ]);
   }
 
+  public static function returnCard($player, $card){
+    self::notifyAll('returnCard', clienttranslate('${player_name} returns ${card_class}${card_class_symbol}'), [
+      'player' => $player,
+      'card'  => $card,
+    ]);
+  }
+
+
 
   /*
    * Automatically adds some standard field about player and/or card

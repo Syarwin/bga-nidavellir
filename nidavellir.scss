@@ -13,21 +13,17 @@
  *
  */
 
-
 html {
-  background-image:url('img/background.jpg');
+  background-image: url('img/background.jpg');
   background-size: cover;
   background-position: center center;
-  background-attachment:fixed;
+  background-attachment: fixed;
 }
-
-
 
 @font-face {
   font-family: 'Norse';
-  src: url('img/font/Norse.woff2') format('woff2'),
-      url('img/font/Norse.woff') format('woff'),
-      url('img/font/Norse.ttf') format('truetype');
+  src: url('img/font/Norse.woff2') format('woff2'), url('img/font/Norse.woff') format('woff'),
+    url('img/font/Norse.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -35,25 +31,22 @@ html {
 
 @font-face {
   font-family: 'Norse';
-  src: url('img/font/Norse-Bold.woff2') format('woff2'),
-      url('img/font/Norse-Bold.woff') format('woff'),
-      url('img/font/Norse-Bold.ttf') format('truetype');
+  src: url('img/font/Norse-Bold.woff2') format('woff2'), url('img/font/Norse-Bold.woff') format('woff'),
+    url('img/font/Norse-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
-
-@import "modules/css/variables";
-@import "modules/css/card";
-@import "modules/css/layout";
-@import "modules/css/coin";
-@import "modules/css/playerPanel";
-@import "modules/css/log";
-@import "modules/css/settings";
-@import "modules/css/modal";
-@import "modules/css/tooltips";
-
+@import 'modules/css/variables';
+@import 'modules/css/card';
+@import 'modules/css/layout';
+@import 'modules/css/coin';
+@import 'modules/css/playerPanel';
+@import 'modules/css/log';
+@import 'modules/css/settings';
+@import 'modules/css/modal';
+@import 'modules/css/tooltips';
 
 .notransition {
   -webkit-transition: none !important;
@@ -62,7 +55,10 @@ html {
   transition: none !important;
 }
 
+#customActions .bgabutton.selected {
+  background: linear-gradient(rgba(89, 219, 78, 0.87), rgba(87, 149, 59, 0.89));
+}
 
 .action-button.bgabutton.bgabutton_blue.selected {
-  background-image:linear-gradient(#26a633, #85c13d) !important;
+  background-image: linear-gradient(#26a633, #85c13d) !important;
 }

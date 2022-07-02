@@ -459,4 +459,55 @@ trait RecruitTrait
     Players::updateScores();
     $this->gamestate->nextState('recruitDone');
   }
+
+  public function argOdin()
+  {
+    $player = Players::getActive();
+    $card = Cards::get(ODIN);
+    $heroes = Cards::getRecruitableHeroes($player);
+    $heroes = array_values(
+      array_filter($heroes, function ($hero) {
+        return $hero->getRecruitementZone() == NEUTRAL;
+      })
+    );
+
+    return [
+      'cards' => $card->getNeutralHeroes(),
+      'heroes' => array_map(function ($hero) {
+        return $hero->getId();
+      }, $heroes),
+    ];
+  }
+
+  public function actSkipOdinPower()
+  {
+    $this->checkAction('actSkipOdinPower');
+    $this->gamestate->nextState('done');
+
+  }
+
+  public function actUseOdinPower($cardId, $heroId)
+  {
+    $this->checkAction('actUseOdinPower');
+    $player = Players::getActive();
+
+    // Notify Odin
+    $odin = Cards::get(ODIN);
+    $odin->usePower();
+
+    // Put back card
+    Cards::move($cardId, "hall");
+    $card = Cards::get($cardId);
+    Notifications::returnCard($player, $card);
+
+
+    // Move card in corresponding position and notify
+    $hero = Cards::get($heroId);
+    $player->recruit($hero);
+    Cards::refresh($hero);
+    Notifications::recruit($player, $hero);
+    $hero->applyEffect($player);
+    Players::updateScores();
+    $this->nextStateAfterRecruit($hero, $player);
+  }
 }
