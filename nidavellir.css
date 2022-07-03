@@ -456,6 +456,27 @@ html {
   .card[data-class='14'][data-flag='5'] .card-grade .valkyrie-force:nth-of-type(6) {
     color: #ffc002;
     font-weight: bold; }
+  .card #loki-token {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 44px;
+    left: 25px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    z-index: 2;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Norse;
+    font-weight: bold; }
+    .card #loki-token div {
+      width: 25px;
+      height: 25px;
+      background: url("img/tokens.png");
+      background-size: 100% 300%; }
 
 .command-zone-container .cards-class .card[data-class='14']:not(:last-child) .card-grade {
   display: flex; }

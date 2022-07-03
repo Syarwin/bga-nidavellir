@@ -43,6 +43,10 @@ trait RecruitTrait
     if (count($cardsPerClass) > 1 || $canCapture) {
       return null;
     }
+    $class = array_keys($cardsPerClass)[0];
+    if (in_array($class, [ASE, VALKYRIE, GIANT, ANIMAL])) {
+      return null;
+    }
 
     $cards = reset($cardsPerClass);
     usort($cards, function ($a, $b) {
@@ -62,6 +66,12 @@ trait RecruitTrait
 
     $tavern = Globals::getTavern();
     $cards = Cards::getInTavern($tavern);
+    if(Globals::getLokiCardId() !== 0 && Players::getActiveId() != Cards::getOwner(LOKI)){
+      $cards = $cards->cfilter(function ($card) {
+        return $card->getId() != Globals::getLokiCardId();
+      });
+    }
+
     $data = [
       'i18n' => ['tavern_name', 'camp_title'],
       'cards' => $cards->getIds(),
@@ -483,7 +493,6 @@ trait RecruitTrait
   {
     $this->checkAction('actSkipOdinPower');
     $this->gamestate->nextState('done');
-
   }
 
   public function actUseOdinPower($cardId, $heroId)
@@ -496,10 +505,9 @@ trait RecruitTrait
     $odin->usePower();
 
     // Put back card
-    Cards::move($cardId, "hall");
+    Cards::move($cardId, 'hall');
     $card = Cards::get($cardId);
     Notifications::returnCard($player, $card);
-
 
     // Move card in corresponding position and notify
     $hero = Cards::get($heroId);

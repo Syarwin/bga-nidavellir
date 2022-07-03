@@ -112,6 +112,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         let tokenLocation = card.location.substr(0, card.location.length - 1) + card.giantClass;
         dojo.attr(tokenLocation, 'data-capture', '1');
       }
+      if (card.loki && card.location.substr(0, 6) == 'tavern') {
+        dojo.place('<div id="loki-token"><div></div>LOKI</div>', 'card-' + card.id);
+      }
 
       if (animation) this.slideFromLeft('card-' + card.id);
     },
@@ -159,6 +162,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         if (toDiscard) {
           dojo.place(elem, 'popin_discard_contents');
           dojo.style(elem, 'left', '0px');
+
+          let lokiToken = elem.querySelector('#loki-token');
+          if (lokiToken) {
+            lokiToken.remove();
+          }
         } else dojo.destroy(elem);
       }, 1000);
     },

@@ -130,6 +130,18 @@ class Nidavellir extends Table
     Cards::get(OLRUN)->increaseForce();
   }
 
+  public function checkAseActivation(&$nextState, $aseId, $aseState)
+  {
+    $owner = Cards::getOwner($aseId);
+    if ($owner != null) {
+      $player = Players::get($owner);
+      if ($player->canUseAse($aseId)) {
+        $this->gamestate->changeActivePlayer($player->getId());
+        $nextState = $aseState;
+      }
+    }
+  }
+
   ////////////////////////////////////
   ////////////   Zombie   ////////////
   ////////////////////////////////////

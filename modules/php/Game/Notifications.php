@@ -365,6 +365,23 @@ class Notifications
   }
 
 
+  public static function reserveCard($player, $card){
+    self::notifyAll('reserveCard', clienttranslate('${player_name} reserves ${card_class}${card_class_symbol}'), [
+      'player' => $player,
+      'card'  => $card,
+    ]);
+  }
+
+
+  public static function exchangeCard($player, $card1, $card2){
+    self::notifyAll('exchangeCard', clienttranslate('${player_name} exchanges ${card_class}${card_class_symbol} and ${card2_class}${card2_class_symbol}'), [
+      'player' => $player,
+      'card'   => $card1,
+      'card2'  => $card2,
+    ]);
+  }
+
+
 
   /*
    * Automatically adds some standard field about player and/or card

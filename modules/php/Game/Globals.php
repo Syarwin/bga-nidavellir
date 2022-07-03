@@ -43,6 +43,7 @@ class Globals extends \APP_DbObject
     'campVisited' => 0,
     'brisingamens' => 0,
     'thor' => 0,
+    'loki' => 0,
   ];
 
   public static function declare($game)
@@ -124,6 +125,12 @@ class Globals extends \APP_DbObject
     return self::get('thor');
   }
 
+  public function getLokiCardId()
+  {
+    return self::get('loki');
+  }
+
+
   /*
    * Setters
    */
@@ -200,4 +207,10 @@ class Globals extends \APP_DbObject
   {
     return self::set('thor', $cardId);
   }
+
+  public function setLoki($cardId)
+  {
+    return self::set('loki', $cardId);
+  }
+
 }

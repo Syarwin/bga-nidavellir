@@ -15,6 +15,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         ['distinction', 2500],
         ['distinctionTie', 2500],
         ['returnCard', 1000],
+        ['reserveCard', 800],
+        ['exchangeCard', 1000],
       );
       this._activeStates.push('recruitDwarf');
 
@@ -92,6 +94,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_recruit(n) {
       debug('Notif: new recruit', n);
       let card = n.args.card;
+
+      let lokiToken = $('card-' + card.id).querySelector('#loki-token');
+      if (lokiToken) {
+        lokiToken.remove();
+      }
 
       if (card.class == 6) {
         // ROYAL OFFER
@@ -398,6 +405,73 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: return card', n);
       let card = n.args.card;
       this.slide('card-' + card.id, card.location);
+    },
+
+    /**********************
+     ******** LOKI ********
+     *********************/
+    onEnteringStateLoki(args) {
+      if (!this.isCurrentPlayerActive()) return;
+
+      this.makeCardSelectable(args.cards, this.onClickCardLoki.bind(this));
+      this.addPrimaryActionButton('btnSkip', _("Don't use"), () => this.takeAction('actSkipLokiPower', {}));
+    },
+
+    onClickCardLoki(card, isId = false) {
+      let cardId = isId ? card : card.id;
+      this.takeAction('actUseLokiPower', {
+        cardId: cardId,
+      });
+    },
+
+    notif_reserveCard(n) {
+      debug('Notif: reserve card', n);
+      let card = n.args.card;
+      dojo.place('<div id="loki-token"><div></div>LOKI</div>', 'card-' + card.id);
+    },
+
+    /**********************
+     ******** FREYA ********
+     *********************/
+
+    onEnteringStateFreya(args) {
+      if (!this.isCurrentPlayerActive()) return;
+
+      this.makeCardSelectable(args.cards, this.onClickCardFreya.bind(this));
+      this._selectedCardsForFreya = [];
+      this.addPrimaryActionButton('btnSkip', _("Don't use"), () => this.takeAction('actSkipFreyaPower', {}));
+    },
+
+    onClickCardFreya(card) {
+      if (this._selectedCardsForFreya.includes(card.id)) {
+        // Already selected => unselect it
+        dojo.removeClass('card-' + card.id, 'selected');
+        this._selectedCardsForFreya.splice(this._selectedCardsForFreya.indexOf(card.id), 1);
+      } else if (this._selectedCardsForFreya.length < 2) {
+        // Select it
+        dojo.addClass('card-' + card.id, 'selected');
+        this._selectedCardsForFreya.push(card.id);
+      }
+
+      dojo.destroy('btnConfirmFreya');
+      if (this._selectedCardsForFreya.length == 2) {
+        this.addPrimaryActionButton('btnConfirmFreya', _('Confirm exchange'), () =>
+          this.takeAction('actUseFreyaPower', {
+            card1Id: this._selectedCardsForFreya[0],
+            card2Id: this._selectedCardsForFreya[1],
+          }),
+        );
+      }
+    },
+
+    notif_exchangeCard(n) {
+      debug('Notif: exchange card', n);
+      let card1 = $('card-' + n.args.card.id);
+      let card2 = $('card-' + n.args.card2.id);
+      let target1 = card2.parentNode;
+      let target2 = card1.parentNode;
+      this.slide(card1, target1);
+      this.slide(card2, target2);
     },
   });
 });

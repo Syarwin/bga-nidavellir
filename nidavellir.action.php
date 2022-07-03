@@ -208,4 +208,35 @@ class action_nidavellir extends APP_GameAction
     $this->game->actUseOdinPower($cardId, $heroId);
     self::ajaxResponse();
   }
+
+  public function actSkipLokiPower()
+  {
+    self::setAjaxMode();
+    $this->game->actSkipLokiPower();
+    self::ajaxResponse();
+  }
+
+  public function actUseLokiPower()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, true);
+    $this->game->actUseLokiPower($cardId);
+    self::ajaxResponse();
+  }
+
+  public function actSkipFreyaPower()
+  {
+    self::setAjaxMode();
+    $this->game->actSkipFreyaPower();
+    self::ajaxResponse();
+  }
+
+  public function actUseFreyaPower()
+  {
+    self::setAjaxMode();
+    $card1Id = self::getArg('card1Id', AT_posint, true);
+    $card2Id = self::getArg('card2Id', AT_posint, true);
+    $this->game->actUseFreyaPower($card1Id, $card2Id);
+    self::ajaxResponse();
+  }
 }

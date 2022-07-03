@@ -97,13 +97,7 @@ trait BidsTrait
 
     // Handle ODIN
     if ($nextState == 'finished') {
-      $odinOwner = Cards::getOwner(ODIN);
-      if ($odinOwner != null) {
-        $player = Players::get($odinOwner);
-        if ($player->canUseAse(ODIN)) {
-          $nextState = 'odin';
-        }
-      }
+      $this->checkAseActivation($nextState, ODIN, 'odin');
     }
     $this->gamestate->nextState($nextState);
   }

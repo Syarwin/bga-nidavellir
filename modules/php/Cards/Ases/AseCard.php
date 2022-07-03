@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards\Ases;
+use Nidavellir;
 use \NID\Cards;
 use \NID\Game\Players;
 use \NID\Game\Notifications;

@@ -44,6 +44,43 @@ $machinestates = [
     'updateGameProgression' => true,
     'transitions' => [
       'start' => ST_BIDS,
+      'freya' => ST_FREYA,
+      'loki' => ST_LOKI,
+    ],
+  ],
+
+  ST_LOKI => [
+    'name' => 'loki',
+    'description' => clienttranslate('${actplayer} may use Loki power to reserve a card'),
+    'descriptionmyturn' => clienttranslate('${you} may use Loki power to reserve a card'),
+    'type' => 'activeplayer',
+    'args' => 'argLoki',
+    'possibleactions' => ['actUseLokiPower', 'actSkipLokiPower'],
+    'transitions' => [
+      '' => ST_PRE_FREYA,
+    ],
+  ],
+
+  ST_PRE_FREYA => [
+    'name' => 'preFreya',
+    'description' => '',
+    'type' => 'game',
+    'action' => 'stPreFreya',
+    'transitions' => [
+      'start' => ST_BIDS,
+      'freya' => ST_FREYA,
+    ],
+  ],
+
+  ST_FREYA => [
+    'name' => 'freya',
+    'description' => clienttranslate('${actplayer} may use Freya power to exchange two cards'),
+    'descriptionmyturn' => clienttranslate('${you} may use Freya power to exchange two cards'),
+    'type' => 'activeplayer',
+    'args' => 'argFreya',
+    'possibleactions' => ['actUseFreyaPower', 'actSkipFreyaPower'],
+    'transitions' => [
+      'start' => ST_BIDS,
     ],
   ],
 

@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards;
+use \NID\Game\Globals;
 
 /*
  * AbstractCard: all utility functions concerning a card : dwarf/improvements or hero
@@ -56,7 +57,7 @@ class AbstractCard
   public function applyEffect($player){}
 
   public function getUiData() {
-    return [
+    $data = [
       'id'       => $this->id,
       'location' => $this->location,
       'state'    => $this->state,
@@ -67,6 +68,12 @@ class AbstractCard
       'tooltip'  => $this->getTooltip(),
       'symbol'   => $this->getNotifSymbol(),
     ];
+
+    if(Globals::getLokiCardId() == $this->id){
+      $data['loki'] = true;
+    }
+
+    return $data;
   }
 
   public function getName(){

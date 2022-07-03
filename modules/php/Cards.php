@@ -428,9 +428,9 @@ class Cards extends Helpers\Pieces
     foreach (self::$giants as $aId => $class) {
       $values[] = [$aId, 'mythology', GIANT, null];
     }
-    foreach (self::$valkyries as $aId => $class) {
-      $values[] = [$aId, 'mythology', VALKYRIE, null];
-    }
+    // foreach (self::$valkyries as $aId => $class) {
+    //   $values[] = [$aId, 'mythology', VALKYRIE, null];
+    // }
 
     self::DB()
       ->multipleInsert(['card_id', 'card_location', 'class', 'grade'])
