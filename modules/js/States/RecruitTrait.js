@@ -95,9 +95,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       debug('Notif: new recruit', n);
       let card = n.args.card;
 
-      let lokiToken = $('card-' + card.id).querySelector('#loki-token');
-      if (lokiToken) {
-        lokiToken.remove();
+      // Remove loki token if needed
+      if ($('card-' + card.id)) {
+        let lokiToken = $('card-' + card.id).querySelector('#loki-token');
+        if (lokiToken) {
+          lokiToken.remove();
+        }
       }
 
       if (card.class == 6) {
@@ -473,5 +476,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.slide(card1, target1);
       this.slide(card2, target2);
     },
+
+
+    onEnteringStatePlaceGullinbursti(args) {
+      if (this.isCurrentPlayerActive()) this.makeColumnsSelectable('gullinbursti');
+    },
+
   });
 });

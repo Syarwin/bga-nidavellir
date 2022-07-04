@@ -193,6 +193,7 @@ $machinestates = [
       'vidofnir' => ST_VIDOFNIR,
       'hofud' => ST_PRE_HOFUD,
       'brisingamens' => ST_PRE_BRISINGAMENS,
+      'placeGullinbursti' => ST_GULLINBURSTI,
 
       'recruitDone' => ST_TRADE_COIN,
     ],
@@ -287,6 +288,23 @@ $machinestates = [
 
       'recruitDone' => ST_OLWYN,
       'finished' => ST_RESOLVE_STACK,
+    ],
+  ],
+
+  ST_GULLINBURSTI => [
+    'name' => 'placeGullinbursti',
+    'description' => clienttranslate('${actplayer} must choose where to place Gullinbursti'),
+    'descriptionmyturn' => clienttranslate('${you} must choose where to place Gullinbursti'),
+    'type' => 'activeplayer',
+    'args' => 'argPlaceGullinbursti',
+    'possibleactions' => ['pickColumn'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'olwyn' => ST_OLWYN,
+
+      'recruitDone' => ST_RESOLVE_STACK,
     ],
   ],
 

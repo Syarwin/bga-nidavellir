@@ -274,6 +274,7 @@ class Notifications
       YLUD => clienttranslate('${player_name} moves Ylud'),
       OLWYN_DOUBLE1 => clienttranslate('${player_name} places first Olwyn\'s double'),
       OLWYN_DOUBLE2 => clienttranslate('${player_name} places second Olwyn\'s double'),
+      GULLINBURSTI => clienttranslate('${player_name} places Gullinbursti')
     ];
 
     $msg = $silent? '' : $msg[$card->getId()];

@@ -66,7 +66,7 @@ trait RecruitTrait
 
     $tavern = Globals::getTavern();
     $cards = Cards::getInTavern($tavern);
-    if(Globals::getLokiCardId() !== 0 && Players::getActiveId() != Cards::getOwner(LOKI)){
+    if (Globals::getLokiCardId() !== 0 && Players::getActiveId() != Cards::getOwner(LOKI)) {
       $cards = $cards->cfilter(function ($card) {
         return $card->getId() != Globals::getLokiCardId();
       });
@@ -192,6 +192,14 @@ trait RecruitTrait
       }
     }
 
+    // Gullinbursti need to be placed somewhere ?
+    if ($nextState == null) {
+      $animal = Cards::get(GULLINBURSTI);
+      if ($animal->getPId() != null && $animal->getZone() == NEUTRAL) {
+        $nextState = 'placeGullinbursti';
+      }
+    }
+
     // Can recruit a hero ?
     if ($nextState == null && $player->canRecruitHero()) {
       $nextState = 'hero';
@@ -291,6 +299,7 @@ trait RecruitTrait
       'chooseThrudColumn' => THRUD,
       'chooseYludColumn' => YLUD,
       'placeOlwynDouble' => OLWYN_DOUBLE1,
+      'placeGullinbursti' => GULLINBURSTI,
     ];
     $card = Cards::get($cardAssoc[$this->gamestate->state()['name']]);
     if ($card->getId() == OLWYN_DOUBLE1 && $card->getLocation() != 'pending' && $card->getZone() != NEUTRAL) {
@@ -517,5 +526,11 @@ trait RecruitTrait
     $hero->applyEffect($player);
     Players::updateScores();
     $this->nextStateAfterRecruit($hero, $player);
+  }
+
+
+  public function argPlaceGullinbursti()
+  {
+    return [];
   }
 }

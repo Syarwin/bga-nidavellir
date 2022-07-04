@@ -1,5 +1,8 @@
 <?php
 namespace NID\Cards\Animals;
+use NID\Cards;
+use NID\Game\Players;
+use NID\Game\Notifications;
 
 class Hreasvelg extends AnimalCard
 {
@@ -14,5 +17,19 @@ class Hreasvelg extends AnimalCard
     ];
     $this->animalClass = BLACKSMITH;
     $this->grade = [null];
+  }
+
+  public function applyEffect($player)
+  {
+    $card = Cards::get(GULLINBURSTI);
+    $player = Players::getActive();
+    $player->recruit($card);
+    Cards::refresh($card); // Update location
+    Notifications::recruit($player, $card);
+  }
+
+  public function stateAfterRecruit($player)
+  {
+    return 'placeGullinbursti';
   }
 }

@@ -390,6 +390,7 @@ class Cards extends Helpers\Pieces
     HREASVELG => 'Hreasvelg',
     NIDHOGG => 'Nidhogg',
     RATATOSK => 'Ratatosk',
+    GULLINBURSTI => 'Gullinbursti',
   ];
 
   public static $ases = [
@@ -419,12 +420,12 @@ class Cards extends Helpers\Pieces
   public static function createMythology()
   {
     $values = [];
-    // foreach (self::$animals as $aId => $class) {
-    //   $values[] = [$aId, 'mythology', ANIMAL, null];
-    // }
-    foreach (self::$ases as $aId => $class) {
-      $values[] = [$aId, 'mythology', ASE, null];
+    foreach (self::$animals as $aId => $class) {
+      $values[] = [$aId, $aId == GULLINBURSTI ? 'pending' : 'mythology', ANIMAL, null];
     }
+    // foreach (self::$ases as $aId => $class) {
+    //   $values[] = [$aId, 'mythology', ASE, null];
+    // }
     foreach (self::$giants as $aId => $class) {
       $values[] = [$aId, 'mythology', GIANT, null];
     }
