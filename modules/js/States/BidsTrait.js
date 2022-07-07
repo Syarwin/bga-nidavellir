@@ -183,7 +183,10 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
 
     notif_clearTavern(n){
       debug("Clearing tavern cards left", n);
-      dojo.query('#tavern_' + n.args.tavern + ' .card').forEach(card => this.slideToRightAndDestroy(card, true) );
+      dojo.query('#tavern_' + n.args.tavern + ' .card').forEach(card => {
+        const destroy = [11, 12, 13, 14].includes(parseInt(card.dataset.class))
+        this.slideToRightAndDestroy(card, !destroy);
+      });
     },
 
     notif_clearTurn(n){

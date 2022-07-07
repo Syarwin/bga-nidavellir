@@ -97,6 +97,7 @@ trait RecruitTrait
       }
     }
     $data['capture'] = $capture;
+    $data['frigg'] = $player->canUseAse(FRIGG);
 
     return $data;
   }
@@ -194,9 +195,12 @@ trait RecruitTrait
 
     // Gullinbursti need to be placed somewhere ?
     if ($nextState == null) {
-      $animal = Cards::get(GULLINBURSTI);
-      if ($animal->getPId() != null && $animal->getZone() == NEUTRAL) {
-        $nextState = 'placeGullinbursti';
+      $pId = Cards::getOwner(GULLINBURSTI);
+      if ($pId !== null) {
+        $animal = Cards::get(GULLINBURSTI);
+        if ($animal->getZone() == NEUTRAL) {
+          $nextState = 'placeGullinbursti';
+        }
       }
     }
 
@@ -527,7 +531,6 @@ trait RecruitTrait
     Players::updateScores();
     $this->nextStateAfterRecruit($hero, $player);
   }
-
 
   public function argPlaceGullinbursti()
   {

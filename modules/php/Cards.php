@@ -420,12 +420,12 @@ class Cards extends Helpers\Pieces
   public static function createMythology()
   {
     $values = [];
-    foreach (self::$animals as $aId => $class) {
-      $values[] = [$aId, $aId == GULLINBURSTI ? 'pending' : 'mythology', ANIMAL, null];
-    }
-    // foreach (self::$ases as $aId => $class) {
-    //   $values[] = [$aId, 'mythology', ASE, null];
+    // foreach (self::$animals as $aId => $class) {
+    //   $values[] = [$aId, $aId == GULLINBURSTI ? 'pending' : 'mythology', ANIMAL, null];
     // }
+    foreach (self::$ases as $aId => $class) {
+      $values[] = [$aId, 'mythology', ASE, null];
+    }
     foreach (self::$giants as $aId => $class) {
       $values[] = [$aId, 'mythology', GIANT, null];
     }
@@ -437,6 +437,11 @@ class Cards extends Helpers\Pieces
       ->multipleInsert(['card_id', 'card_location', 'class', 'grade'])
       ->values($values);
     self::shuffle('mythology');
+
+    // Draw some of them into the mythology deck
+    $nPlayers = Players::count();
+    $nCards = max(9, $nPlayers * 3);
+    self::pickForLocation($nCards, 'mythology', 'mythology_deck');
   }
 
   public static function getAnimal($id, $row = null)
@@ -491,7 +496,7 @@ class Cards extends Helpers\Pieces
     $age = Globals::getAge();
     $nPlayers = Players::count();
     $nCardsPerTavern = $nPlayers == 2 ? 3 : $nPlayers;
-    $dancingDragonLocation = $age == 1 && Globals::getTurn() <= 3 && Globals::isIdavoll() ? 'mythology' : ['age', $age];
+    $dancingDragonLocation = $age == 1 && Globals::getTurn() <= 3 && Globals::isIdavoll() ? 'mythology_deck' : ['age', $age];
 
     return array_merge(
       self::pickForLocation($nCardsPerTavern, ['age', $age], ['tavern', 0])->ui(),
@@ -566,6 +571,10 @@ class Cards extends Helpers\Pieces
 
   public static function clearTavern($tavern)
   {
+    $mythCardIds = self::getInLocation(['tavern', $tavern])->cfilter(function($card){
+      return in_array($card->getClass(), [ANIMAL, GIANT, ASE, VALKYRIE]);
+    })->getIds();
+    self::discard($mythCardIds, true);
     self::moveAllInLocation(['tavern', $tavern], 'discard');
   }
 
