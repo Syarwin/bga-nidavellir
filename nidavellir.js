@@ -275,6 +275,7 @@ define([
             class:i,
             offer:'',
             flag:0,
+            olrunToken:'',
             gradeHtml: '<div class="card-rank">' + grades[i][0] + '</div>',
           };
 

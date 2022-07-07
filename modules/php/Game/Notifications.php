@@ -390,6 +390,13 @@ class Notifications
     ]);
   }
 
+  public static function chooseOlrun($player, $column){
+    self::notifyAll('chooseOlrun', '', [
+      'column' => $column,
+    ]);
+  }
+
+
 
 
   /*

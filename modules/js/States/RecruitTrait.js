@@ -18,6 +18,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         ['reserveCard', 800],
         ['exchangeCard', 1000],
         ['putBackCard', 1000],
+        ['chooseOlrun', 200],
       );
       this._activeStates.push('recruitDwarf');
 
@@ -255,12 +256,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       if (this.isCurrentPlayerActive()) this.makeColumnsSelectable('olwyn', args.columns);
     },
 
-    makeColumnsSelectable(hero, columns = 0) {
+    makeColumnsSelectable(hero, columns = 0, action = 'chooseColumn') {
       columns = columns || [1, 2, 3, 4, 5];
       columns.forEach((col) => {
         dojo.addClass('command-zone_' + this.player_id + '_' + col, 'selectable');
         this.connect($('command-zone_' + this.player_id + '_' + col), 'click', () => {
-          this.takeAction('chooseColumn', {
+          this.takeAction(action, {
             column: col,
             hero: hero,
           });
@@ -529,6 +530,26 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         this.openDistinctionExplorerModal(),
       );
       this.openDistinctionExplorerModal();
+    },
+
+    /**********************
+     ******** OLRUN ********
+     *********************/
+    onEnteringStateChooseOlrunClass(args) {
+      if (this.isCurrentPlayerActive()) this.makeColumnsSelectable('olrun', 0, 'actChooseOlrunClass');
+    },
+
+    notif_chooseOlrun(n) {
+      debug('Notif: choose olrun class', n);
+      dojo.query('.olrun-token').forEach((elt) => (elt.dataset.class = n.args.column));
+
+      let cardId = 'card-513';
+      let content = this.tooltips[cardId].label;
+      content = content.replace(
+        /<div class='olrun-token' data-class='[0-9]+'><\/div>/g,
+        `<div class='olrun-token' data-class='${n.args.column}'></div>`,
+      );
+      this.tooltips[cardId].label = content;
     },
   });
 });

@@ -125,6 +125,7 @@ var jstpl_card = `
     \${gradeHtml}
     <div class="card-class-icon"></div>
   </div>
+   \${olrunToken}
 </div>
 `;
 
@@ -139,6 +140,7 @@ var jstpl_cardTooltip = `
       \${gradeHtml}
       <div class="card-class-icon"></div>
     </div>
+    \${olrunToken}
   </div>
   <div class="card-description">
     \${desc}

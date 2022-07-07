@@ -107,6 +107,10 @@ class AbstractCard
     return null;
   }
 
+  public function hasRankOfClass($class){
+    return $this->class == $class;
+  }
+
   public function getNotifString(){
     $recruitNames = [
       BLACKSMITH => clienttranslate('a blacksmith'),

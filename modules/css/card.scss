@@ -285,10 +285,38 @@
       background-size: 100% 300%;
     }
   }
+
+  .olrun-token {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    z-index: 2;
+    background: url('img/olrun.png');
+    background-size: 500% 100%;
+
+    &[data-class='0'] {
+      display: none;
+    }
+    @for $i from 1 through 5 {
+      &[data-class='#{$i}'] {
+        background-position-x: ($i - 1) * 100% / 4;
+      }
+    }
+  }
 }
 
-.command-zone-container .cards-class .card[data-class='14']:not(:last-child) .card-grade {
-  display: flex;
+.command-zone-container .cards-class .card[data-class='14']:not(:last-child) {
+  .card-grade {
+    display: flex;
+  }
+
+  .olrun-token {
+    left: -15px;
+    top: 1px;
+    z-index: 1;
+  }
 }
 
 .card[data-class='14'] {

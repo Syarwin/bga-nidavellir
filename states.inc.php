@@ -196,6 +196,7 @@ $machinestates = [
       'placeGullinbursti' => ST_GULLINBURSTI,
       'frigg' => ST_FRIGG,
       'skymir' => ST_SKYMIR,
+      'olrun' => ST_OLRUN,
 
       'recruitDone' => ST_TRADE_COIN,
     ],
@@ -509,8 +510,20 @@ $machinestates = [
       'brisingamens' => ST_PRE_BRISINGAMENS,
       'placeGullinbursti' => ST_GULLINBURSTI,
       'skymir' => ST_SKYMIR,
+      'olrun' => ST_OLRUN,
 
       'recruitDone' => ST_TRADE_COIN,
+    ],
+  ],
+
+  ST_OLRUN => [
+    'name' => 'chooseOlrunClass',
+    'description' => clienttranslate('${actplayer} must choose the class for Ölrun (click corresponding column)'),
+    'descriptionmyturn' => clienttranslate('${you} must choose the class for Ölrun (click corresponding column)'),
+    'type' => 'activeplayer',
+    'possibleactions' => ['actChooseOlrunClass'],
+    'transitions' => [
+      'recruitDone' => ST_RESOLVE_STACK,
     ],
   ],
 

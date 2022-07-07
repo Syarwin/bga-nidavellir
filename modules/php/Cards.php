@@ -442,6 +442,7 @@ class Cards extends Helpers\Pieces
     $nPlayers = Players::count();
     $nCards = max(9, $nPlayers * 3);
     self::pickForLocation($nCards, 'mythology', 'mythology_deck');
+    self::shuffle('mythology_deck');
   }
 
   public static function getAnimal($id, $row = null)

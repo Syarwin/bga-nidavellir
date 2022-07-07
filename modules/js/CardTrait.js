@@ -103,6 +103,8 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         card.gradeHtml = card.forces.map((r) => `<div class='valkyrie-force'>${r}</div>`).join('');
       }
 
+      card.olrunToken = (card.olrun !== undefined)? `<div class='olrun-token' data-class='${card.olrun}'></div>` : '';
+
       this.place('jstpl_card', card, container);
       dojo.connect($('card-' + card.id), 'click', () => this.onClickCard(card));
       this.addTooltipHtml('card-' + card.id, this.format_block('jstpl_cardTooltip', card));

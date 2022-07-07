@@ -477,9 +477,34 @@ html {
       height: 25px;
       background: url("img/tokens.png");
       background-size: 100% 300%; }
+  .card .olrun-token {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    z-index: 2;
+    background: url("img/olrun.png");
+    background-size: 500% 100%; }
+    .card .olrun-token[data-class='0'] {
+      display: none; }
+    .card .olrun-token[data-class='1'] {
+      background-position-x: 0%; }
+    .card .olrun-token[data-class='2'] {
+      background-position-x: 25%; }
+    .card .olrun-token[data-class='3'] {
+      background-position-x: 50%; }
+    .card .olrun-token[data-class='4'] {
+      background-position-x: 75%; }
+    .card .olrun-token[data-class='5'] {
+      background-position-x: 100%; }
 
 .command-zone-container .cards-class .card[data-class='14']:not(:last-child) .card-grade {
   display: flex; }
+.command-zone-container .cards-class .card[data-class='14']:not(:last-child) .olrun-token {
+  left: -15px;
+  top: 1px;
+  z-index: 1; }
 
 .card[data-class='14']::after {
   content: '';
@@ -2995,6 +3020,11 @@ html {
     font-size: 14px;
     max-width: 300px;
     text-align: justify; }
+  .card-tooltip .olrun-token {
+    width: 40px;
+    height: 40px;
+    top: 18px;
+    left: 16px; }
 
 .notransition {
   -webkit-transition: none !important;

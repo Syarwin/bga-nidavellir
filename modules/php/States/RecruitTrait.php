@@ -144,6 +144,9 @@ trait RecruitTrait
     if ($card->getClass() == HERO) {
       Cards::increaseForce(SIGRDRIFA, $player); // Valkyrie
     }
+    if (Globals::getOlrunClass() != 0 && $card->hasRankOfClass(Globals::getOlrunClass())) {
+      Cards::increaseForce(OLRUN, $player); // Valkyrie
+    }
 
     Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
@@ -583,5 +586,14 @@ trait RecruitTrait
       'cardsObj' => $cards->ui(),
       'suffix' => $cards->count() == 5 ? '' : 'second',
     ];
+  }
+
+  public function actChooseOlrunClass($column)
+  {
+    $this->checkAction('actChooseOlrunClass');
+    Globals::setOlrun($column);
+    $player = Players::getActive();
+    Notifications::chooseOlrun($player, $column);
+    Stack::resolve();
   }
 }

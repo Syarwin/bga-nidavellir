@@ -31,6 +31,11 @@ class AnimalCard extends \NID\Cards\AbstractCard
     return $this->animalClass;
   }
 
+  public function hasRankOfClass($class){
+    return $this->animalClass == $class;
+  }
+
+
   public function updateRanks(&$ranks, $uselessExceptThrud)
   {
     $ranks[$this->animalClass] += $this->getRanks();

@@ -247,4 +247,12 @@ class action_nidavellir extends APP_GameAction
     $this->game->actUseFriggPower($cardId);
     self::ajaxResponse();
   }
+
+  public function actChooseOlrunClass()
+  {
+    self::setAjaxMode();
+    $column = self::getArg('column', AT_posint, true);
+    $this->game->actChooseOlrunClass($column);
+    self::ajaxResponse();
+  }
 }
