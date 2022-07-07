@@ -201,7 +201,17 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function getHeroLine()
   {
-    return Cards::getMegingjordOwner() == $this->id ? -1 : $this->countHeroes() + 1;
+    if(Cards::getMegingjordOwner() == $this->id){
+      return -1;
+    }
+    $line = $this->countHeroes() + 1;
+    if(Cards::getOwner(THRIVALDI) == $this->id){
+      $card = Cards::get(THRIVALDI);
+      if($card->getActivationStatus() == GIANT_CAPTURED){
+        $line--;
+      }
+    }
+    return $line;
   }
 
   public function getRanks($ThrudIncluded = false)
@@ -234,7 +244,7 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function canRecruitHero()
   {
-    return $this->countLines() > $this->countHeroes() && Cards::getMegingjordOwner() != $this->id;
+    return $this->countLines() >= $this->getHeroLine() && Cards::getMegingjordOwner() != $this->id;
   }
 
   // Useful for Dagda and Bonfur

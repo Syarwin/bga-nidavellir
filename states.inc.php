@@ -252,6 +252,7 @@ $machinestates = [
       'andumia' => ST_ANDUMIA,
       'olwyn' => ST_OLWYN,
       'khradTransform' => ST_KHRAD_TRANSFORM,
+      'skymir' => ST_SKYMIR,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ],

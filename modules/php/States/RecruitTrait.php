@@ -491,9 +491,9 @@ trait RecruitTrait
     $card = Cards::get($cardId);
     $giant = $player->getCapturingGiant($card);
     $giant->capture($card);
-    $nextState = $giant->applyEffect($player) ?? 'recruitDone';
+    $newState = $giant->applyEffect($player) ?? null;
     Players::updateScores();
-    $this->gamestate->nextState($nextState);
+    Stack::nextState('recruitDone', $newState);
   }
 
   public function argOdin()

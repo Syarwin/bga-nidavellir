@@ -13,4 +13,9 @@ class Thrivaldi extends GiantCard
     $this->grade = [null];
     $this->giantClass = BLACKSMITH;
   }
+
+  public function applyEffect($player)
+  {
+    return 'hero';
+  }
 }
