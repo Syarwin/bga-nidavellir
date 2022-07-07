@@ -83,11 +83,6 @@ trait TurnTrait
   public function argFreya()
   {
     $cards = Cards::getInTavern('%')->getIds();
-    $loki = Globals::getLokiCardId();
-    if ($loki !== 0) {
-      $cards = array_values(array_diff($cards, [$loki]));
-    }
-
     return [
       'cards' => $cards,
     ];
