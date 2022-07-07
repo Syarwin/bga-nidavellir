@@ -166,6 +166,11 @@ trait RecruitTrait
     // Card require a new state ?
     $nextState = $bypassCardState ? null : $card->stateAfterRecruit($player);
 
+    // Skymir second card ?
+    if (Cards::countInLocation('skymir') > 3) {
+      $nextState = 'skymir';
+    }
+
     // Royal Offer
     if ($card != null && $card->getClass() == ROYAL_OFFER) {
       $value = $card->getValue();
@@ -486,9 +491,9 @@ trait RecruitTrait
     $card = Cards::get($cardId);
     $giant = $player->getCapturingGiant($card);
     $giant->capture($card);
-    $giant->applyEffect($player);
+    $nextState = $giant->applyEffect($player) ?? 'recruitDone';
     Players::updateScores();
-    $this->gamestate->nextState('recruitDone');
+    $this->gamestate->nextState($nextState);
   }
 
   public function argOdin()
@@ -567,6 +572,16 @@ trait RecruitTrait
     return [
       'cards' => $cards->getIds(),
       'cardsObj' => $cards->ui(),
+    ];
+  }
+
+  public function argSkymir()
+  {
+    $cards = Cards::getInLocation('skymir');
+    return [
+      'cards' => $cards->getIds(),
+      'cardsObj' => $cards->ui(),
+      'suffix' => $cards->count() == 5 ? '' : 'second',
     ];
   }
 }

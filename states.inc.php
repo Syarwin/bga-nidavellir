@@ -195,6 +195,7 @@ $machinestates = [
       'brisingamens' => ST_PRE_BRISINGAMENS,
       'placeGullinbursti' => ST_GULLINBURSTI,
       'frigg' => ST_FRIGG,
+      'skymir' => ST_SKYMIR,
 
       'recruitDone' => ST_TRADE_COIN,
     ],
@@ -488,6 +489,30 @@ $machinestates = [
       'recruitDone' => ST_TRADE_COIN,
     ],
   ],
+
+  ST_SKYMIR => [
+    'name' => 'skymir',
+    'description' => clienttranslate('${actplayer} must keep one card (Skymir\'s power, first card)'),
+    'descriptionmyturn' => clienttranslate('${you} must keep one card (Skymir\'s power, first card)'),
+    'descriptionsecond' => clienttranslate('${actplayer} must keep one card (Skymir\'s power, second card)'),
+    'descriptionmyturnsecond' => clienttranslate('${you} must keep one card (Skymir\'s power, second card)'),
+    'type' => 'activeplayer',
+    'args' => 'argSkymir',
+    'possibleactions' => ['recruit'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'vidofnir' => ST_VIDOFNIR,
+      'hofud' => ST_PRE_HOFUD,
+      'brisingamens' => ST_PRE_BRISINGAMENS,
+      'placeGullinbursti' => ST_GULLINBURSTI,
+      'skymir' => ST_SKYMIR,
+
+      'recruitDone' => ST_TRADE_COIN,
+    ],
+  ],
+
 
 
   // Player end of turn

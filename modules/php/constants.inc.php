@@ -46,6 +46,7 @@ define('ST_PRE_FREYA', 52);
 define('ST_FREYA', 53);
 define('ST_GULLINBURSTI', 54);
 define('ST_FRIGG', 55);
+define('ST_SKYMIR', 56);
 
 define('ST_PRE_END_OF_AGE', 29);
 define('ST_END_OF_AGE', 30);

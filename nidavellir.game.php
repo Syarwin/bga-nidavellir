@@ -127,7 +127,7 @@ class Nidavellir extends Table
 
   public function tp()
   {
-    Cards::get(OLRUN)->increaseForce();
+    Cards::createMythology();
   }
 
   public function checkAseActivation(&$nextState, $aseId, $aseState)

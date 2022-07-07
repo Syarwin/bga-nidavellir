@@ -1,5 +1,6 @@
 <?php
 namespace NID\Cards\Giants;
+use NID\Cards;
 
 class Skymir extends GiantCard
 {
@@ -21,5 +22,11 @@ class Skymir extends GiantCard
     $this->tooltip[] = clienttranslate(
       'Put the 3 remaining cards under the Mythology card deck next to the Royal Treasure.'
     );
+  }
+
+  public function applyEffect($player)
+  {
+    Cards::pickForLocation(5, 'mythology', 'skymir');
+    return 'skymir';
   }
 }

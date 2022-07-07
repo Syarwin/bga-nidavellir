@@ -507,12 +507,28 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.slideToRightAndDestroy(card, false);
     },
 
-    onEnteringStateFriggPick(args){
+    onEnteringStateFriggPick(args) {
       this._distinctionExplorerCards = args.cardsObj;
       this.addPrimaryActionButton('btnShowDistinctionExplorerCards', _('Show cards'), () =>
         this.openDistinctionExplorerModal(),
       );
       this.openDistinctionExplorerModal();
-    }
+    },
+
+    /**********************
+     ******** SKYMIR ********
+     *********************/
+    onEnteringStateSkymir(args) {
+      if (!this.isCurrentPlayerActive()) return;
+      if (args.suffix != '') {
+        this.changePageTitle(args.suffix);
+      }
+
+      this._distinctionExplorerCards = args.cardsObj;
+      this.addPrimaryActionButton('btnShowDistinctionExplorerCards', _('Show cards'), () =>
+        this.openDistinctionExplorerModal(),
+      );
+      this.openDistinctionExplorerModal();
+    },
   });
 });

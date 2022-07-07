@@ -420,28 +420,28 @@ class Cards extends Helpers\Pieces
   public static function createMythology()
   {
     $values = [];
-    // foreach (self::$animals as $aId => $class) {
-    //   $values[] = [$aId, $aId == GULLINBURSTI ? 'pending' : 'mythology', ANIMAL, null];
-    // }
-    foreach (self::$ases as $aId => $class) {
-      $values[] = [$aId, 'mythology', ASE, null];
+    foreach (self::$animals as $aId => $class) {
+      $values[] = [$aId, $aId == GULLINBURSTI ? 'pending' : 'mythology', ANIMAL, null];
     }
-    foreach (self::$giants as $aId => $class) {
-      $values[] = [$aId, 'mythology', GIANT, null];
-    }
-    // foreach (self::$valkyries as $aId => $class) {
-    //   $values[] = [$aId, 'mythology', VALKYRIE, null];
+    // foreach (self::$ases as $aId => $class) {
+    //   $values[] = [$aId, 'mythology', ASE, null];
     // }
+    // foreach (self::$giants as $aId => $class) {
+    //   $values[] = [$aId, 'mythology', GIANT, null];
+    // }
+    foreach (self::$valkyries as $aId => $class) {
+      $values[] = [$aId, 'mythology', VALKYRIE, null];
+    }
 
     self::DB()
       ->multipleInsert(['card_id', 'card_location', 'class', 'grade'])
       ->values($values);
     self::shuffle('mythology');
 
-    // Draw some of them into the mythology deck
-    $nPlayers = Players::count();
-    $nCards = max(9, $nPlayers * 3);
-    self::pickForLocation($nCards, 'mythology', 'mythology_deck');
+    // // Draw some of them into the mythology deck
+    // $nPlayers = Players::count();
+    // $nCards = max(9, $nPlayers * 3);
+    // self::pickForLocation($nCards, 'mythology', 'mythology_deck');
   }
 
   public static function getAnimal($id, $row = null)
