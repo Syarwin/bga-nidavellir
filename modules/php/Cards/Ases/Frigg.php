@@ -1,5 +1,7 @@
 <?php
 namespace NID\Cards\Ases;
+use \NID\Game\Globals;
+use \NID\Cards;
 
 class Frigg extends AseCard
 {
@@ -15,6 +17,16 @@ class Frigg extends AseCard
     $this->tooltip[] = clienttranslate('You will then know 3 cards of the last Tavern of this Age.');
     $this->grade = [12];
   }
+
+  public function canUsePower()
+  {
+    if (!parent::canUsePower()) {
+      return false;
+    }
+
+    return Cards::countInLocation(['age', Globals::getAge()]) != 0;
+  }
+
 
   public function updateScores(&$scores, $player)
   {

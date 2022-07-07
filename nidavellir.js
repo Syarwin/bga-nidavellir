@@ -303,7 +303,7 @@ define([
       /* This enable to inject translatable styled things to logs or action bar */
       /* @Override */
       format_string_recursive (log, args) {
-        try {
+       try {
           if (log && args && !args.processed) {
             args.processed = true;
 
@@ -344,7 +344,7 @@ define([
 
 
             // Coin icons
-            var coinKeys = Object.keys(args).filter(key => key.substr(0,4) == 'coin' && key.substr(-4) != "type");
+            var coinKeys = Object.keys(args).filter(key => key.substr(0,4) == 'coin' && key.substr(-4) != "type" && args[key + '_type']);
             coinKeys.forEach(key => {
               args[key] = this.format_block('jstpl_coin', {
                 id:-1,
@@ -355,7 +355,7 @@ define([
             })
           }
         } catch (e) {
-          console.error(log,args,"Exception thrown", e.stack);
+          console.error(log,args,"Exception thrown", e.stack, log, args);
         }
 
         return this.inherited(arguments);

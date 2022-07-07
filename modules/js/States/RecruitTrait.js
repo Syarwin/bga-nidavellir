@@ -17,6 +17,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         ['returnCard', 1000],
         ['reserveCard', 800],
         ['exchangeCard', 1000],
+        ['putBackCard', 1000],
       );
       this._activeStates.push('recruitDwarf');
 
@@ -45,6 +46,11 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       dojo.addClass('tavern_' + args.tavern, 'selectable');
       if (args.camp) {
         dojo.addClass('camp-container', 'selectable');
+      }
+      if (args.frigg) {
+        this.addPrimaryActionButton('btnFrigg', _("Use Frigg's power"), () => {
+          this.clientState('frigg', _('Select the card to put back under the deck'), args);
+        });
       }
     },
 
@@ -477,10 +483,36 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.slide(card2, target2);
     },
 
-
     onEnteringStatePlaceGullinbursti(args) {
       if (this.isCurrentPlayerActive()) this.makeColumnsSelectable('gullinbursti');
     },
 
+    /**********************
+     ******** FRIGG ********
+     *********************/
+    onEnteringStateFrigg(args) {
+      this.addCancelStateBtn();
+      this.makeCardSelectable(args.cards, this.onClickCardFrigg.bind(this));
+    },
+
+    onClickCardFrigg(card) {
+      this.takeAction('actUseFriggPower', {
+        cardId: card.id,
+      });
+    },
+
+    notif_putBackCard(n) {
+      debug('Notif: put back card', n);
+      let card = $('card-' + n.args.card.id);
+      this.slideToRightAndDestroy(card, false);
+    },
+
+    onEnteringStateFriggPick(args){
+      this._distinctionExplorerCards = args.cardsObj;
+      this.addPrimaryActionButton('btnShowDistinctionExplorerCards', _('Show cards'), () =>
+        this.openDistinctionExplorerModal(),
+      );
+      this.openDistinctionExplorerModal();
+    }
   });
 });

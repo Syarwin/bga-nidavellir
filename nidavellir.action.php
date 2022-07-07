@@ -239,4 +239,12 @@ class action_nidavellir extends APP_GameAction
     $this->game->actUseFreyaPower($card1Id, $card2Id);
     self::ajaxResponse();
   }
+
+  public function actUseFriggPower()
+  {
+    self::setAjaxMode();
+    $cardId = self::getArg('cardId', AT_posint, true);
+    $this->game->actUseFriggPower($cardId);
+    self::ajaxResponse();
+  }
 }

@@ -185,7 +185,7 @@ $machinestates = [
     'type' => 'activeplayer',
     'args' => 'argRecruitDwarf',
     'action' => 'stRecruitDwarf',
-    'possibleactions' => ['recruit'],
+    'possibleactions' => ['recruit', 'actUseFriggPower'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
       'transform' => ST_TRANSFORM_COIN,
@@ -194,6 +194,7 @@ $machinestates = [
       'hofud' => ST_PRE_HOFUD,
       'brisingamens' => ST_PRE_BRISINGAMENS,
       'placeGullinbursti' => ST_GULLINBURSTI,
+      'frigg' => ST_FRIGG,
 
       'recruitDone' => ST_TRADE_COIN,
     ],
@@ -467,6 +468,27 @@ $machinestates = [
       'khradTransform' => ST_KHRAD_TRANSFORM,
     ],
   ],
+
+  ST_FRIGG => [
+    'name' => 'friggPick',
+    'description' => clienttranslate('${actplayer} must keep one card (Frigg\'s power)'),
+    'descriptionmyturn' => clienttranslate('${you} must keep one card (Frigg\'s power)'),
+    'type' => 'activeplayer',
+    'args' => 'argFrigg',
+    'possibleactions' => ['recruit'],
+    'transitions' => [
+      'hero' => ST_RECRUIT_HERO,
+      'transform' => ST_TRANSFORM_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'vidofnir' => ST_VIDOFNIR,
+      'hofud' => ST_PRE_HOFUD,
+      'brisingamens' => ST_PRE_BRISINGAMENS,
+      'placeGullinbursti' => ST_GULLINBURSTI,
+
+      'recruitDone' => ST_TRADE_COIN,
+    ],
+  ],
+
 
   // Player end of turn
   ST_END_OF_TURN => [

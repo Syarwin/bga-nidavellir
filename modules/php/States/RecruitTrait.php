@@ -18,7 +18,7 @@ trait RecruitTrait
   public function stRecruitDwarf()
   {
     $player = Players::getActive();
-    if ($player->wantAutopick() && !$player->canVisitCamp()) {
+    if ($player->wantAutopick() && !$player->canVisitCamp() && !$player->canUseAse(FRIGG)) {
       $cardId = $this->getAutopickCard();
       if ($cardId != null) {
         $this->actRecruit($cardId, false, false);
@@ -124,6 +124,14 @@ trait RecruitTrait
       }
       $this->actCapture($cardId);
       return;
+    }
+    // IDAVOLL => check Frigg
+    if ($this->gamestate->state_id() == ST_FRIGG) {
+      foreach ($cards as $cardLeftId) {
+        if ($cardLeftId != $cardId) {
+          Cards::insertAtBottom($cardLeftId, ['age', Globals::getAge()]);
+        }
+      }
     }
 
     // Move card in corresponding position and notify (useful for replay)
@@ -535,5 +543,30 @@ trait RecruitTrait
   public function argPlaceGullinbursti()
   {
     return [];
+  }
+
+  public function actUseFriggPower($cardId)
+  {
+    $this->checkAction('actUseFriggPower');
+    $player = Players::getActive();
+
+    // Notify Frigg
+    $frigg = Cards::get(FRIGG);
+    $frigg->usePower();
+
+    Cards::insertAtBottom($cardId, ['age', Globals::getAge()]);
+    $card = Cards::get($cardId);
+    Notifications::putBackCard($player, $card);
+
+    $this->gamestate->nextState('frigg');
+  }
+
+  public function argFrigg()
+  {
+    $cards = Cards::getTopOf(['age', Globals::getAge()], 3);
+    return [
+      'cards' => $cards->getIds(),
+      'cardsObj' => $cards->ui(),
+    ];
   }
 }

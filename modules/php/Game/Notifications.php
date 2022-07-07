@@ -286,6 +286,7 @@ class Notifications
 
 
 
+
   public static function updateScores($scores, $ranks){
     self::notifyAll('updateScores', '', [
       'scores' => $scores,
@@ -379,6 +380,13 @@ class Notifications
       'player' => $player,
       'card'   => $card1,
       'card2'  => $card2,
+    ]);
+  }
+
+  public static function putBackCard($player, $card){
+    self::notifyAll('putBackCard', clienttranslate('${player_name} put back ${card_class}${card_class_symbol} at the bottom of the deck'), [
+      'player' => $player,
+      'card'  => $card,
     ]);
   }
 
