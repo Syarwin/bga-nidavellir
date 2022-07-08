@@ -293,10 +293,16 @@ trait RecruitTrait
     }
 
     $player = Players::getActive();
-    $recruit = $player->getLastAction('recruit');
-    $card = Cards::get($recruit['card']['id']);
     $thor = Cards::get(THOR);
     $thor->usePower();
+
+    if ($this->gamestate->state_id() == ST_BRISINGAMENS_DISCARD) {
+      $this->nextStateAfterRecruit(null, $player, true);
+      return;
+    }
+
+    $recruit = $player->getLastAction('recruit');
+    $card = Cards::get($recruit['card']['id']);
     Globals::setThor($card->getId());
 
     if ($card->getDiscardRequirement($player) == 1) {
@@ -424,6 +430,7 @@ trait RecruitTrait
       $data['_private'][$pId]['cards'] = array_map(function ($card) {
         return $card->getId();
       }, $cards);
+      $data['_private'][$pId]['thor'] = $player->canUseAse(THOR);
     }
 
     return $data;
@@ -443,6 +450,24 @@ trait RecruitTrait
     });
     Notifications::discardHofud($player, $card, $warriors);
     Players::updateScores();
+    $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
+  }
+
+  public function actUseThorPowerHofud()
+  {
+    $this->checkAction('actUseThorPowerHofud');
+    $player = Players::getCurrent();
+    if (!$player->canUseAse(THOR)) {
+      throw new \BgaUserException(_('You cannot use Thor Power'));
+    }
+
+    $thor = Cards::get(THOR);
+    $thor->usePower();
+
+    $warriors = $player->getCards()->filter(function ($card) {
+      return $card->getZone() == WARRIOR;
+    });
+    Notifications::discardHofud($player, null, $warriors);
     $this->gamestate->setPlayerNonMultiactive($player->getId(), 'done');
   }
 
@@ -494,7 +519,7 @@ trait RecruitTrait
     $card = Cards::get($cardId);
     $giant = $player->getCapturingGiant($card);
     $giant->capture($card);
-    $newState = $giant->applyEffect($player) ?? null;
+    $newState = $giant->applyCaptureEffect($player) ?? null;
     Players::updateScores();
     Stack::nextState('recruitDone', $newState);
   }
@@ -506,7 +531,7 @@ trait RecruitTrait
     $heroes = Cards::getRecruitableHeroes($player);
     $heroes = array_values(
       array_filter($heroes, function ($hero) {
-        return $hero->getRecruitementZone() == NEUTRAL;
+        return $hero->getRecruitementZone() == NEUTRAL || $hero->getId() == ZOLKUR;
       })
     );
 

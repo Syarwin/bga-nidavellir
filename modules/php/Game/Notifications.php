@@ -181,11 +181,18 @@ class Notifications
   }
 
   public static function discardHofud($player, $card, $warriors){
-    self::notifyAll('discardHofud', clienttranslate('${player_name} discards ${card_class}${card_class_symbol} for Hofud\'s effect'), [
-      'player' => $player,
-      'card'  => $card,
-      'warriors' => array_map(function($card){ return $card->getId(); }, $warriors),
-    ]);
+    if(is_null($card)){
+      self::notify($player->getId(), 'discardHofud', '', [
+        'player' => $player,
+        'warriors' => array_map(function($card){ return $card->getId(); }, $warriors),
+      ]);
+    } else {
+      self::notifyAll('discardHofud', clienttranslate('${player_name} discards ${card_class}${card_class_symbol} for Hofud\'s effect'), [
+        'player' => $player,
+        'card'  => $card,
+        'warriors' => array_map(function($card){ return $card->getId(); }, $warriors),
+      ]);
+    }
   }
 
 

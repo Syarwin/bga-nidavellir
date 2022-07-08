@@ -54,7 +54,7 @@ class GiantCard extends \NID\Cards\AbstractCard
     Cards::DB()->update(['flag' => 1], $this->id);
   }
 
-  public function applyEffect($player)
+  public function applyCaptureEffect($player)
   {
   }
 

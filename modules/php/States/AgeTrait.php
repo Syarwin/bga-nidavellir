@@ -71,6 +71,7 @@ trait AgeTrait
       'cards' => array_map(function ($card) {
         return $card->getId();
       }, $cards),
+      'thor' => $player->canUseAse(THOR),
     ];
   }
 

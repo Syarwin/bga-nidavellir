@@ -14,7 +14,7 @@ class Thrivaldi extends GiantCard
     $this->giantClass = BLACKSMITH;
   }
 
-  public function applyEffect($player)
+  public function applyCaptureEffect($player)
   {
     return 'hero';
   }

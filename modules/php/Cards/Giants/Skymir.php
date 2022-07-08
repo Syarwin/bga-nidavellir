@@ -24,7 +24,7 @@ class Skymir extends GiantCard
     );
   }
 
-  public function applyEffect($player)
+  public function applyCaptureEffect($player)
   {
     Cards::pickForLocation(5, 'mythology', 'skymir');
     return 'skymir';

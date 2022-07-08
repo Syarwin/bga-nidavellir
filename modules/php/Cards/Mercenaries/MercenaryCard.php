@@ -41,6 +41,10 @@ class MercenaryCard extends \NID\Cards\AbstractCard
     return MERCENARY;
   }
 
+  public function hasRankOfClass($class){
+    return isset($this->grades[$class]);
+  }
+
   public function updateRanks(&$ranks,$uselessExceptThrud){
     if($this->zone != NEUTRAL){
       $ranks[$this->zone]++;

@@ -339,6 +339,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._selectedWarrior = null;
       args._private.cards.forEach((cardId) => this.slide('card-' + cardId, 'enlist-' + this.player_id));
       this.makeCardSelectable(args._private.cards, this.onClickCardDiscardHofud.bind(this));
+
+      if (args._private.thor) {
+        this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () =>
+          this.takeAction('actUseThorPowerHofud', {}),
+        );
+      }
     },
 
     onClickCardDiscardHofud(card) {
@@ -369,6 +375,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this.makeCardSelectable(args.cards, this.onClickCardDiscard.bind(this));
       this._selectedCardsForDiscard = [];
       this._amountToDiscard = 1;
+
+      if (args.thor) {
+        this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () =>
+          this.takeAction('actUseThorPower', {}),
+        );
+      }
     },
 
     /**********************

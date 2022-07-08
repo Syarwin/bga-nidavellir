@@ -363,7 +363,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must choose a card of the warrior column and discard it'),
     'args' => 'argDiscardHofud',
     'type' => 'multipleactiveplayer',
-    'possibleactions' => ['discard'],
+    'possibleactions' => ['discard', 'actUseThorPowerHofud'],
     'transitions' => [
       'done' => ST_RESOLVE_STACK,
     ],
@@ -700,7 +700,7 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must choose a card (Brisingamens\'s effect)'),
     'type' => 'activeplayer',
     'args' => 'argBrisingamensDiscard',
-    'possibleactions' => ['discard'],
+    'possibleactions' => ['discard', 'actUseThorPower'],
     'transitions' => ['recruitDone' => ST_GAME_END],
   ],
 

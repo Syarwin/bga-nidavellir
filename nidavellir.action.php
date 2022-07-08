@@ -192,6 +192,12 @@ class action_nidavellir extends APP_GameAction
     $this->game->actUseThorPower();
     self::ajaxResponse();
   }
+  public function actUseThorPowerHofud()
+  {
+    self::setAjaxMode();
+    $this->game->actUseThorPowerHofud();
+    self::ajaxResponse();
+  }
 
   public function actSkipOdinPower()
   {

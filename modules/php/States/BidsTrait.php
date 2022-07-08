@@ -294,7 +294,7 @@ trait BidsTrait
   {
     $player = Players::getCurrent();
     $card = Cards::get($cardId);
-    Cards::discard($cardId);
+    Cards::discard($cardId, in_array($card->getClass(), [ANIMAL, GIANT, ASE, VALKYRIE]));
     Notifications::discardCards($player, $card);
     $this->gamestate->nextState('next');
   }

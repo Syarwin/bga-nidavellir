@@ -12,7 +12,7 @@ class Hrungnir extends GiantCard
     $this->tooltip[] = clienttranslate(
       'Capture the next Miner card you recruit to transform immediately each of your coins with +2.'
     );
-    $this->tooltip[] = clienttranslate('This effect does not applyy to the trading coins (0 or Special 3).');
+    $this->tooltip[] = clienttranslate('This effect does not apply to the trading coins (0 or Special 3).');
     $this->tooltip[] = clienttranslate(
       'Apply the transformations in the order of your board, starting with the coin for the Laughing Goblin to the coins in your pouch.'
     );
@@ -21,7 +21,7 @@ class Hrungnir extends GiantCard
     $this->giantClass = MINER;
   }
 
-  public function applyEffect($player)
+  public function applyCaptureEffect($player)
   {
     foreach ([GOBLIN_TAVERN, DRAGON_TAVERN, HORSE_TAVERN] as $tavern) {
       $coin = $player->getBid($tavern, true);

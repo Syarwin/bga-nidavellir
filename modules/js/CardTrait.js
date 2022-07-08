@@ -103,7 +103,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         card.gradeHtml = card.forces.map((r) => `<div class='valkyrie-force'>${r}</div>`).join('');
       }
 
-      card.olrunToken = (card.olrun !== undefined)? `<div class='olrun-token' data-class='${card.olrun}'></div>` : '';
+      card.olrunToken = card.olrun !== undefined ? `<div class='olrun-token' data-class='${card.olrun}'></div>` : '';
 
       this.place('jstpl_card', card, container);
       dojo.connect($('card-' + card.id), 'click', () => this.onClickCard(card));
@@ -174,9 +174,16 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     slideToDiscard(id) {
-      this.slide('card-' + id, 'tab-discard', {
+      let card = $('card-' + id);
+      const destroy = [11, 12, 13, 14].includes(parseInt(card.dataset.class));
+      this.slide(card, 'tab-discard', {
         duration: 1000,
-      }).then(() => dojo.place('card-' + id, 'popin_discard_contents'));
+        destroy,
+      }).then(() => {
+        if (!destroy) {
+          dojo.place('card-' + id, 'popin_discard_contents');
+        }
+      });
     },
 
     notif_discardCards(n) {
@@ -196,7 +203,9 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     notif_discardHofud(n) {
       debug('Notif: discarding card for Hofud', n);
 
-      this.slideToDiscard(n.args.card.id);
+      if (n.args.card) {
+        this.slideToDiscard(n.args.card.id);
+      }
 
       if (this.player_id == n.args.player_id) {
         n.args.warriors.forEach((cardId) => this.slide('card-' + cardId, 'command-zone_' + this.player_id + '_5'));
