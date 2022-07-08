@@ -345,7 +345,7 @@ define([
 
 
             // Coin icons
-            var coinKeys = Object.keys(args).filter(key => key.substr(0,4) == 'coin' && key.substr(-4) != "type" && args[key + '_type']);
+            var coinKeys = Object.keys(args).filter(key => key.substr(0,4) == 'coin' && key.substr(-4) != "type" && args[key + '_type'] !== undefined);
             coinKeys.forEach(key => {
               args[key] = this.format_block('jstpl_coin', {
                 id:-1,

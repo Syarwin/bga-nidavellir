@@ -2050,64 +2050,92 @@ html {
   height: 40px;
   position: relative;
   z-index: 100; }
-  .coin[data-value="0"] {
+  .coin[data-value='0'] {
     order: 0; }
-  .coin[data-value="1"] {
+  .coin[data-value='1'] {
     order: 1; }
-  .coin[data-value="2"] {
+  .coin[data-value='2'] {
     order: 2; }
-  .coin[data-value="3"] {
+  .coin[data-value='3'] {
     order: 3; }
-  .coin[data-value="4"] {
+  .coin[data-value='4'] {
     order: 4; }
-  .coin[data-value="5"] {
+  .coin[data-value='5'] {
     order: 5; }
-  .coin[data-value="6"] {
+  .coin[data-value='6'] {
     order: 6; }
-  .coin[data-value="7"] {
+  .coin[data-value='7'] {
     order: 7; }
-  .coin[data-value="8"] {
+  .coin[data-value='8'] {
     order: 8; }
-  .coin[data-value="9"] {
+  .coin[data-value='9'] {
     order: 9; }
-  .coin[data-value="10"] {
+  .coin[data-value='10'] {
     order: 10; }
-  .coin[data-value="11"] {
+  .coin[data-value='11'] {
     order: 11; }
-  .coin[data-value="12"] {
+  .coin[data-value='12'] {
     order: 12; }
-  .coin[data-value="13"] {
+  .coin[data-value='13'] {
     order: 13; }
-  .coin[data-value="14"] {
+  .coin[data-value='14'] {
     order: 14; }
-  .coin[data-value="15"] {
+  .coin[data-value='15'] {
     order: 15; }
-  .coin[data-value="16"] {
+  .coin[data-value='16'] {
     order: 16; }
-  .coin[data-value="17"] {
+  .coin[data-value='17'] {
     order: 17; }
-  .coin[data-value="18"] {
+  .coin[data-value='18'] {
     order: 18; }
-  .coin[data-value="19"] {
+  .coin[data-value='19'] {
     order: 19; }
-  .coin[data-value="20"] {
+  .coin[data-value='20'] {
     order: 20; }
-  .coin[data-value="21"] {
+  .coin[data-value='21'] {
     order: 21; }
-  .coin[data-value="22"] {
+  .coin[data-value='22'] {
     order: 22; }
-  .coin[data-value="23"] {
+  .coin[data-value='23'] {
     order: 23; }
-  .coin[data-value="24"] {
+  .coin[data-value='24'] {
     order: 24; }
-  .coin[data-value="25"] {
+  .coin[data-value='25'] {
     order: 25; }
+  .coin[data-selected='1'] .coin-holder .coin-inner::after {
+    content: "1"; }
+  .coin[data-selected='2'] .coin-holder .coin-inner::after {
+    content: "2"; }
+  .coin[data-selected='3'] .coin-holder .coin-inner::after {
+    content: "3"; }
+  .coin[data-selected='4'] .coin-holder .coin-inner::after {
+    content: "4"; }
+  .coin[data-selected='5'] .coin-holder .coin-inner::after {
+    content: "5"; }
+  .coin[data-selected] .coin-holder .coin-inner::after {
+    position: absolute;
+    top: -6px;
+    left: -4px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: 'Norse';
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 20px;
+    border: 1px solid black;
+    background-color: red;
+    color: white;
+    z-index: 10; }
   .coin .coin-holder {
     position: absolute;
     width: 100%;
     height: 100%; }
     .coin .coin-holder::before, .coin .coin-holder::after {
-      content: "";
+      content: '';
       display: none;
       position: absolute;
       width: 100%;
@@ -2135,13 +2163,13 @@ html {
         line-height: 40px;
         color: #64360e;
         font-weight: bold; }
-  .coin[data-type="0"] .coin-holder .coin-inner {
+  .coin[data-type='0'] .coin-holder .coin-inner {
     background-position-x: 0%; }
-  .coin[data-type="1"] .coin-holder .coin-inner {
+  .coin[data-type='1'] .coin-holder .coin-inner {
     background-position-x: calc(100% / 3); }
-  .coin[data-type="2"] .coin-holder .coin-inner {
+  .coin[data-type='2'] .coin-holder .coin-inner {
     background-position-x: calc(100% / 3 * 2); }
-  .coin[data-type="0"][data-value="0"] .coin-holder .coin-inner {
+  .coin[data-type='0'][data-value='0'] .coin-holder .coin-inner {
     background-position-x: 100%; }
   .coin.selectable .coin-holder {
     cursor: pointer; }

@@ -255,4 +255,14 @@ class action_nidavellir extends APP_GameAction
     $this->game->actChooseOlrunClass($column);
     self::ajaxResponse();
   }
+
+  public function actHrungnir()
+  {
+    self::setAjaxMode();
+    $raw = self::getArg('coinIds', AT_numberlist, true);
+    $coinIds = explode(';', $raw);
+    $this->game->actHrungnir($coinIds);
+    self::ajaxResponse();
+  }
+
 }

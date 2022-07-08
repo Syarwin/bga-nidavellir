@@ -197,6 +197,7 @@ $machinestates = [
       'frigg' => ST_FRIGG,
       'skymir' => ST_SKYMIR,
       'olrun' => ST_OLRUN,
+      'hrungnir' => ST_HRUNGNIR,
 
       'recruitDone' => ST_TRADE_COIN,
     ],
@@ -527,6 +528,17 @@ $machinestates = [
     ],
   ],
 
+  ST_HRUNGNIR => [
+    'name' => 'hrungnir',
+    'description' => clienttranslate('${actplayer} must choose the order of coins in hand for Hrungnir power'),
+    'descriptionmyturn' => clienttranslate('${you} must choose the order of coins in hand for Hrungnir power'),
+    'type' => 'activeplayer',
+    'args' => 'argHrungnir',
+    'possibleactions' => ['actHrungnir'],
+    'transitions' => [
+      'recruitDone' => ST_TRADE_COIN,
+    ],
+  ],
 
 
   // Player end of turn

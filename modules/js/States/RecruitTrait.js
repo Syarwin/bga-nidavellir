@@ -551,5 +551,55 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       );
       this.tooltips[cardId].label = content;
     },
+
+    /**********************
+     ******** HRUNGNIR ********
+     *********************/
+    onEnteringStateHrungnir(args) {
+      if (!this.isCurrentPlayerActive()) return;
+
+      let hrungnirSelection = [];
+      let updateStatus = () => {
+        args.coins.forEach((coinId) => {
+          delete $('coin-' + coinId).dataset.selected;
+        });
+
+        hrungnirSelection.forEach((coinId, i) => {
+          $('coin-' + coinId).dataset.selected = i + 1;
+        });
+
+        dojo.destroy('btnCancelHrungnir');
+        dojo.destroy('btnConfirmlHrungnir');
+        if (hrungnirSelection.length > 0) {
+          this.addSecondaryActionButton('btnCancelHrungnir', _('Cancel'), () => {
+            hrungnirSelection = [];
+            updateStatus();
+          });
+        }
+        if (hrungnirSelection.length == args.coins.length) {
+          this.addPrimaryActionButton('btnConfirmlHrungnir', _('Confirm'), () => {
+            this.takeAction('actHrungnir', {
+              coinIds: hrungnirSelection.join(';'),
+            });
+          });
+        }
+      };
+
+      this.makeCoinsSelectable(args.coins, (coin) => {
+        let index = hrungnirSelection.findIndex((cId) => cId == coin.id);
+        let selected = index !== -1; // Already selected ?
+
+        if (selected) {
+          hrungnirSelection.splice(index, 1);
+        } else {
+          hrungnirSelection.push(coin.id);
+        }
+        updateStatus();
+      });
+    },
+
+    onClickCoinHrungnir(coin) {
+      debug(coin);
+    },
   });
 });

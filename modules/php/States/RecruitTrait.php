@@ -596,4 +596,36 @@ trait RecruitTrait
     Notifications::chooseOlrun($player, $column);
     Stack::resolve();
   }
+
+  public function argHrungnir()
+  {
+    $player = Players::getActive();
+    $coins = $player->getUnbidCoins();
+    $ids = [];
+    foreach ($coins as $coin) {
+      if ($coin !== null && $coin['value'] != 0 && ($coin['value'] != 3 || $coin['type'] != COIN_DISTINCTION)) {
+        $ids[] = $coin['id'];
+      }
+    }
+
+    return [
+      'coins' => $ids,
+    ];
+  }
+
+  public function actHrungnir($coinIds)
+  {
+    $this->checkAction('actHrungnir');
+    $args = $this->argHrungnir();
+    $player = Players::getActive();
+    foreach ($coinIds as $coinId) {
+      if (!in_array($coinId, $args['coins'])) {
+        throw new \BgaUserException(_('You cannot upgrade this coin'));
+      }
+      $coin = Coins::get($coinId);
+      $player->tradeCoin($coin, 2);
+    }
+
+    Stack::resolve();
+  }
 }

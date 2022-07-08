@@ -131,6 +131,7 @@ define(["dojo", "dojo/_base/declare"], (dojo, declare) => {
       });
 
       // Slide old coin depending on his type
+      delete $('coin-' + n.args.max.id).dataset.selected;
       if(n.args.max.type == 1){ // TREASURE
         this.slide('coin-' + n.args.max.id, 'treasure-slot-' + n.args.max.value, { duration:1500 });
       } else {

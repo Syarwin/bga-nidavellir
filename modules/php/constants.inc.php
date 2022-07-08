@@ -48,6 +48,7 @@ define('ST_GULLINBURSTI', 54);
 define('ST_FRIGG', 55);
 define('ST_SKYMIR', 56);
 define('ST_OLRUN', 57);
+define('ST_HRUNGNIR', 58);
 
 define('ST_PRE_END_OF_AGE', 29);
 define('ST_END_OF_AGE', 30);
