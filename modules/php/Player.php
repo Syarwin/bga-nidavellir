@@ -151,11 +151,15 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function getBid($currentTavern, $returnCoin = false)
   {
-    //$coins = Coins::getOfPlayer($this->id, 'bid_' . $current_tavern);
     $coin = Coins::getInLocationQ(['tavern', $currentTavern])
       ->where('pId', $this->id)
       ->getSingle();
-    return $returnCoin ? $coin : $coin['value'];
+    if (is_null($coin)) {
+      $coin = Coins::getInLocationQ(['bid', $currentTavern])
+        ->where('pId', $this->id)
+        ->getSingle();
+    }
+    return $returnCoin ? $coin : (is_null($coin) ? null : $coin['value']);
   }
 
   public function getUnbidCoins()
@@ -201,13 +205,13 @@ class Player extends \NID\Helpers\DB_Manager
 
   public function getHeroLine()
   {
-    if(Cards::getMegingjordOwner() == $this->id){
+    if (Cards::getMegingjordOwner() == $this->id) {
       return -1;
     }
     $line = $this->countHeroes() + 1;
-    if(Cards::getOwner(THRIVALDI) == $this->id){
+    if (Cards::getOwner(THRIVALDI) == $this->id) {
       $card = Cards::get(THRIVALDI);
-      if($card->getActivationStatus() == GIANT_CAPTURED){
+      if ($card->getActivationStatus() == GIANT_CAPTURED) {
         $line--;
       }
     }

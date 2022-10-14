@@ -34,6 +34,7 @@ use NID\Game\Globals;
 use NID\Game\Players;
 use NID\Game\Log;
 use NID\Game\Stats;
+use NID\Game\Stack;
 
 class Nidavellir extends Table
 {
@@ -70,8 +71,8 @@ class Nidavellir extends Table
       $options[OPTION_SETUP] = NORMAL;
     }
 
-    Cards::setupNewGame($players, $options);
     Players::setupNewGame($players, self::isAsync());
+    Cards::setupNewGame($players, $options);
     Coins::setupNewGame($players);
 
     Globals::setupNewGame();
@@ -157,7 +158,7 @@ class Nidavellir extends Table
       // Make sure player is in a non blocking status for role turn
       $this->gamestate->setPlayerNonMultiactive($activePlayer, '');
     } else {
-      $this->nextStateFromSource('zombiePass');
+      Stack::resolve();
     }
     //			throw new BgaVisibleSystemException('Zombie player ' . $activePlayer . ' stuck in unexpected state ' . $state['name']);
   }
