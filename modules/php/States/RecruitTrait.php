@@ -44,11 +44,11 @@ trait RecruitTrait
       return null;
     }
     $class = array_keys($cardsPerClass)[0];
-    if (in_array($class, [ASE, VALKYRIE, GIANT, ANIMAL])) {
+    $cards = reset($cardsPerClass);
+    if (in_array($class, [ASE, VALKYRIE, GIANT, ANIMAL]) && count($cards) > 1) {
       return null;
     }
 
-    $cards = reset($cardsPerClass);
     usort($cards, function ($a, $b) {
       return $b->getPriority() - $a->getPriority();
     });

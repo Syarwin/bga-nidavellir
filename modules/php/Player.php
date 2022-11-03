@@ -327,7 +327,7 @@ class Player extends \NID\Helpers\DB_Manager
 
     $c = 0;
     foreach ($this->getCards() as $card) {
-      if ($card->getRecruitementZone() == MINER) {
+      if ($card->getRecruitementZone() == MINER && $card->getZone() == MINER) {
         foreach ($card->getGrade() as $grade) {
           if ($grade === 0) {
             $c++;

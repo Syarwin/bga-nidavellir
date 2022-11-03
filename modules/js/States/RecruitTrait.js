@@ -377,9 +377,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       this._amountToDiscard = 1;
 
       if (args.thor) {
-        this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () =>
-          this.takeAction('actUseThorPower', {}),
-        );
+        this.addPrimaryActionButton('btnUseThor', _("Use Thor's power"), () => this.takeAction('actUseThorPower', {}));
       }
     },
 
@@ -521,6 +519,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
     },
 
     onEnteringStateFriggPick(args) {
+      if (!this.isCurrentPlayerActive()) return;
       this._distinctionExplorerCards = args.cardsObj;
       this.addPrimaryActionButton('btnShowDistinctionExplorerCards', _('Show cards'), () =>
         this.openDistinctionExplorerModal(),
