@@ -183,9 +183,12 @@ class Nidavellir extends Table
       self::applyDbUpgradeToAllDB($sql);
     }
 
-    if ($from_version <= 2104301643) {
-      $sql = 'ALTER TABLE `DBPREFIX_card` ADD `flag` SMALLINT(5) NOT NULL DEFAULT 0';
-      self::applyDbUpgradeToAllDB($sql);
+    if ($from_version <= 2211031052) {
+      $result = self::getUniqueValueFromDB("SHOW COLUMNS FROM `card` LIKE 'flag'");
+      if (is_null($result)) {
+        $sql = 'ALTER TABLE `DBPREFIX_card` ADD `flag` SMALLINT(5) NOT NULL DEFAULT 0';
+        self::applyDbUpgradeToAllDB($sql);
+      }
     }
   }
 
