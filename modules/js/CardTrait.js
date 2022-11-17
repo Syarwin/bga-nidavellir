@@ -6,6 +6,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
         ['discardHofud', 1000],
         ['increaseForce', 800],
         ['useAsePower', 800],
+        ['wasteLoki', 500],
       );
       this._callbackOnCard = null;
       this._selectableCards = [];
@@ -230,6 +231,14 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       let content = this.tooltips[cardId].label;
       content = content.replace(/data-flag="[0-9]*"/g, `data-flag="1"`);
       this.tooltips[cardId].label = content;
+    },
+
+    notif_wasteLoki(n) {
+      debug('Notif: waste loki', n);
+      let lokiToken = $(`card-${n.args.cardId}`).querySelector('#loki-token');
+      if (lokiToken) {
+        lokiToken.remove();
+      }
     },
 
     /*********************************

@@ -135,8 +135,8 @@ trait RecruitTrait
     }
 
     // Move card in corresponding position and notify (useful for replay)
-    $card = Cards::get($cardId);
     $player = Players::getActive();
+    $card = Cards::get($cardId);
     $player->recruit($card);
     if ($card->getLocation() == 'camp' && $this->gamestate->state()['name'] == 'recruitDwarf') {
       Globals::visitCamp();
@@ -154,6 +154,12 @@ trait RecruitTrait
     if (!$capture && isset($args['capture']) && in_array($cardId, $args['capture'])) {
       $player->denyCapture($card);
     }
+    // IDAVOLL => check loki
+    if (Globals::getLokiCardId() !== 0 && $player->getId() == Cards::getOwner(LOKI)) {
+      Notifications::wasteLoki($player, Globals::getLokiCardId());
+      Globals::setLoki(0);
+    }
+
     $card->applyEffect($player);
     Players::updateScores();
     if ($card->getClass() == HERO) {
