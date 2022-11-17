@@ -283,6 +283,7 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
 
       this.makeCardSelectable(args.cards, this.onClickCardRecruit.bind(this));
       this.openDiscardModal();
+      this.addDangerActionButton('skipBrisingamens', _('Skip'), () => this.takeAction('actSkipBrisingamens', {}));
     },
   });
 });

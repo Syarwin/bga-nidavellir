@@ -16,7 +16,6 @@ class Players extends \NID\Helpers\DB_Manager
     return new \NID\Player($row);
   }
 
-
   public function setupNewGame($players, $isAsync)
   {
     // Create players
@@ -24,22 +23,39 @@ class Players extends \NID\Helpers\DB_Manager
 
     $gameInfos = Nidavellir::get()->getGameinfos();
     $colors = $gameInfos['player_colors'];
-    $query = self::DB()->multipleInsert(['player_id', 'player_color', 'player_canal', 'player_name', 'player_avatar', 'player_score', 'player_gem', 'player_autopick']);
+    $query = self::DB()->multipleInsert([
+      'player_id',
+      'player_color',
+      'player_canal',
+      'player_name',
+      'player_avatar',
+      'player_score',
+      'player_gem',
+      'player_autopick',
+    ]);
 
-    $gems = [1,2,3,4,5];
+    $gems = [1, 2, 3, 4, 5];
     array_splice($gems, 0, 5 - count($players));
     shuffle($gems);
     $values = [];
     foreach ($players as $pId => $player) {
       $color = array_shift($colors);
-      $values[] = [ $pId, $color, $player['player_canal'], $player['player_name'], $player['player_avatar'], 19, array_shift($gems), $isAsync? 1 : 0];
+      $values[] = [
+        $pId,
+        $color,
+        $player['player_canal'],
+        $player['player_name'],
+        $player['player_avatar'],
+        19,
+        array_shift($gems),
+        $isAsync ? 1 : 1,
+      ];
     }
     $query->values($values);
     Nidavellir::get()->reattributeColorsBasedOnPreferences($players, $gameInfos['player_colors']);
     Nidavellir::get()->reloadPlayersBasicInfos();
 
-
-    if(false){
+    if (false) {
       $pId = array_keys($players)[0];
       Cards::addClass($pId, BLACKSMITH);
       Cards::addClass($pId, HUNTER);
@@ -48,8 +64,6 @@ class Players extends \NID\Helpers\DB_Manager
       Cards::addClass($pId, WARRIOR);
     }
   }
-
-
 
   public function getActiveId()
   {
@@ -61,7 +75,8 @@ class Players extends \NID\Helpers\DB_Manager
     return Nidavellir::get()->getCurrentPId();
   }
 
-  public function getAll(){
+  public function getAll()
+  {
     return self::DB()->get(false);
   }
 
@@ -71,7 +86,9 @@ class Players extends \NID\Helpers\DB_Manager
   public function get($pId = null)
   {
     $pId = $pId ?: self::getActiveId();
-    return self::DB()->where($pId)->getSingle();
+    return self::DB()
+      ->where($pId)
+      ->getSingle();
   }
 
   public function getActive()
@@ -90,11 +107,10 @@ class Players extends \NID\Helpers\DB_Manager
     return $table[$player->getId()];
   }
 
-
   public function getMaxWarriorRank()
   {
     $maxWarrior = 0;
-    foreach(Players::getAll() as $player){
+    foreach (Players::getAll() as $player) {
       $maxWarrior = max($maxWarrior, $player->getRanks()[WARRIOR]);
     }
     return $maxWarrior;
@@ -108,28 +124,27 @@ class Players extends \NID\Helpers\DB_Manager
     return self::DB()->count();
   }
 
-
   /*
    * getUiData : get all ui data of all players : id, no, name, team, color, powers list, farmers
    */
   public function getUiData($pId)
   {
-    return self::getAll()->assocMap(function($player) use ($pId){ return $player->getUiData($pId); });
+    return self::getAll()->assocMap(function ($player) use ($pId) {
+      return $player->getUiData($pId);
+    });
   }
-
 
   /*
    * Trade gems: given a list of trade (player1, player2), proceeds to the exchange of gems
    */
   public function tradeGems($trades)
   {
-    foreach($trades as $trade){
+    foreach ($trades as $trade) {
       // $trade = [p1_id, p1_gem, p2_id, p2_gem]
       self::DB()->update(['player_gem' => $trade[3]], $trade[0]);
       self::DB()->update(['player_gem' => $trade[1]], $trade[2]);
     }
   }
-
 
   /*
    * Update scores UI
@@ -138,7 +153,7 @@ class Players extends \NID\Helpers\DB_Manager
   {
     $scores = [];
     $ranks = [];
-    foreach(self::getAll() as $pId => $player){
+    foreach (self::getAll() as $pId => $player) {
       $scores[$pId] = $player->getScores();
       $ranks[$pId] = $player->getRanks();
       self::DB()->update(['player_score' => $scores[$pId]['total']], $pId);

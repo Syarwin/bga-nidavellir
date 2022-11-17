@@ -183,6 +183,12 @@ class action_nidavellir extends APP_GameAction
     self::ajaxResponse();
   }
 
+  public function actSkipBrisingamens()
+  {
+    self::setAjaxMode();
+    $this->game->actSkipBrisingamens();
+    self::ajaxResponse();
+  }
   //////////////////////////////////////////////
   ///////////// Idavoll  ////////////
   //////////////////////////////////////////////
@@ -270,5 +276,4 @@ class action_nidavellir extends APP_GameAction
     $this->game->actHrungnir($coinIds);
     self::ajaxResponse();
   }
-
 }

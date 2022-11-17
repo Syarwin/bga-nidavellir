@@ -147,6 +147,11 @@ trait RecruitTrait
     if (Globals::getOlrunClass() != 0 && $card->hasRankOfClass(Globals::getOlrunClass())) {
       Cards::increaseForce(OLRUN, $player); // Valkyrie
     }
+    // OLWYN DOUBLE TAKEN FROM DISCARD => PLACE IT
+    if (in_array($card->getId(), [OLWYN_DOUBLE1, OLWYN_DOUBLE2])) {
+      $nOlwynLeft = Globals::getOlwynLeft();
+      Globals::setOlwynLeft($nOlwynLeft + 1);
+    }
 
     Cards::refresh($card); // Update location
     Notifications::recruit($player, $card);
@@ -207,8 +212,9 @@ trait RecruitTrait
     if ($nextState == null) {
       $double1 = Cards::get(OLWYN_DOUBLE1);
       $double2 = Cards::get(OLWYN_DOUBLE2);
+      $nOlwyn = Globals::getOlwynLeft();
       if (
-        ($double1->getPId() != null && $double1->getZone() == NEUTRAL) ||
+        ($nOlwyn > 0 && ($double1->getPId() != null && $double1->getZone() == NEUTRAL)) ||
         ($double2->getPId() != null && $double2->getZone() == NEUTRAL)
       ) {
         $nextState = 'olwyn';
@@ -334,10 +340,13 @@ trait RecruitTrait
       'placeGullinbursti' => GULLINBURSTI,
     ];
     $card = Cards::get($cardAssoc[$this->gamestate->state()['name']]);
-    if ($card->getId() == OLWYN_DOUBLE1 && $card->getLocation() != 'pending' && $card->getZone() != NEUTRAL) {
+    if ($card->getId() == OLWYN_DOUBLE1 && $card->getLocation() != 'pending' && ($card->getZone() ?? -1) != NEUTRAL) {
       $card = Cards::get(OLWYN_DOUBLE2);
     }
-
+    if (in_array($card->getId(), [OLWYN_DOUBLE1, OLWYN_DOUBLE2])) {
+      $nOlwynLeft = Globals::getOlwynLeft();
+      Globals::setOlwynLeft($nOlwynLeft - 1);
+    }
     Cards::changeColumn($card, $player, $column);
     Players::updateScores();
     $this->nextStateAfterRecruit($card, $player, true);
@@ -372,6 +381,11 @@ trait RecruitTrait
     $this->gamestate->nextState($n <= 2 ? 'recruit' : 'done');
   }
 
+  public function actSkipBrisingamens()
+  {
+    Stack::nextState('recruitDone', $nextState);
+  }
+
   /********************
    ******* OLWYN *******
    ********************/
@@ -397,10 +411,11 @@ trait RecruitTrait
     $double1 = Cards::get(OLWYN_DOUBLE1);
     $double2 = Cards::get(OLWYN_DOUBLE2);
     if (
-      $double1->getLocation() != 'pending' &&
-      $double2->getLocation() != 'pending' &&
-      $double1->getZone() != NEUTRAL &&
-      $double2->getZone() != NEUTRAL
+      Globals::getOlwynLeft() == 0 ||
+      ($double1->getLocation() != 'pending' &&
+        $double2->getLocation() != 'pending' &&
+        $double1->getZone() != NEUTRAL &&
+        $double2->getZone() != NEUTRAL)
     ) {
       $this->gamestate->nextState('finished');
     }

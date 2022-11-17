@@ -45,6 +45,7 @@ class Globals extends \APP_DbObject
     'thor' => 0,
     'loki' => 0,
     'olrun' => 0,
+    'olwyn' => 0,
   ];
 
   public static function declare($game)
@@ -136,6 +137,11 @@ class Globals extends \APP_DbObject
     return (int) self::get('olrun');
   }
 
+  public function getOlwynLeft()
+  {
+    return self::get('olwyn');
+  }
+
   /*
    * Setters
    */
@@ -221,5 +227,10 @@ class Globals extends \APP_DbObject
   public function setOlrun($column)
   {
     self::set('olrun', $column);
+  }
+
+  public function setOlwynLeft($val)
+  {
+    self::set('olwyn', $val);
   }
 }

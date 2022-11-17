@@ -386,11 +386,12 @@ $machinestates = [
     'descriptionmyturn' => clienttranslate('${you} must pick one card in the discard'),
     'args' => 'argPickDiscardAndumia', // Same arg as Andumia
     'type' => 'activeplayer',
-    'possibleactions' => ['recruit'],
+    'possibleactions' => ['recruit', 'actSkipBrisingamens'],
     'transitions' => [
       'hero' => ST_RECRUIT_HERO,
       'transform' => ST_TRANSFORM_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+      'olwyn' => ST_OLWYN,
 
       'recruitDone' => ST_PRE_BRISINGAMENS,
     ],
@@ -539,7 +540,6 @@ $machinestates = [
       'recruitDone' => ST_TRADE_COIN,
     ],
   ],
-
 
   // Player end of turn
   ST_END_OF_TURN => [
