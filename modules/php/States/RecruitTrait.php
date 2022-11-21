@@ -160,7 +160,8 @@ trait RecruitTrait
       $player->denyCapture($card);
     }
     // IDAVOLL => check loki
-    if (Globals::getLokiCardId() !== 0 && $player->getId() == Cards::getOwner(LOKI)) {
+    $lokiCardId = Globals::getLokiCardId();
+    if ($lokiCardId !== 0 && $player->getId() == Cards::getOwner(LOKI) && in_array($lokiCardId, $cards)) {
       Notifications::wasteLoki($player, Globals::getLokiCardId());
       Globals::setLoki(0);
     }
