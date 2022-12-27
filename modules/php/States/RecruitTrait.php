@@ -182,12 +182,12 @@ trait RecruitTrait
     $nextState = $bypassCardState ? null : $card->stateAfterRecruit($player);
 
     // Skymir second card ?
-    if (Cards::countInLocation('skymir') > 3) {
+    if ($nextState == null && Cards::countInLocation('skymir') > 3) {
       $nextState = 'skymir';
     }
 
     // Royal Offer
-    if ($card != null && $card->getClass() == ROYAL_OFFER) {
+    if ($nextState == null && $card != null && $card->getClass() == ROYAL_OFFER) {
       $value = $card->getValue();
       if (Cards::getJarikaOwner() == $player->getId()) {
         $value += 2;
