@@ -632,6 +632,24 @@ $machinestates = [
       'trade' => ST_TRADE_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
 
+      'recruitDone' => ST_ENLIST_MERCENARY_AFTER_YLUD, //ST_RESOLVE_STACK,
+    ],
+  ],
+
+  ST_ENLIST_MERCENARY_AFTER_YLUD => [
+    'name' => 'enlistMercenary',
+    'description' => clienttranslate('${actplayer} must choose a mercenary and a column to place it'),
+    'descriptionmyturn' => clienttranslate('${you} must choose a mercenary and a column to place it'),
+    'args' => 'argEnlistMercenary',
+    'action' => 'stEnlistMercenary',
+    'type' => 'activeplayer',
+    'possibleactions' => ['enlist'],
+    'transitions' => [
+      'next' => ST_RESOLVE_STACK,
+      'hero' => ST_RECRUIT_HERO,
+      'trade' => ST_TRADE_COIN,
+      'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
+
       'recruitDone' => ST_RESOLVE_STACK,
     ],
   ],
