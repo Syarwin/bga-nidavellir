@@ -168,7 +168,10 @@ define(['dojo', 'dojo/_base/declare', 'dojo/fx', 'dojox/fx/ext-dojo/complex'], f
       });
 
       if (this.breakpoint != null) {
-        let newModalWidth = bdy.w * this.scale;
+        let modalSize = dojo.position('popin_' + this.id);
+        let w = Math.max(bdy.w, modalSize.w);
+
+        let newModalWidth = w * this.scale;
         let modalScale = newModalWidth / this.breakpoint;
         if (modalScale > 1) modalScale = 1;
         dojo.style('popin_' + this.id, {
@@ -330,8 +333,7 @@ define(['dojo', 'dojo/_base/declare', 'dojo/fx', 'dojox/fx/ext-dojo/complex'], f
       this._isClosing = true;
       this._isOpening = false;
       this.fadeOutAnimation().then(() => {
-        if(!this._isClosing || this._isOpening)
-          return;
+        if (!this._isClosing || this._isOpening) return;
         this._isClosing = false;
         this._open = false;
 
@@ -356,8 +358,7 @@ define(['dojo', 'dojo/_base/declare', 'dojo/fx', 'dojox/fx/ext-dojo/complex'], f
       this._isOpening = false;
       this._isClosing = true;
       this.fadeOutAnimation().then(() => {
-        if(!this._isClosing || this._isOpening)
-          return;
+        if (!this._isClosing || this._isOpening) return;
         this._isClosing = false;
         this._open = false;
 

@@ -14,6 +14,7 @@
   }
 
   #show-help,
+  #show-overview,
   #show-settings {
     height: 40px;
     width: 50px;
@@ -125,32 +126,32 @@
   }
 }
 
-#overall-content[data-nplayers='2'],
-#overall-content[data-nplayers='3'] {
+#overall-content[data-nplayers="2"],
+#overall-content[data-nplayers="3"] {
   #turn-counter::after {
-    content: '/4';
+    content: "/4";
   }
 }
 
-#overall-content[data-nplayers='4'],
-#overall-content[data-nplayers='5'] {
+#overall-content[data-nplayers="4"],
+#overall-content[data-nplayers="5"] {
   #turn-counter::after {
-    content: '/3';
+    content: "/3";
   }
 }
 
-#ebd-body.nidavellir-idavoll[data-age='1'] {
-  #overall-content[data-nplayers='2'],
-  #overall-content[data-nplayers='3'] {
+#ebd-body.nidavellir-idavoll[data-age="1"] {
+  #overall-content[data-nplayers="2"],
+  #overall-content[data-nplayers="3"] {
     #turn-counter::after {
-      content: '/5';
+      content: "/5";
     }
   }
 
-  #overall-content[data-nplayers='4'],
-  #overall-content[data-nplayers='5'] {
+  #overall-content[data-nplayers="4"],
+  #overall-content[data-nplayers="5"] {
     #turn-counter::after {
-      content: '/4';
+      content: "/4";
     }
   }
 }
