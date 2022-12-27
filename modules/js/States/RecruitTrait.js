@@ -347,6 +347,12 @@ define(['dojo', 'dojo/_base/declare'], (dojo, declare) => {
       }
     },
 
+    onUpdateActivityDiscardHofud(args, status) {
+      if (status === false) {
+        this.clearPossible();
+      }
+    },
+
     onClickCardDiscardHofud(card) {
       if (this._selectedWarrior != null) {
         dojo.removeClass('card-' + this._selectedWarrior, 'selected');
