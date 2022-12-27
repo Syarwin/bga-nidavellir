@@ -41,6 +41,12 @@ class ArtifactCard extends \NID\Cards\AbstractCard
 
   public function getNotifString()
   {
-    return sprintf(Nidavellir::translate(clienttranslate('an artifact (%s)')), $this->name);
+    return [
+      'log' => clienttranslate('an artifact (${artifact_name)'),
+      'args' => [
+        'i18n' => ['artifact_name'],
+        'artifact_name' => $this->name,
+      ],
+    ];
   }
 }
