@@ -29,7 +29,7 @@ class Odin extends AseCard
   {
     $player = Players::get($this->pId);
     $heroes = $player->getCards()->filter(function ($card) {
-      return $card->getClass() == HERO && $card->getRecruitementZone() == NEUTRAL;
+      return $card->getClass() == HERO && ($card->getRecruitementZone() == NEUTRAL || $card->getId() == ZOLKUR);
     });
     $cards = [];
     foreach ($heroes as $hero) {
