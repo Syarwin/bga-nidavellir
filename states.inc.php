@@ -446,6 +446,7 @@ $machinestates = [
     'transitions' => [
       'next' => ST_NEXT_PLAYER,
       'hero' => ST_RECRUIT_HERO,
+      'placeGullinbursti' => ST_GULLINBURSTI,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ],
