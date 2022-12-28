@@ -174,7 +174,7 @@ class Player extends \NID\Helpers\DB_Manager
   {
     $currentTavern = Globals::getTavern();
     $coin = $this->getBid($currentTavern, true);
-    return $coin['value'] == 0 || $coin['type'] == COIN_DISTINCTION;
+    return !is_null($coin) && ($coin['value'] == 0 || $coin['type'] == COIN_DISTINCTION);
   }
 
   public function tradeCoin($coin, $value)
