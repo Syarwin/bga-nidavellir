@@ -308,6 +308,7 @@ $machinestates = [
       'transform' => ST_TRANSFORM_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
       'olwyn' => ST_OLWYN,
+      'skymir' => ST_SKYMIR,
 
       'recruitDone' => ST_RESOLVE_STACK,
     ],
