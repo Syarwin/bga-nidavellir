@@ -1116,7 +1116,10 @@ html {
           #nidavellir-board #exterior-wrapper #exterior #tabs-container .nid-tab#tab-discard {
             background-position-y: 0%;
             line-height: 102px;
-            text-indent: 34px; }
+            padding: 0px 60px 0px 20px;
+            box-sizing: border-box;
+            text-indent: 0px;
+            text-align: center; }
       @media (max-width: 1650px) {
         #nidavellir-board #exterior-wrapper #exterior #taverns-container {
           order: 1;

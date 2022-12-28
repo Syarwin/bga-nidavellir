@@ -1,60 +1,69 @@
 #tabs-container {
-  width:200px;
+  width: 200px;
   margin-right: 100px;
-  height:auto;
+  height: auto;
   display: flex;
   flex-flow: column;
   justify-content: center;
-  margin-right:auto;
+  margin-right: auto;
   @media (max-width: $breakpoint) {
-    width:160px;
+    width: 160px;
   }
 
   .nid-tab {
-    width:200px;
-    height:112px;
-    margin:10px 0px 10px -20px;
-    cursor:pointer;
+    width: 200px;
+    height: 112px;
+    margin: 10px 0px 10px -20px;
+    cursor: pointer;
     transition: margin 0.3s;
-    background-image:url('img/tabs.png');
-    background-size:100% 400%;
+    background-image: url("img/tabs.png");
+    background-size: 100% 400%;
 
     &.hidden {
-      display:none;
+      display: none;
     }
 
-    &:hover, &.opened {
-      margin-left:0px;
+    &:hover,
+    &.opened {
+      margin-left: 0px;
     }
 
     &.focus {
       animation: clickme 2s infinite;
       @keyframes clickme {
         0% {
-          transform:translateX(0px);
+          transform: translateX(0px);
         }
         20% {
-          transform:translateX(10px);
+          transform: translateX(10px);
         }
         40% {
-          transform:translateX(0px);
+          transform: translateX(0px);
         }
         60% {
-          transform:translateX(10px);
+          transform: translateX(10px);
         }
         80% {
-          transform:translateX(0px);
+          transform: translateX(0px);
         }
       }
     }
-    &.focus:hover, &.opened {
-      animation:none;
+    &.focus:hover,
+    &.opened {
+      animation: none;
     }
 
-    &#tab-camp { display:none; }
-    &#tab-heroes { background-position-y:calc(100% / 3); }
-    &#tab-distinctions { background-position-y:calc(2 * 100% / 3); }
-    &#tab-score, &#tab-discard {
+    &#tab-camp {
+      display: none;
+    }
+    &#tab-heroes {
+      background-position-y: calc(100% / 3);
+    }
+    &#tab-distinctions {
+      background-position-y: calc(2 * 100% / 3);
+    }
+    &#tab-score,
+    &#tab-discard {
       background-position-y: 100%;
       text-transform: capitalize;
       font-size: 30px;
@@ -65,9 +74,12 @@
       text-shadow: 0px 0px 19px white;
     }
     &#tab-discard {
-      background-position-y:0%;
+      background-position-y: 0%;
       line-height: 102px;
-      text-indent: 34px;
+      padding: 0px 60px 0px 20px;
+      box-sizing: border-box;
+      text-indent: 0px;
+      text-align: center;
     }
   }
 }
