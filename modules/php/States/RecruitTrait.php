@@ -31,8 +31,14 @@ trait RecruitTrait
     $tavern = Globals::getTavern();
     $cardsPerClass = [];
     $player = Players::getActive();
+    $isLoki = $player->getId() == Cards::getOwner(LOKI);
     $canCapture = false;
     foreach (Cards::getInTavern($tavern) as $card) {
+      // Skip card if reserved by Loki
+      if (Globals::getLokiCardId() == $card->getId() && !$isLoki) {
+        continue;
+      }
+
       $cardsPerClass[$card->getClass()][] = $card;
       if (!$canCapture && $player->canCapture($card)) {
         $canCapture = true;
