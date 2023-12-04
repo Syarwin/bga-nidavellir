@@ -393,6 +393,7 @@ $machinestates = [
       'transform' => ST_TRANSFORM_COIN,
       'placeThrud' => ST_CHOOSE_THRUD_COLUMN,
       'olwyn' => ST_OLWYN,
+      'placeGullinbursti' => ST_GULLINBURSTI,
 
       'recruitDone' => ST_PRE_BRISINGAMENS,
     ],
