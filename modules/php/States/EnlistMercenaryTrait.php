@@ -1,4 +1,5 @@
 <?php
+
 namespace NID\States;
 
 use Nidavellir;
@@ -19,7 +20,7 @@ trait EnlistMercenaryTrait
    */
   public function stStartMercenaryEnlistment()
   {
-    if(!Globals::isThingvellir()){
+    if (!Globals::isThingvellir()) {
       $this->gamestate->nextState('skip');
       return;
     }
@@ -34,9 +35,11 @@ trait EnlistMercenaryTrait
 
     // Then by gems
     $order = [];
-    foreach($amounts as $bid => &$bidders){
-      usort($bidders, function($p1, $p2){ return $p2->getGem() - $p1->getGem(); });
-      foreach($bidders as $player){
+    foreach ($amounts as $bid => &$bidders) {
+      usort($bidders, function ($p1, $p2) {
+        return $p2->getGem() - $p1->getGem();
+      });
+      foreach ($bidders as $player) {
         array_push($order, $player->getId());
       }
     }
@@ -62,9 +65,9 @@ trait EnlistMercenaryTrait
     $order = Log::getEnlistOrder();
     $pId = $order[$index] ?? null;
 
-    if($index == 0){
+    if ($index == 0) {
       $player = Players::get($pId);
-      if($player->countUnplacedMercenaries() > 0){
+      if ($player->countUnplacedMercenaries() > 0) {
         $this->gamestate->changeActivePlayer($pId);
         self::giveExtraTime($pId);
         $this->gamestate->nextState("chooseOrder");
@@ -75,16 +78,15 @@ trait EnlistMercenaryTrait
     }
 
 
-    if($index >= count($order)){
+    if ($index >= count($order)) {
       $this->gamestate->nextState("end");
     } else {
       $player = Players::get($order[$index]);
-      if($player->countUnplacedMercenaries() > 0){
+      if ($player->countUnplacedMercenaries() > 0) {
         $this->gamestate->changeActivePlayer($pId);
         self::giveExtraTime($pId);
         $this->gamestate->nextState("enlist");
-      }
-      else
+      } else
         $this->stNextPlayerEnlist();
     }
   }
@@ -92,13 +94,13 @@ trait EnlistMercenaryTrait
 
   public function actChooseOrder($position)
   {
-    $this->gamestate->nextState($position == 0? 'first' : 'last');
+    $this->gamestate->nextState($position == 0 ? 'first' : 'last');
   }
 
 
   public function stEnlistMercenary()
   {
-    if(empty($this->argEnlistMercenary()['cards'])){
+    if (empty($this->argEnlistMercenary()['cards'])) {
       $this->gamestate->nextState('next');
     }
   }
@@ -107,7 +109,9 @@ trait EnlistMercenaryTrait
   {
     $player = Players::getActive();
     return [
-      'cards' => array_map(function($mercenary){ return $mercenary->getId(); }, $player->getUnplacedMercenaries()),
+      'cards' => array_map(function ($mercenary) {
+        return $mercenary->getId();
+      }, $player->getUnplacedMercenaries()),
     ];
   }
 
@@ -117,7 +121,7 @@ trait EnlistMercenaryTrait
     $this->checkAction("enlist");
 
     $cards = $this->argEnlistMercenary()['cards'];
-    if(!in_array($cardId, $cards))
+    if (!in_array($cardId, $cards))
       throw new \BgaUserException(_("You cannot enlist this mercenary"));
 
     $player = Players::getCurrent();
@@ -128,4 +132,3 @@ trait EnlistMercenaryTrait
     $this->nextStateAfterRecruit($card, $player, true);
   }
 }
-?>

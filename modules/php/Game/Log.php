@@ -1,11 +1,14 @@
 <?php
+
 namespace NID\Game;
+
 use Nidavellir;
 
 /*
  * Log: a class that allows to log some actions
  *   and then fetch these actions latter
  */
+
 class Log extends \NID\Helpers\DB_Manager
 {
   protected static $table = 'log';
@@ -25,15 +28,16 @@ class Log extends \NID\Helpers\DB_Manager
   /*
    * Utils : where filter with player and current turn
    */
-  private function getFilteredQuery($pId){
-    return self::DB()->where('player_id', $pId)->where('turn', Globals::getTurn() )->orderBy("log_id", "DESC");
+  private static function getFilteredQuery($pId)
+  {
+    return self::DB()->where('player_id', $pId)->where('turn', Globals::getTurn())->orderBy("log_id", "DESC");
   }
 
-////////////////////////////////
-////////////////////////////////
-//////////   Adders   //////////
-////////////////////////////////
-////////////////////////////////
+  ////////////////////////////////
+  ////////////////////////////////
+  //////////   Adders   //////////
+  ////////////////////////////////
+  ////////////////////////////////
 
   /*
    * insert: add a new log entry
@@ -44,7 +48,7 @@ class Log extends \NID\Helpers\DB_Manager
    */
   public static function insert($player, $action, $args = [])
   {
-    $pId = (is_integer($player) || is_null($player))? $player : $player->getId();
+    $pId = (is_integer($player) || is_null($player)) ? $player : $player->getId();
     $turn = Globals::getTurn();
     $actionArgs = json_encode($args);
     self::DB()->insert([
@@ -57,21 +61,21 @@ class Log extends \NID\Helpers\DB_Manager
 
   public static function storeOrder($order, $ties)
   {
-    self::insert(null, "turnOrder", [ 'order' => $order, 'ties' => $ties]);
+    self::insert(null, "turnOrder", ['order' => $order, 'ties' => $ties]);
   }
 
 
   public static function storeEnlistOrder($order)
   {
-    self::insert(null, "enlistOrder", [ 'order' => $order ]);
+    self::insert(null, "enlistOrder", ['order' => $order]);
   }
 
 
-/////////////////////////////////
-/////////////////////////////////
-//////////   Getters   //////////
-/////////////////////////////////
-/////////////////////////////////
+  /////////////////////////////////
+  /////////////////////////////////
+  //////////   Getters   //////////
+  /////////////////////////////////
+  /////////////////////////////////
   public static function getLastActions($pId)
   {
     return self::getFilteredQuery($pId)->get();
@@ -103,5 +107,4 @@ class Log extends \NID\Helpers\DB_Manager
   {
     return self::getLastActionArg('turnOrder', -1)['ties'];
   }
-
 }

@@ -1,10 +1,13 @@
 <?php
+
 namespace NID\Game;
+
 use Nidavellir;
 
 /*
  * Stack: a class that allows to have some memory about states
  */
+
 class Stack
 {
   private static function getGame()
@@ -15,13 +18,15 @@ class Stack
   private static $stack = null;
   private static $lId = null;
 
-  protected function init(){
-    Log::insert(-1, 'stackEngine', [ 'stack' => [] ] );
+  protected static function init()
+  {
+    Log::insert(-1, 'stackEngine', ['stack' => []]);
   }
 
-  protected function fetch(){
+  protected static function fetch()
+  {
     $action = Log::getLastAction('stackEngine', -1);
-    if($action == null){
+    if ($action == null) {
       self::init();
       self::fetch();
     } else {
@@ -30,22 +35,25 @@ class Stack
     }
   }
 
-  protected function get(){
-    if(self::$stack == null)
+  protected static function get()
+  {
+    if (self::$stack == null)
       self::fetch();
 
     return self::$stack;
   }
 
-  protected function save(){
+  protected static function save()
+  {
     Log::DB()->update([
-      'action_arg' => json_encode([ 'stack' => self::$stack ], true),
+      'action_arg' => json_encode(['stack' => self::$stack], true),
     ], self::$lId);
   }
 
 
-  public function push($transition){
-    if(self::$stack == null)
+  public static function push($transition)
+  {
+    if (self::$stack == null)
       self::fetch();
 
     $sourceState = self::getGame()->gamestate->states[self::getGame()->gamestate->state_id()];
@@ -54,8 +62,9 @@ class Stack
     self::save();
   }
 
-  public function pop(){
-    if(self::$stack == null)
+  public static function pop()
+  {
+    if (self::$stack == null)
       self::fetch();
 
     $elem = array_pop(self::$stack);
@@ -64,8 +73,9 @@ class Stack
   }
 
 
-  public function nextState($transition, $newState){
-    if($newState != null){
+  public static function nextState($transition, $newState)
+  {
+    if ($newState != null) {
       self::push($transition);
     } else {
       $newState = $transition;
@@ -74,10 +84,10 @@ class Stack
     self::getGame()->gamestate->nextState($newState);
   }
 
-  public function resolve()
+  public static function resolve()
   {
     $state = self::pop();
-    if($state == null)
+    if ($state == null)
       throw new \feException("Stack engine is empty !");
 
     self::getGame()->gamestate->jumpToState($state);

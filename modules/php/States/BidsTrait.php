@@ -1,4 +1,5 @@
 <?php
+
 namespace NID\States;
 
 use Nidavellir;
@@ -299,4 +300,3 @@ trait BidsTrait
     $this->gamestate->nextState('next');
   }
 }
-?>

@@ -1,5 +1,7 @@
 <?php
+
 namespace NID;
+
 use Nidavellir;
 use NID\Game\Players;
 use NID\Game\Globals;
@@ -208,7 +210,7 @@ class Cards extends Helpers\Pieces
       ->values($values);
   }
 
-  public function getOwner($cardId)
+  public static function getOwner($cardId)
   {
     try {
       return self::get($cardId)->getPID();
@@ -217,51 +219,51 @@ class Cards extends Helpers\Pieces
     }
   }
 
-  public function getUlineOwner()
+  public static function getUlineOwner()
   {
     return self::getOwner(ULINE);
   }
-  public function getYludOwner()
+  public static function getYludOwner()
   {
     return self::getOwner(YLUD);
   }
-  public function getThrudOwner()
+  public static function getThrudOwner()
   {
     return self::getOwner(THRUD);
   }
-  public function getJarikaOwner()
+  public static function getJarikaOwner()
   {
     return self::getOwner(JARIKA);
   }
-  public function getFafnirOwner()
+  public static function getFafnirOwner()
   {
     return self::getOwner(FAFNIR);
   }
-  public function getMegingjordOwner()
+  public static function getMegingjordOwner()
   {
     return self::getOwner(MEGINGJORD);
   }
-  public function getZolkurOwner()
+  public static function getZolkurOwner()
   {
     return self::getOwner(ZOLKUR);
   }
-  public function getHofudOwner()
+  public static function getHofudOwner()
   {
     return self::getOwner(HOFUD);
   }
-  public function getBrisingamensOwner()
+  public static function getBrisingamensOwner()
   {
     return self::getOwner(BRISINGAMENS);
   }
-  public function getDurathorOwner()
+  public static function getDurathorOwner()
   {
     return self::getOwner(DURATHOR);
   }
-  public function getRatatoskOwner()
+  public static function getRatatoskOwner()
   {
     return self::getOwner(RATATOSK);
   }
-  public function getGarmkOwner()
+  public static function getGarmkOwner()
   {
     return self::getOwner(GARM);
   }
@@ -572,7 +574,7 @@ class Cards extends Helpers\Pieces
 
   public static function clearTavern($tavern)
   {
-    $mythCardIds = self::getInLocation(['tavern', $tavern])->cfilter(function($card){
+    $mythCardIds = self::getInLocation(['tavern', $tavern])->cfilter(function ($card) {
       return in_array($card->getClass(), [ANIMAL, GIANT, ASE, VALKYRIE]);
     })->getIds();
     self::discard($mythCardIds, true);

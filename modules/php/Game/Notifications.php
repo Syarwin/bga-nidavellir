@@ -1,5 +1,7 @@
 <?php
+
 namespace NID\Game;
+
 use Nidavellir;
 use NID\Game\Globals;
 
@@ -32,8 +34,8 @@ class Notifications
   {
     $msg =
       Globals::getAge() == 1
-        ? clienttranslate('Starting turn ${turn} of first age')
-        : clienttranslate('Starting turn ${turn} of second age');
+      ? clienttranslate('Starting turn ${turn} of first age')
+      : clienttranslate('Starting turn ${turn} of second age');
     self::notifyAll('newTurn', $msg, [
       'cards' => $cards,
       'age' => Globals::getAge(),
@@ -549,5 +551,3 @@ class Notifications
     }
   }
 }
-
-?>

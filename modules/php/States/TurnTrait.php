@@ -1,5 +1,7 @@
 <?php
+
 namespace NID\States;
+
 use NID\Cards;
 use NID\Game\Globals;
 use NID\Game\Notifications;
@@ -112,4 +114,3 @@ trait TurnTrait
     $this->gamestate->nextState('start');
   }
 }
-?>

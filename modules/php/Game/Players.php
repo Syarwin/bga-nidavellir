@@ -1,5 +1,7 @@
 <?php
+
 namespace NID\Game;
+
 use Nidavellir;
 use NID\Cards;
 
@@ -7,6 +9,7 @@ use NID\Cards;
  * Players manager : allows to easily access players ...
  *  a player is an instance of Player class
  */
+
 class Players extends \NID\Helpers\DB_Manager
 {
   protected static $table = 'player';
@@ -16,7 +19,7 @@ class Players extends \NID\Helpers\DB_Manager
     return new \NID\Player($row);
   }
 
-  public function setupNewGame($players, $isAsync)
+  public static function setupNewGame($players)
   {
     // Create players
     self::DB()->delete();
@@ -48,7 +51,7 @@ class Players extends \NID\Helpers\DB_Manager
         $player['player_avatar'],
         19,
         array_shift($gems),
-        $isAsync ? 1 : 1,
+        1,
       ];
     }
     $query->values($values);
@@ -65,17 +68,17 @@ class Players extends \NID\Helpers\DB_Manager
     }
   }
 
-  public function getActiveId()
+  public static function getActiveId()
   {
     return Nidavellir::get()->getActivePlayerId();
   }
 
-  public function getCurrentId()
+  public static function getCurrentId()
   {
     return Nidavellir::get()->getCurrentPId();
   }
 
-  public function getAll()
+  public static function getAll()
   {
     return self::DB()->get(false);
   }
@@ -83,7 +86,7 @@ class Players extends \NID\Helpers\DB_Manager
   /*
    * get : returns the Player object for the given player ID
    */
-  public function get($pId = null)
+  public static function get($pId = null)
   {
     $pId = $pId ?: self::getActiveId();
     return self::DB()
@@ -91,23 +94,23 @@ class Players extends \NID\Helpers\DB_Manager
       ->getSingle();
   }
 
-  public function getActive()
+  public static function getActive()
   {
     return self::get();
   }
 
-  public function getCurrent()
+  public static function getCurrent()
   {
     return self::get(self::getCurrentId());
   }
 
-  public function getNextId($player)
+  public static function getNextId($player)
   {
     $table = Nidavellir::get()->getNextPlayerTable();
     return $table[$player->getId()];
   }
 
-  public function getMaxWarriorRank()
+  public static function getMaxWarriorRank()
   {
     $maxWarrior = 0;
     foreach (Players::getAll() as $player) {
@@ -119,7 +122,7 @@ class Players extends \NID\Helpers\DB_Manager
   /*
    * Return the number of players
    */
-  public function count()
+  public static function count()
   {
     return self::DB()->count();
   }
@@ -127,7 +130,7 @@ class Players extends \NID\Helpers\DB_Manager
   /*
    * getUiData : get all ui data of all players : id, no, name, team, color, powers list, farmers
    */
-  public function getUiData($pId)
+  public static function getUiData($pId)
   {
     return self::getAll()->assocMap(function ($player) use ($pId) {
       return $player->getUiData($pId);
@@ -137,7 +140,7 @@ class Players extends \NID\Helpers\DB_Manager
   /*
    * Trade gems: given a list of trade (player1, player2), proceeds to the exchange of gems
    */
-  public function tradeGems($trades)
+  public static function tradeGems($trades)
   {
     foreach ($trades as $trade) {
       // $trade = [p1_id, p1_gem, p2_id, p2_gem]
@@ -149,7 +152,7 @@ class Players extends \NID\Helpers\DB_Manager
   /*
    * Update scores UI
    */
-  public function updateScores()
+  public static function updateScores()
   {
     $scores = [];
     $ranks = [];

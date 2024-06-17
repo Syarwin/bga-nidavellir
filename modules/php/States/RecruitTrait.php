@@ -1,4 +1,5 @@
 <?php
+
 namespace NID\States;
 
 use Nidavellir;
@@ -390,7 +391,7 @@ trait RecruitTrait
 
   public function actSkipBrisingamens()
   {
-    Stack::nextState('recruitDone', $nextState);
+    Stack::nextState('recruitDone');
   }
 
   /********************

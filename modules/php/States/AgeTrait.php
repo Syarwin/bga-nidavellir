@@ -1,5 +1,7 @@
 <?php
+
 namespace NID\States;
+
 use NID\Coins;
 use NID\Cards;
 use NID\Game\Players;
@@ -131,4 +133,3 @@ trait AgeTrait
     ];
   }
 }
-?>

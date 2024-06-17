@@ -1,4 +1,5 @@
 <?php
+
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
@@ -71,7 +72,7 @@ class Nidavellir extends Table
       $options[OPTION_SETUP] = NORMAL;
     }
 
-    Players::setupNewGame($players, self::isAsync());
+    Players::setupNewGame($players);
     Cards::setupNewGame($players, $options);
     Coins::setupNewGame($players);
 
@@ -199,12 +200,12 @@ class Nidavellir extends Table
   // Exposing protected method getCurrentPlayerId
   public static function getCurrentPId()
   {
-    return self::getCurrentPlayerId();
+    return self::get()->getCurrentPlayerId();
   }
 
   // Exposing protected method translation
   public static function translate($text)
   {
-    return self::_($text);
+    return self::get()->_($text);
   }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace NID\States;
+
 use NID\Game\Globals;
 use NID\Game\Players;
 use NID\Game\Notifications;
@@ -191,4 +193,3 @@ trait TradeCoinTrait
     $this->gamestate->nextState(count($data['transformations']) == 1 ? 'done' : 'vidofnir');
   }
 }
-?>

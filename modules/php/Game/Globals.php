@@ -1,11 +1,14 @@
 <?php
+
 namespace NID\Game;
+
 use Nidavellir;
 //use \CREW\Cards;
 
 /*
  * Globals
  */
+
 class Globals extends \APP_DbObject
 {
   /* Exposing methods from Table object singleton instance */
@@ -77,67 +80,67 @@ class Globals extends \APP_DbObject
   /*
    * Getters
    */
-  public function isThingvellir()
+  public static function isThingvellir()
   {
     return self::get('thingvellir') == THINGVELLIR;
   }
 
-  public function isIdavoll()
+  public static function isIdavoll()
   {
     return self::get('idavoll') == IDAVOLL;
   }
 
-  public function getAge()
+  public static function getAge()
   {
     return (int) self::get('currentAge');
   }
 
-  public function getTurn()
+  public static function getTurn()
   {
     return (int) self::get('currentTurn');
   }
 
-  public function getTavern()
+  public static function getTavern()
   {
     return (int) self::get('currentTavern');
   }
 
-  public function getCurrentPlayerIndex()
+  public static function getCurrentPlayerIndex()
   {
     return (int) self::get('currentPlayerIndex');
   }
 
-  public function getTransformValue()
+  public static function getTransformValue()
   {
     return (int) self::get('transformValue');
   }
 
-  public function getSourceState()
+  public static function getSourceState()
   {
     return (int) self::get('sourceState');
   }
 
-  public function wasCampVisited()
+  public static function wasCampVisited()
   {
     return self::get('campVisited') == 1;
   }
 
-  public function getThorCardId()
+  public static function getThorCardId()
   {
     return self::get('thor');
   }
 
-  public function getLokiCardId()
+  public static function getLokiCardId()
   {
     return self::get('loki');
   }
 
-  public function getOlrunClass()
+  public static function getOlrunClass()
   {
     return (int) self::get('olrun');
   }
 
-  public function getOlwynLeft()
+  public static function getOlwynLeft()
   {
     return self::get('olwyn');
   }
@@ -146,90 +149,90 @@ class Globals extends \APP_DbObject
    * Setters
    */
 
-  public function startNewAge()
+  public static function startNewAge()
   {
     self::set('currentTurn', 0);
     return self::inc('currentAge');
   }
 
-  public function setEndOfGame()
+  public static function setEndOfGame()
   {
     self::set('currentAge', 3);
   }
 
-  public function startNewTurn()
+  public static function startNewTurn()
   {
     self::inc('currentTurn');
     self::set('currentTavern', -1);
   }
 
-  public function incTavern()
+  public static function incTavern()
   {
     self::set('campVisited', 0);
     return self::inc('currentTavern', 1);
   }
 
-  public function incCurrentPlayerIndex($step = 1)
+  public static function incCurrentPlayerIndex($step = 1)
   {
     return self::inc('currentPlayerIndex', $step);
   }
 
-  public function setCurrentPlayerIndex($value)
+  public static function setCurrentPlayerIndex($value)
   {
     self::set('currentPlayerIndex', $value);
   }
 
-  public function resetCurrentPlayerIndex()
+  public static function resetCurrentPlayerIndex()
   {
     self::setCurrentPlayerIndex(-1);
   }
 
-  public function setTransformValue($val)
+  public static function setTransformValue($val)
   {
     self::set('transformValue', $val);
   }
 
-  public function setCurrentDistinction($val)
+  public static function setCurrentDistinction($val)
   {
     self::set('currentDistinction', $val);
   }
 
-  public function nextDistinction()
+  public static function nextDistinction()
   {
     return self::inc('currentDistinction', 1);
   }
 
-  public function setSourceState($state)
+  public static function setSourceState($state)
   {
     self::set('sourceState', $state);
   }
 
-  public function visitCamp()
+  public static function visitCamp()
   {
     self::set('campVisited', 1);
   }
 
-  public function incBrisingamens()
+  public static function incBrisingamens()
   {
     return self::inc('brisingamens', 1);
   }
 
-  public function setThor($cardId)
+  public static function setThor($cardId)
   {
     self::set('thor', $cardId);
   }
 
-  public function setLoki($cardId)
+  public static function setLoki($cardId)
   {
     self::set('loki', $cardId);
   }
 
-  public function setOlrun($column)
+  public static function setOlrun($column)
   {
     self::set('olrun', $column);
   }
 
-  public function setOlwynLeft($val)
+  public static function setOlwynLeft($val)
   {
     self::set('olwyn', $val);
   }
